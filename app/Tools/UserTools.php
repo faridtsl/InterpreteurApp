@@ -13,14 +13,8 @@ use App\User;
 
 class UserTools{
 
-    public function addUser($r){
-        $u = new User();
-        $u->name = $r['name'];
-        $u->email = $r['email'];
-        $u->password = bcrypt($r['password']);
-        $u->isAdmin = false;
-        $u->save();
-        return $u;
+    public static function getUser($id){
+        return User::find($id);
     }
 
 }
