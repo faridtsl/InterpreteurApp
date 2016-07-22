@@ -111,6 +111,10 @@
         </div>
     </form>
 </div>
+@endsection
+
+
+@section('modals')
 
     <!-- Modal -->
     <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -176,6 +180,7 @@
     @endif
 
 @endsection
+
 
 @section('footer')
 

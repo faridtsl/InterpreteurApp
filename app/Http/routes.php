@@ -15,6 +15,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Interpreteur Routes
+Route::get('interpreteur/add', 'InterpreteurController@show');
+Route::post('interpreteur/add', 'InterpreteurController@store');
+Route::get('images/{img}','InterpreteurController@getImage');
+Route::get('interpreteur/list','InterpreteurController@showInterpreteurs');
+Route::get('interpreteur/{id}','InterpreteurController@showInterpreteur');
+Route::post('interpreteur/update','InterpreteurController@updateInterpreteur');
+Route::post('interpreteur/delete','InterpreteurController@deleteInterpreteur');
+
+Route::get('langue/add','LangueController@show');
+Route::post('langue/add','LangueController@store');
+
+
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 
 Route::post('auth/login', 'Auth\AuthController@postLogin');
