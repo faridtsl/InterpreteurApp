@@ -15,11 +15,11 @@
         <div class="panel panel-default">
             <div class="form-group">
                 <label>Abreviation Langue</label>
-                <input class="form-control" name="abreviation" value="{{ old('abreviation') }}" />
+                <input class="form-control" name="abreviation" required="true" value="{{ old('abreviation') }}" />
             </div>
             <div class="form-group">
                 <label>Nom Langue</label>
-                <input class="form-control" name="nom" value="{{ old('nom') }}" />
+                <input class="form-control" name="nom" required="true" value="{{ old('nom') }}" />
             </div>
 
             <button id="send" type="submit" class="btn btn-primary">Ajouter</button>
