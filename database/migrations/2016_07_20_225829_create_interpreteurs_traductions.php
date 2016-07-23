@@ -14,6 +14,7 @@ class CreateInterpreteursTraductions extends Migration
         Schema::create('interpreteurs_traductions', function (Blueprint $table) {
             $table->integer('interpreteur_id')->unsigned();
             $table->integer('traduction_id')->unsigned();
+            $table->softDeletes();
 
             #Constraints
             $table->foreign('interpreteur_id')

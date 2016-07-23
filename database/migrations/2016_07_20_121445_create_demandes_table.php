@@ -19,6 +19,7 @@ class CreateDemandesTable extends Migration{
             $table->integer('user_id')->unsigned();
             $table->integer('etat_id')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
 
             #Constraints
             $table->foreign('user_id')

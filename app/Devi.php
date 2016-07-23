@@ -3,8 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Devi extends Model
-{
-    //
+class Devi extends Model{
+
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
 }

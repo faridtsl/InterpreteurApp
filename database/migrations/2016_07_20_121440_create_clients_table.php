@@ -22,6 +22,7 @@ class CreateClientsTable extends Migration{
             $table->integer('user_id')->unsigned();
             $table->integer('adresse_id')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
 
             #Constraints
             $table->foreign('adresse_id')

@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Adresse;
-use App\Langue;
 use App\Tools\AdresseTools;
 use App\Tools\InterpreteurTools;
 use App\Tools\LangueTools;
 use App\Tools\TraductionTools;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
+use App\Http\Requests\InterpreteurRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
@@ -22,7 +20,7 @@ class InterpreteurController extends Controller{
         return view('interpreteur.interpreteurAdd', ['langues' => $langues]);
     }
 
-    public function store(Request $request){
+    public function store(InterpreteurRequest $request){
         $langues = LangueTools::getAllLangues();
         $adresse = AdresseTools::addAdresse($request);
         $connectedUser = Auth::user();
@@ -60,9 +58,15 @@ class InterpreteurController extends Controller{
         return view('interpreteur.interpreteursShow',['interpreteurs'=>$interpreteurs]);
     }
 
+    public function archiveInterpreteurs(){
+        $interpreteursArchive = InterpreteurTools::getArchiveInterpreteurs();
+        return view('interpreteur.interpreteurArchive',['interpreteurs'=>$interpreteursArchive]);
+    }
+
     public function showInterpreteur($id){
         return response(InterpreteurTools::getInterpreteur($id));
     }
+
 
     public function updateInterpreteur(Request $request){
         $connectedUser = Auth::user();
@@ -74,6 +78,12 @@ class InterpreteurController extends Controller{
         $connectedUser = Auth::user();
         InterpreteurTools::deleteInterpreteur($connectedUser,$request['id']);
         return redirect('interpreteur/list');
+    }
+
+    public function restoreInterpreteur(Request $request){
+        $connectedUser = Auth::user();
+        InterpreteurTools::restoreInterpreteur($connectedUser,$request['id']);
+        return redirect('interpreteur/archive');
     }
 
 }

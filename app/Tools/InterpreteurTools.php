@@ -42,6 +42,13 @@ class InterpreteurTools{
         $interp->delete();
     }
 
+    public static function restoreInterpreteur(User $u,$id){
+        $interp = Interpreteur::withTrashed()
+            ->where('id', $id)
+            ->get()->first();
+        $interp->restore();
+    }
+
     public static function updateInterpreteur(User $u, $a){
         $interp = Interpreteur::find($a['id']);
         if($a['nom'] != null) $interp->nom = $a['nom'];
@@ -62,8 +69,16 @@ class InterpreteurTools{
         return $interpreteurs;
     }
 
+
+    public static function getArchiveInterpreteurs(){
+        $interpreteurs = Interpreteur::onlyTrashed()->get();
+        return $interpreteurs;
+    }
+
     public static function getInterpreteur($id){
-        $interp = Interpreteur::find($id);
+        $interp = Interpreteur::withTrashed()
+            ->where('id', $id)
+            ->get()->first();
         return $interp;
     }
 

@@ -24,6 +24,7 @@ class CreateInterpreteursTable extends Migration{
             $table->integer('adresse_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
 
             #Constraints
             $table->foreign('adresse_id')

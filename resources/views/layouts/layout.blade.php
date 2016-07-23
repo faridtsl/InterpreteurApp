@@ -75,7 +75,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-tasks">
                         <li>
-                            <a href="langue/add">
+                            <a href="/langue/add">
                                 <div>
                                     <p>
                                         <strong>Ajout Langues</strong>
@@ -235,7 +235,7 @@
                                     <a href="/interpreteur/list">Afficher les interpreteurs</a>
                                 </li>
                                 <li>
-                                    <a href="/demandes">Archive</a>
+                                    <a href="/interpreteur/archive">Archive</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

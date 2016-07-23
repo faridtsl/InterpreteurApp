@@ -14,6 +14,7 @@ class CreateFacturesTable extends Migration{
             $table->increments('id');
             $table->integer('devi_id')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
 
             #Constraints
             $table->foreign('devi_id')

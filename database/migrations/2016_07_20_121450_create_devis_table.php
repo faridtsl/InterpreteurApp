@@ -18,6 +18,7 @@ class CreateDevisTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('demande_id')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
 
             #Constraints
             $table->foreign('user_id')

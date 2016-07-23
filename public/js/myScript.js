@@ -54,8 +54,8 @@ $(function () {
 
         $.ajax({
             url: $id,
-            type:"GET",
-            success:function(data){
+            type: "GET",
+            success: function (data) {
                 $("#idDel").val(data['id']);
                 var msg = "Suppresion de '";
                 var m2 = msg.concat(data['nom']);
@@ -63,13 +63,31 @@ $(function () {
                 m2 = m2.concat(data['prenom']);
                 var m = m2.concat("'");
                 $("#headDelete").text(m);
-            },error:function(){
+            }, error: function () {
                 alert("error!!!!");
             }
         });
-
     });
 
+    $('.restoreButton').on('click', function () {
+        // Get the record's ID via attribute
+        $id = $(this).attr('data-id');
+        $.ajax({
+            url: $id,
+            type: "GET",
+            success: function (data) {
+                $("#idRestore").val(data['id']);
+                var msg = "Restoration de '";
+                var m2 = msg.concat(data['nom']);
+                m2 = m2.concat(' ');
+                m2 = m2.concat(data['prenom']);
+                var m = m2.concat("'");
+                $("#headRestore").text(m);
+            }, error: function () {
+                alert("error!!!!");
+            }
+        });
+    });
 
 });
 

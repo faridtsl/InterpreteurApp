@@ -22,6 +22,8 @@ class CreateAdressesTable extends Migration{
             $table->string('long');
             $table->string('lat');
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 
