@@ -38,4 +38,10 @@ class TraductionTools{
         return Traduction::all();
     }
 
+    public static function getTraductionsByInterpreteur($id){
+        $res = Traduction::join('interpreteurs_traductions', 'traductions.id', '=', 'interpreteurs_traductions.traduction_id')
+        ->where('interpreteurs_traductions.interpreteur_id',$id)->get();
+        return $res;
+    }
+
 }

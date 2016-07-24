@@ -334,7 +334,7 @@
 
 
 <script src="https://cdn.datatables.net/buttons/1.1.2/js/dataTables.buttons.min.js"></script>
-<script src="//cdn.datatables.net/buttons/1.1.2/js/buttons.colVis.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.1.2/js/buttons.colVis.min.js"></script>
     @yield('footer')
 
 <script src="{{{ asset('dist/js/sb-admin-2.js') }}}"></script>

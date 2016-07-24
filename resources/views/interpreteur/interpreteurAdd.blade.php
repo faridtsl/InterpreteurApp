@@ -10,16 +10,6 @@
 
 @section('content')
 
-@if(count($errors)>0)
-    <div class="alert alert-danger">
-        <strong>Erreurs : </strong>
-        <ul>
-            @foreach($errors->all() as $error)
-                <i class="fa fa fa-times fa-fw"></i> {{$error}} <br/>
-            @endforeach
-        </ul>
-    </div>
-@endif
 <div class="controls">
     <form role="form" method="POST" action="/interpreteur/add" id="formID" enctype="multipart/form-data">
         <div class="panel-body">
@@ -62,11 +52,11 @@
                             </div>
                             <div class="form-group">
                                 <label>tel portable</label>
-                                <input class="form-control" value="{{ old('tel_portable') }}"  name="tel_portable" placeholder="telephone portable">
+                                <input class="form-control" value="{{ old('tel_portable') }}"  name="tel_portable" placeholder="Telephone portable">
                             </div>
                             <div class="form-group">
                                 <label>tel fixe</label>
-                                <input class="form-control"  value="{{ old('tel_fixe') }}" name="tel_fixe" placeholder="telephone fixe">
+                                <input class="form-control"  value="{{ old('tel_fixe') }}" name="tel_fixe" placeholder="Telephone fixe">
                             </div>
                             <div class="form-group">
                                 <label>Commentaire</label>
@@ -125,6 +115,33 @@
 
 
 @section('modals')
+
+    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header  modal-header-danger">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Liste d'erreurs</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger">
+                        <strong>Erreurs : </strong>
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <i class="fa fa fa-times fa-fw"></i> {{$error}} <br/>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
     @if(isset($message))
         <!-- Modal -->
         <div class="modal fade" id="sucess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

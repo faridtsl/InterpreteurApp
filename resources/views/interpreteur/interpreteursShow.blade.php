@@ -3,6 +3,8 @@
 
 @section('header')
     <link type="text/css" rel="stylesheet" href="{{asset('css/bootstrap-datatable.css')}}">
+    <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/responsive/1.0.7/css/responsive.dataTables.min.css">
 @endsection
 
 @section('title')
@@ -17,15 +19,17 @@
     </div>
 
     <div class="row">
-        <table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0">
+        <table id="example" class="table table-striped table-bordered display responsive nowrap" width="100%" cellspacing="0">
             <thead>
             <tr>
                 <th>Nom</th>
                 <th>Email</th>
                 <th>Prestation</th>
-                <th>Telephones</th>
                 <th>Adresse</th>
                 <th>Action</th>
+                <th>Telephone portable</th>
+                <th>Telephone fixe</th>
+                <th>Traductions</th>
             </tr>
             </thead>
             <tfoot>
@@ -33,9 +37,11 @@
                 <th>Nom</th>
                 <th>Email</th>
                 <th>Prestation</th>
-                <th>Telephones</th>
                 <th>Adresse</th>
                 <th></th>
+                <th>Telephone portable</th>
+                <th>Telephone fixe</th>
+                <th>Traductions</th>
             </tr>
             </tfoot>
             <tbody>
@@ -47,7 +53,6 @@
                         </td>
                         <td>{{$interpreteur->email}}</td>
                         <td>{{$interpreteur->prestation}} {{$interpreteur->devise}}</td>
-                        <td>{{$interpreteur->tel_fixe}} / {{$interpreteur->tel_portable}}</td>
                         <td>{{\App\Tools\AdresseTools::getAdresse($interpreteur->adresse_id)->adresse}}</td>
 
                         <td>
@@ -61,6 +66,14 @@
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </button>
                             </p>
+                        </td>
+                        <td>{{$interpreteur->tel_portable}}</td>
+                        <td>{{$interpreteur->tel_fixe}}</td>
+                        <td>
+                            @foreach(\App\Tools\TraductionTools::getTraductionsByInterpreteur($interpreteur->id) as $traduction)
+                                {{\App\Tools\LangueTools::getLangue($traduction->source)->content}} -> {{\App\Tools\LangueTools::getLangue($traduction->cible)->content}}
+                                ;
+                            @endforeach
                         </td>
                     </tr>
                 @endforeach
@@ -141,5 +154,8 @@
 
 
 @section('footer')
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"> </script>
+    <script src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"> </script>
+    <script src="https://cdn.datatables.net/responsive/1.0.7/js/dataTables.responsive.min.js"> </script>
     <script src="{{ asset("js/myScript.js") }}"> </script>
 @endsection
