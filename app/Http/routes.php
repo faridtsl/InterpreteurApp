@@ -18,7 +18,6 @@ Route::get('/', function () {
 //Interpreteur Routes
 Route::get('interpreteur/add', 'InterpreteurController@show');
 Route::post('interpreteur/add', 'InterpreteurController@store');
-Route::get('images/{img}','InterpreteurController@getImage');
 Route::get('interpreteur/list','InterpreteurController@showInterpreteurs');
 Route::get('interpreteur/archive','InterpreteurController@archiveInterpreteurs');
 Route::get('interpreteur/{id}','InterpreteurController@showInterpreteur');
@@ -26,10 +25,24 @@ Route::post('interpreteur/update','InterpreteurController@updateInterpreteur');
 Route::post('interpreteur/delete','InterpreteurController@deleteInterpreteur');
 Route::post('interpreteur/restore','InterpreteurController@restoreInterpreteur');
 
+//Client Routes
+Route::get('client/add', 'ClientController@show');
+Route::post('client/add', 'ClientController@store');
+Route::get('client/list','ClientController@showClients');
+Route::get('client/archive','ClientController@archiveClients');
+Route::get('client/{id}','ClientController@showClient');
+Route::post('client/update','ClientController@updateClient');
+Route::post('client/delete','ClientController@deleteClient');
+Route::post('client/restore','ClientController@restoreClient');
+
 //Langues Routes
 Route::get('langue/add','LangueController@show');
 Route::post('langue/add','LangueController@store');
 
+//Images Routes
+Route::get('images/{img}',function ($img){
+    return \App\Tools\ImageTools::getImage($img);
+});
 
 
 //Auth Routes

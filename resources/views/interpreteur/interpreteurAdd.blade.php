@@ -74,31 +74,44 @@
                         <div class="panel-body">
                             <div id="langs">
                                 <div class="entry input-group">
-                                    <select class="form-control col-lg-3" name="langue_src[]">
-                                        <option value="" disabled selected>Langue initiale</option>
-                                        @foreach($langues as $langue)
-                                            @if($langue->id == old('langue_ini'))
-                                                <option value="{{$langue->id}}" selected>{{$langue->content}}</option>
-                                            @else
-                                                <option value="{{$langue->id}}">{{$langue->content}}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                    <select class="form-control col-lg-3" name="langue_dest[]" >
-                                        <option value="" disabled selected>Langue destination</option>
-                                        @foreach($langues as $langue)
-                                            @if($langue->id == old('langue_dest'))
-                                                <option value="{{$langue->id}}" selected>{{$langue->content}}</option>
-                                            @else
-                                                <option value="{{$langue->id}}">{{$langue->content}}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                    <span class="input-group-btn">
-                                      <button class="btn btn-success btn-add" type="button">
-                                          <span class="glyphicon glyphicon-plus"></span>
-                                      </button>
-                                    </span>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-5">
+                                                <label>Langue initiale</label>
+                                                <select class="form-control col-lg-3" name="langue_src[]">
+                                                    <option value="" disabled selected>Langue initiale</option>
+                                                    @foreach($langues as $langue)
+                                                        @if($langue->id == old('langue_ini'))
+                                                            <option value="{{$langue->id}}" selected>{{$langue->content}}</option>
+                                                        @else
+                                                            <option value="{{$langue->id}}">{{$langue->content}}</option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <label>Langue destination</label>
+                                                <select class="form-control col-lg-3" name="langue_dest[]" >
+                                                    <option value="" disabled selected>Langue destination</option>
+                                                    @foreach($langues as $langue)
+                                                        @if($langue->id == old('langue_dest'))
+                                                            <option value="{{$langue->id}}" selected>{{$langue->content}}</option>
+                                                        @else
+                                                            <option value="{{$langue->id}}">{{$langue->content}}</option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <label></label>
+                                                <span class="input-group-btn">
+                                                  <button class="btn btn-success btn-add" type="button">
+                                                      <span class="glyphicon glyphicon-plus"></span>
+                                                  </button>
+                                              </span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">

@@ -15,8 +15,8 @@ class Adresse extends Model{
         return $this->belongsToMany(Interpreteur::class);
     }
 
-    public function clients(){
-        return $this->belongsToMany(Client::class);
+    public function demandes(){
+        return $this->belongsToMany(Demande::class);
     }
 
 }

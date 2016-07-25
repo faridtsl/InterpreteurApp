@@ -18,10 +18,22 @@ class CreateDemandesTable extends Migration{
             $table->timestamp('dateEndEvent');
             $table->integer('user_id')->unsigned();
             $table->integer('etat_id')->unsigned();
+            $table->integer('adresse_id')->unsigned();
+            $table->integer('client_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
 
             #Constraints
+            $table->foreign('adresse_id')
+                ->references('id')
+                ->on('adresses')
+                ->onDelete('cascade');
+
+            $table->foreign('client_id')
+                ->references('id')
+                ->on('clients')
+                ->onDelete('cascade');
+
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')

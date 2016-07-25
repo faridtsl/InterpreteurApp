@@ -20,16 +20,10 @@ class CreateClientsTable extends Migration{
             $table->string('tel_fixe');
             $table->string('image');
             $table->integer('user_id')->unsigned();
-            $table->integer('adresse_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
 
             #Constraints
-            $table->foreign('adresse_id')
-                ->references('id')
-                ->on('adresses')
-                ->onDelete('cascade');
-
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')

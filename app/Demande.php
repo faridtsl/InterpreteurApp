@@ -10,4 +10,9 @@ class Demande extends Model{
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
+
+    public function adresse(){
+        return $this->belongsTo(Adresse::class);
+    }
+
 }

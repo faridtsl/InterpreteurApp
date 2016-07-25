@@ -271,10 +271,10 @@
                                     <a href="/client/add">Ajouter un client</a>
                                 </li>
                                 <li>
-                                    <a href="#">Afficher les clients</a>
+                                    <a href="/client/list">Afficher les clients</a>
                                 </li>
                                 <li>
-                                    <a href="/demandes">Archive</a>
+                                    <a href="/client/archive">Archive</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

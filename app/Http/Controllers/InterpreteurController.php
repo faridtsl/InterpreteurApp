@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Tools\AdresseTools;
+use App\Tools\ImageTools;
 use App\Tools\InterpreteurTools;
 use App\Tools\LangueTools;
 use App\Tools\TraductionTools;
@@ -10,8 +11,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests\InterpreteurRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Storage;
 
 class InterpreteurController extends Controller{
 
@@ -21,36 +22,37 @@ class InterpreteurController extends Controller{
     }
 
     public function store(InterpreteurRequest $request){
+
         $langues = LangueTools::getAllLangues();
-        $adresse = AdresseTools::addAdresse($request);
-        $connectedUser = Auth::user();
-        $image = Input::file('image');
-        $imgName = '';
-        if($image == null){
-            $imgName = 'unknown.jpg';
-        }else {
-            $imgName = $this->getName($image, $request);
-            Input::file('image')->move(storage_path() . '/img', $imgName);
+        try {
+            DB::beginTransaction();
+            $adresse = AdresseTools::addAdresse($request);
+            $connectedUser = Auth::user();
+            $image = Input::file('image');
+            $imgName = '';
+            if ($image == null) {
+                $imgName = 'unknown.jpg';
+            } else {
+                $imgName = ImageTools::getName($image, $request);
+                Input::file('image')->move(storage_path() . '/img', $imgName);
+            }
+            $request['imageName'] = $imgName;
+            $interpreteur = InterpreteurTools::addInterpreteur($adresse, $connectedUser, $request);
+            $langs_init = $request['langue_src'];
+            $langs_dest = $request['langue_dest'];
+            foreach ($langs_init as $index => $value) {
+                $src = LangueTools::getLangue($value);
+                $dst = LangueTools::getLangue($langs_dest[$index]);
+                $traduction = TraductionTools::getTraduction($src, $dst);
+                InterpreteurTools::addTraduction($interpreteur, $traduction);
+            }
+            DB::commit();
+            return view('interpreteur.interpreteurAdd', ['message' => 'Interpreteur ajouté avec success!', 'img' => $imgName, 'langues' => $langues, 'interpreteur' => $interpreteur]);
+        }catch(\Exception $e){
+            DB::rollback();
         }
-        $request['imageName'] = $imgName;
-        $interpreteur = InterpreteurTools::addInterpreteur($adresse,$connectedUser,$request);
-        $langs_init = $request['langue_src'];
-        $langs_dest = $request['langue_dest'];
-        foreach ($langs_init as $index => $value){
-            $src = LangueTools::getLangue($value);
-            $dst = LangueTools::getLangue($langs_dest[$index]);
-            $traduction = TraductionTools::getTraduction($src,$dst);
-            InterpreteurTools::addTraduction($interpreteur,$traduction);
-        }
-        return view('interpreteur.interpreteurAdd',['message'=>'Interpreteur ajouté avec success!','img'=>$imgName,'langues' => $langues,'interpreteur'=>$interpreteur]);
-    }
-
-    private function getName($image,$request){
-        return $request['nom'].'_'.$request['prenom'].rand(11111,99999).'.'.$image->getClientOriginalExtension();
-    }
-
-    public function getImage($img){
-        return Storage::disk('img')->get($img);
+        $errors = ['Veuillez remplire toutes les correspondances src->dest'];
+        return view('interpreteur.interpreteurAdd', ['langues' => $langues])->withErrors($errors);
     }
 
     public function showInterpreteurs(){

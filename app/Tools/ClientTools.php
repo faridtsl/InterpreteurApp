@@ -9,6 +9,66 @@
 namespace App\Tools;
 
 
+use App\Client;
+use App\User;
+
 class ClientTools{
+
+    public static function addClient(User $u, $a){
+        $client = new Client();
+        $client->nom = $a['nom'];
+        $client->prenom = $a['prenom'];
+        $client->email = $a['email'];
+        $client->tel_portable = $a['tel_portable'];
+        $client->commentaire = $a['commentaire'];
+        $client->tel_fixe = $a['tel_fixe'];
+        $client->image = $a['imageName'];
+        $client->user()->associate($u);
+        $client->save();
+        return $client;
+    }
+    public static function deleteClient(User $u,$id){
+        $client = Client::find($id);
+        $client->delete();
+    }
+
+    public static function restoreClient(User $u,$id){
+        $client = Client::withTrashed()
+            ->where('id', $id)
+            ->get()->first();
+        $client->restore();
+    }
+
+    public static function updateClient(User $u, $a){
+        $client = Client::find($a['id']);
+        if($a['nom'] != null) $client->nom = $a['nom'];
+        if($a['prenom'] != null) $client->prenom = $a['prenom'];
+        if($a['email'] != null) $client->email = $a['email'];
+        if($a['tel_portable'] != null) $client->tel_portable = $a['tel_portable'];
+        if($a['commentaire'] != null) $client->commentaire = $a['commentaire'];
+        if($a['tel_fixe'] != null) $client->tel_fixe = $a['tel_fixe'];
+        if($a['image'] != null) $client->image = $a['image'];
+        $client->save();
+        return $client;
+    }
+
+
+    public static function getAllClients(){
+        $clients = Client::all();
+        return $clients;
+    }
+
+
+    public static function getArchiveClients(){
+        $clients = Client::onlyTrashed()->get();
+        return $clients;
+    }
+
+    public static function getClient($id){
+        $client = Client::withTrashed()
+            ->where('id', $id)
+            ->get()->first();
+        return $client;
+    }
 
 }

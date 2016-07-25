@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class InterpreteurRequest extends Request{
+class ClientRequest extends Request{
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -23,11 +23,8 @@ class InterpreteurRequest extends Request{
         return [
             'nom' => 'required',
             'prenom' => 'required',
-            'email' => 'required|email|unique:interpreteurs',
-            'tel_portable' => 'required',
-            'adresse' => 'required',
-            'langue_src' => 'required',
-            'langue_dest' => 'required'
+            'email' => 'required|email|unique:clients',
+            'tel_portable' => 'required'
         ];
     }
 }
