@@ -5,6 +5,8 @@
     <link type="text/css" rel="stylesheet" href="{{asset('css/bootstrap-datatable.css')}}">
     <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css">
     <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/responsive/1.0.7/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="{{ asset('/css/steps.css')}}" />
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
 @endsection
 
 @section('title')
@@ -94,29 +96,111 @@
                 <form role="form" method="post" id="updateForm" action="update" enctype="multipart/form-data">
                     {!! csrf_field() !!}
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label>Identifiant: </label>
-                            <input type="text" value="-1" readonly="readonly" id="id" name="id" class="form-control"/>
+                        <div class="row hide" data-step="1" data-title="This is step!">
+                            <div class="container-fluid">
+                                <h3> Informations personnelles</h3>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label>Nom</label>
+                                            <input class="form-control" value="{{ old('nom') }}" name="nom" id="nom" placeholder="Nom">
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label>Prenom</label>
+                                            <input class="form-control" value="{{ old('prenom') }}" name="prenom" id="prenom" placeholder="Prenom">
+                                        </div>
+                                    </div>
+                                    <input type="hidden" value="-1" readonly="readonly" id="id" name="id" class="form-control"/>
+                                    <input type="hidden" value="-1" readonly="readonly" id="adr" name="adresse_id" class="form-control"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Email: </label>
+                                    <input type="text" value="-1" id="email" name="email" class="form-control"/>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label>Prix préstation</label>
+                                            <input class="form-control" value="{{ old('prestation') }}" id="prestation"  name="prestation" placeholder="Prestation">
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label>Devise</label>
+                                            <select name="devise" id="devise" class="form-control">
+                                                <option value="Dollar">Dollar</option>
+                                                <option value="Euro">Euro</option>
+                                                <option value="DH">DH</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Tel fixe: </label>
+                                    <input type="text" value="-1" id="tel_fixe" name="tel_fixe" class="form-control"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Tel portable: </label>
+                                    <input type="text" value="-1" id="tel_portable" name="tel_portable" class="form-control"/>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>Email: </label>
-                            <input type="text" value="-1" id="email" name="email" class="form-control"/>
+                        <div class="row hide" data-step="2" data-title="Adresse">
+                            <div class="container-fluid">
+                                <h3> Adresse</h3>
+                                @include('includes.adresseForm')
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>Prestation: </label>
-                            <input type="text" value="-1" id="prestation" name="prestation" class="form-control"/>
-                        </div>
-                        <div class="form-group">
-                            <label>Tel fixe: </label>
-                            <input type="text" value="-1" id="tel_fixe" name="tel_fixe" class="form-control"/>
-                        </div>
-                        <div class="form-group">
-                            <label>Tel portable: </label>
-                            <input type="text" value="-1" id="tel_portable" name="tel_portable" class="form-control"/>
+                        <div class="row hide" data-step="3" data-title="This is the third step!">
+                            <div class="container-fluid">
+                                <h3> Traductions</h3>
+
+                                <div id="langs">
+                                    <div class="entry input-group">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-lg-5">
+                                                    <label>Langue initiale</label>
+                                                    <select class="form-control col-lg-3" name="langue_src[]">
+                                                        <option value="" disabled selected>Langue initiale</option>
+                                                        @foreach($langues as $langue)
+                                                            @if($langue->id == old('langue_ini'))
+                                                                <option value="{{$langue->id}}" selected>{{$langue->content}}</option>
+                                                            @else
+                                                                <option value="{{$langue->id}}">{{$langue->content}}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-5">
+                                                    <label>Langue destination</label>
+                                                    <select class="form-control col-lg-3" name="langue_dest[]" >
+                                                        <option value="" disabled selected>Langue destination</option>
+                                                        @foreach($langues as $langue)
+                                                            @if($langue->id == old('langue_dest'))
+                                                                <option value="{{$langue->id}}" selected>{{$langue->content}}</option>
+                                                            @else
+                                                                <option value="{{$langue->id}}">{{$langue->content}}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <label></label>
+                                                    <span class="input-group-btn">
+                                                  <button class="btn btn-success btn-add" type="button">
+                                                      <span class="glyphicon glyphicon-plus"></span>
+                                                  </button>
+                                              </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer ">
-                        <input value="Modifier" type="submit" class="btn btn-warning btn-lg" style="width: 100%;" />
+                        <button type="button" class="btn btn-warning js-btn-step" data-orientation="previous"></button>
+                        <button type="button" class="btn btn-success js-btn-step" data-orientation="next"></button>
                     </div>
                 </form>
             </div>
@@ -156,5 +240,9 @@
 @section('footer')
     <script src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"> </script>
     <script src="https://cdn.datatables.net/responsive/1.0.7/js/dataTables.responsive.min.js"> </script>
+    <script src="{{ asset("js/steps.js") }}"> </script>
     <script src="{{ asset("js/myScript.js") }}"> </script>
+    <script src="{{ asset("js/mapsJS.js") }}"> </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAS3tOh8NpT_5A_-P2-Oz2HqAhEf5h4uSs&signed_in=true&libraries=places&callback=initAutocomplete"
+            async defer></script>
 @endsection

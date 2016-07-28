@@ -37,6 +37,17 @@ class InterpreteurTools{
         $interp->traductions()->attach($trad);
     }
 
+    public static function addTraductions(Interpreteur $interp,$a){
+        $langs_init = $a['langue_src'];
+        $langs_dest = $a['langue_dest'];
+        foreach ($langs_init as $index => $value) {
+            $src = LangueTools::getLangue($value);
+            $dst = LangueTools::getLangue($langs_dest[$index]);
+            $traduction = TraductionTools::getTraduction($src, $dst);
+            InterpreteurTools::addTraduction($interp, $traduction);
+        }
+    }
+
     public static function deleteInterpreteur(User $u,$id){
         $interp = Interpreteur::find($id);
         $interp->delete();

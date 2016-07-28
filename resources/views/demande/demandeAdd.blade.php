@@ -35,7 +35,7 @@ Ajouter demande
                                     <div class="col-lg-6">
                                         <label>Date de debut</label>
                                         <div class="input-group date" >
-                                            <input type="text" name="dateEvent" id="date-start" class="form-control floating-label" value="{{ old('dateEvent') }}" placeholder="Date de debut">
+                                            <input type="text" name="dateEvent" id="date-start" class="form-control" value="{{ old('dateEvent') }}" placeholder="Date de debut">
                                             <div class="input-group-addon">
                                                 <span class="glyphicon glyphicon-th"></span>
                                             </div>
@@ -44,7 +44,7 @@ Ajouter demande
                                     <div class="col-lg-6">
                                         <label>Date de fin</label>
                                         <div class="input-group date" >
-                                            <input type="text" name="dateEndEvent" id="date-end" class="form-control floating-label" value="{{ old('dateEndEvent') }}" placeholder="Date de fin">
+                                            <input type="text" name="dateEndEvent" id="date-end" class="form-control" value="{{ old('dateEndEvent') }}" placeholder="Date de fin">
                                             <div class="input-group-addon">
                                                 <span class="glyphicon glyphicon-th"></span>
                                             </div>

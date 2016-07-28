@@ -10,6 +10,7 @@ namespace App\Tools;
 
 
 use App\Adresse;
+use App\User;
 
 class AdresseTools{
 
@@ -24,6 +25,21 @@ class AdresseTools{
         $adr->departement = $a['departement'];
         $adr->long = $a['long'];
         $adr->lat = $a['lat'];
+        $adr->save();
+        return $adr;
+    }
+
+    public static function updateAdresse(User $u,$a){
+        $adr = Adresse::find($a['adresse_id']);
+        if($a['adresse'] != null) $adr->adresse = $a['adresse'];
+        if($a['numero'] != null) $adr->numero = $a['numero'];
+        if($a['route'] != null) $adr->route = $a['route'];
+        if($a['code_postal'] != null) $adr->code_postal = $a['code_postal'];
+        if($a['ville'] != null) $adr->ville = $a['ville'];
+        if($a['pays'] != null) $adr->pays = $a['pays'];
+        if($a['departement'] != null) $adr->departement = $a['departement'];
+        if($a['long'] != null) $adr->long = $a['long'];
+        if($a['lat'] != null) $adr->lat = $a['lat'];
         $adr->save();
         return $adr;
     }

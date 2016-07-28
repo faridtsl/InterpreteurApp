@@ -1,12 +1,12 @@
 
 <div class="form-group">
     <label>Adresse</label>
-    <input class="form-control" name="adresse" value="{{ old('adresse') }}" id="autocomplete" placeholder="Enter your address" onFocus="geolocate()"  type="text">
+    <input class="form-control" name="adresse" value="{{ old('adresse') }}" id="adresse" placeholder="Enter your address" onFocus="geolocate()"  type="text">
 </div>
 
 <div class="form-group">
     <label>Numero</label>
-    <input class="form-control" name="numero" value="{{ old('numero') }}" id="street_number">
+    <input class="form-control" name="numero" value="{{ old('numero') }}" id="numero">
 </div>
 
 <div class="form-group">
@@ -16,23 +16,23 @@
 
 <div class="form-group">
     <label>Code postal</label>
-    <input class="form-control" name="code_postal" value="{{ old('code_postal') }}" id="postal_code" type="text">
+    <input class="form-control" name="code_postal" value="{{ old('code_postal') }}" id="code_postal" type="text">
 </div>
 
 <div class="form-group">
     <label>Ville</label>
-    <input class="form-control" name="ville" value="{{ old('ville') }}" id="locality"
+    <input class="form-control" name="ville" value="{{ old('ville') }}" id="ville"
            type="text">
 </div>
 
 <div class="form-group">
     <label>Pays</label>
-    <input class="form-control" name="pays" value="{{ old('pays') }}" id="country" >
+    <input class="form-control" name="pays" value="{{ old('pays') }}" id="pays" >
 </div>
 
 <div class="form-group">
     <label>Departement</label>
-    <input class="form-control" name="departement" value="{{ old('departement') }}" id="administrative_area_level_1">
+    <input class="form-control" name="departement" value="{{ old('departement') }}" id="departement">
 </div>
 <div class="form-group">
     <div class="row">

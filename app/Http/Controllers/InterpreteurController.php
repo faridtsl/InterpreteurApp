@@ -38,14 +38,7 @@ class InterpreteurController extends Controller{
             }
             $request['imageName'] = $imgName;
             $interpreteur = InterpreteurTools::addInterpreteur($adresse, $connectedUser, $request);
-            $langs_init = $request['langue_src'];
-            $langs_dest = $request['langue_dest'];
-            foreach ($langs_init as $index => $value) {
-                $src = LangueTools::getLangue($value);
-                $dst = LangueTools::getLangue($langs_dest[$index]);
-                $traduction = TraductionTools::getTraduction($src, $dst);
-                InterpreteurTools::addTraduction($interpreteur, $traduction);
-            }
+            InterpreteurTools::addTraductions($interpreteur,$request);
             DB::commit();
             return view('interpreteur.interpreteurAdd', ['message' => 'Interpreteur ajouté avec success!', 'img' => $imgName, 'langues' => $langues, 'interpreteur' => $interpreteur]);
         }catch(\Exception $e){
@@ -56,8 +49,9 @@ class InterpreteurController extends Controller{
     }
 
     public function showInterpreteurs(){
+        $langues = LangueTools::getAllLangues();
         $interpreteurs = InterpreteurTools::getAllInterpreteurs();
-        return view('interpreteur.interpreteursShow',['interpreteurs'=>$interpreteurs]);
+        return view('interpreteur.interpreteursShow',['interpreteurs'=>$interpreteurs,'langues'=>$langues]);
     }
 
     public function archiveInterpreteurs(){
@@ -72,7 +66,9 @@ class InterpreteurController extends Controller{
 
     public function updateInterpreteur(Request $request){
         $connectedUser = Auth::user();
-        InterpreteurTools::updateInterpreteur($connectedUser,$request);
+        $interpreteur = InterpreteurTools::updateInterpreteur($connectedUser,$request);
+        AdresseTools::updateAdresse($connectedUser,$request);
+        InterpreteurTools::addTraductions($interpreteur,$request);
         return redirect('interpreteur/list');
     }
 

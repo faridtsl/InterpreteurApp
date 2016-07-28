@@ -16,34 +16,130 @@ Route::get('/', function () {
 });
 
 //Interpreteur Routes
-Route::get('interpreteur/add', 'InterpreteurController@show');
-Route::post('interpreteur/add', 'InterpreteurController@store');
-Route::get('interpreteur/list','InterpreteurController@showInterpreteurs');
-Route::get('interpreteur/archive','InterpreteurController@archiveInterpreteurs');
-Route::get('interpreteur/{id}','InterpreteurController@showInterpreteur');
-Route::post('interpreteur/update','InterpreteurController@updateInterpreteur');
-Route::post('interpreteur/delete','InterpreteurController@deleteInterpreteur');
-Route::post('interpreteur/restore','InterpreteurController@restoreInterpreteur');
+
+Route::get(
+    'interpreteur/add',
+    ['middleware'=>'auth','uses' =>'InterpreteurController@show']
+);
+
+Route::post(
+    'interpreteur/add',
+    ['middleware'=>'auth','uses'=>'InterpreteurController@store']
+);
+
+Route::get(
+    'interpreteur/list',
+    ['middleware'=>'auth','uses'=>'InterpreteurController@showInterpreteurs']
+);
+
+Route::get(
+    'interpreteur/archive',
+    ['middleware'=>'auth','uses'=>'InterpreteurController@archiveInterpreteurs']
+);
+
+Route::get(
+    'interpreteur/{id}',
+    ['middleware'=>'auth','uses'=>'InterpreteurController@showInterpreteur']
+);
+
+Route::post(
+    'interpreteur/update',
+    ['middleware'=>'auth','uses'=>'InterpreteurController@updateInterpreteur']
+);
+
+Route::post(
+    'interpreteur/delete',
+    ['middleware'=>'auth','uses'=>'InterpreteurController@deleteInterpreteur']
+);
+
+Route::post(
+    'interpreteur/restore',
+    ['middleware'=>'auth','uses'=>'InterpreteurController@restoreInterpreteur']
+);
 
 //Client Routes
-Route::get('client/add', 'ClientController@show');
-Route::post('client/add', 'ClientController@store');
-Route::get('client/list','ClientController@showClients');
-Route::get('client/archive','ClientController@archiveClients');
-Route::get('client/{id}','ClientController@showClient');
-Route::post('client/update','ClientController@updateClient');
-Route::post('client/delete','ClientController@deleteClient');
-Route::post('client/restore','ClientController@restoreClient');
+
+Route::get(
+    'client/add',
+    ['middleware'=>'auth','uses'=>'ClientController@show']
+);
+
+Route::post(
+    'client/add',
+    ['middleware'=>'auth','uses'=>'ClientController@store']
+);
+
+Route::get(
+    'client/list',
+    ['middleware'=>'auth','uses'=>'ClientController@showClients']
+);
+
+Route::get(
+    'client/archive',
+    ['middleware'=>'auth','uses'=>'ClientController@archiveClients']
+);
+
+Route::get(
+    'client/{id}',
+    ['middleware'=>'auth','uses'=>'ClientController@showClient']
+);
+
+Route::post(
+    'client/update',
+    ['middleware'=>'auth','uses'=>'ClientController@updateClient']
+);
+
+Route::post(
+    'client/delete',
+    ['middleware'=>'auth','uses'=>'ClientController@deleteClient']
+);
+
+Route::post(
+    'client/restore',
+    ['middleware'=>'auth','uses'=>'ClientController@restoreClient']
+);
 
 //Demande Routes
-Route::get('demande/add','DemandeController@show');
-Route::post('demande/add','DemandeController@store');
+
+Route::get(
+    'demande/add',
+    ['middleware'=>'auth','uses'=>'DemandeController@show']
+);
+
+Route::post(
+    'demande/add',
+    ['middleware'=>'auth','uses'=>'DemandeController@store']
+);
 
 //Langues Routes
-Route::get('langue/add','LangueController@show');
-Route::post('langue/add','LangueController@store');
-Route::get('etat/add','EtatController@show');
-Route::post('etat/add','EtatController@store');
+
+Route::get(
+    'langue/add',
+    ['middleware'=>'auth','uses'=>'LangueController@show']
+);
+
+Route::post(
+    'langue/add',
+    ['middleware'=>'auth','uses'=>'LangueController@store']
+);
+
+Route::get(
+    'etat/add',
+    ['middleware'=>'auth','uses'=>'EtatController@show']
+);
+
+Route::post(
+    'etat/add',
+    ['middleware'=>'auth','uses'=>'EtatController@store']
+);
+
+
+//
+
+Route::get(
+    'adresse/{id}',
+    ['middleware'=>'auth','uses'=>'AdresseController@get']
+);
 
 //Images Routes
 Route::get('images/{img}',function ($img){
