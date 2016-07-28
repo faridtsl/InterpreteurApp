@@ -6,7 +6,7 @@
 
 <div class="form-group">
     <label>Numero</label>
-    <input class="form-control" name="numero" value="{{ old('numero') }}" id="numero">
+    <input class="form-control" name="numero" value="{{ old('numero') }}" id="street_number">
 </div>
 
 <div class="form-group">
@@ -16,23 +16,23 @@
 
 <div class="form-group">
     <label>Code postal</label>
-    <input class="form-control" name="code_postal" value="{{ old('code_postal') }}" id="code_postal" type="text">
+    <input class="form-control" name="code_postal" value="{{ old('code_postal') }}" id="postal_code" type="text">
 </div>
 
 <div class="form-group">
     <label>Ville</label>
-    <input class="form-control" name="ville" value="{{ old('ville') }}" id="ville"
+    <input class="form-control" name="ville" value="{{ old('ville') }}" id="locality"
            type="text">
 </div>
 
 <div class="form-group">
     <label>Pays</label>
-    <input class="form-control" name="pays" value="{{ old('pays') }}" id="pays" >
+    <input class="form-control" name="pays" value="{{ old('pays') }}" id="country" >
 </div>
 
 <div class="form-group">
     <label>Departement</label>
-    <input class="form-control" name="departement" value="{{ old('departement') }}" id="departement">
+    <input class="form-control" name="departement" value="{{ old('departement') }}" id="administrative_area_level_1">
 </div>
 <div class="form-group">
     <div class="row">
