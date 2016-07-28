@@ -35,9 +35,15 @@ Route::post('client/update','ClientController@updateClient');
 Route::post('client/delete','ClientController@deleteClient');
 Route::post('client/restore','ClientController@restoreClient');
 
+//Demande Routes
+Route::get('demande/add','DemandeController@show');
+Route::post('demande/add','DemandeController@store');
+
 //Langues Routes
 Route::get('langue/add','LangueController@show');
 Route::post('langue/add','LangueController@store');
+Route::get('etat/add','EtatController@show');
+Route::post('etat/add','EtatController@store');
 
 //Images Routes
 Route::get('images/{img}',function ($img){

@@ -24,5 +24,12 @@ class EtatTools{
         return Etat::all();
     }
 
+    public static function getEtatByName($name){
+        return Etat::where('libelle',$name)->get()->first();
+    }
+
+    public static function getEtatById($id){
+        return Etat::find($id);
+    }
 
 }
