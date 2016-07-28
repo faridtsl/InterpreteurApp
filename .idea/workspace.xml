@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="323faa9a-1b42-43af-ae09-e82e697c525e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/InterpreteurController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/InterpreteurController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Tools/AdresseTools.php" afterPath="$PROJECT_DIR$/app/Tools/AdresseTools.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Tools/InterpreteurTools.php" afterPath="$PROJECT_DIR$/app/Tools/InterpreteurTools.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/myScript.js" afterPath="$PROJECT_DIR$/public/js/myScript.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/demande/demandeAdd.blade.php" afterPath="$PROJECT_DIR$/resources/views/demande/demandeAdd.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/includes/adresseForm.blade.php" afterPath="$PROJECT_DIR$/resources/views/includes/adresseForm.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/interpreteur/interpreteurAdd.blade.php" afterPath="$PROJECT_DIR$/resources/views/interpreteur/interpreteurAdd.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/interpreteur/interpreteursShow.blade.php" afterPath="$PROJECT_DIR$/resources/views/interpreteur/interpreteursShow.blade.php" />
     </list>
     <ignored path="InterpreteurApp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -60,7 +51,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="interpreteursShow.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="interpreteursShow.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/interpreteur/interpreteursShow.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1923">
@@ -75,9 +66,31 @@
       <file leaf-file-name="myScript.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/myScript.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="35" column="32" selection-start-line="35" selection-start-column="32" selection-end-line="35" selection-end-column="32" />
+            <state relative-caret-position="54">
+              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="modifJS.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/js/modifJS.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="218">
+              <caret line="30" column="34" selection-start-line="30" selection-start-column="34" selection-end-line="30" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="steps.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/steps.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4068">
+              <caret line="226" column="6" selection-start-line="226" selection-start-column="6" selection-end-line="226" selection-end-column="6" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -121,8 +134,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -132,7 +145,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/resources/lang/fr/pagination.php" />
         <option value="$PROJECT_DIR$/resources/lang/fr/remainders.php" />
         <option value="$PROJECT_DIR$/config/app.php" />
         <option value="$PROJECT_DIR$/resources/lang/fr/validation.php" />
@@ -179,10 +191,11 @@
         <option value="$PROJECT_DIR$/app/Http/routes.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/AdresseController.php" />
         <option value="$PROJECT_DIR$/resources/views/interpreteur/interpreteursShow.blade.php" />
-        <option value="$PROJECT_DIR$/public/js/myScript.js" />
         <option value="$PROJECT_DIR$/app/Tools/AdresseTools.php" />
         <option value="$PROJECT_DIR$/app/Tools/InterpreteurTools.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/InterpreteurController.php" />
+        <option value="$PROJECT_DIR$/public/js/myScript.js" />
+        <option value="$PROJECT_DIR$/public/js/modifJS.js" />
       </list>
     </option>
   </component>
@@ -636,12 +649,12 @@
       <workItem from="1469324041781" duration="1356000" />
       <workItem from="1469357286220" duration="7577000" />
       <workItem from="1469643773980" duration="13991000" />
-      <workItem from="1469707974852" duration="15430000" />
+      <workItem from="1469707974852" duration="16084000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="93818000" />
+    <option name="totallyTimeSpent" value="94472000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="741" extended-state="0" />
@@ -692,13 +705,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/database/migrations/2016_07_20_121413_create_adresses_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2016_07_20_121450_create_devis_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
@@ -1003,16 +1009,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/steps.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4068">
-          <caret line="226" column="6" selection-start-line="226" selection-start-column="6" selection-end-line="226" selection-end-column="6" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2034">
@@ -1053,14 +1049,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/myScript.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="35" column="32" selection-start-line="35" selection-start-column="32" selection-end-line="35" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Tools/InterpreteurTools.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-133">
@@ -1096,6 +1084,32 @@
           <folding>
             <element signature="e#8429#11622#0#HTML" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/steps.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4068">
+          <caret line="226" column="6" selection-start-line="226" selection-start-column="6" selection-end-line="226" selection-end-column="6" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/myScript.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/modifJS.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="30" column="34" selection-start-line="30" selection-start-column="34" selection-end-line="30" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>
