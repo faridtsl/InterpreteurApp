@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="323faa9a-1b42-43af-ae09-e82e697c525e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/myScript.js" afterPath="$PROJECT_DIR$/public/js/myScript.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/interpreteur/interpreteursShow.blade.php" afterPath="$PROJECT_DIR$/resources/views/interpreteur/interpreteursShow.blade.php" />
     </list>
     <ignored path="InterpreteurApp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -51,11 +51,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="interpreteursShow.blade.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="interpreteursShow.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/interpreteur/interpreteursShow.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1923">
-              <caret line="245" column="41" selection-start-line="245" selection-start-column="41" selection-end-line="245" selection-end-column="41" />
+            <state relative-caret-position="393">
+              <caret line="244" column="37" selection-start-line="244" selection-start-column="37" selection-end-line="244" selection-end-column="37" />
               <folding>
                 <element signature="e#8429#11622#0#HTML" expanded="false" />
               </folding>
@@ -73,7 +73,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="modifJS.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="modifJS.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/modifJS.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="218">
@@ -190,12 +190,12 @@
         <option value="$PROJECT_DIR$/resources/views/includes/adresseForm.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/routes.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/AdresseController.php" />
-        <option value="$PROJECT_DIR$/resources/views/interpreteur/interpreteursShow.blade.php" />
         <option value="$PROJECT_DIR$/app/Tools/AdresseTools.php" />
         <option value="$PROJECT_DIR$/app/Tools/InterpreteurTools.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/InterpreteurController.php" />
         <option value="$PROJECT_DIR$/public/js/myScript.js" />
         <option value="$PROJECT_DIR$/public/js/modifJS.js" />
+        <option value="$PROJECT_DIR$/resources/views/interpreteur/interpreteursShow.blade.php" />
       </list>
     </option>
   </component>
@@ -649,12 +649,12 @@
       <workItem from="1469324041781" duration="1356000" />
       <workItem from="1469357286220" duration="7577000" />
       <workItem from="1469643773980" duration="13991000" />
-      <workItem from="1469707974852" duration="16084000" />
+      <workItem from="1469707974852" duration="16211000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94472000" />
+    <option name="totallyTimeSpent" value="94599000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="741" extended-state="0" />
@@ -1077,16 +1077,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/interpreteur/interpreteursShow.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1923">
-          <caret line="245" column="41" selection-start-line="245" selection-start-column="41" selection-end-line="245" selection-end-column="41" />
-          <folding>
-            <element signature="e#8429#11622#0#HTML" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/steps.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4068">
@@ -1110,6 +1100,16 @@
         <state relative-caret-position="218">
           <caret line="30" column="34" selection-start-line="30" selection-start-column="34" selection-end-line="30" selection-end-column="34" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/interpreteur/interpreteursShow.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="244" column="37" selection-start-line="244" selection-start-column="37" selection-end-line="244" selection-end-column="37" />
+          <folding>
+            <element signature="e#8429#11622#0#HTML" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -242,6 +242,7 @@
     <script src="https://cdn.datatables.net/responsive/1.0.7/js/dataTables.responsive.min.js"> </script>
     <script src="{{ asset("js/steps.js") }}"> </script>
     <script src="{{ asset("js/myScript.js") }}"> </script>
+    <script src="{{ asset("js/modifJS.js") }}"> </script>
     <script src="{{ asset("js/mapsJS.js") }}"> </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAS3tOh8NpT_5A_-P2-Oz2HqAhEf5h4uSs&signed_in=true&libraries=places&callback=initAutocomplete"
             async defer></script>
