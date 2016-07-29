@@ -60,6 +60,17 @@ class ClientController extends Controller{
 
     public function updateClient(Request $request){
         $connectedUser = Auth::user();
+        $client = ClientTools::getClient($request['id']);
+        $image = Input::file('image');
+        if ($image == null) {
+            $imgName = $client->image;
+        } else {
+            $imgName = $client->image;
+            if($imgName == 'unknown.jpg')
+                $imgName = ImageTools::getName($image, $request);
+            Input::file('image')->move(storage_path() . '/img', $imgName);
+        }
+        $request['imageName'] = $imgName;
         ClientTools::updateClient($connectedUser,$request);
         return redirect('client/list');
     }

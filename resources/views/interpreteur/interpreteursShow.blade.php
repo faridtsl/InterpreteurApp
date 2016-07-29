@@ -5,8 +5,8 @@
     <link type="text/css" rel="stylesheet" href="{{asset('css/bootstrap-datatable.css')}}">
     <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css">
     <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/responsive/1.0.7/css/responsive.dataTables.min.css">
-    <link rel="stylesheet" href="{{ asset('/css/steps.css')}}" />
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <style type="text/css"> .pac-container { z-index: 1051 !important; } </style>
 @endsection
 
 @section('title')
@@ -62,8 +62,6 @@
                                 <button class="btn btn-warning btn-xs editButton" data-title="Edit" data-toggle="modal" data-target="#edit" data-id="{{$interpreteur->id}}" >
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </button>
-                            </p>
-                            <p data-placement="top" data-toggle="tooltip" title="Delete">
                                 <button class="btn btn-danger btn-xs deleteButton" data-title="Delete" data-toggle="modal" data-target="#delete" data-id="{{$interpreteur->id}}" >
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </button>
@@ -118,6 +116,10 @@
                                     <input type="text" value="-1" id="email" name="email" class="form-control"/>
                                 </div>
                                 <div class="form-group">
+                                    <label>Image : </label>
+                                    <input type="file" name="image" />
+                                </div>
+                                <div class="form-group">
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <label>Prix préstation</label>
@@ -134,25 +136,28 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Tel fixe: </label>
-                                    <input type="text" value="-1" id="tel_fixe" name="tel_fixe" class="form-control"/>
-                                </div>
-                                <div class="form-group">
-                                    <label>Tel portable: </label>
-                                    <input type="text" value="-1" id="tel_portable" name="tel_portable" class="form-control"/>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label>Tel fixe: </label>
+                                            <input type="text" value="-1" id="tel_fixe" name="tel_fixe" class="form-control"/>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label>Tel portable: </label>
+                                            <input type="text" value="-1" id="tel_portable" name="tel_portable" class="form-control"/>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row hide" data-step="2" data-title="Adresse">
+                        <div class="row hide" data-step="2" data-title="Traductions">
                             <div class="container-fluid">
                                 <h3> Adresse</h3>
                                 @include('includes.adresseForm')
                             </div>
                         </div>
-                        <div class="row hide" data-step="3" data-title="This is the third step!">
+                        <div class="row hide" data-step="3" data-title="Traductions">
                             <div class="container-fluid">
                                 <h3> Traductions</h3>
-
                                 <div id="langs">
                                     <div class="entry input-group">
                                         <div class="form-group">
@@ -244,6 +249,7 @@
     <script src="{{ asset("js/myScript.js") }}"> </script>
     <script src="{{ asset("js/modifJS.js") }}"> </script>
     <script src="{{ asset("js/mapsJS.js") }}"> </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAS3tOh8NpT_5A_-P2-Oz2HqAhEf5h4uSs&signed_in=true&libraries=places&callback=initAutocomplete"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVuJ8zI1I-V9ckmycKWAbNRJmcTzs7nZE&signed_in=true&libraries=places&callback=initAutocomplete"
             async defer></script>
+
 @endsection

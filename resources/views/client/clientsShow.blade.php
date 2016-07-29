@@ -53,8 +53,6 @@
                             <button class="btn btn-warning btn-xs editButton" data-title="Edit" data-toggle="modal" data-target="#edit" data-id="{{$client->id}}" >
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </button>
-                        </p>
-                        <p data-placement="top" data-toggle="tooltip" title="Delete">
                             <button class="btn btn-danger btn-xs deleteButton" data-title="Delete" data-toggle="modal" data-target="#delete" data-id="{{$client->id}}" >
                                 <span class="glyphicon glyphicon-trash"></span>
                             </button>
@@ -76,28 +74,50 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span>&times;</span></button>
                     <h4 class="modal-title custom_align" id="Heading">Modifier</h4>
                 </div>
+
                 <form role="form" method="post" id="updateForm" action="update" enctype="multipart/form-data">
                     {!! csrf_field() !!}
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label>Identifiant: </label>
-                            <input type="text" value="-1" readonly="readonly" id="id" name="id" class="form-control"/>
-                        </div>
-                        <div class="form-group">
-                            <label>Email: </label>
-                            <input type="text" value="-1" id="email" name="email" class="form-control"/>
-                        </div>
-                        <div class="form-group">
-                            <label>Tel fixe: </label>
-                            <input type="text" value="-1" id="tel_fixe" name="tel_fixe" class="form-control"/>
-                        </div>
-                        <div class="form-group">
-                            <label>Tel portable: </label>
-                            <input type="text" value="-1" id="tel_portable" name="tel_portable" class="form-control"/>
+                        <div class="container-fluid">
+                            <h3> Informations personnelles</h3>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label>Nom</label>
+                                        <input class="form-control" value="{{ old('nom') }}" name="nom" id="nom" placeholder="Nom">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label>Prenom</label>
+                                        <input class="form-control" value="{{ old('prenom') }}" name="prenom" id="prenom" placeholder="Prenom">
+                                    </div>
+                                </div>
+                                <input type="hidden" value="-1" readonly="readonly" id="id" name="id" class="form-control"/>
+                                <input type="hidden" value="-1" readonly="readonly" id="adr" name="adresse_id" class="form-control"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Email: </label>
+                                <input type="text" value="-1" id="email" name="email" class="form-control"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Image : </label>
+                                <input type="file" name="image" />
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-6">
+                                    <label>Tel fixe: </label>
+                                    <input type="text" value="-1" id="tel_fixe" name="tel_fixe" class="form-control"/>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Tel portable: </label>
+                                    <input type="text" value="-1" id="tel_portable" name="tel_portable" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer ">
-                        <input value="Modifier" type="submit" class="btn btn-warning btn-lg" style="width: 100%;" />
+                        <button type="submit" class="btn btn-success js-btn-step"> Modifier </button>
                     </div>
                 </form>
             </div>

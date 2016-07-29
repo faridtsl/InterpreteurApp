@@ -47,7 +47,7 @@ class ClientTools{
         if($a['tel_portable'] != null) $client->tel_portable = $a['tel_portable'];
         if($a['commentaire'] != null) $client->commentaire = $a['commentaire'];
         if($a['tel_fixe'] != null) $client->tel_fixe = $a['tel_fixe'];
-        if($a['image'] != null) $client->image = $a['image'];
+        if($a['imageName'] != null) $client->image = $a['imageName'];
         $client->save();
         return $client;
     }

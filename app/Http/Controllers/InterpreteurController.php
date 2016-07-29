@@ -66,6 +66,18 @@ class InterpreteurController extends Controller{
 
     public function updateInterpreteur(Request $request){
         $connectedUser = Auth::user();
+        $interpreteur = InterpreteurTools::getInterpreteur($request['id']);
+        $image = Input::file('image');
+        if ($image == null) {
+            $imgName = $interpreteur->image;
+        } else {
+            $imgName = $interpreteur->image;
+            if($imgName == 'unknown.jpg')
+                $imgName = ImageTools::getName($image, $request);
+            Input::file('image')->move(storage_path() . '/img', $imgName);
+        }
+        $request['imageName'] = $imgName;
+
         $interpreteur = InterpreteurTools::updateInterpreteur($connectedUser,$request);
         AdresseTools::updateAdresse($connectedUser,$request);
         InterpreteurTools::addTraductions($interpreteur,$request);

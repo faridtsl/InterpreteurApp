@@ -40,6 +40,7 @@ class InterpreteurTools{
     public static function addTraductions(Interpreteur $interp,$a){
         $langs_init = $a['langue_src'];
         $langs_dest = $a['langue_dest'];
+        if($langs_init == null) return;
         foreach ($langs_init as $index => $value) {
             $src = LangueTools::getLangue($value);
             $dst = LangueTools::getLangue($langs_dest[$index]);
@@ -70,7 +71,7 @@ class InterpreteurTools{
         if($a['tel_portable'] != null) $interp->tel_portable = $a['tel_portable'];
         if($a['commentaire'] != null) $interp->commentaire = $a['commentaire'];
         if($a['tel_fixe'] != null) $interp->tel_fixe = $a['tel_fixe'];
-        if($a['image'] != null) $interp->image = $a['image'];
+        if($a['imageName'] != null) $interp->image = $a['imageName'];
         $interp->save();
         return $interp;
     }

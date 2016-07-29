@@ -1,4 +1,5 @@
 $(function () {
+
     function ajaxAdr() {
         // Get the record's ID via attribute
         $id = $("#adr").val();
@@ -8,11 +9,11 @@ $(function () {
             type:"GET",
             success:function(data){
                 $("#adresse").val(data['adresse']);
-                $("#pays").val(data['pays']);
-                $("#ville").val(data['ville']);
-                $("#departement").val(data['departement']);
-                $("#code_postal").val(data['code_postal']);
-                $("#numero").val(data['numero']);
+                $("#country").val(data['pays']);
+                $("#locality").val(data['ville']);
+                $("#administrative_area_level_1").val(data['departement']);
+                $("#postal_code").val(data['code_postal']);
+                $("#street_number").val(data['numero']);
                 $("#route").val(data['route']);
                 $("#lat").val(data['lat']);
                 $("#long").val(data['long']);
@@ -23,22 +24,12 @@ $(function () {
     }
 
     function ajaxSubmit() {
-        $.ajax({
-            type: "POST",
-            url: '/interpreteur/update',
-            data: $("#updateForm").serialize(), // serializes the form's elements.
-            success: function(data){
-                location.reload();
-                alert(data); // show response from the php script.
-            },error:function (data) {
-                console.log(data);
-            }
-        });
+        $("#updateForm").submit();
     }
 
     $('#edit').modalSteps({
         callbacks: {
-            '2': ajaxAdr
+          '2' : ajaxAdr
         },
         btnCancelHtml: 'Quitter',
         btnPreviousHtml: 'Precedent',

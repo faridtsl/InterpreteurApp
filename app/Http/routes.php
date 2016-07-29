@@ -140,6 +140,15 @@ Route::get(
     'adresse/{id}',
     ['middleware'=>'auth','uses'=>'AdresseController@get']
 );
+Route::get(
+    'adresse/update/{id}',
+    ['middleware'=>'auth','uses'=>'AdresseController@showUpdate']
+);
+Route::post(
+    'adresse/update/{id}',
+    ['middleware'=>'auth','uses'=>'AdresseController@storeUpdate']
+);
+
 
 //Images Routes
 Route::get('images/{img}',function ($img){
