@@ -35,6 +35,8 @@ class DemandeController extends Controller{
             $src = LangueTools::getLangue($request['langue_src']);
             $dst = LangueTools::getLangue($request['langue_dest']);
             $traduction = TraductionTools::getTraduction($src,$dst);
+            if($traduction==null)
+                return view('demande.demandeAdd',['langues' => $langues,'clients' => $clients])->withErrors(['Langue source doit être differente de la langues destination']);
             $demande = DemandeTools::addDemande($adresse,$client,$etat,$traduction,$connectedUser,$request);
             DB::commit();
             return view('demande.demandeAdd', ['message' => 'Interpreteur ajouté avec success!','client' => $client, 'clients' => $clients,'langues' => $langues, 'demande' => $demande]);
