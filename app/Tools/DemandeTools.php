@@ -16,6 +16,7 @@ use App\Etat;
 use App\Http\Requests\DemandeSearchRequest;
 use App\Traduction;
 use App\User;
+use Carbon\Carbon;
 
 class DemandeTools{
 
@@ -53,7 +54,14 @@ class DemandeTools{
         }
 
         $demandes = $demande->get();
+
         return $demandes;
+    }
+
+    public static function tempsRestant(Demande $d){
+        $dateEvent = new Carbon($d->dateEvent);
+        $now = Carbon::now();
+        return $now->diffInDays($dateEvent,false);
     }
 
 

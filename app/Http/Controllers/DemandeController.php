@@ -50,6 +50,10 @@ class DemandeController extends Controller{
         if($request->isMethod('post')){
             $demandes = DemandeTools::searchByDates($request);
         }
+        $demandes = $demandes->sortBy(function($demande)
+        {
+            return $demande->dateEvent;
+        });
         return view('demande.demandeShow',['demandes'=>$demandes]);
     }
 

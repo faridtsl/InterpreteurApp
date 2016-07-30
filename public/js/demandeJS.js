@@ -12,7 +12,8 @@ $(function () {
         dom: 'Bfrtip',
         buttons: [
             'colvis'
-        ]
+        ],
+        "bSort": false
     } );
 
 
@@ -28,6 +29,39 @@ $(function () {
             }
         } );
     } );
+
+
+    $('#tableExpire tfoot th').each( function () {
+        var title = $(this).text();
+        $(this).html( '<input type="text" class="form-control" placeholder="Search '+title+'" />' );
+    });
+
+
+    var table = $('#tableExpire').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'colvis'
+        ],
+        "bSort": false
+    } );
+
+
+    // Apply the search
+    table.columns().every( function () {
+        var that = this;
+
+        $( 'input', this.footer() ).on( 'keyup change', function () {
+            if ( that.search() !== this.value ) {
+                that
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+
+
+    $("#collapse2").addClass('collapse');
+
 
     $('.toggle').click(function (event) {
         event.preventDefault();

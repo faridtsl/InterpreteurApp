@@ -11,10 +11,11 @@
     <script src="http://cdn.ckeditor.com/4.5.8/full/ckeditor.js"></script>
     <link type="text/css" rel="stylesheet" href="{{asset('css/bootstrap-datatable.css')}}">
     <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css">
-    <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/responsive/1.0.7/css/responsive.dataTables.min.css">
-    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.1.2/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.0.2/css/responsive.bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
     <style type="text/css"> .pac-container { z-index: 1051 !important; } </style>
+    <meta name="_token" content="{{ csrf_token() }}">
 @endsection
 
 @section('title')
@@ -129,20 +130,89 @@
                 </tfoot>
                 <tbody>
                 @foreach($demandes as $demande)
-                    <tr>
-                        <th>{{$demande->titre}}</th>
-                        <th>{{\App\Tools\EtatTools::getEtatById($demande->etat_id)->libelle}}</th>
-                        <th>{{\App\Tools\ClientTools::getClient($demande->client_id)->nom}}</th>
-                        <th>{{$demande->created_at}}</th>
-                        <th>{{\App\Tools\LangueTools::getLangue(\App\Tools\TraductionTools::getTraductionById($demande->traduction_id)->source)->content}}</th>
-                        <th>{{\App\Tools\LangueTools::getLangue(\App\Tools\TraductionTools::getTraductionById($demande->traduction_id)->cible)->content}}</th>
-                        <th>Action</th>
-                        <th>{{$demande->content}}</th>
+                    @if(\App\Tools\DemandeTools::tempsRestant($demande)>0)
+                    <tr class="@if(\App\Tools\DemandeTools::tempsRestant($demande) < env('EVENT_DANGER_DELAI','0')) danger @elseif(\App\Tools\DemandeTools::tempsRestant($demande) < env('EVENT_WAR_DELAI','0')) warning @endif">
+                        <td>{{$demande->titre}}</td>
+                        <td>{{\App\Tools\EtatTools::getEtatById($demande->etat_id)->libelle}}</td>
+                        <td>{{\App\Tools\ClientTools::getClient($demande->client_id)->nom}}</td>
+                        <td>{{$demande->created_at}}</td>
+                        <td>{{\App\Tools\LangueTools::getLangue(\App\Tools\TraductionTools::getTraductionById($demande->traduction_id)->source)->content}}</td>
+                        <td>{{\App\Tools\LangueTools::getLangue(\App\Tools\TraductionTools::getTraductionById($demande->traduction_id)->cible)->content}}</td>
+                        <td>{{\App\Tools\DemandeTools::tempsRestant($demande)}}</td>
+                        <td>{{$demande->content}}</td>
                     </tr>
+                    @endif
                 @endforeach
                 </tbody>
             </table>
         </div>
+
+
+        <div class="row">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapse2" id="redraw">
+                            Demandes expirées
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse2" class="panel-collapse">
+                    <div class="panel-body">
+                        <table id="tableExpire" class="table table-striped table-bordered display responsive nowrap" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Titre</th>
+                                <th>Etat</th>
+                                <th>Client</th>
+                                <th>Date Creation</th>
+                                <th>Langue Initiale</th>
+                                <th>Langue Destination</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>Titre</th>
+                                <th>Etat</th>
+                                <th>Client</th>
+                                <th>Date Creation</th>
+                                <th>Langue Initiale</th>
+                                <th>Langue Destination</th>
+                                <th></th>
+                            </tr>
+                            </tfoot>
+                            <tbody>
+                            @foreach($demandes as $demande)
+                                @if(\App\Tools\DemandeTools::tempsRestant($demande)<=0)
+                                    <tr>
+                                        <td>{{$demande->titre}}</td>
+                                        <td>{{\App\Tools\EtatTools::getEtatById($demande->etat_id)->libelle}}</td>
+                                        <td>{{\App\Tools\ClientTools::getClient($demande->client_id)->nom}}</td>
+                                        <td>{{$demande->created_at}}</td>
+                                        <td>{{\App\Tools\LangueTools::getLangue(\App\Tools\TraductionTools::getTraductionById($demande->traduction_id)->source)->content}}</td>
+                                        <td>{{\App\Tools\LangueTools::getLangue(\App\Tools\TraductionTools::getTraductionById($demande->traduction_id)->cible)->content}}</td>
+                                        <td>
+                                            <p data-placement="top" data-toggle="tooltip" title="Edit">
+                                                <button class="btn btn-warning btn-xs editButton" data-title="Edit" data-toggle="modal" data-target="#edit" data-id="{{$demande->id}}" >
+                                                    <span class="glyphicon glyphicon-pencil"></span>
+                                                </button>
+                                                <button class="btn btn-success btn-xs deleteButton" data-title="Delete" data-toggle="modal" data-target="#delete" data-id="{{$demande->id}}" >
+                                                    <span class="glyphicon glyphicon-search"></span>
+                                                </button>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 
 @endsection
