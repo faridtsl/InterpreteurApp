@@ -52,7 +52,7 @@ $(function () {
         $langsT = '';
         $langsT = $langsT.concat('<tr>');
         $langsT = $langsT.concat('<td><label id="id'+$idT+'l'+$source+'">');
-        $langsT = $langsT.concat('</label></td> <td> -> </td> <td><label id="id'+$idT+'l'+$cible+'">');
+        $langsT = $langsT.concat('</label></td> <td> <span class="glyphicon glyphicon-arrow-right"></span> </td> <td><label id="id'+$idT+'l'+$cible+'">');
         $langsT = $langsT.concat('</label></td>');
         $langsT = $langsT.concat('<td><form method="post" action="/traduction/delete"><input id="idT" name="idT" type="hidden" value="'+$idT+'"><input id="idI" name="idI" type="hidden" value="'+$id+'">'+$csrfIn+'<button class="btn btn-danger btn-xs tradDel" style="margin-left: 10px" ><span class="glyphicon glyphicon-trash"></span> </button></td></tr>');
         $langs.append($langsT);

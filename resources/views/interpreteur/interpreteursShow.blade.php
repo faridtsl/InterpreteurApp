@@ -72,7 +72,7 @@
                         <td>{{$interpreteur->tel_fixe}}</td>
                         <td>
                             @foreach(\App\Tools\TraductionTools::getTraductionsByInterpreteur($interpreteur->id) as $traduction)
-                                {{\App\Tools\LangueTools::getLangue($traduction->source)->content}} -> {{\App\Tools\LangueTools::getLangue($traduction->cible)->content}}
+                                {{\App\Tools\LangueTools::getLangue($traduction->source)->content}} -<span class="glyphicon glyphicon-arrow-right"></span> {{\App\Tools\LangueTools::getLangue($traduction->cible)->content}}
                                 ;
                             @endforeach
                         </td>
