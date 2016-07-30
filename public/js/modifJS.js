@@ -27,9 +27,83 @@ $(function () {
         $("#updateForm").submit();
     }
 
+    function ajaxGetLangue($idT,$id){
+        var l = 'id'+$idT+'l'+$id;
+        $.ajax({
+            url: '/langue/'+$id,
+            type:"GET",
+            success:function(data){
+                $langs = $('#'+l);
+                $langs.html(data['content']);
+            },error:function(){
+                alert("error!!!!");
+            }
+        });
+    }
+
+
+    function ajaxCall(data,d) {
+        $langs = $("#oldLangs>tbody");
+        $source = data[d]['source'];
+        $idT = data[d]['id'];
+        $cible = data[d]['cible'];
+        $csrf = $('meta[name="_token"]').attr('content');
+        $csrfIn = '<input type="hidden" name="_token" value="'+$csrf+'">';
+        $langsT = '';
+        $langsT = $langsT.concat('<tr>');
+        $langsT = $langsT.concat('<td><label id="id'+$idT+'l'+$source+'">');
+        $langsT = $langsT.concat('</label></td> <td> -> </td> <td><label id="id'+$idT+'l'+$cible+'">');
+        $langsT = $langsT.concat('</label></td>');
+        $langsT = $langsT.concat('<td><form method="post" action="/traduction/delete"><input id="idT" name="idT" type="hidden" value="'+$idT+'"><input id="idI" name="idI" type="hidden" value="'+$id+'">'+$csrfIn+'<button class="btn btn-danger btn-xs tradDel" style="margin-left: 10px" ><span class="glyphicon glyphicon-trash"></span> </button></td></tr>');
+        $langs.append($langsT);
+        ajaxGetLangue($idT,$source);
+        ajaxGetLangue($idT,$cible);
+    }
+
+    function ajaxInterp() {
+        $id = $("#id").val();
+
+        $.ajax({
+            url: '/traductions/'+$id,
+            type:"GET",
+            success:function(data){
+                $langs = $("#oldLangs>tbody");
+                $langs.html('');
+                $.each(data,function (d) {
+                    ajaxCall(data,d);
+                });
+            },error:function(){
+                alert("error!!!!");
+            }
+        });
+    }
+
+    $(document.body).on('click', '.tradDel',function (e) {
+            e.preventDefault();
+            $form = $(this).parent('form');
+            console.log($id);
+
+            $.ajax({
+                url: '/traduction/delete',
+                type:"POST",
+                data:$form.serialize(),
+                success:function(data){
+                    $langs = $("#oldLangs>tbody");
+                    $langs.html('');
+                    $.each(data,function (d) {
+                        ajaxCall(data,d);
+                    });
+                },error:function(){
+                    alert("error!!!!");
+                }
+            });
+    });
+
+
     $('#edit').modalSteps({
         callbacks: {
-          '2' : ajaxAdr
+          '2' : ajaxAdr,
+          '3' : ajaxInterp
         },
         btnCancelHtml: 'Quitter',
         btnPreviousHtml: 'Precedent',

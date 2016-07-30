@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Demande;
 use App\Tools\AdresseTools;
 use App\Tools\ClientTools;
 use App\Tools\DemandeTools;
@@ -42,6 +43,14 @@ class DemandeController extends Controller{
         }
         $errors = ['Veuillez remplire toutes la correspondance src->dest'];
         return view('demande.demandeAdd', ['langues' => $langues,'clients' => $clients])->withErrors($errors);
+    }
+
+    public function showList(Request $request){
+        $demandes = Demande::all();
+        if($request->isMethod('post')){
+            $demandes = DemandeTools::searchByDates($request);
+        }
+        return view('demande.demandeShow',['demandes'=>$demandes]);
     }
 
 }

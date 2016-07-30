@@ -105,10 +105,13 @@ Route::get(
     'demande/add',
     ['middleware'=>'auth','uses'=>'DemandeController@show']
 );
-
 Route::post(
     'demande/add',
     ['middleware'=>'auth','uses'=>'DemandeController@store']
+);
+Route::get(
+    'demande/list',
+    ['middleware'=>'auth','uses'=>'DemandeController@showList']
 );
 
 //Langues Routes
@@ -124,6 +127,11 @@ Route::post(
 );
 
 Route::get(
+    'langue/{id}',
+    ['middleware'=>'auth','uses'=>'LangueController@getLangue']
+);
+
+Route::get(
     'etat/add',
     ['middleware'=>'auth','uses'=>'EtatController@show']
 );
@@ -133,6 +141,14 @@ Route::post(
     ['middleware'=>'auth','uses'=>'EtatController@store']
 );
 
+Route::get(
+    'traductions/{id}',
+    ['middleware'=>'auth','uses'=>'TraductionController@getTraductions']
+);
+Route::post(
+    'traduction/delete',
+    ['middleware'=>'auth','uses'=>'TraductionController@deleteTraduction']
+);
 
 //
 

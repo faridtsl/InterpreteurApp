@@ -13,6 +13,7 @@ use App\Adresse;
 use App\Client;
 use App\Demande;
 use App\Etat;
+use App\Http\Requests\DemandeSearchRequest;
 use App\Traduction;
 use App\User;
 
@@ -31,6 +32,28 @@ class DemandeTools{
         $demande->etat()->associate($etat);
         $demande->save();
         return $demande;
+    }
+
+    public static function searchByDates(DemandeSearchRequest $request){
+
+        if(!empty($request['dateEventDeb'])){
+            $demande = Demande::where('dateEvent', '>=', $request['dateEventDeb']);
+        }
+
+        if(!empty($request['dateEventFin'])){
+            $demande = $demande->where('dateEvent', '<=', $request['dateEventFin']);
+        }
+
+        if(!empty($request['dateCreateDeb'])){
+            $demande = $demande->where('created_at', '>=', $request['dateCreateDeb']);
+        }
+
+        if(!empty($request['dateCreateFin'])){
+            $demande = $demande->where('created_at', '<=', $request['dateCreateFin']);
+        }
+
+        $demandes = $demande->get();
+        return $demandes;
     }
 
 

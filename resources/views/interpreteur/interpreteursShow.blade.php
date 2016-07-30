@@ -7,6 +7,7 @@
     <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/responsive/1.0.7/css/responsive.dataTables.min.css">
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
     <style type="text/css"> .pac-container { z-index: 1051 !important; } </style>
+    <meta name="_token" content="{{ csrf_token() }}">
 @endsection
 
 @section('title')
@@ -158,6 +159,11 @@
                         <div class="row hide" data-step="3" data-title="Traductions">
                             <div class="container-fluid">
                                 <h3> Traductions</h3>
+                                <div class="row container-fluid">
+                                    <table id="oldLangs">
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
                                 <div id="langs">
                                     <div class="entry input-group">
                                         <div class="form-group">
@@ -243,8 +249,6 @@
 
 
 @section('footer')
-    <script src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"> </script>
-    <script src="https://cdn.datatables.net/responsive/1.0.7/js/dataTables.responsive.min.js"> </script>
     <script src="{{ asset("js/steps.js") }}"> </script>
     <script src="{{ asset("js/myScript.js") }}"> </script>
     <script src="{{ asset("js/modifJS.js") }}"> </script>

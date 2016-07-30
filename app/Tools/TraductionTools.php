@@ -44,4 +44,8 @@ class TraductionTools{
         return $res;
     }
 
+    public static function getTraductionById($id){
+        return Traduction::find($id);
+    }
+
 }

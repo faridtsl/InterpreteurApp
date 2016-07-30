@@ -45,7 +45,8 @@ class InterpreteurTools{
             $src = LangueTools::getLangue($value);
             $dst = LangueTools::getLangue($langs_dest[$index]);
             $traduction = TraductionTools::getTraduction($src, $dst);
-            InterpreteurTools::addTraduction($interp, $traduction);
+            if($traduction != null)
+                InterpreteurTools::addTraduction($interp, $traduction);
         }
     }
 

@@ -18,4 +18,8 @@ class LangueController extends Controller{
         return view('langue',['message'=>'Langue ajoutée avec success']);
     }
 
+    public function getLangue($id){
+        return response(LangueTools::getLangue($id));
+    }
+
 }
