@@ -59,4 +59,9 @@ class DemandeController extends Controller{
         return view('demande.demandeShow',['demandes'=>$demandes]);
     }
 
+    public function showCalendar(){
+        $demandes = Demande::all();
+        return view('demande.calendar', [ 'demandes' => $demandes ] );
+    }
+
 }

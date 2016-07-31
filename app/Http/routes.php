@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
+
 //Interpreteur Routes
 
 Route::get(
@@ -56,6 +59,10 @@ Route::post(
     'interpreteur/restore',
     ['middleware'=>'auth','uses'=>'InterpreteurController@restoreInterpreteur']
 );
+
+
+
+
 
 //Client Routes
 
@@ -99,6 +106,10 @@ Route::post(
     ['middleware'=>'auth','uses'=>'ClientController@restoreClient']
 );
 
+
+
+
+
 //Demande Routes
 
 Route::get(
@@ -113,6 +124,12 @@ Route::get(
     'demande/list',
     ['middleware'=>'auth','uses'=>'DemandeController@showList']
 );
+Route::get(
+    '/calendar',
+    ['middleware'=>'auth','uses'=>'DemandeController@showCalendar']
+);
+
+
 
 //Langues Routes
 

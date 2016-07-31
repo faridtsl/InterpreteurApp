@@ -3,7 +3,7 @@
 
 <head>
 
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859"/>le
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -235,7 +235,7 @@
                             <a href="index.html"><i class="fa fa-dashboard fa-fw"></i>Traces</a>
                         </li>
                         <li>
-                            <a href="/calandar"><i class="fa fa-table fa-fw"></i> Calendrier</a>
+                            <a href="/calendar"><i class="fa fa-table fa-fw"></i> Calendrier</a>
                         </li>
 </ul>
 </div>
