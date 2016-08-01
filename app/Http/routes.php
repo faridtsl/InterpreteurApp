@@ -128,7 +128,10 @@ Route::get(
     '/calendar',
     ['middleware'=>'auth','uses'=>'DemandeController@showCalendar']
 );
-
+Route::get(
+    '/demande/update',
+    ['middleware'=>'auth','uses'=>'DemandeController@showUpdate']
+);
 
 
 //Langues Routes

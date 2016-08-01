@@ -64,4 +64,24 @@ class DemandeController extends Controller{
         return view('demande.calendar', [ 'demandes' => $demandes ] );
     }
 
+    public function showUpdate(Request $request){
+        $demande = Demande::find($request['id']);
+        $traduction = TraductionTools::getTraductionById($demande->traduction_id);
+        $langues = LangueTools::getAllLangues();
+        $clients = ClientTools::getAllClients();
+        $client = ClientTools::getClient($demande->client_id);
+        return view('demande.demandeUpdate',['client'=>$client,'langues'=>$langues,'traduction'=>$traduction,'demande'=>$demande,'clients'=>$clients]);
+    }
+
+    public function storeUpdate(Request $request){
+        $connectedUser = Auth::user();
+        $etat = EtatTools::getEtatByName('Créée');
+        $client = ClientTools::getClient($request['client']);
+        $src = LangueTools::getLangue($request['langue_src']);
+        $dst = LangueTools::getLangue($request['langue_dest']);
+        $traduction = TraductionTools::getTraduction($src,$dst);
+        $demande = DemandeTools::updateDemande(null,$client,$etat,$traduction,$connectedUser,$request);
+        return $this->showUpdate();
+    }
+
 }

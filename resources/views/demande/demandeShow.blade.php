@@ -148,9 +148,9 @@
                                     <td>{{\App\Tools\LangueTools::getLangue(\App\Tools\TraductionTools::getTraductionById($demande->traduction_id)->cible)->content}}</td>
                                     <td>
                                         <p data-placement="top" data-toggle="tooltip" title="Edit">
-                                            <button class="btn btn-warning btn-xs editButton" data-title="Edit" data-toggle="modal" data-target="#edit" data-id="{{$demande->id}}" >
+                                            <a class="btn btn-warning btn-xs editButton" href="/demande/update?id={{$demande->id}}" >
                                                 <span class="glyphicon glyphicon-pencil"></span>
-                                            </button>
+                                            </a>
                                             <button class="btn btn-success btn-xs deleteButton" data-title="Delete" data-toggle="modal" data-target="#delete" data-id="{{$demande->id}}" >
                                                 <span class="glyphicon glyphicon-search"></span>
                                             </button>

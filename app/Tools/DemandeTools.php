@@ -64,5 +64,20 @@ class DemandeTools{
         return $now->diffInDays($dateEvent,false);
     }
 
+    public static function updateDemande(Adresse $adr=null,Client $client=null,Etat $etat=null,Traduction $traduction=null,User $u,$a){
+        $demande = Demande::find($a['id']);
+        if($a['titre'] != null) $demande->titre = $a['titre'];
+        if($a['content'] != null) $demande->content = $a['content'];
+        if($a['dateEvent'] != null) $demande->dateEvent = $a['dateEvent'];
+        if($a['dateEndEvent'] != null) $demande->dateEndEvent = $a['dateEndEvent'];
+        if($adr != null) $demande->adresse()->associate($adr);
+        if($client != null) $demande->client()->associate($client);
+        if($traduction != null) $demande->traduction()->associate($traduction);
+        if($etat != null) $demande->etat()->associate($etat);
+        $demande->save();
+        return $demande;
+    }
+
+
 
 }
