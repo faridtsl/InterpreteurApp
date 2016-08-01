@@ -132,6 +132,10 @@ Route::get(
     '/demande/update',
     ['middleware'=>'auth','uses'=>'DemandeController@showUpdate']
 );
+Route::post(
+    '/demande/update',
+    ['middleware'=>'auth','uses'=>'DemandeController@storeUpdate']
+);
 
 
 //Langues Routes

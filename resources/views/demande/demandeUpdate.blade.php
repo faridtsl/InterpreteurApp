@@ -14,6 +14,7 @@
     <script type="text/javascript" src="{{ asset('js/bootstrap-material-datetimepicker.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('/css/myStyle.css')}}" />
     <script src="http://cdn.ckeditor.com/4.5.8/full/ckeditor.js"></script>
+    <style type="text/css"> .pac-container { z-index: 1051 !important; } </style>
 
 @endsection
 
@@ -25,173 +26,171 @@
         <input type="hidden" value="{{$demande->id}}" name="id"/>
         <input type="hidden" value="{{$demande->client_id}}" id="client" name="client"/>
         <div class="col-lg-12">
-            <div class="panel panel-info" id="demandePanel">
-                <div class="panel-heading">
-                    Informations demande
-                </div>
-                <div class="panel-body">
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-lg-3 lab">
-                                <label>Titre de la demande : </label>
-                            </div>
-                            <div class="col-lg-3">
-                                <span class="displayClass">{{$demande->titre}}</span>
-                                <a href="#" class="editChamps"><span class="glyphicon glyphicon-pencil"></span></a>
-                                <input class="form-control editClass" name="titre" value="{{ $demande->titre }}" placeholder="Saisir l'objet de la demande.">
-                            </div>
-                        </div>
+            <div class="panel-group" id="accordion">
+
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#demandePanel">Informations demande</a>
                     </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="col-lg-6 lab">
-                                    <label>Date de debut : </label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <span class="displayClass">{{$demande->dateEvent}}</span>
-                                    <a href="#" class="editChamps"><span class="glyphicon glyphicon-pencil"></span></a>
-
-                                    <div class="input-group date editClass" >
-                                        <input type="text" name="dateEvent" id="date-start" class="form-control" value="{{ $demande->dateEvent }}" placeholder="Date de debut">
-                                        <div class="input-group-addon">
-                                            <span class="glyphicon glyphicon-th"></span>
-                                        </div>
+                    <div class="panel-body panel-collapse collapse in" id="demandePanel">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="col-lg-3 lab">
+                                        <label>Titre de la demande : </label>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="col-lg-6 lab">
-                                    <label>Date de fin : </label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <span class="displayClass">{{$demande->dateEndEvent}}</span>
-                                    <a href="#" class="editChamps"><span class="glyphicon glyphicon-pencil"></span></a>
-
-                                    <div class="input-group date editClass" >
-                                        <input type="text" name="dateEndEvent" id="date-end" class="form-control" value="{{ $demande->dateEndEvent }}" placeholder="Date de fin">
-                                        <div class="input-group-addon">
-                                            <span class="glyphicon glyphicon-th"></span>
-                                        </div>
+                                    <div class="col-lg-3">
+                                        <span class="displayClass">{{$demande->titre}}</span>
+                                        <input class="form-control editClass" name="titre" value="{{ $demande->titre }}" placeholder="Saisir l'objet de la demande.">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-6">
                                     <div class="col-lg-6 lab">
-                                        <label>Langue initiale : </label>
+                                        <label>Date de debut : </label>
                                     </div>
-                                    <div class="col-lg-6">
-                                        @foreach($langues as $langue)
-                                            @if($langue->id == $traduction->source)
-                                                <span class="displayClass">{{$langue->content}}</span>
-                                                <a href="#" class="editChamps"><span class="glyphicon glyphicon-pencil"></span></a>
-                                            @endif
-                                        @endforeach
-                                        <select class="form-control editClass" name="langue_src">
-                                            <option value="" disabled selected>Langue source</option>
+                                    <div class="col-lg-6 par">
+                                        <span class="displayClass">{{$demande->dateEvent}}</span>
+                                        <div class="input-group date editClass" >
+                                            <input type="text" name="dateEvent" id="date-start" class="form-control" value="{{ $demande->dateEvent }}" placeholder="Date de debut">
+                                            <div class="input-group-addon">
+                                                <span class="glyphicon glyphicon-th"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="col-lg-6 lab">
+                                        <label>Date de fin : </label>
+                                    </div>
+                                    <div class="col-lg-6 par">
+                                        <span class="displayClass">{{$demande->dateEndEvent}}</span>
+                                        <div class="input-group date editClass" >
+                                            <input type="text" name="dateEndEvent" id="date-end" class="form-control" value="{{ $demande->dateEndEvent }}" placeholder="Date de fin">
+                                            <div class="input-group-addon">
+                                                <span class="glyphicon glyphicon-th"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <div class="col-lg-6 lab">
+                                            <label>Langue initiale : </label>
+                                        </div>
+                                        <div class="col-lg-6 par">
                                             @foreach($langues as $langue)
                                                 @if($langue->id == $traduction->source)
-                                                    <option value="{{$langue->id}}" selected>{{$langue->content}}</option>
-                                                @else
-                                                    <option value="{{$langue->id}}">{{$langue->content}}</option>
-
+                                                    <span class="displayClass">{{$langue->content}}</span>
                                                 @endif
                                             @endforeach
-                                        </select>
+                                            <select class="form-control editClass" name="langue_src">
+                                                <option value="" disabled selected>Langue source</option>
+                                                @foreach($langues as $langue)
+                                                    @if($langue->id == $traduction->source)
+                                                        <option value="{{$langue->id}}" selected>{{$langue->content}}</option>
+                                                    @else
+                                                        <option value="{{$langue->id}}">{{$langue->content}}</option>
+
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group lab">
-                                    <div class="col-lg-6">
-                                        <label>Langue destination : </label>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        @foreach($langues as $langue)
-                                            @if($langue->id == $traduction->cible)
-                                                <span class="displayClass">{{$langue->content}}</span>
-                                                <a href="#" class="editChamps"><span class="glyphicon glyphicon-pencil"></span></a>
-                                            @endif
-                                        @endforeach
-                                        <select class="form-control editClass" name="langue_dest">
-                                            <option value="" disabled selected>Langue destination</option>
+                                <div class="col-lg-6">
+                                    <div class="form-group lab">
+                                        <div class="col-lg-6">
+                                            <label>Langue destination : </label>
+                                        </div>
+                                        <div class="col-lg-6 par">
                                             @foreach($langues as $langue)
                                                 @if($langue->id == $traduction->cible)
-                                                    <option value="{{$langue->id}}" selected>{{$langue->content}}</option>
-                                                @else
-                                                    <option value="{{$langue->id}}">{{$langue->content}}</option>
+                                                    <span class="displayClass">{{$langue->content}}</span>
                                                 @endif
                                             @endforeach
-                                        </select>
+                                            <select class="form-control editClass" name="langue_dest">
+                                                <option value="" disabled selected>Langue destination</option>
+                                                @foreach($langues as $langue)
+                                                    @if($langue->id == $traduction->cible)
+                                                        <option value="{{$langue->id}}" selected>{{$langue->content}}</option>
+                                                    @else
+                                                        <option value="{{$langue->id}}">{{$langue->content}}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label>Contenu de la demande : </label>
+                            <textarea class="form-control ckeditor" id="content" rows="10" name="content">{{ $demande->content }}</textarea>
+                            <p class="help-block editClass">Saisir le contenu de la demande.</p>
+                        </div>
+                        <button class="btn btn-outline btn-primary" id="toggleCli">Suivant</button>
+                        <a href="#" class="editChamps btn btn-danger">Modifier</a>
                     </div>
-                    <div class="form-group">
-                        <label>Contenu de la demande : </label>
-                        <textarea class="form-control ckeditor editClass" id="content" rows="10" name="content">{{ $demande->content }}</textarea>
-                        <p class="help-block editClass">Saisir le contenu de la demande.</p>
+                </div>
+
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#clientPanel">Demandeur</a>
+                        </h4>
                     </div>
-                    <button class="btn btn-outline btn-primary" id="toggleCli">Enregistrer les modifications</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-12">
-
-            <div class="panel panel-info" id="devisPanel">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Demandeur
-                    </h4>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
+                    <div id="clientPanel"  class="panel-body panel-collapse collapse">
+                        <div class="row">
                             <div class="col-lg-2">
-
                                 <img class="img-circle" src="/images/{{$client->image}}" style="width: 100px;height:100px;">
                             </div>
                             <div class="col-lg-9">
                                 <h3>
                                     {{$client->nom}} {{$client->prenom}}
-                                    <a href="#" class="toggle" data-title="client" data-toggle="modal" data-target="#clientModal" data-id="{{$demande->client_id}}" ><span class="glyphicon glyphicon-pencil"></span></a>
                                 </h3>
                                 <span class="glyphicon glyphicon-phone-alt"> {{$client->tel_portable}} </span><br/>
                                 <span class="glyphicon glyphicon-earphone"> {{$client->tel_fixe}}</span><br/>
                                 <span class="glyphicon glyphicon-globe"> {{$client->email}}</span><br/>
-                                <a href="#" class="toggle" data-title="client" data-toggle="modal" data-target="#clientModal" data-id="{{$demande->client_id}}" >
+                                <a href="#" id="showAdrModal" class="toggle" data-title="client" data-toggle="modal" data-target="#adresseModal" data-id="{{$demande->adresse_id}}" >
                                     <span class="glyphicon glyphicon-map-marker"> {{\App\Tools\AdresseTools::getAdresse($demande->adresse_id)->adresse}} </span>
                                 </a><br/>
                             </div>
                         </div>
+                        <button class="btn btn-outline btn-primary" type="submit">Enregister les modfications</button>
+                        <a href="#" class="toggle btn btn-danger" data-title="client" data-toggle="modal" data-target="#clientModal" data-id="{{$demande->client_id}}">Modifier</a>
+                    </div>
                 </div>
-            </div>
 
-            <div class="panel panel-info" id="devisPanel">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Liste des devis
-                    </h4>
-                </div>
-                <div class="panel-body">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#devisPanel">Liste des devis</a>
+                        </h4>
+                    </div>
+                    <div id="devisPanel"  class="panel-body panel-collapse collapse">
 
+                    </div>
                 </div>
-            </div>
-            <div class="panel panel-info" id="factPanel">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Facturation
-                    </h4>
-                </div>
-                <div class="panel-body">
 
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#factPanel">Facturation</a>
+                        </h4>
+                    </div>
+                    <div id="factPanel"  class="panel-body panel-collapse collapse">
+
+                    </div>
                 </div>
+
             </div>
         </div>
     </form>
@@ -248,7 +247,7 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-    <div class="modal fade" id="clientModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="adresseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header  modal-header-info">
@@ -275,7 +274,7 @@
 
     <script src="{{ asset("js/demandeUpdate.js") }}"> </script>
     <script src="{{ asset("js/mapsJS.js") }}"> </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAS3tOh8NpT_5A_-P2-Oz2HqAhEf5h4uSs&signed_in=true&libraries=places&callback=initAutocomplete"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVuJ8zI1I-V9ckmycKWAbNRJmcTzs7nZE&signed_in=true&libraries=places&callback=initAutocomplete"
             async defer></script>
     <script src="{{ asset("js/timeInitiator.js") }}"> </script>
 
