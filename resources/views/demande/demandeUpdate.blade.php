@@ -39,7 +39,7 @@
                                     <div class="col-lg-3 lab">
                                         <label>Titre de la demande : </label>
                                     </div>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-3 par">
                                         <span class="displayClass">{{$demande->titre}}</span>
                                         <input class="form-control editClass" name="titre" value="{{ $demande->titre }}" placeholder="Saisir l'objet de la demande.">
                                     </div>

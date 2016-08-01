@@ -25,7 +25,7 @@ $(document).ready(function() {
     $('.editChamps').on('click',function (e) {
         e.preventDefault();
         var parent = $(this).parent();
-        parent.removeClass('col-lg-3');
+        $('.par').removeClass('col-lg-3');
         $('.par').removeClass('col-lg-6');
         var ed = $('.editClass').show();
         $('.displayClass').hide();
