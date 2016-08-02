@@ -35,6 +35,7 @@ class ClientController extends Controller{
             $request['imageName'] = $imgName;
             $client = ClientTools::addClient($connectedUser, $request);
             DB::commit();
+            //MailTools::sendMail('Profil client créé','createClient','faridkaiba@gmail.com','faridkaiba@gmail.com',[],['client'=>$client],'public/css/mailStyle.css');
             return view('client.clientAdd', ['message' => 'Client ajouté avec success!', 'img' => $imgName, 'client' => $client]);
         }catch(\Exception $e){
             DB::rollback();
@@ -77,7 +78,11 @@ class ClientController extends Controller{
 
     public function deleteClient(Request $request){
         $connectedUser = Auth::user();
-        ClientTools::deleteClient($connectedUser,$request['id']);
+        if(ClientTools::canBeDeleted($request['id']))
+            ClientTools::deleteClient($connectedUser,$request['id']);
+        else{
+            return redirect('client/list')->withErrors(['Le client a des demande non terminées']);
+        }
         return redirect('client/list');
     }
 

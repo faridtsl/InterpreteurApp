@@ -197,7 +197,70 @@
                     </h4>
                 </div>
                 <div id="devisPanel"  class="panel-body panel-collapse collapse">
+                    <div class="list-group">
+                        <a href="/devis/edit/2" class="list-group-item">
+                            <i class="fa fa fa-money fa-fw"></i> Interpreteur : <strong>Nom Prenom</strong><br/>
+                            Crée le : <strong>12/12/2012</strong>
+                            <span class="pull-right text-muted small"><em>Prix : <strong>123 &euro;</strong></em>
+                                    </span>
+                        </a>
+                    </div>
+                    <!-- /.list-group -->
 
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <a href="#" class="btn btn-default btn-block"  data-toggle="modal" data-target="#devisModal">Afficher tous les devis</a>
+                        </div>
+                        <div class="col-lg-6">
+                            <a href="/devis/add/{{$demande->id}}" class="btn btn-default btn-block">Ajouter un devis</a>
+                        </div>
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="devisModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="myModalLabel">Liste des devis en cours</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <table class="table nowrap" cellspacing="0" cellspacing="0" id="example">	<thead>
+                                        <tr>
+                                            <th>Nom de l'interpreteur</th>
+                                            <th>Prenom de l'interpreteur</th>
+                                            <th>Adresse de l'interpreteur</th>
+                                            <th>Prix proposé</th>
+                                            <th>Date creation du devis</th>
+                                            <th>Date modification du devis</th>
+                                            <th>Edit/Delete</th>
+                                            <th>Valider</th>
+                                        </tr>
+                                        </thead>
+                                        <tfoot>
+                                        <tr>
+                                            <th>Nom de l'interpreteur</th>
+                                            <th>Prenom de l'interpreteur</th>
+                                            <th>Adresse de l'interpreteur</th>
+                                            <th>Prix proposé</th>
+                                            <th>Date creation du devis</th>
+                                            <th>Date modification du devis</th>
+                                            <th>Edit/Delete</th>
+                                            <th>Valider</th>
+                                        </tr>
+                                        </tfoot>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">close</button>
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
                 </div>
             </div>
 

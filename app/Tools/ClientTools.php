@@ -10,6 +10,7 @@ namespace App\Tools;
 
 
 use App\Client;
+use App\Demande;
 use App\User;
 
 class ClientTools{
@@ -69,6 +70,15 @@ class ClientTools{
             ->where('id', $id)
             ->get()->first();
         return $client;
+    }
+
+    public static function canBeDeleted($client_id){
+        $demandes = Demande::where('client_id','=',$client_id);
+        foreach ($demandes as $demande){
+            $etat = EtatTools::getEtatById($demande->etat_id);
+            if($etat->nom != 'Expirée' && $etat->nom != 'Archivée') return false;
+        }
+        return true;
     }
 
 }

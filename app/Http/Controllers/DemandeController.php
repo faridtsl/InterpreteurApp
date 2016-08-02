@@ -39,6 +39,7 @@ class DemandeController extends Controller{
                 return view('demande.demandeAdd',['langues' => $langues,'clients' => $clients])->withErrors(['Langue source doit être differente de la langues destination']);
             $demande = DemandeTools::addDemande($adresse,$client,$etat,$traduction,$connectedUser,$request);
             DB::commit();
+            //MailTools::sendMail('Demande créée','createDemande','faridkaiba@gmail.com','faridkaiba@gmail.com',[],['client'=>$client,'demande'=>$demande,'adresse'=>$adresse],'public/css/mailStyle.css');
             return view('demande.demandeAdd', ['message' => 'Interpreteur ajouté avec success!','client' => $client, 'clients' => $clients,'langues' => $langues, 'demande' => $demande]);
         }catch(\Exception $e){
             DB::rollback();
