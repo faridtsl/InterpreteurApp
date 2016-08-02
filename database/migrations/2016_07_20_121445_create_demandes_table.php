@@ -12,6 +12,7 @@ class CreateDemandesTable extends Migration{
     public function up(){
         Schema::create('demandes', function (Blueprint $table) {
             $table->increments('id');
+            $table->Timestamps();
             $table->string('titre');
             $table->string('content');
             $table->timestamp('dateEvent');
@@ -22,7 +23,6 @@ class CreateDemandesTable extends Migration{
             $table->integer('client_id')->unsigned();
             $table->integer('traduction_id')->unsigned();
 
-            $table->timestamps();
             $table->softDeletes();
 
             #Constraints

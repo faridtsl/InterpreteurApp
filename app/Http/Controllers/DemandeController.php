@@ -79,7 +79,8 @@ class DemandeController extends Controller{
         $client = ClientTools::getClient($request['client']);
         $src = LangueTools::getLangue($request['langue_src']);
         $dst = LangueTools::getLangue($request['langue_dest']);
-        $traduction = TraductionTools::getTraduction($src,$dst);
+        if($src != null && $dst != null) $traduction = TraductionTools::getTraduction($src,$dst);
+        else $traduction = null;
         DemandeTools::updateDemande(null,$client,$etat,$traduction,$connectedUser,$request);
         return $this->showUpdate($request);
     }

@@ -12,6 +12,7 @@
     <script type="text/javascript" src="http://momentjs.com/downloads/moment-with-locales.min.js"></script>
     <script type="text/javascript" src="{{ asset('js/bootstrap-material-datetimepicker.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('/css/myStyle.css')}}" />
+    <link rel="stylesheet" href="{{ asset('/css/demandeUpdate.css')}}" />
     <script src="http://cdn.ckeditor.com/4.5.8/full/ckeditor.js"></script>
     <style type="text/css"> .pac-container { z-index: 1051 !important; } </style>
 
@@ -22,123 +23,123 @@
 <div class="container-fluid" style="margin-top: 30px">
     <div class="col-lg-12">
         <div class="panel-group" id="accordion">
-            
-            <form role="form" method="POST" action="/demande/update">
-                {!! csrf_field() !!}
-                <input type="hidden" value="{{$demande->id}}" name="id"/>
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#demandePanel">Informations demande</a>
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#demandePanel">Informations demande</a>
+                </div>
+                <div class="panel-body panel-collapse collapse in" id="demandePanel">
+                    <form role="form" method="POST" action="/demande/update">
+                    {!! csrf_field() !!}
+                    <input type="hidden" value="{{$demande->id}}" name="id"/>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="col-lg-3 lab">
+                                    <label>Titre de la demande : </label>
+                                </div>
+                                <div class="col-lg-3 par">
+                                    <span class="displayClass">{{$demande->titre}}</span>
+                                    <input class="form-control editClass" name="titre" value="{{ $demande->titre }}" placeholder="Saisir l'objet de la demande.">
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="panel-body panel-collapse collapse in" id="demandePanel">
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="col-lg-3 lab">
-                                        <label>Titre de la demande : </label>
-                                    </div>
-                                    <div class="col-lg-3 par">
-                                        <span class="displayClass">{{$demande->titre}}</span>
-                                        <input class="form-control editClass" name="titre" value="{{ $demande->titre }}" placeholder="Saisir l'objet de la demande.">
-                                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="col-lg-6 lab">
+                                    <label>Date de debut : </label>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="col-lg-6 lab">
-                                        <label>Date de debut : </label>
-                                    </div>
-                                    <div class="col-lg-6 par">
-                                        <span class="displayClass">{{$demande->dateEvent}}</span>
-                                        <div class="input-group date editClass" >
-                                            <input type="text" name="dateEvent" id="date-start" class="form-control" value="{{ $demande->dateEvent }}" placeholder="Date de debut">
-                                            <div class="input-group-addon">
-                                                <span class="glyphicon glyphicon-th"></span>
-                                            </div>
+                                <div class="col-lg-6 par">
+                                    <span class="displayClass">{{$demande->dateEvent}}</span>
+                                    <div class="input-group date editClass" >
+                                        <input type="text" name="dateEvent" id="date-start" class="form-control" value="{{ $demande->dateEvent }}" placeholder="Date de debut">
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon glyphicon-th"></span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
-                                    <div class="col-lg-6 lab">
-                                        <label>Date de fin : </label>
-                                    </div>
-                                    <div class="col-lg-6 par">
-                                        <span class="displayClass">{{$demande->dateEndEvent}}</span>
-                                        <div class="input-group date editClass" >
-                                            <input type="text" name="dateEndEvent" id="date-end" class="form-control" value="{{ $demande->dateEndEvent }}" placeholder="Date de fin">
-                                            <div class="input-group-addon">
-                                                <span class="glyphicon glyphicon-th"></span>
-                                            </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="col-lg-6 lab">
+                                    <label>Date de fin : </label>
+                                </div>
+                                <div class="col-lg-6 par">
+                                    <span class="displayClass">{{$demande->dateEndEvent}}</span>
+                                    <div class="input-group date editClass" >
+                                        <input type="text" name="dateEndEvent" id="date-end" class="form-control" value="{{ $demande->dateEndEvent }}" placeholder="Date de fin">
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon glyphicon-th"></span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <div class="col-lg-6 lab">
-                                            <label>Langue initiale : </label>
-                                        </div>
-                                        <div class="col-lg-6 par">
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <div class="col-lg-6 lab">
+                                        <label>Langue initiale : </label>
+                                    </div>
+                                    <div class="col-lg-6 par">
+                                        @foreach($langues as $langue)
+                                            @if($langue->id == $traduction->source)
+                                                <span class="displayClass">{{$langue->content}}</span>
+                                            @endif
+                                        @endforeach
+                                        <select class="form-control editClass" name="langue_src">
+                                            <option value="" disabled selected>Langue source</option>
                                             @foreach($langues as $langue)
                                                 @if($langue->id == $traduction->source)
-                                                    <span class="displayClass">{{$langue->content}}</span>
+                                                    <option value="{{$langue->id}}" selected>{{$langue->content}}</option>
+                                                @else
+                                                    <option value="{{$langue->id}}">{{$langue->content}}</option>
+
                                                 @endif
                                             @endforeach
-                                            <select class="form-control editClass" name="langue_src">
-                                                <option value="" disabled selected>Langue source</option>
-                                                @foreach($langues as $langue)
-                                                    @if($langue->id == $traduction->source)
-                                                        <option value="{{$langue->id}}" selected>{{$langue->content}}</option>
-                                                    @else
-                                                        <option value="{{$langue->id}}">{{$langue->content}}</option>
-
-                                                    @endif
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group lab">
-                                        <div class="col-lg-6">
-                                            <label>Langue destination : </label>
-                                        </div>
-                                        <div class="col-lg-6 par">
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group lab">
+                                    <div class="col-lg-6">
+                                        <label>Langue destination : </label>
+                                    </div>
+                                    <div class="col-lg-6 par">
+                                        @foreach($langues as $langue)
+                                            @if($langue->id == $traduction->cible)
+                                                <span class="displayClass">{{$langue->content}}</span>
+                                            @endif
+                                        @endforeach
+                                        <select class="form-control editClass" name="langue_dest">
+                                            <option value="" disabled selected>Langue destination</option>
                                             @foreach($langues as $langue)
                                                 @if($langue->id == $traduction->cible)
-                                                    <span class="displayClass">{{$langue->content}}</span>
+                                                    <option value="{{$langue->id}}" selected>{{$langue->content}}</option>
+                                                @else
+                                                    <option value="{{$langue->id}}">{{$langue->content}}</option>
                                                 @endif
                                             @endforeach
-                                            <select class="form-control editClass" name="langue_dest">
-                                                <option value="" disabled selected>Langue destination</option>
-                                                @foreach($langues as $langue)
-                                                    @if($langue->id == $traduction->cible)
-                                                        <option value="{{$langue->id}}" selected>{{$langue->content}}</option>
-                                                    @else
-                                                        <option value="{{$langue->id}}">{{$langue->content}}</option>
-                                                    @endif
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label>Contenu de la demande : </label>
-                            <textarea class="form-control ckeditor" id="content" rows="10" name="content">{{ $demande->content }}</textarea>
-                            <p class="help-block editClass">Saisir le contenu de la demande.</p>
-                        </div>
-                        <button class="btn btn-outline btn-primary" type="submit">Enregistrer les modifications</button>
-                        <a href="#" class="editChamps btn btn-danger">Modifier</a>
                     </div>
+                    <div class="form-group">
+                        <label>Contenu de la demande : </label>
+                        <textarea class="form-control ckeditor" id="content" rows="10" name="content">{{ $demande->content }}</textarea>
+                        <p class="help-block editClass">Saisir le contenu de la demande.</p>
+                    </div>
+                    <button class="btn btn-outline btn-primary" type="submit">Enregistrer les modifications</button>
+                    <a href="#" class="editChamps btn btn-danger">Modifier</a>
+                    </form>
                 </div>
-            </form>
+            </div>
 
             <div class="panel panel-info">
                 <div class="panel-heading">
@@ -160,13 +161,13 @@
                             <span class="glyphicon glyphicon-globe"> {{$client->email}}</span><br/>
                         </div>
                     </div>
-                    <form>
+                    <form method="post" action="/demande/update">
                     {!! csrf_field() !!}
                         <input type="hidden" value="{{$demande->id}}" name="id"/>
                         <input type="hidden" value="{{$demande->client_id}}" id="client" name="client"/>
                         <button class="btn btn-outline btn-primary" id="clientConfirm" type="submit">Enregister les modfications</button>
+                        <a href="#" class="toggle btn btn-danger" data-title="client" data-toggle="modal" data-target="#clientModal" data-id="{{$demande->client_id}}">Modifier</a>
                     </form>
-                    <a href="#" class="toggle btn btn-danger" data-title="client" data-toggle="modal" data-target="#clientModal" data-id="{{$demande->client_id}}">Modifier</a>
                 </div>
             </div>
 

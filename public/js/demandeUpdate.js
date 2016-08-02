@@ -87,7 +87,7 @@ $(document).ready(function() {
                 $("#route").val(data['route']);
                 $("#lat").val(data['lat']);
                 $("#long").val(data['long']);
-                $("#modal-success").show();
+                $("#modal-success").modal('toggle');
             },error:function(data){
                 alert("erreur ressayé");
             }
