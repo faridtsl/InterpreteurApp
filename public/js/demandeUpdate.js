@@ -1,12 +1,13 @@
 $(document).ready(function() {
 
-    $('#dataTables-example').DataTable({
+    $('#clients').DataTable({
         "pageLength": 10,
         dom: 'T<"clear">lfrtip',
         tableTools: {
             "sRowSelect": "single",
             fnRowSelected: function(nodes) {
-                var ttInstance = TableTools.fnGetInstance("dataTables-example");
+                console.log("here");
+                var ttInstance = TableTools.fnGetInstance("clients");
                 var row = ttInstance.fnGetSelectedData();
                 $('#client').val(row[0][0]);
                 console.log(row[0][0]);
@@ -67,6 +68,35 @@ $(document).ready(function() {
         e.preventDefault();
         $('#demandePanel').removeClass('in');
         $('#clientPanel').addClass('in');
+    });
+
+    $('#adrConfirm').on('click',function (e) {
+        e.preventDefault();
+        $form = $('#adrForm');
+        $.ajax({
+            url: '/adresse/update',
+            type:"POST",
+            data:$form.serialize(),
+            success:function(data){
+                $("#adresse").val(data['adresse']);
+                $("#country").val(data['pays']);
+                $("#locality").val(data['ville']);
+                $("#administrative_area_level_1").val(data['departement']);
+                $("#postal_code").val(data['code_postal']);
+                $("#street_number").val(data['numero']);
+                $("#route").val(data['route']);
+                $("#lat").val(data['lat']);
+                $("#long").val(data['long']);
+                $("#modal-success").show();
+            },error:function(data){
+                alert("erreur ressayé");
+            }
+        });
+    });
+
+    $('#modAdr').on('click',function () {
+        $('.enab').removeAttr('readonly');
+        $(this).hide();
     });
 
 });

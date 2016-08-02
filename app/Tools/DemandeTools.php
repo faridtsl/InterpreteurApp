@@ -68,7 +68,7 @@ class DemandeTools{
         $demande = Demande::find($a['id']);
         if($a['titre'] != null) $demande->titre = $a['titre'];
         if($a['content'] != null) $demande->content = $a['content'];
-        if($a['dateEvent'] != null) $demande->dateEvent = $a['dateEvent'];
+        if(($a['dateEvent'] != null)) $demande->dateEvent = $a['dateEvent'];
         if($a['dateEndEvent'] != null) $demande->dateEndEvent = $a['dateEndEvent'];
         if($adr != null) $demande->adresse()->associate($adr);
         if($client != null) $demande->client()->associate($client);

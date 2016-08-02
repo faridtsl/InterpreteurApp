@@ -75,13 +75,13 @@ class DemandeController extends Controller{
 
     public function storeUpdate(Request $request){
         $connectedUser = Auth::user();
-        $etat = EtatTools::getEtatByName('Créée');
+        $etat = EtatTools::getEtatByName('NULL');
         $client = ClientTools::getClient($request['client']);
         $src = LangueTools::getLangue($request['langue_src']);
         $dst = LangueTools::getLangue($request['langue_dest']);
         $traduction = TraductionTools::getTraduction($src,$dst);
-        $demande = DemandeTools::updateDemande(null,$client,$etat,$traduction,$connectedUser,$request);
-        return $this->showUpdate();
+        DemandeTools::updateDemande(null,$client,$etat,$traduction,$connectedUser,$request);
+        return $this->showUpdate($request);
     }
 
 }

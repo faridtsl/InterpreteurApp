@@ -81,7 +81,6 @@ $(function () {
     $(document.body).on('click', '.tradDel',function (e) {
             e.preventDefault();
             $form = $(this).parent('form');
-            console.log($id);
 
             $.ajax({
                 url: '/traduction/delete',

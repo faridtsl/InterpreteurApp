@@ -6,7 +6,6 @@
 @endsection
 
 @section('header')
-
     <script type="text/javascript" src="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/js/material.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/bootstrap-material-datetimepicker.css') }}" />
@@ -21,13 +20,12 @@
 @section('content')
 
 <div class="container-fluid" style="margin-top: 30px">
-    <form role="form" method="POST" action="/demande/update">
-        {!! csrf_field() !!}
-        <input type="hidden" value="{{$demande->id}}" name="id"/>
-        <input type="hidden" value="{{$demande->client_id}}" id="client" name="client"/>
-        <div class="col-lg-12">
-            <div class="panel-group" id="accordion">
-
+    <div class="col-lg-12">
+        <div class="panel-group" id="accordion">
+            
+            <form role="form" method="POST" action="/demande/update">
+                {!! csrf_field() !!}
+                <input type="hidden" value="{{$demande->id}}" name="id"/>
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <a data-toggle="collapse" data-parent="#accordion" href="#demandePanel">Informations demande</a>
@@ -136,64 +134,84 @@
                             <textarea class="form-control ckeditor" id="content" rows="10" name="content">{{ $demande->content }}</textarea>
                             <p class="help-block editClass">Saisir le contenu de la demande.</p>
                         </div>
-                        <button class="btn btn-outline btn-primary" id="toggleCli">Suivant</button>
+                        <button class="btn btn-outline btn-primary" type="submit">Enregistrer les modifications</button>
                         <a href="#" class="editChamps btn btn-danger">Modifier</a>
                     </div>
                 </div>
+            </form>
 
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#clientPanel">Demandeur</a>
-                        </h4>
-                    </div>
-                    <div id="clientPanel"  class="panel-body panel-collapse collapse">
-                        <div class="row">
-                            <div class="col-lg-2">
-                                <img class="img-circle" src="/images/{{$client->image}}" style="width: 100px;height:100px;">
-                            </div>
-                            <div class="col-lg-9">
-                                <h3>
-                                    {{$client->nom}} {{$client->prenom}}
-                                </h3>
-                                <span class="glyphicon glyphicon-phone-alt"> {{$client->tel_portable}} </span><br/>
-                                <span class="glyphicon glyphicon-earphone"> {{$client->tel_fixe}}</span><br/>
-                                <span class="glyphicon glyphicon-globe"> {{$client->email}}</span><br/>
-                                <a href="#" id="showAdrModal" class="toggle" data-title="client" data-toggle="modal" data-target="#adresseModal" data-id="{{$demande->adresse_id}}" >
-                                    <span class="glyphicon glyphicon-map-marker"> {{\App\Tools\AdresseTools::getAdresse($demande->adresse_id)->adresse}} </span>
-                                </a><br/>
-                            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#clientPanel">Demandeur</a>
+                    </h4>
+                </div>
+                <div id="clientPanel"  class="panel-body panel-collapse collapse">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <img class="img-circle" src="/images/{{$client->image}}" style="width: 100px;height:100px;">
                         </div>
-                        <button class="btn btn-outline btn-primary" type="submit">Enregister les modfications</button>
-                        <a href="#" class="toggle btn btn-danger" data-title="client" data-toggle="modal" data-target="#clientModal" data-id="{{$demande->client_id}}">Modifier</a>
+                        <div class="col-lg-9">
+                            <h3>
+                                {{$client->nom}} {{$client->prenom}}
+                            </h3>
+                            <span class="glyphicon glyphicon-phone-alt"> {{$client->tel_portable}} </span><br/>
+                            <span class="glyphicon glyphicon-earphone"> {{$client->tel_fixe}}</span><br/>
+                            <span class="glyphicon glyphicon-globe"> {{$client->email}}</span><br/>
+                        </div>
                     </div>
+                    <form>
+                    {!! csrf_field() !!}
+                        <input type="hidden" value="{{$demande->id}}" name="id"/>
+                        <input type="hidden" value="{{$demande->client_id}}" id="client" name="client"/>
+                        <button class="btn btn-outline btn-primary" id="clientConfirm" type="submit">Enregister les modfications</button>
+                    </form>
+                    <a href="#" class="toggle btn btn-danger" data-title="client" data-toggle="modal" data-target="#clientModal" data-id="{{$demande->client_id}}">Modifier</a>
                 </div>
+            </div>
 
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#devisPanel">Liste des devis</a>
-                        </h4>
-                    </div>
-                    <div id="devisPanel"  class="panel-body panel-collapse collapse">
-
-                    </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#adrPanel">Adresse de l'evenement</a>
+                    </h4>
                 </div>
-
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#factPanel">Facturation</a>
-                        </h4>
+                <form method="post" id="adrForm" action="/adresse/update">
+                <div id="adrPanel"  class="panel-body panel-collapse collapse">
+                    <input type="hidden" value="{{$demande->adresse_id}}" id="idAdr" name="adresse_id">
+                    <div class="container-fluid" id="formAdr">
+                        @include('includes.adresseForm')
                     </div>
-                    <div id="factPanel"  class="panel-body panel-collapse collapse">
-
-                    </div>
+                    {!! csrf_field() !!}
+                    <button class="btn btn-outline btn-primary" id="adrConfirm" type="submit">Enregister les modfications</button>
+                    <a href="#" class="btn btn-danger" id="modAdr">Modifier</a>
                 </div>
+                </form>
+            </div>
 
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#devisPanel">Liste des devis</a>
+                    </h4>
+                </div>
+                <div id="devisPanel"  class="panel-body panel-collapse collapse">
+
+                </div>
+            </div>
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#factPanel">Facturation</a>
+                    </h4>
+                </div>
+                <div id="factPanel"  class="panel-body panel-collapse collapse">
+
+                </div>
             </div>
         </div>
-    </form>
+    </div>
 </div>
 @endsection
 
@@ -208,7 +226,7 @@
                     <h4 class="modal-title" id="myModalLabel">Liste des Clients</h4>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-striped table-bordered table-hover" id="dataTables-example" cellspacing="0" width="100%">
+                    <table class="table table-striped table-bordered table-hover" id="clients" cellspacing="0" width="100%">
                         <thead>
                         <tr>
                             <th>id</th>
@@ -247,31 +265,26 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-    <div class="modal fade" id="adresseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+
+    <div id="modal-success" class="modal modal-message modal-success fade" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header  modal-header-info">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Liste des Clients</h4>
+                <div class="modal-header">
+                    <i class="glyphicon glyphicon-check"></i>
                 </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <h3> Adresse</h3>
-                        @include('includes.adresseForm')
-                    </div>
-                </div>
+                <div class="modal-title">Success</div>
+                <div class="modal-body">l'adresse a été changé avec success!</div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
                 </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
+            </div> <!-- / .modal-content -->
+        </div> <!-- / .modal-dialog -->
     </div>
+
 @endsection
 
 @section('footer')
-
+    <script src="{{ asset("js/tableTools.js") }}"> </script>
     <script src="{{ asset("js/demandeUpdate.js") }}"> </script>
     <script src="{{ asset("js/mapsJS.js") }}"> </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVuJ8zI1I-V9ckmycKWAbNRJmcTzs7nZE&signed_in=true&libraries=places&callback=initAutocomplete"

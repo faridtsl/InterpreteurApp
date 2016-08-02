@@ -185,7 +185,7 @@ Route::get(
     ['middleware'=>'auth','uses'=>'AdresseController@showUpdate']
 );
 Route::post(
-    'adresse/update/{id}',
+    'adresse/update',
     ['middleware'=>'auth','uses'=>'AdresseController@storeUpdate']
 );
 
