@@ -177,17 +177,17 @@
                         <a data-toggle="collapse" data-parent="#accordion" href="#adrPanel">Adresse de l'evenement</a>
                     </h4>
                 </div>
-                <form method="post" id="adrForm" action="/adresse/update">
                 <div id="adrPanel"  class="panel-body panel-collapse collapse">
-                    <input type="hidden" value="{{$demande->adresse_id}}" id="idAdr" name="adresse_id">
-                    <div class="container-fluid" id="formAdr">
-                        @include('includes.adresseForm')
-                    </div>
-                    {!! csrf_field() !!}
-                    <button class="btn btn-outline btn-primary" id="adrConfirm" type="submit">Enregister les modfications</button>
-                    <a href="#" class="btn btn-danger" id="modAdr">Modifier</a>
+                    <form method="post" id="adrForm" action="/adresse/update">
+                        <input type="hidden" value="{{$demande->adresse_id}}" id="idAdr" name="adresse_id">
+                        <div class="container-fluid" id="formAdr">
+                            @include('includes.adresseForm')
+                        </div>
+                        {!! csrf_field() !!}
+                        <button class="btn btn-outline btn-primary" id="adrConfirm" type="submit">Enregister les modfications</button>
+                        <a href="#" class="btn btn-danger" id="modAdr">Modifier</a>
+                    </form>
                 </div>
-                </form>
             </div>
 
             <div class="panel panel-info">
