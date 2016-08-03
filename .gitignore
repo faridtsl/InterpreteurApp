@@ -5,3 +5,4 @@ Homestead.yaml
 Homestead.json
 /storage/img/*
 !/storage/img/unknown.jpg
+.env

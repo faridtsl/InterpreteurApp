@@ -106,8 +106,6 @@ $(document).ready(function() {
     } );
 
 
-    ('#devisModal').modal('show');
-
     table = $('#example').DataTable( {
         dom: 'Bfrtip',
         buttons: [
@@ -131,5 +129,4 @@ $(document).ready(function() {
         } );
     } );
 
-    ('#devisModal').modal('hide');
 });
