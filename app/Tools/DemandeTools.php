@@ -78,6 +78,9 @@ class DemandeTools{
         return $demande;
     }
 
+    public static function getDemande($id){
+        return Demande::find($id);
+    }
 
 
 }

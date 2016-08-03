@@ -99,4 +99,37 @@ $(document).ready(function() {
         $(this).hide();
     });
 
+    // Setup - add a text input to each footer cell
+    $('#example tfoot th').each( function () {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="'+title+'" />' );
+    } );
+
+
+    ('#devisModal').modal('show');
+
+    table = $('#example').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'colvis',
+                columns: ':not(:first-child)'
+            }
+        ]
+    });
+
+    // Apply the search
+    table.columns().every( function () {
+        var that = this;
+
+        $( 'input', this.footer() ).on( 'keyup change', function () {
+            if ( that.search() !== this.value ) {
+                that
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+
+    ('#devisModal').modal('hide');
 });

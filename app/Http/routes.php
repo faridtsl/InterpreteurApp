@@ -174,7 +174,7 @@ Route::post(
     ['middleware'=>'auth','uses'=>'TraductionController@deleteTraduction']
 );
 
-//
+//Adresse Routes
 
 Route::get(
     'adresse/{id}',
@@ -189,6 +189,16 @@ Route::post(
     ['middleware'=>'auth','uses'=>'AdresseController@storeUpdate']
 );
 
+
+//Devis Routes
+Route::get(
+    'devis/add',
+    ['middleware'=>'auth','uses'=>'DevisController@show']
+);
+Route::post(
+    'devis/add',
+    ['middleware'=>'auth','uses'=>'DevisController@store']
+);
 
 //Images Routes
 Route::get('images/{img}',function ($img){

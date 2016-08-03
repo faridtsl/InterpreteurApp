@@ -7,10 +7,16 @@
     <meta property="og:title" content="*|MC:SUBJECT|*" />
 
     <title>*|MC:SUBJECT|*</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVuJ8zI1I-V9ckmycKWAbNRJmcTzs7nZE"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.googlemap/1.5/jquery.googlemap.js"></script>
+    <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
 
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVuJ8zI1I-V9ckmycKWAbNRJmcTzs7nZE"></script>
+
+    <script src="{{ asset('js/jquery.googlemap.js') }}"></script>
+
+
+    <style type="text/css">
+
+    </style>
 </head>
 <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
 <center>
@@ -78,22 +84,22 @@
                                                         <tr>
                                                             <td valign="top">
                                                                 <div mc:edit="std_content00">
-                                                                    <h2 class="h2">Your Request Details</i></h2>
-
+                                                                    <h2 class="h2"><i>Your Request Details</i></h2>
+                                                                    <hr>
                                                                     <table>
-                                                                        <hr>
+
 
                                                                         <strong>Title : </strong> {{$demande->titre}}
                                                                         <p style="margin:10px;">
                                                                             {{$demande->contenu}}
                                                                         </p>
-                                                                        <hr>
                                                                         <strong>Start Event : </strong>{{$demande->dateEvent}}
                                                                         <br/>
                                                                         <strong>End Event : </strong>{{$demande->dateEndEvent}}
-                                                                        <hr>
                                                                     </table>
+                                                                    <br>
                                                                     <h4 style="margin-top:5px;">Client details</h4>
+                                                                    <hr>
                                                                     <table>
                                                                         <tr>
                                                                             <td>
@@ -126,8 +132,9 @@
                                                         </tr>
                                                         <tr>
                                                             <td valign="top">
-                                                                <div id="map" style="width: 100%; height: 200px;"></div>
+                                                                <img width="100%" src="http://maps.googleapis.com/maps/api/staticmap?center={{$adresse->lat}},{{$adresse->long}}&zoom=10&scale=false&size=600x400&maptype=roadmap&markers=color:blue%7Clabel:S%7C{{$adresse->lat}},{{$adresse->long}}&format=png&visual_refresh=true" alt="Google Map of Albany, NY">
                                                             </td>
+
                                                         </tr>
                                                     </table>
                                                     <!-- // End Module: Standard Content \\ -->
@@ -195,8 +202,10 @@
                                                                 </div>
                                                             </td>
                                                         </tr>
+
                                                     </table>
                                                     <!-- // End Module: Top Image with Content \\ -->
+
                                                 </td>
                                             </tr>
                                         </table>
@@ -250,6 +259,7 @@
                                             </tr>
                                         </table>
                                         <!-- // End Module: Standard Footer \\ -->
+
                                     </td>
                                 </tr>
                             </table>
@@ -266,11 +276,11 @@
     $(function() {
         $("#map").googleMap();
         $("#map").addMarker({
-            coords: [{{$adresse->lat}}, {{$adresse->long}}], // GPS coords
+            coords: [48.895651, 2.290569], // GPS coords
             url: 'http://www.tiloweb.com', // Link to redirect onclick (optional)
             id: 'marker1' // Unique ID for your marker
         });
     })
 </script>
 </body>
-</html>
+html>

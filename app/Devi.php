@@ -10,4 +10,17 @@ class Devi extends Model{
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function demande(){
+        return $this->belongsTo(Demande::class);
+    }
+
+    public function interpreteur(){
+        return $this->belongsTo(Interpreteur::class);
+    }
+
 }
