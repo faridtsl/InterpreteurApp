@@ -78,8 +78,23 @@ class DemandeTools{
         return $demande;
     }
 
+    public static function deleteDemande(User $u,$demande){
+        $devis = DevisTools::getDevis($demande->id);
+        foreach ($devis as $devi) {
+            $devi->delete();
+        }
+        $demande->etat()->associate(EtatTools::getEtatByName('Archivée'));
+        $demande->save();
+        $demande->delete();
+    }
+
     public static function getDemande($id){
         return Demande::find($id);
+    }
+
+    public static function getDemandesByClient($id_client){
+        $demandes = Demande::where('client_id','=',$id_client)->get();
+        return $demandes;
     }
 
 

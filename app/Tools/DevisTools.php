@@ -10,6 +10,7 @@ namespace App\Tools;
 
 
 use App\Devi;
+use App\Etat;
 use App\Service;
 use App\User;
 
@@ -25,11 +26,18 @@ class DevisTools{
         $devis->save();
         $devis->total = ServiceTools::addServices($devis,$request);
         $devis->save();
+        $demande->etat()->associate(EtatTools::getEtatByName('En cours'));
+        $demande->save();
         return $devis;
     }
 
     public static function getDevis($demande_id){
         $devis = Devi::where('demande_id',$demande_id)->get();
+        return $devis;
+    }
+
+    public static function getDevisByInterp($interpreteur_id){
+        $devis = Devi::where('interpreteur_id',$interpreteur_id)->get();
         return $devis;
     }
 

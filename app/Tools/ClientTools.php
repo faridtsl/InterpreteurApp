@@ -30,6 +30,10 @@ class ClientTools{
     }
     public static function deleteClient(User $u,$id){
         $client = Client::find($id);
+        $demandes = DemandeTools::getDemandesByClient($id);
+        foreach ($demandes as $demande){
+            DemandeTools::deleteDemande($u,$demande);
+        }
         $client->delete();
     }
 
@@ -73,10 +77,10 @@ class ClientTools{
     }
 
     public static function canBeDeleted($client_id){
-        $demandes = Demande::where('client_id','=',$client_id)->get();
+        $demandes = DemandeTools::getDemandesByClient($client_id);
         foreach ($demandes as $demande){
             $etat = EtatTools::getEtatById($demande->etat_id);
-            if($etat->nom != 'Expirée' && $etat->nom != 'Archivée') return false;
+            if($etat->nom == 'Traitée') return false;
         }
         return true;
     }

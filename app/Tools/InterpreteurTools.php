@@ -52,6 +52,14 @@ class InterpreteurTools{
 
     public static function deleteInterpreteur(User $u,$id){
         $interp = Interpreteur::find($id);
+        $devis = DevisTools::getDevisByInterp($id);
+        foreach ($devis as $devi) {
+            $devi->delete();
+        }
+        $factures = FactureTools::getFacturesByInterp($id);
+        foreach ($factures as $facture) {
+            $facture->delete();
+        }
         $interp->delete();
     }
 
@@ -93,6 +101,14 @@ class InterpreteurTools{
             ->where('id', $id)
             ->get()->first();
         return $interp;
+    }
+
+    public static function canBeDeleted($iterpreteur_id){
+        $factures = FactureTools::getFacturesByInterp($iterpreteur_id);
+        foreach($factures as $facture){
+            if($facture->fini == false) return false;
+        }
+        return true;
     }
 
 }
