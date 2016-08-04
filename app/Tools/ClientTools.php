@@ -73,7 +73,7 @@ class ClientTools{
     }
 
     public static function canBeDeleted($client_id){
-        $demandes = Demande::where('client_id','=',$client_id);
+        $demandes = Demande::where('client_id','=',$client_id)->get();
         foreach ($demandes as $demande){
             $etat = EtatTools::getEtatById($demande->etat_id);
             if($etat->nom != 'Expirée' && $etat->nom != 'Archivée') return false;

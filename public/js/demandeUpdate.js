@@ -106,15 +106,7 @@ $(document).ready(function() {
     } );
 
 
-    table = $('#example').DataTable( {
-        dom: 'Bfrtip',
-        buttons: [
-            {
-                extend: 'colvis',
-                columns: ':not(:first-child)'
-            }
-        ]
-    });
+    table = $('#example').DataTable();
 
     // Apply the search
     table.columns().every( function () {

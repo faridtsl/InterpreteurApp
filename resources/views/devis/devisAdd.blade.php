@@ -51,31 +51,19 @@
                         </div>
                         <div id="collapse2" class="panel-collapse collapse">
                             <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-lg-2">
+                                <br><br>
+                                <div class="container-fluid well span6">
+                                    <div class="col-sm-2 col-md-2">
+                                        <img src="/images/unknown.jpg"
+                                             alt="" id="imgInterp" class="img-rounded img-responsive" />
                                     </div>
-                                    <div  class="col-lg-10">
-                                        <h4>Interpreteur selectionné</h4>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <strong>Nom de l'interpreteur</strong>
-                                    </div>
-                                    <div class="col-lg-6" id="nomInter">
-                                        Aucun
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <strong>email</strong>
-                                    </div>
-                                    <div class="col-lg-6" id="emailInter">
-                                        Aucun
+                                    <div class="col-sm-2 col-md-4">
+                                        <blockquote>
+                                            <p id="nomInterp">Aucun</p> <small><cite title="Source Title" id="adresseInterp">Aucun  <i class="glyphicon glyphicon-map-marker"></i></cite></small>
+                                        </blockquote>
+                                        <p> <i class="glyphicon glyphicon-envelope"></i> <span id="emailInterp">Aucun</span>
+                                            <br
+                                            /> <i class="glyphicon glyphicon-phone"></i> <span id="telInterp">Aucun</span>
                                     </div>
                                 </div>
                                 <hr>
@@ -227,57 +215,134 @@
             </div>
         </div>
     </form>
+@endsection
 
-    <!-- Modal -->
-    <div class="modal fade" id="IntModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Liste des interpreteurs</h4>
-                </div>
-                <div class="modal-body">
+@section('modals')
+
+
+<!-- Modal -->
+<div class="modal fade" id="IntModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Liste des interpreteurs</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-success success-alert" id="success-alert2">Interpret <strong class="nom"></strong> selectionné!</div>
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example" cellspacing="0" width="100%">
-                        <thead>
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>E-MAIL</th>
+                        <th>init=>dest</th>
+                        <th>Edit</th>
+                        <th>image</th>
+                        <th>tel_portable</th>
+                        <th>adresse</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>id</th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>E-MAIL</th>
+                        <th>init=>dest</th>
+                        <th>Edit</th>
+                        <th>image</th>
+                        <th>tel_portable</th>
+                        <th>adresse</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    @foreach($interpreteurs as $interpreteur)
                         <tr>
-                            <th>id</th>
-                            <th>Nom</th>
-                            <th>Prenom</th>
-                            <th>E-MAIL</th>
-                            <th>init=>dest</th>
-                            <th>Edit</th>
+                            <td>{{$interpreteur->id}}</td>
+                            <td>{{$interpreteur->nom}}</td>
+                            <td>{{$interpreteur->prenom}}</td>
+                            <td>{{$interpreteur->email}}</td>
+                            <td>
+                                <select class="form-control" name="langue_ini">
+                                    @foreach(\App\Tools\TraductionTools::getTraductionsByInterpreteur($interpreteur->id) as $traduction)
+                                        <option><strong>{{\App\Tools\LangueTools::getLangue($traduction->source)->content}}→{{\App\Tools\LangueTools::getLangue($traduction->cible)->content}}</strong></option>
+                                    @endforeach
+                                </select>
+                            </td>
+                            <td><a href="/interpreteur/edit/{{$interpreteur->id}}" class="editor_edit"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                            <td>{{$interpreteur->image}}</td>
+                            <td>{{$interpreteur->tel_portable}}</td>
+                            <td>{{\App\Tools\AdresseTools::getAdresse($interpreteur->adresse_id)->adresse}}</td>
                         </tr>
-                        </thead>
-                        <tfoot>
-                        <tr>
-                            <th>id</th>
-                            <th>Nom</th>
-                            <th>Prenom</th>
-                            <th>E-MAIL</th>
-                            <th>init=>dest</th>
-                            <th>Edit</th>
-                        </tr>
-                        </tfoot>
-                        <tbody>
-                        @foreach($interpreteurs as $interpreteur)
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="MapModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Liste interpreteurs</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-success success-alert" id="success-alert2">Interpret <strong class="nom"></strong> selectionné!</div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <table id="dataTables-example2" class="table table-striped">
+                            <thead>
                             <tr>
-                                <td>{{$interpreteur->id}}</td>
-                                <td>{{$interpreteur->nom}}</td>
-                                <td>{{$interpreteur->prenom}}</td>
-                                <td>{{$interpreteur->email}}</td>
-                                <td>
-                                    <select class="form-control" name="langue_ini">
-                                        @foreach(\App\Tools\TraductionTools::getTraductionsByInterpreteur($interpreteur->id) as $traduction)
-                                            <option><strong>{{\App\Tools\LangueTools::getLangue($traduction->source)->content}}→{{\App\Tools\LangueTools::getLangue($traduction->cible)->content}}</strong></option>
-                                        @endforeach
-                                    </select>
-                                </td>
-                                <td><a href="/interpreteur/edit/{{$interpreteur->id}}" class="editor_edit"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                                <th>id</th>
+                                <th>Nom</th>
+                                <th>Prenom</th>
+                                <th>E-MAIL</th>
+                                <th>init=>dest</th>
+                                <th>image</th>
+                                <th>tel_portable</th>
+                                <th>adresse</th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody class="searchable">
+                            @foreach($interpreteurs as $interpreteur)
+                                <tr>
+                                    <td>{{$interpreteur->id}}</td>
+                                    <td>{{$interpreteur->nom}}</td>
+                                    <td>{{$interpreteur->prenom}}</td>
+                                    <td>{{$interpreteur->email}}</td>
+                                    <td>
+                                        <select class="form-control" name="langue_ini">
+                                            @foreach(\App\Tools\TraductionTools::getTraductionsByInterpreteur($interpreteur->id) as $traduction)
+                                                <option><strong>{{\App\Tools\LangueTools::getLangue($traduction->source)->content}}→{{\App\Tools\LangueTools::getLangue($traduction->cible)->content}}</strong></option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td>{{$interpreteur->image}}</td>
+                                    <td>{{$interpreteur->tel_portable}}</td>
+                                    <td>{{\App\Tools\AdresseTools::getAdresse($interpreteur->adresse_id)->adresse}}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                        <button id="draw" type="button" class="btn btn-primary">Dessiner</button>
+                    </div>
+                    <div class="col-lg-8">
+                        <div id="map"/>
+                    </div>
                 </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">close</button>
                 </div>
@@ -287,110 +352,9 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
-
-    <!-- Modal -->
-    <div class="modal fade" id="MapModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Liste interpreteurs</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <table id="dataTables-example2" class="table table-striped">
-                                <thead>
-                                <tr>
-                                    <th>id</th>
-                                    <th>Nom</th>
-                                    <th>prenom</th>
-                                    <th>email</th>
-                                    <th>init=>dest</th>
-                                </tr>
-                                </thead>
-                                <tbody class="searchable">
-                                @foreach($interpreteurs as $interpreteur)
-                                    <tr>
-                                        <td>{{$interpreteur->id}}</td>
-                                        <td>{{$interpreteur->nom}}</td>
-                                        <td>{{$interpreteur->prenom}}</td>
-                                        <td>{{$interpreteur->email}}</td>
-                                        <td>
-                                            <select class="form-control" name="langue_ini">
-                                                @foreach(\App\Tools\TraductionTools::getTraductionsByInterpreteur($interpreteur->id) as $traduction)
-                                                    <option><strong>{{\App\Tools\LangueTools::getLangue($traduction->source)->content}}→{{\App\Tools\LangueTools::getLangue($traduction->cible)->content}}</strong></option>
-                                                @endforeach
-                                            </select>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                            <button id="draw" type="button" class="btn btn-primary">Dessiner</button>
-                        </div>
-                        <div class="col-lg-8">
-                            <div id="map"/>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">close</button>
-                    </div>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
-
-
-@endsection
-
-@section('modals')
-
-<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header  modal-header-danger">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Liste d'erreurs</h4>
-            </div>
-            <div class="modal-body">
-                <div class="alert alert-danger">
-                    <strong>Erreurs : </strong>
-                    <ul>
-                        @foreach($errors->all() as $error)
-                            <i class="fa fa fa-times fa-fw"></i> {{$error}} <br/>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
 </div>
 
-@if(isset($message))
-    <div id="modal-success" class="modal modal-message modal-success fade" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <i class="glyphicon glyphicon-check"></i>
-                </div>
-                <div class="modal-title">Success</div>
-                <div class="modal-body">{{$message}}</div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
-                </div>
-            </div> <!-- / .modal-content -->
-        </div> <!-- / .modal-dialog -->
-    </div>
-@endif
+@include('includes.popups')
 
 @endsection
 
@@ -400,6 +364,7 @@
         @if (count($errors) > 0)
         $('#errorModal').modal('show');
         @endif
+
         @if (isset($message))$('#modal-success').modal('show');@endif
         var table2;
         var table;
@@ -422,15 +387,15 @@
                         var ttInstance = TableTools.fnGetInstance("dataTables-example");
                         var row = ttInstance.fnGetSelectedData();
                         $('#interpreteur').val(row[0][0]);
-                        addInterpreteur(row[0][0],row[0][1] + row[0][2] ,row[0][3]);
+                        addInterpreteur(row[0][0],row[0][1] + " " + row[0][2] ,row[0][3],row[0][6],row[0][7],row[0][8]);
                     },
 
                     fnRowDeselected: function ( node ) {
                         $('#interpreteur').val("");
-                        addInterpreteur(null,"Aucun","Aucun");
+                        addInterpreteur(null,"Aucun","Aucun",'unknown.jpg','Aucun','Aucun');
                     }
                 },"columnDefs":
-                        [ { "visible": false, "searchable": false, "targets":0 }]
+                        [ { "visible": false, "searchable": false, "targets":[0,6,7,8] }]
 
             });
 
@@ -443,7 +408,7 @@
                         var ttInstance = TableTools.fnGetInstance("dataTables-example2");
                         var row = ttInstance.fnGetSelectedData();
                         $('#interpreteur').val(row[0][0]);
-                        addInterpreteur(row[0][0],row[0][1] + row[0][2] ,row[0][3]);
+                        addInterpreteur(row[0][0],row[0][1] + " " + row[0][2] ,row[0][3],row[0][5],row[0][6],row[0][7]);
                     },
 
                     fnRowDeselected: function ( node ) {
@@ -451,7 +416,7 @@
                         addInterpreteur(null,"Aucun","Aucun");
                     }
                 },"columnDefs":
-                        [ { "visible": false, "searchable": false, "targets":0 }]
+                        [ { "visible": false, "searchable": false, "targets":[0,5,6,7] }]
 
             });
 
@@ -472,6 +437,8 @@
                     }
                 } );
             } );
+
+            $('.success-alert').hide();
         });
 
     </script>
@@ -483,12 +450,19 @@
 
     <script type="text/javascript">
 
-        function addInterpreteur(id,nom,email){
+        function addInterpreteur(id,nom,email,img,tel,adr){
             $("#interpreteur").val(id);
-            $("#nomInter").text(nom);
-            $("#emailInter").text(email);
+            $("#nomInterp").text(nom);
+            $("#emailInterp").text(email);
+            $("#telInterp").text(tel);
+            $("#adresseInterp").text(adr);
+            $("#imgInterp").attr('src','/images/'+img);
             if(nom != "Aucun"){
-                alert("Interpreteur ajouté avec sucess");
+                $('.success-alert').find('.nom').text(nom);
+                $('.success-alert').alert();
+                $(".success-alert").fadeTo(2000, 500).slideUp(500, function(){
+                    $(".success-alert").slideUp(500);
+                });
             }
         }
 
@@ -528,10 +502,11 @@
 </div>\
 <div class="row">\
   <div class="col-lg-8"></div>\
-  <div class="col-lg-4"><button type="button" onclick="addInterpreteur({{ $interpreteur->id }},\'{{$interpreteur->nom}} {{$interpreteur->prenom}}\',\'{{$interpreteur->email}}\')" class="btn btn-primary">Select</button></div>\
+  <div class="col-lg-4"><button type="button" onclick="addInterpreteur({{ $interpreteur->id }},\'{{$interpreteur->nom}} {{$interpreteur->prenom}}\',\'{{$interpreteur->email}}\',\'{{$interpreteur->image}}\',\'{{$interpreteur->tel_portable}}\',\'{{\App\Tools\AdresseTools::getAdresse($interpreteur->adresse_id)->adresse}}\')" class="btn btn-primary">Select</button></div>\
 </div>\
 </div>'
             });
+
 
 
             markers[{{$interpreteur->id}}].addListener('click', function() {
@@ -563,9 +538,9 @@
             mapDiv = document.getElementById('map');
             map = new google.maps.Map(mapDiv, {
                 center: demandeLG,
-                zoom: 8
+                zoom: 18
             });
-            var image = "{{{ asset('images/marker.png') }}}";
+            var image = "{{ asset('images/marker.png') }}";
             var marker1 = new google.maps.Marker({
                 position: {lat: {{ $demande->adresse->lat }}, lng: {{ $demande->adresse->long }} },
                 map: map,

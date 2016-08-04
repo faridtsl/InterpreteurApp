@@ -203,7 +203,7 @@ Ajouter demande
                             <dd>{{$demande->dateEvent}}</dd>
                             <dt>Demandeur :</dt>
                             <dd>{{$client->nom}} {{$client->prenom}}</dd>
-                            <dt><a href="/demande/edit/{{$demande->id}}">Edit</a></dt>
+                            <dt><a href="/demande/update?id={{$demande->id}}">Edit</a></dt>
                         </dl>
                     @endif
                 </div>

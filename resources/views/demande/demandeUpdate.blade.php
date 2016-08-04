@@ -14,7 +14,10 @@
     <link rel="stylesheet" href="{{ asset('/css/myStyle.css')}}" />
     <link rel="stylesheet" href="{{ asset('css/success.css')}}" />
     <script src="http://cdn.ckeditor.com/4.5.8/full/ckeditor.js"></script>
-    <style type="text/css"> .pac-container { z-index: 1051 !important; } </style>
+    <style type="text/css">
+        .pac-container { z-index: 1051 !important; }
+        .modal-dialog { width: 80%; height: 100%; padding: 20px; }
+    </style>
 
 @endsection
 
@@ -234,6 +237,7 @@
         </div>
     </div>
 </div>
+
 @endsection
 
 
@@ -247,7 +251,8 @@
                 <h4 class="modal-title" id="myModalLabel">Liste des devis en cours</h4>
             </div>
             <div class="modal-body">
-                <table class="table nowrap table-responsive responsive" cellspacing="0" cellspacing="0" id="example">	<thead>
+                <table class="table table-striped table-bordered table-hover" width="90%" id="example" cellspacing="0">
+                    <thead>
                     <tr>
                         <th>Nom de l'interpreteur</th>
                         <th>Adresse de l'interpreteur</th>
@@ -287,68 +292,55 @@
     <!-- /.modal-dialog -->
 </div>
 
-    <div class="modal fade" id="clientModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header  modal-header-info">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Liste des Clients</h4>
-                </div>
-                <div class="modal-body">
-                    <table class="table table-striped table-bordered table-hover" id="clients" cellspacing="0" width="100%">
-                        <thead>
-                        <tr>
-                            <th>id</th>
-                            <th>Nom</th>
-                            <th>Prenom</th>
-                            <th>E-MAIL</th>
-                        </tr>
-                        </thead>
-                        <tfoot>
-                        <tr>
-                            <th>id</th>
-                            <th>Nom</th>
-                            <th>Prenom</th>
-                            <th>E-MAIL</th>
-
-                        </tr>
-                        </tfoot>
-                        <tbody>
-                        @foreach($clients as $client)
-                            <tr>
-                                <td>{{$client->id}}</td>
-                                <td>{{$client->nom}}</td>
-                                <td>{{$client->prenom}}</td>
-                                <td>{{$client->email}}</td>
-                            </tr>
-                        @endforeach
-
-                        </tbody>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+<div class="modal fade" id="clientModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header  modal-header-info">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Liste des Clients</h4>
             </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
+            <div class="modal-body">
+                <table class="table table-striped table-bordered table-hover" id="clients" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>E-MAIL</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>id</th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>E-MAIL</th>
 
-    <div id="modal-success" class="modal modal-message modal-success fade" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <i class="glyphicon glyphicon-check"></i>
-                </div>
-                <div class="modal-title">Success</div>
-                <div class="modal-body">l'adresse a été changé avec success!</div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
-                </div>
-            </div> <!-- / .modal-content -->
-        </div> <!-- / .modal-dialog -->
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    @foreach($clients as $client)
+                        <tr>
+                            <td>{{$client->id}}</td>
+                            <td>{{$client->nom}}</td>
+                            <td>{{$client->prenom}}</td>
+                            <td>{{$client->email}}</td>
+                        </tr>
+                    @endforeach
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
     </div>
+    <!-- /.modal-dialog -->
+</div>
+
+@include('includes.popups')
 
 @endsection
 

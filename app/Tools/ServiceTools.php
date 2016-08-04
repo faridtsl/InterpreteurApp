@@ -35,4 +35,9 @@ class ServiceTools{
         return $tot;
     }
 
+    public static function getServices($devis_id){
+        $services = Service::where('devi_id',$devis_id)->get();
+        return $services;
+    }
+
 }
