@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Demande;
+use App\Http\Requests\DemandeSearchRequest;
 use App\Tools\AdresseTools;
 use App\Tools\ClientTools;
 use App\Tools\DemandeTools;
@@ -39,7 +40,7 @@ class DemandeController extends Controller{
                 return view('demande.demandeAdd',['langues' => $langues,'clients' => $clients])->withErrors(['Langue source doit être differente de la langues destination']);
             $demande = DemandeTools::addDemande($adresse,$client,$etat,$traduction,$connectedUser,$request);
             DB::commit();
-            //MailTools::sendMail('Demande créée','createDemande','faridkaiba@gmail.com','faridkaiba@gmail.com',[],['client'=>$client,'demande'=>$demande,'adresse'=>$adresse],'public/css/mailStyle.css');
+            //MailTools::sendMail('Demande créée','createDemande','creadis.test@gmail.com',$client->email,[],['client'=>$client,'demande'=>$demande,'adresse'=>$adresse],'public/css/mailStyle.css');
             return view('demande.demandeAdd', ['message' => 'Interpreteur ajouté avec success!','client' => $client, 'clients' => $clients,'langues' => $langues, 'demande' => $demande]);
         }catch(\Exception $e){
             DB::rollback();
@@ -84,6 +85,18 @@ class DemandeController extends Controller{
         else $traduction = null;
         DemandeTools::updateDemande(null,$client,$etat,$traduction,$connectedUser,$request);
         return $this->showUpdate($request);
+    }
+
+    public function duplicateDemande(Request $request){
+        $demande = Demande::find($request['id']);
+        $demande->traduction = TraductionTools::getTraductionById($demande->traduction_id);
+        $demande->adr = AdresseTools::getAdresse($demande->adresse_id);
+        $demande->client = ClientTools::getClient($demande->client_id);
+        $demande->etat = EtatTools::getEtatById($demande->etat_id);
+        $connectedUser = Auth::user();
+        DemandeTools::dupDemande($connectedUser,$demande);
+        $demandes = Demande::all();
+        return view('demande.demandeShow',['demandes'=>$demandes,'message'=>'Demande dupliquée avec success']);
     }
 
 }

@@ -35,7 +35,7 @@ class ClientController extends Controller{
             $request['imageName'] = $imgName;
             $client = ClientTools::addClient($connectedUser, $request);
             DB::commit();
-            //MailTools::sendMail('Profil client créé','createClient','faridkaiba@gmail.com','faridkaiba@gmail.com',[],['client'=>$client],'public/css/mailStyle.css');
+            //MailTools::sendMail('Profil client créé','createClient','creadis.test@gmail.com',$client->email,[],['client'=>$client],'public/css/mailStyle.css');
             return view('client.clientAdd', ['message' => 'Client ajouté avec success!', 'img' => $imgName, 'client' => $client]);
         }catch(\Exception $e){
             DB::rollback();

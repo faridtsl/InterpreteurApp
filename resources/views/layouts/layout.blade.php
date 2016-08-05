@@ -181,7 +181,7 @@
                             <a href="#"><i class="fa fa-sitemap fa-fw"></i> Gestion des devis<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="/devis">Les devis en cours</a>
+                                    <a href="/devis/list">Les devis en cours</a>
                                 </li>
                                 <li>
                                     <a href="/devis/archive">Archive</a>

@@ -85,22 +85,8 @@ $(function () {
         });
     });
 
-    $('.deleteButton').on('click', function () {
-        // Get the record's ID via attribute
-        $id = $(this).attr('data-id');
 
-        $.ajax({
-            url: $id,
-            type: "GET",
-            success: function (data) {
-
-            }, error: function () {
-                alert("error!!!!");
-            }
-        });
-    });
-
-    $('.restoreButton').on('click', function () {
+    $('.seeButton').on('click', function () {
         // Get the record's ID via attribute
         $id = $(this).attr('data-id');
         $.ajax({

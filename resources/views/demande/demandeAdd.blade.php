@@ -22,8 +22,10 @@ Ajouter demande
         {!! csrf_field() !!}
         <div class="col-lg-12">
             <div class="panel panel-info" id="demandePanel">
-                <div class="panel-heading" id="headDem">
-                    Nouvelle demande
+                <div class="panel-heading">
+                    <h4 class="panel-title" id="headDem">
+                        Nouvelle demande
+                    </h4>
                 </div>
                 <div class="panel-body">
                     <div class="form-group">

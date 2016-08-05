@@ -26,7 +26,7 @@
     <!-- /.modal-dialog -->
 </div>
 
-<div id="modal-success" class="modal modal-message modal-success fade" style="display: none;z-index:100000;" aria-hidden="true">
+<div id="modalSuccess" class="modal modal-message modal-success fade" style="display: none;z-index:100000;" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

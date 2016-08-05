@@ -87,7 +87,8 @@ $(document).ready(function() {
                 $("#route").val(data['route']);
                 $("#lat").val(data['lat']);
                 $("#long").val(data['long']);
-                $("#modal-success").modal('toggle');
+                $("#modalSuccess").find('.modal-body').html('Adresse changée avec success');
+                $("#modalSuccess").modal('toggle');
             },error:function(data){
                 alert("erreur ressayé");
             }

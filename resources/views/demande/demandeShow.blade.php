@@ -8,6 +8,7 @@
     <script type="text/javascript" src="http://momentjs.com/downloads/moment-with-locales.min.js"></script>
     <script type="text/javascript" src="{{ asset('js/bootstrap-material-datetimepicker.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('/css/myStyle.css')}}" />
+    <link rel="stylesheet" href="{{ asset('css/success.css')}}" />
     <script src="http://cdn.ckeditor.com/4.5.8/full/ckeditor.js"></script>
     <link type="text/css" rel="stylesheet" href="{{asset('css/bootstrap-datatable.css')}}">
     <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css">
@@ -35,7 +36,7 @@
                             <h3 class="col-lg-4">Recherche avancée</h3>
                         </div>
                     </div>
-                    <form role="form" method="POST" action="/demande/show" id="formID" enctype="multipart/form-data" class="col-lg-10 col-lg-offset-1">
+                    <form role="form" method="POST" action="/demande/list" id="formID" enctype="multipart/form-data" class="col-lg-10 col-lg-offset-1">
                         {!! csrf_field() !!}
                         <div class="container-fluid">
                             <div class="form-group">
@@ -160,9 +161,12 @@
                                             <a class="btn btn-warning btn-xs editButton" href="/demande/update?id={{$demande->id}}" >
                                                 <span class="glyphicon glyphicon-pencil"></span>
                                             </a>
-                                            <button class="btn btn-success btn-xs deleteButton" data-title="Delete" data-toggle="modal" data-target="#delete" data-id="{{$demande->id}}" >
+                                            <button class="btn btn-success btn-xs seeButton" data-title="Delete" data-toggle="modal" data-target="#delete" data-id="{{$demande->id}}" >
                                                 <span class="glyphicon glyphicon-search"></span>
                                             </button>
+                                            <a class="btn btn-info btn-xs dupButton" href="/demande/duplicate?id={{$demande->id}}" >
+                                                <span class="glyphicon glyphicon-copy"></span>
+                                            </a>
                                         </p>
                                     </td>
                                 </tr>
@@ -236,6 +240,9 @@
                                                 <button class="btn btn-success btn-xs deleteButton" data-title="Delete" data-toggle="modal" data-target="#delete" data-id="{{$demande->id}}" >
                                                     <span class="glyphicon glyphicon-search"></span>
                                                 </button>
+                                                <a class="btn btn-info btn-xs dupButton" href="/demande/duplicate?id={{$demande->id}}" >
+                                                    <span class="glyphicon glyphicon-copy"></span>
+                                                </a>
                                             </p>
                                         </td>
                                     </tr>
@@ -250,13 +257,26 @@
 
 
     </div>
-
 @endsection
 
 
+@section('modals')
+    @include('includes.popups')
+@endsection
 
 
 @section('footer')
+
+    <script>
+        @if (count($errors) > 0)
+            $('#errorModal').modal('show');
+        @endif
+
+        @if (isset($message))
+            $("#modalSuccess").modal('toggle');
+        @endif
+    </script>
     <script src="{{ asset("js/demandeJS.js") }}"> </script>
     <script src="{{ asset("js/timeInitiator.js") }}"> </script>
+
 @endsection

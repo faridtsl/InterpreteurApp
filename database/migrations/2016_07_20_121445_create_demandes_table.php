@@ -22,6 +22,7 @@ class CreateDemandesTable extends Migration{
             $table->integer('adresse_id')->unsigned();
             $table->integer('client_id')->unsigned();
             $table->integer('traduction_id')->unsigned();
+            $table->integer('origin_id')->unsigned();
 
             $table->softDeletes();
 

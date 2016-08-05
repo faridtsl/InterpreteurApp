@@ -120,6 +120,10 @@ Route::post(
     'demande/add',
     ['middleware'=>'auth','uses'=>'DemandeController@store']
 );
+Route::post(
+    'demande/list',
+    ['middleware'=>'auth','uses'=>'DemandeController@showList']
+);
 Route::get(
     'demande/list',
     ['middleware'=>'auth','uses'=>'DemandeController@showList']
@@ -135,6 +139,10 @@ Route::get(
 Route::post(
     '/demande/update',
     ['middleware'=>'auth','uses'=>'DemandeController@storeUpdate']
+);
+Route::get(
+    '/demande/duplicate',
+    ['middleware'=>'auth','uses'=>'DemandeController@duplicateDemande','as'=>'/demande/list']
 );
 
 
@@ -198,6 +206,14 @@ Route::get(
 Route::post(
     'devis/add',
     ['middleware'=>'auth','uses'=>'DevisController@store']
+);
+Route::get(
+    'devis/list',
+    ['middleware'=>'auth','uses'=>'DevisController@showDevis']
+);
+Route::get(
+    'devis/resend',
+    ['middleware'=>'auth','uses'=>'DevisController@resendDevis']
 );
 
 //Images Routes

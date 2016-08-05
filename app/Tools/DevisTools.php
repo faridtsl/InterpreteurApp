@@ -9,6 +9,7 @@
 namespace App\Tools;
 
 
+use App\Demande;
 use App\Devi;
 use App\Etat;
 use App\Service;
@@ -48,6 +49,14 @@ class DevisTools{
             $tot += $service->total;
         }
         return $tot;
+    }
+
+    public static function sendDevisMail($devis){
+        $demande = Demande::find($devis->demande_id);
+        $client = ClientTools::getClient($demande->client_id);
+        $adresse = AdresseTools::getAdresse($demande->adresse_id);
+        $services = ServiceTools::getServices($devis->id);
+        MailTools::sendMail('Devis créée','devis','creadis.test@gmail.com',$client->email,[],['services'=>$services,'client'=>$client,'demande'=>$demande,'adresse'=>$adresse,'devis'=>$devis],'public/css/style_df.css');
     }
 
 }

@@ -27,7 +27,8 @@ class InterpreteurRequest extends Request{
             'tel_portable' => 'required',
             'adresse' => 'required',
             'langue_src' => 'required',
-            'langue_dest' => 'required'
+            'langue_dest' => 'required',
+            'prestation' => 'required|Integer|Min:0'
         ];
     }
 }

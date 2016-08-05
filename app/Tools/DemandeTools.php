@@ -31,12 +31,13 @@ class DemandeTools{
         $demande->client()->associate($client);
         $demande->traduction()->associate($traduction);
         $demande->etat()->associate($etat);
+        $demande->origin_id = 0;
         $demande->save();
         return $demande;
     }
 
-    public static function searchByDates(DemandeSearchRequest $request){
-
+    public static function searchByDates($request){
+        $demande = Demande::where('id','>=',0);
         if(!empty($request['dateEventDeb'])){
             $demande = Demande::where('dateEvent', '>=', $request['dateEventDeb']);
         }
@@ -54,7 +55,6 @@ class DemandeTools{
         }
 
         $demandes = $demande->get();
-
         return $demandes;
     }
 
@@ -95,6 +95,22 @@ class DemandeTools{
     public static function getDemandesByClient($id_client){
         $demandes = Demande::where('client_id','=',$id_client)->get();
         return $demandes;
+    }
+
+    public static function dupDemande(User $u,Demande $d){
+        $demande = new Demande();
+        $demande->titre = $d->titre;
+        $demande->content = $d->content;
+        $demande->dateEvent = $d->dateEvent;
+        $demande->dateEndEvent = $d->dateEndEvent;
+        $demande->adresse()->associate($d->adr);
+        $demande->user()->associate($u);
+        $demande->client()->associate($d->client);
+        $demande->traduction()->associate($d->traduction);
+        $demande->etat()->associate($d->etat);
+        $demande->origin_id = $d->id;
+        $demande->save();
+        return $demande;
     }
 
 

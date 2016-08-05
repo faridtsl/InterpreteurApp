@@ -24,15 +24,14 @@
 
         }
     </style>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlkrHCrqBm3WLyMkykudHX02GKzMBFBR0" async defer>
-    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlkrHCrqBm3WLyMkykudHX02GKzMBFBR0" async defer></script>
     <script type="text/javascript">
         var markers = {};
         var infowindows = {};
     </script>
 
     <link rel="stylesheet" href="{{ asset('/css/myStyle.css')}}" />
-    <link rel="stylesheet" href="{{ asset('css/success.css')}}" />
+    <link rel="stylesheet" href="{{ asset('/css/success.css')}}" />
 @endsection
 
 @section('content')
@@ -54,8 +53,7 @@
                                 <br><br>
                                 <div class="container-fluid well span6">
                                     <div class="col-sm-2 col-md-2">
-                                        <img src="/images/unknown.jpg"
-                                             alt="" id="imgInterp" class="img-rounded img-responsive" />
+                                        <img src="/images/unknown.jpg" alt="" id="imgInterp" class="img-rounded img-responsive" />
                                     </div>
                                     <div class="col-sm-2 col-md-4">
                                         <blockquote>
@@ -137,7 +135,6 @@
                                     </tr>
                                     </tfoot>
                                     <tbody>
-
                                     @if(Session::has('services'))
                                         @foreach(Session::get('services') as $index => $service)
 
@@ -215,10 +212,6 @@
             </div>
         </div>
     </form>
-@endsection
-
-@section('modals')
-
 
 <!-- Modal -->
 <div class="modal fade" id="IntModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -229,8 +222,10 @@
                 <h4 class="modal-title" id="myModalLabel">Liste des interpreteurs</h4>
             </div>
             <div class="modal-body">
-                <div class="alert alert-success success-alert" id="success-alert2">Interpret <strong class="nom"></strong> selectionné!</div>
-                    <table class="table table-striped table-bordered table-hover" id="dataTables-example" cellspacing="0" width="100%">
+                <div class="alert alert-success success-alert" id="success-alert2">
+                    Interpret <strong class="nom"></strong> selectionné!
+                </div>
+                <table class="table table-striped table-bordered table-hover" id="dataTables-example" cellspacing="0" width="100%">
                     <thead>
                     <tr>
                         <th>id</th>
@@ -284,14 +279,11 @@
                 <button type="button" class="btn btn-primary" data-dismiss="modal">close</button>
             </div>
         </div>
-        <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
 </div>
-<!-- /.modal -->
 
-<!-- Modal -->
 <div class="modal fade" id="MapModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -299,7 +291,9 @@
                 <h4 class="modal-title" id="myModalLabel">Liste interpreteurs</h4>
             </div>
             <div class="modal-body">
-                <div class="alert alert-success success-alert" id="success-alert2">Interpret <strong class="nom"></strong> selectionné!</div>
+                <div class="alert alert-success success-alert" id="success-alert2">
+                    Interpret <strong class="nom"></strong> selectionné!
+                </div>
                 <div class="row">
                     <div class="col-lg-4">
                         <table id="dataTables-example2" class="table table-striped">
@@ -342,7 +336,6 @@
                         <div id="map"/>
                     </div>
                 </div>
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">close</button>
                 </div>
@@ -351,8 +344,10 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal -->
+
 </div>
+
+    </div>
 
 @include('includes.popups')
 
@@ -360,93 +355,19 @@
 
 @section('footer')
 
-    <script type="text/javascript">
-        @if (count($errors) > 0)
+<script type="text/javascript">
+    @if (count($errors) > 0)
         $('#errorModal').modal('show');
-        @endif
+    @endif
 
-        @if (isset($message))$('#modal-success').modal('show');@endif
-        var table2;
-        var table;
-    </script>
+    @if (isset($message))
+        $("#modalSuccess").modal('toggle');
+    @endif
+</script>
 
-    <script src="{{ asset('js/tableTools.js')}}"></script>
+<script src="{{ asset('js/tableTools.js')}}"></script>
+<script src="{{ asset('js/devisAddVars.js')}}"></script>
 
-    <script>
-        $(document).ready(function() {
-            $("#draw").on("click", function() {
-                drawFiltredRows();
-            });
-
-            table = $('#dataTables-example').DataTable({
-                "pageLength": 10,
-                dom: 'T<"clear">lfrtip',
-                tableTools: {
-                    "sRowSelect": "single",
-                    fnRowSelected: function(nodes) {
-                        var ttInstance = TableTools.fnGetInstance("dataTables-example");
-                        var row = ttInstance.fnGetSelectedData();
-                        $('#interpreteur').val(row[0][0]);
-                        addInterpreteur(row[0][0],row[0][1] + " " + row[0][2] ,row[0][3],row[0][6],row[0][7],row[0][8]);
-                    },
-
-                    fnRowDeselected: function ( node ) {
-                        $('#interpreteur').val("");
-                        addInterpreteur(null,"Aucun","Aucun",'unknown.jpg','Aucun','Aucun');
-                    }
-                },"columnDefs":
-                        [ { "visible": false, "searchable": false, "targets":[0,6,7,8] }]
-
-            });
-
-            table2 = $('#dataTables-example2').DataTable({
-                "pageLength": 10,
-                dom: 'T<"clear">lfrtip',
-                tableTools: {
-                    "sRowSelect": "single",
-                    fnRowSelected: function(nodes) {
-                        var ttInstance = TableTools.fnGetInstance("dataTables-example2");
-                        var row = ttInstance.fnGetSelectedData();
-                        $('#interpreteur').val(row[0][0]);
-                        addInterpreteur(row[0][0],row[0][1] + " " + row[0][2] ,row[0][3],row[0][5],row[0][6],row[0][7]);
-                    },
-
-                    fnRowDeselected: function ( node ) {
-                        $('#interpreteur').val("");
-                        addInterpreteur(null,"Aucun","Aucun");
-                    }
-                },"columnDefs":
-                        [ { "visible": false, "searchable": false, "targets":[0,5,6,7] }]
-
-            });
-
-            // Setup - add a text input to each footer cell
-            $('#dataTables-example tfoot th').each( function () {
-                var title = $(this).text();
-                $(this).html( '<input type="text" placeholder="'+title+'" />' );
-            } );
-
-            // Apply the search
-            table.columns().every( function () {
-                var that = this;
-                $( 'input', this.footer() ).on( 'keyup change', function () {
-                    if ( that.search() !== this.value ) {
-                        that
-                                .search( this.value )
-                                .draw();
-                    }
-                } );
-            } );
-
-            $('.success-alert').hide();
-        });
-
-    </script>
-
-    <script>
-        var map;
-        var mapDiv;
-    </script>
 
     <script type="text/javascript">
 
