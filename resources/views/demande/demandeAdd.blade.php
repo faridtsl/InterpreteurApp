@@ -238,7 +238,7 @@ Ajouter demande
     <script src="{{ asset("js/demandeAdd.js") }}"> </script>
     <script src="{{ asset("js/myScript.js") }}"> </script>
     <script src="{{ asset("js/mapsJS.js") }}"> </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAS3tOh8NpT_5A_-P2-Oz2HqAhEf5h4uSs&signed_in=true&libraries=places&callback=initAutocomplete"
+    <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_KEY')}}&signed_in=true&libraries=places&callback=initAutocomplete"
             async defer></script>
     <script src="{{ asset("js/timeInitiator.js") }}"> </script>
 
