@@ -1,12 +1,16 @@
 
 $(function () {
 
-    table = $('#example').DataTable();
+    table = $('#example').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'colvis'
+        ]});
 
     // Setup - add a text input to each footer cell
     $('#example tfoot th').each( function () {
         var title = $(this).text();
-        if(title!="" && title != 'Action') $(this).html( '<input type="text" placeholder="'+title+'" />' );
+        if(title!="" && title != 'Action') $(this).html( '<input type="text" placeholder="'+title+'" style="width: 100%;" />' );
     } );
 
     // Apply the search
@@ -48,7 +52,7 @@ $(function () {
         return false;
     });
 
-    $('.editButton').on('click', function () {
+    $(document.body).on('click','.editButton', function () {
         // Get the record's ID via attribute
         $id = $(this).attr('data-id');
 
@@ -71,7 +75,7 @@ $(function () {
         });
     });
 
-    $('.deleteButton').on('click', function () {
+    $(document.body).on('click','.deleteButton', function () {
         // Get the record's ID via attribute
         $id = $(this).attr('data-id');
 
@@ -92,7 +96,7 @@ $(function () {
         });
     });
 
-    $('.restoreButton').on('click', function () {
+    $(document.body).on('click','.restoreButton', function () {
         // Get the record's ID via attribute
         $id = $(this).attr('data-id');
         $.ajax({

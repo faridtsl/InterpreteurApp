@@ -2,6 +2,7 @@
 $(document).ready(function() {
     $('#dataTables-example').DataTable({
         "pageLength": 10,
+        dom: 'T<"clear">lfrtip',
         tableTools: {
             "sRowSelect": "single",
             fnRowSelected: function(nodes) {

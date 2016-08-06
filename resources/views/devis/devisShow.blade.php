@@ -7,9 +7,11 @@
 @section('header')
     <link type="text/css" rel="stylesheet" href="{{asset('css/bootstrap-datatable.css')}}">
     <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.1.2/css/buttons.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.0.2/css/responsive.bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('/css/myStyle.css')}}" />
     <link rel="stylesheet" href="{{ asset('css/success.css')}}" />
+    <script type="text/javascript" src="{{{ asset('js/jquery.popconfirm.js')}}}"></script>
 @endsection
 
 @section('content')
@@ -61,7 +63,7 @@
                     <td>{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
                     <td>{{\App\Tools\DevisTools::getTotal($devi->id)}} &euro;</td>
                     <td>
-                        <a href="home" data-id="{{$devi->id}}" class="resendButton"> <span class="glyphicon glyphicon-refresh"></span> </a>
+                        <a href="home" id="resend{{$devi->id}}" data-id="{{$devi->id}}" class="resendButton"> <span class="glyphicon glyphicon-refresh"></span> </a>
                     </td>
                     <td>
                         <a href="/devis/view?id={{$devi->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
@@ -77,6 +79,22 @@
                     <td>{{$devi->created_at->format('l j F Y H:i')}}</td>
                     <td>{{$devi->updated_at->format('l j F Y H:i')}}</td>
                 </tr>
+
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        $("#delete{{$devi->id}}").popConfirm({
+                            title: "Message de confirmation ?",
+                            content: "Voulez vous supprimer l'objet !",
+                            placement: "bottom"
+                        });
+
+                        $("#validate{{$devi->id}}").popConfirm({
+                            title: "Message de confirmation ?",
+                            content: "Voulez vous Valider le devis en cours !",
+                            placement: "bottom"
+                        });
+                    });
+                </script>
             @endforeach
         </tbody>
     </table>
@@ -86,6 +104,23 @@
 
 @section('modals')
     @include('includes.popups')
+
+    <div class="modal fade" id="resendModal" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span>&times;</span></button>
+                    <h4 class="modal-title custom_align" >Renvoyer le devis ?</h4>
+                </div>
+                <div class="modal-footer ">
+                    <input id="idResend" type="hidden" value="-1"/>
+                    <button class="btn btn-success" id="resend" >Oui</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Non</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('footer')

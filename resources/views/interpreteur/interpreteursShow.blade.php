@@ -4,6 +4,7 @@
 @section('header')
     <link type="text/css" rel="stylesheet" href="{{asset('css/bootstrap-datatable.css')}}">
     <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.1.2/css/buttons.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.0.2/css/responsive.bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
     <style type="text/css"> .pac-container { z-index: 1051 !important; } </style>
@@ -17,76 +18,77 @@
 
 @section('content')
 
-    <div class="row">
-        <h1 class="center"> Liste des interpreteurs </h1>
-    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <h1 class="center"> Liste des interpreteurs </h1>
+        </div>
 
-    <div class="row">
-        <table id="example" class="table table-striped table-bordered display responsive nowrap" width="100%" cellspacing="0">
-            <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Email</th>
-                <th>Prestation</th>
-                <th>Adresse</th>
-                <th>Action</th>
-                <th>Telephone portable</th>
-                <th>Telephone fixe</th>
-                <th>Date creation</th>
-                <th>Date modification</th>
-                <th>Traductions</th>
-            </tr>
-            </thead>
-            <tfoot>
-            <tr>
-                <th>Nom</th>
-                <th>Email</th>
-                <th>Prestation</th>
-                <th>Adresse</th>
-                <th></th>
-                <th>Telephone portable</th>
-                <th>Telephone fixe</th>
-                <th>Date creation</th>
-                <th>Date modification</th>
-                <th>Traductions</th>
-            </tr>
-            </tfoot>
-            <tbody>
-                @foreach($interpreteurs as $interpreteur)
-                    <tr>
-                        <td>
-                            <img class="img-circle" src="/images/{{$interpreteur->image}}" style="width: 50px;height:50px;"/>
-                            {{$interpreteur->nom}} {{$interpreteur->prenom}}
-                        </td>
-                        <td>{{$interpreteur->email}}</td>
-                        <td>{{$interpreteur->prestation}} {{$interpreteur->devise}}</td>
-                        <td>{{\App\Tools\AdresseTools::getAdresse($interpreteur->adresse_id)->adresse}}</td>
-
-                        <td>
-                            <p data-placement="top" data-toggle="tooltip" title="Edit">
-                                <button class="btn btn-warning btn-xs editButton" data-title="Edit" data-toggle="modal" data-target="#edit" data-id="{{$interpreteur->id}}" >
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
-                                <button class="btn btn-danger btn-xs deleteButton" data-title="Delete" data-toggle="modal" data-target="#delete" data-id="{{$interpreteur->id}}" >
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                </button>
-                            </p>
-                        </td>
-                        <td>{{$interpreteur->tel_portable}}</td>
-                        <td>{{$interpreteur->tel_fixe}}</td>
-                        <td>{{$interpreteur->created_at->format('l j F Y H:i')}}</td>
-                        <td>{{$interpreteur->updated_at->format('l j F Y H:i')}}</td>
-                        <td>
-                            |
-                            @foreach(\App\Tools\TraductionTools::getTraductionsByInterpreteur($interpreteur->id) as $traduction)
-                                {{\App\Tools\LangueTools::getLangue($traduction->source)->content}} <span class="glyphicon glyphicon-arrow-right"></span> {{\App\Tools\LangueTools::getLangue($traduction->cible)->content}}
-                                 |
-                            @endforeach
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <div class="row">
+            <table id="example" class="table table-striped table-bordered display responsive nowrap"  width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Prestation</th>
+                    <th>Adresse</th>
+                    <th>Telephone portable</th>
+                    <th>Action</th>
+                    <th>Telephone fixe</th>
+                    <th>Date creation</th>
+                    <th>Date modification</th>
+                    <th>Traductions</th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Prestation</th>
+                    <th>Adresse</th>
+                    <th>Telephone portable</th>
+                    <th></th>
+                    <th>Telephone fixe</th>
+                    <th>Date creation</th>
+                    <th>Date modification</th>
+                    <th>Traductions</th>
+                </tr>
+                </tfoot>
+                <tbody>
+                    @foreach($interpreteurs as $interpreteur)
+                        <tr>
+                            <td>
+                                <img class="img-circle" src="/images/{{$interpreteur->image}}" style="width: 50px;height:50px;"/>
+                                {{$interpreteur->nom}} {{$interpreteur->prenom}}
+                            </td>
+                            <td>{{$interpreteur->email}}</td>
+                            <td>{{$interpreteur->prestation}} {{$interpreteur->devise}}</td>
+                            <td>{{\App\Tools\AdresseTools::getAdresse($interpreteur->adresse_id)->adresse}}</td>
+                            <td>{{$interpreteur->tel_portable}}</td>
+                            <td>
+                                <p data-placement="top" data-toggle="tooltip" title="Edit">
+                                    <button class="btn btn-warning btn-xs editButton" data-title="Edit" data-toggle="modal" data-target="#edit" data-id="{{$interpreteur->id}}" >
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </button>
+                                    <button class="btn btn-danger btn-xs deleteButton" data-title="Delete" data-toggle="modal" data-target="#delete" data-id="{{$interpreteur->id}}" >
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
+                                </p>
+                            </td>
+                            <td>{{$interpreteur->tel_fixe}}</td>
+                            <td>{{$interpreteur->created_at->format('l j F Y H:i')}}</td>
+                            <td>{{$interpreteur->updated_at->format('l j F Y H:i')}}</td>
+                            <td>
+                                |
+                                @foreach(\App\Tools\TraductionTools::getTraductionsByInterpreteur($interpreteur->id) as $traduction)
+                                    {{\App\Tools\LangueTools::getLangue($traduction->source)->content}} <span class="glyphicon glyphicon-arrow-right"></span> {{\App\Tools\LangueTools::getLangue($traduction->cible)->content}}
+                                     |
+                                @endforeach
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 @endsection
 
@@ -256,6 +258,7 @@
 
 
 @section('footer')
+    <script src="{{ asset("js/tableTools.js") }}"> </script>
     <script src="{{ asset("js/steps.js") }}"> </script>
     <script src="{{ asset("js/myScript.js") }}"> </script>
     <script src="{{ asset("js/modifJS.js") }}"> </script>

@@ -2,6 +2,10 @@ $(document).ready(function() {
 
     table = $('#example').DataTable({
         "pageLength": 10,
+        dom: 'Bfrtip',
+        buttons: [
+            'colvis'
+        ],
         tableTools: {
             "columnDefs": [{"visible": false, "searchable": false, "targets": [0]}]
         }
@@ -28,20 +32,27 @@ $(document).ready(function() {
         } );
     } );
 
-    $('.resendButton').on('click',function (e) {
-        e.preventDefault();
-        $id = $(this).attr('data-id');
+    $('#resend').on('click',function (e) {
+        $id = $(this).parent().find('#idResend').val();
 
         $.ajax({
             url: '/devis/resend?id='+$id,
             type:"GET",
             success:function(data){
+                $("#resendModal").modal('hide');
                 $('#modalSuccess').find('.modal-body').html('Devis renvoyé au client');
                 $('#modalSuccess').modal('toggle');
             },error:function(){
                 alert("error!!!!");
             }
         });
+    });
+
+    $('.resendButton').on('click',function (e) {
+        e.preventDefault();
+        $("#idResend").val($(this).attr('data-id'));
+        console.log($("#idResend").val());
+        $("#resendModal").modal('show');
     });
 
 });
