@@ -8,6 +8,7 @@ use App\Tools\ClientTools;
 use App\Tools\LangueTools;
 use App\Tools\TraductionTools;
 use Illuminate\Http\Request;
+use App\Tools\MailTools;
 
 use App\Http\Requests\ClientRequest;
 use Illuminate\Support\Facades\Auth;
@@ -35,7 +36,7 @@ class ClientController extends Controller{
             $request['imageName'] = $imgName;
             $client = ClientTools::addClient($connectedUser, $request);
             DB::commit();
-            //MailTools::sendMail('Profil client créé','createClient','creadis.test@gmail.com',$client->email,[],['client'=>$client],'public/css/mailStyle.css');
+            MailTools::sendMail('Profil client créé','createClient','creadis.test@gmail.com',$client->email,[],['client'=>$client],'public/css/mailStyle.css');
             return view('client.clientAdd', ['message' => 'Client ajouté avec success!', 'img' => $imgName, 'client' => $client]);
         }catch(\Exception $e){
             DB::rollback();

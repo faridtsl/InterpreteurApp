@@ -122,4 +122,20 @@ $(document).ready(function() {
         } );
     } );
 
+    $(document.body).on('click','.resendButton',function (e) {
+        e.preventDefault();
+        $id = $(this).attr('data-id');
+
+        $.ajax({
+            url: '/devis/resend?id='+$id,
+            type:"GET",
+            success:function(data){
+                $('#modalSuccess').find('.modal-body').html('Devis renvoyé au client');
+                $('#modalSuccess').modal('toggle');
+            },error:function(){
+                alert("error!!!!");
+            }
+        });
+    });
+
 });

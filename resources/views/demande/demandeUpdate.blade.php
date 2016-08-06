@@ -29,7 +29,9 @@
 
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#demandePanel">Informations demande</a>
+		<h4 class="panel-title">
+                    	<a data-toggle="collapse" data-parent="#accordion" href="#demandePanel">Informations demande</a>
+		</h4>
                 </div>
                 <div class="panel-body panel-collapse collapse in" id="demandePanel">
                     <form role="form" method="POST" action="/demande/update">
@@ -257,7 +259,7 @@
                         <th>Nom de l'interpreteur</th>
                         <th>Adresse de l'interpreteur</th>
                         <th width="20px">Prix proposé</th>
-                        <th width="40px">Edit/Delete</th>
+                        <th width="40px">Resend/Edit/Delete</th>
                         <th width="20px">Valider</th>
                     </tr>
                     </thead>
@@ -276,7 +278,7 @@
                             <td>{{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->nom}} {{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->prenom}}</td>
                             <td>{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
                             <td>{{\App\Tools\DevisTools::getTotal($devi->id)}} &euro;</td>
-                            <td><a href="/devis/edit/{{$devi->id}}" class="editor_edit"><span class="glyphicon glyphicon-pencil"></span></a> / <a id="delete{{$devi->id}}" href="/devis/remove/{{$devi->id}}" class="editor_remove"><span class="glyphicon glyphicon-trash" ></span></a></td>
+                            <td><a href="home" data-id="{{$devi->id}}" class="resendButton"> <span class="glyphicon glyphicon-refresh"></span> </a> / <a href="/devis/edit/{{$devi->id}}" class="editor_edit"><span class="glyphicon glyphicon-pencil"></span></a> / <a id="delete{{$devi->id}}" href="/devis/remove/{{$devi->id}}" class="editor_remove"><span class="glyphicon glyphicon-trash" ></span></a></td>
                             <td><a id="validate{{$devi->id}}" href="/devis/validate/{{$devi->id}}" class="editor_edit"><span class="glyphicon glyphicon-ok"></span></a></td>
                         </tr>
                     @endforeach

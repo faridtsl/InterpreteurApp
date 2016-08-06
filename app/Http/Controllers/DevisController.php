@@ -11,6 +11,7 @@ use App\Tools\InterpreteurTools;
 use App\Tools\ServiceTools;
 use App\User;
 use Illuminate\Http\Request;
+use App\Tools\MailTools;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
@@ -34,7 +35,7 @@ class DevisController extends Controller{
             DB::beginTransaction();
             $devis = DevisTools::addDevis($request,$connectedUser);
             $services = ServiceTools::getServices($devis->id);
-            //MailTools::sendMail('Devis créée','devis','creadis.test@gmail.com',$client->email,[],['services'=>$services,'client'=>$client,'demande'=>$demande,'adresse'=>$adresse,'devis'=>$devis],'public/css/style_df.css');
+            MailTools::sendMail('Devis créée','devis','creadis.test@gmail.com',$client->email,[],['services'=>$services,'client'=>$client,'demande'=>$demande,'adresse'=>$adresse,'devis'=>$devis],'public/css/style_df.css');
             DB::commit();
             return view('devis.devisAdd',['demande'=>$demande,'interpreteurs'=>$interpreteurs,'message'=>'Devis ajouté avec success']);
         }catch(\Exception $e){
