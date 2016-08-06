@@ -9,7 +9,7 @@ $(document).ready(function() {
         tableTools: {
             "columnDefs": [{"visible": false, "searchable": false, "targets": [0]}]
         }
-
+        
     });
 
 

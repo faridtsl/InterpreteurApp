@@ -13,7 +13,7 @@ $(function () {
         buttons: [
             'colvis'
         ],
-        "bSort": false
+        "bSort": true
     } );
 
 
