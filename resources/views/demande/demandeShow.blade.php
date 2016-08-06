@@ -152,7 +152,7 @@
                                     <td>{{$demande->titre}}</td>
                                     <td>{{\App\Tools\EtatTools::getEtatById($demande->etat_id)->libelle}}</td>
                                     <td>{{\App\Tools\ClientTools::getClient($demande->client_id)->nom}} {{\App\Tools\ClientTools::getClient($demande->client_id)->prenom}}</td>
-                                    <td>{{(\Carbon\Carbon::parse($demande->created_at))->format('l j F Y H:i')}}</td>
+                                    <td>{{\Carbon\Carbon::parse($demande->created_at)->format('l j F Y H:i')}}</td>
                                     <td>{{\Carbon\Carbon::parse($demande->updated_at)->format('l j F Y H:i')}}</td>
                                     <td>{{\Carbon\Carbon::parse($demande->dateEvent)->format('l j F Y H:i')}}</td>
                                     <td>{{\Carbon\Carbon::parse($demande->dateEndEvent)->format('l j F Y H:i')}}</td>
