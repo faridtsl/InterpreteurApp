@@ -218,6 +218,10 @@ Route::get(
     'devis/resend',
     ['middleware'=>'auth','uses'=>'DevisController@resendDevis']
 );
+Route::get(
+    'devis/view',
+    ['middleware'=>'auth','uses'=>'DevisController@viewDevis']
+);
 
 //Images Routes
 Route::get('images/{img}',function ($img){

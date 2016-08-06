@@ -2,7 +2,6 @@ $(document).ready(function() {
 
     table = $('#example').DataTable({
         "pageLength": 10,
-        dom: 'T<"clear">lfrtip',
         tableTools: {
             "columnDefs": [{"visible": false, "searchable": false, "targets": [0]}]
         }
@@ -13,7 +12,7 @@ $(document).ready(function() {
     // Setup - add a text input to each footer cell
     $('#example tfoot th').each( function () {
         var title = $(this).text();
-        $(this).html( '<input type="text" placeholder="'+title+'" />' );
+        if(title!="" && title != 'Action') $(this).html( '<input type="text" placeholder="'+title+'" />' );
     } );
 
     // Apply the search

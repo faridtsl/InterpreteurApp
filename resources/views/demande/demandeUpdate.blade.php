@@ -57,7 +57,7 @@
                                     <label>Date de debut : </label>
                                 </div>
                                 <div class="col-lg-6 par">
-                                    <span class="displayClass">{{$demande->dateEvent}}</span>
+                                    <span class="displayClass">{{\Carbon\Carbon::parse($demande->dateEvent)->format('l j F Y H:i')}}</span>
                                     <div class="input-group date editClass" >
                                         <input type="text" name="dateEvent" id="date-start" class="form-control" value="{{ $demande->dateEvent }}" placeholder="Date de debut">
                                         <div class="input-group-addon">
@@ -71,7 +71,7 @@
                                     <label>Date de fin : </label>
                                 </div>
                                 <div class="col-lg-6 par">
-                                    <span class="displayClass">{{$demande->dateEndEvent}}</span>
+                                    <span class="displayClass">{{\Carbon\Carbon::parse($demande->dateEndEvent)->format('l j F Y H:i')}}</span>
                                     <div class="input-group date editClass" >
                                         <input type="text" name="dateEndEvent" id="date-end" class="form-control" value="{{ $demande->dateEndEvent }}" placeholder="Date de fin">
                                         <div class="input-group-addon">

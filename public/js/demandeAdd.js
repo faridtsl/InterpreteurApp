@@ -2,7 +2,6 @@
 $(document).ready(function() {
     $('#dataTables-example').DataTable({
         "pageLength": 10,
-        dom: 'T<"clear">lfrtip',
         tableTools: {
             "sRowSelect": "single",
             fnRowSelected: function(nodes) {
@@ -13,7 +12,7 @@ $(document).ready(function() {
             },
 
             fnRowDeselected: function ( node ) {
-                $('#client').val("");
+                $('#client').val("-1");
             }
         },"columnDefs":
             [ { "visible": false, "searchable": false, "targets":[0] }]
@@ -33,7 +32,8 @@ $(document).ready(function() {
                 if($(this).val() == null || $(this).val() == '') isGood='panel-danger';
             }
         });
-        if(isGood=='panel-danger') $('#headDem').html('Nouvelle demande <strong>-Incomplet-</strong>');
+        if(isGood=='panel-danger') $('#headDem').html('Nouvelle demande <strong id="demInc">-Incomplet-</strong>');
+        else $('#demInc').html("");
         $('#demandePanel').removeClass('panel-info').addClass(isGood).addClass('panel-collapsed').find('.panel-body').slideUp();
         $('#clientPanel').show();
     });
@@ -42,7 +42,8 @@ $(document).ready(function() {
         e.preventDefault();
         var isGood = 'panel-success';
         if($('#client').val() == -1) isGood = 'panel-danger';
-        if(isGood=='panel-danger') $('#headCli').html('Liste des clients <strong>-Incomplet-</strong>');
+        if(isGood=='panel-danger') $('#headCli').html('Liste des clients <strong id="cliInc">-Incomplet-</strong>');
+        else $('#cliInc').html("");
         $('#clientPanel').removeClass('panel-info').addClass(isGood).addClass('panel-collapsed').find('.panel-body').slideUp();
         $('#adrPanel').show();
     });

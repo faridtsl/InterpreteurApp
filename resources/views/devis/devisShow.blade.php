@@ -15,9 +15,9 @@
 @section('content')
 
 
-    <div class="row">
-        <h1 class="center"> Liste des interpreteurs </h1>
-    </div>
+<div class="row">
+    <h1 class="center"> Liste des devis </h1>
+</div>
 
 <div class="row">
     <table id="example" class="table table-striped table-bordered display responsive nowrap" width="100%" cellspacing="0">
@@ -27,10 +27,14 @@
                 <th>Nom de l'interpreteur</th>
                 <th>Adresse de l'interpreteur</th>
                 <th>Prix proposé</th>
-                <th>Resend/Edit/Delete</th>
+                <th>Resend</th>
+                <th>View</th>
+                <th>Edit/Delete</th>
+                <th>Valider</th>
+                <th>Demande</th>
+                <th>Client</th>
                 <th>Date creation du devis</th>
                 <th>Date modification du devis</th>
-                <th>Valider</th>
             </tr>
         </thead>
         <tfoot>
@@ -39,10 +43,14 @@
                 <th>Nom de l'interpreteur</th>
                 <th>Adresse de l'interpreteur</th>
                 <th>Prix proposé</th>
-                <th>Resend/Edit/Delete</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>Demande</th>
+                <th>Client</th>
                 <th>Date creation du devis</th>
                 <th>Date modification du devis</th>
-                <th>Valider</th>
             </tr>
         </tfoot>
         <tbody>
@@ -54,14 +62,20 @@
                     <td>{{\App\Tools\DevisTools::getTotal($devi->id)}} &euro;</td>
                     <td>
                         <a href="home" data-id="{{$devi->id}}" class="resendButton"> <span class="glyphicon glyphicon-refresh"></span> </a>
-                        /
+                    </td>
+                    <td>
+                        <a href="/devis/view?id={{$devi->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
+                    </td>
+                    <td>
                         <a href="/devis/edit?id={{$devi->id}}" class="editor_edit"><span class="glyphicon glyphicon-pencil"></span></a>
                         /
                         <a id="delete{{$devi->id}}" href="/devis/remove?id={{$devi->id}}" class="editor_remove"><span class="glyphicon glyphicon-trash" ></span></a>
                     </td>
-                    <td>{{$devi->created_at}}</td>
-                    <td>{{$devi->updated_at}}</td>
                     <td><a id="validate{{$devi->id}}" href="/devis/validate?id={{$devi->id}}" class="validateButton"><span class="glyphicon glyphicon-ok"></span></a></td>
+                    <td><a href="/demande/update?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->id}}">{{\App\Tools\DemandeTools::getDemande($devi->demande_id)->titre}}</a></td>
+                    <td><a href="/client/profile?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id}}">{{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id)->nom}} {{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id)->prenom}}</a></td>
+                    <td>{{$devi->created_at->format('l j F Y H:i')}}</td>
+                    <td>{{$devi->updated_at->format('l j F Y H:i')}}</td>
                 </tr>
             @endforeach
         </tbody>

@@ -2,20 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>QUOTATION SARAH COMPANY N: SAC-{{$devis->id}}</title>
+    <title>New QUOTATION has been created N: SAC-{{$devis->id}}</title>
     <link rel="stylesheet" href="{{ asset('css/style_df.css') }}" media="all" />
 </head>
 <body>
 <header class="clearfix">
     <div id="logo">
         @if(isset($show))
-            <img src="{{{ asset('images/logo.png') }}}">
+            <img src="{{ asset('images/logo.png') }}">
         @else
 
             <img src="http://www.wordsandco.pro/wp-content/uploads/2016/04/logo-wordsandco-silver200.png">
         @endif
     </div>
-    <h1>QUOTATION SARAH COMPANY N: SAC-{{$devis->id}}</h1>
+    <h1>New QUOTATION has been created N: SAC-{{$devis->id}}</h1>
     <div id="company" class="clearfix">
         <div>Company Name</div>
         <div>455 Foggy Heights,<br /> AZ 85004, US</div>

@@ -32,6 +32,8 @@
                 <th>Action</th>
                 <th>Telephone portable</th>
                 <th>Telephone fixe</th>
+                <th>Date creation</th>
+                <th>Date modification</th>
                 <th>Traductions</th>
             </tr>
             </thead>
@@ -44,6 +46,8 @@
                 <th></th>
                 <th>Telephone portable</th>
                 <th>Telephone fixe</th>
+                <th>Date creation</th>
+                <th>Date modification</th>
                 <th>Traductions</th>
             </tr>
             </tfoot>
@@ -70,10 +74,13 @@
                         </td>
                         <td>{{$interpreteur->tel_portable}}</td>
                         <td>{{$interpreteur->tel_fixe}}</td>
+                        <td>{{$interpreteur->created_at->format('l j F Y H:i')}}</td>
+                        <td>{{$interpreteur->updated_at->format('l j F Y H:i')}}</td>
                         <td>
+                            |
                             @foreach(\App\Tools\TraductionTools::getTraductionsByInterpreteur($interpreteur->id) as $traduction)
-                                {{\App\Tools\LangueTools::getLangue($traduction->source)->content}} -<span class="glyphicon glyphicon-arrow-right"></span> {{\App\Tools\LangueTools::getLangue($traduction->cible)->content}}
-                                ;
+                                {{\App\Tools\LangueTools::getLangue($traduction->source)->content}} <span class="glyphicon glyphicon-arrow-right"></span> {{\App\Tools\LangueTools::getLangue($traduction->cible)->content}}
+                                 |
                             @endforeach
                         </td>
                     </tr>

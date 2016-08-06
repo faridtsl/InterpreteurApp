@@ -1,7 +1,27 @@
 
 $(function () {
 
-    $('#example').DataTable();
+    table = $('#example').DataTable();
+
+    // Setup - add a text input to each footer cell
+    $('#example tfoot th').each( function () {
+        var title = $(this).text();
+        if(title!="" && title != 'Action') $(this).html( '<input type="text" placeholder="'+title+'" />' );
+    } );
+
+    // Apply the search
+    table.columns().every( function () {
+        var that = this;
+
+        $( 'input', this.footer() ).on( 'keyup change', function () {
+            if ( that.search() !== this.value ) {
+                that
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+
 
     $('.toggle').click(function (event) {
         event.preventDefault();
