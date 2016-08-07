@@ -22,7 +22,7 @@ $(document).ready(function() {
                 var ttInstance = TableTools.fnGetInstance("dataTables-example");
                 var row = ttInstance.fnGetSelectedData();
                 $('#interpreteur').val(row[0][0]);
-                addInterpreteur(row[0][0],row[0][1] + " " + row[0][2] ,row[0][3],row[0][6],row[0][7],row[0][8]);
+                addInterpreteur(row[0][0],row[0][9] ,row[0][2],row[0][6],row[0][7],row[0][8]);
             },
 
             fnRowDeselected: function ( node ) {
@@ -30,27 +30,13 @@ $(document).ready(function() {
                 addInterpreteur(null,"Aucun","Aucun",'unknown.jpg','Aucun','Aucun');
             }
         },"columnDefs":
-            [ { "visible": false, "searchable": false, "targets":[0,6,7,8] }]
+            [ { "visible": false, "searchable": false, "targets":[0,6,7,8,9] }]
 
     });
 
     table2 = $('#dataTables-example2').DataTable({
         "pageLength": 10,
-        dom: 'T<"clear">lfrtip',
-        tableTools: {
-            "sRowSelect": "single",
-            fnRowSelected: function(nodes) {
-                var ttInstance = TableTools.fnGetInstance("dataTables-example2");
-                var row = ttInstance.fnGetSelectedData();
-                $('#interpreteur').val(row[0][0]);
-                addInterpreteur(row[0][0],row[0][1] + " " + row[0][2] ,row[0][3],row[0][5],row[0][6],row[0][7]);
-            },
-
-            fnRowDeselected: function ( node ) {
-                $('#interpreteur').val("");
-                addInterpreteur(null,"Aucun","Aucun");
-            }
-        },"columnDefs":
+        "columnDefs":
             [ { "visible": false, "searchable": false, "targets":[0,4,5,6,7] }]
 
     });
@@ -74,4 +60,15 @@ $(document).ready(function() {
     } );
 
     $('.success-alert').hide();
+
+
+    $(document.body).on('click','.selectInterp',function (e) {
+        var id = $(this).attr('data-id');
+        console.log(id);
+        var row = table2.rows(id).data();
+        console.log(row[0]);
+        $('#interpreteur').val(row[0][0]);
+        addInterpreteur(row[0][0],row[0][1] + " " + row[0][2] ,row[0][3],row[0][5],row[0][6],row[0][7]);
+    });
+
 });

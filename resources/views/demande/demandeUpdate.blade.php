@@ -166,13 +166,15 @@
                             <span class="glyphicon glyphicon-globe"> {{$client->email}}</span><br/>
                         </div>
                     </div>
-                    <form method="post" action="/demande/update">
-                    {!! csrf_field() !!}
-                        <input type="hidden" value="{{$demande->id}}" name="id"/>
-                        <input type="hidden" value="{{$demande->client_id}}" id="client" name="client"/>
-                        <button class="btn btn-outline btn-primary" id="clientConfirm" type="submit">Enregister les modfications</button>
-                        <a href="#" class="toggle btn btn-danger" data-title="client" data-toggle="modal" data-target="#clientModal" data-id="{{$demande->client_id}}">Modifier</a>
-                    </form>
+                    <div class="row" style="margin-top: 20px;margin-left: 10px">
+                        <form method="post" action="/demande/update">
+                        {!! csrf_field() !!}
+                            <input type="hidden" value="{{$demande->id}}" name="id"/>
+                            <input type="hidden" value="{{$demande->client_id}}" id="client" name="client"/>
+                            <button class="btn btn-outline btn-primary" id="clientConfirm" type="submit">Enregister les modfications</button>
+                            <a href="#" class="toggle btn btn-danger" data-title="client" data-toggle="modal" data-target="#clientModal" data-id="{{$demande->client_id}}">Modifier</a>
+                        </form>
+                    </div>
                 </div>
             </div>
 
@@ -278,7 +280,7 @@
                             <td>{{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->nom}} {{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->prenom}}</td>
                             <td>{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
                             <td>{{\App\Tools\DevisTools::getTotal($devi->id)}} &euro;</td>
-                            <td><a href="home" data-id="{{$devi->id}}" class="resendButton"> <span class="glyphicon glyphicon-refresh"></span> </a> / <a href="/devis/edit/{{$devi->id}}" class="editor_edit"><span class="glyphicon glyphicon-pencil"></span></a> / <a id="delete{{$devi->id}}" href="/devis/remove/{{$devi->id}}" class="editor_remove"><span class="glyphicon glyphicon-trash" ></span></a></td>
+                            <td><a href="home" data-id="{{$devi->id}}" class="resendButton"> <span class="glyphicon glyphicon-refresh"></span> </a> / <a href="/devis/edit/{{$devi->id}}" class="editor_edit"><span class="glyphicon glyphicon-pencil"></span></a> / <a id="delete{{$devi->id}}" href="/devis/delete/{{$devi->id}}" class="editor_remove"><span class="glyphicon glyphicon-trash" ></span></a></td>
                             <td><a id="validate{{$devi->id}}" href="/devis/validate/{{$devi->id}}" class="editor_edit"><span class="glyphicon glyphicon-ok"></span></a></td>
                         </tr>
                     @endforeach
@@ -306,27 +308,32 @@
                     <thead>
                     <tr>
                         <th>id</th>
-                        <th>Nom</th>
-                        <th>Prenom</th>
+                        <th>Nom Client</th>
                         <th>E-MAIL</th>
+                        <th>Telephone portable</th>
+                        <th>Telephone fixe</th>
                     </tr>
                     </thead>
                     <tfoot>
                     <tr>
                         <th>id</th>
-                        <th>Nom</th>
-                        <th>Prenom</th>
+                        <th>Nom Client</th>
                         <th>E-MAIL</th>
-
+                        <th>Telephone portable</th>
+                        <th>Telephone fixe</th>
                     </tr>
                     </tfoot>
                     <tbody>
                     @foreach($clients as $client)
                         <tr>
                             <td>{{$client->id}}</td>
-                            <td>{{$client->nom}}</td>
-                            <td>{{$client->prenom}}</td>
+                            <td>
+                                <img class="img-circle" src="/images/{{$client->image}}" style="width: 50px;height:50px;"/>
+                                {{$client->nom}} {{$client->prenom}}
+                            </td>
                             <td>{{$client->email}}</td>
+                            <td>{{$client->tel_portable}}</td>
+                            <td>{{$client->tel_fixe}}</td>
                         </tr>
                     @endforeach
 

@@ -9,6 +9,8 @@
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
     <style type="text/css"> .pac-container { z-index: 1051 !important; } </style>
     <meta name="_token" content="{{ csrf_token() }}">
+    <script type="text/javascript" src="{{ asset('js/jquery.popconfirm.js')}}"></script>
+
 @endsection
 
 @section('title')

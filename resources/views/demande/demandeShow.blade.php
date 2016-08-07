@@ -160,15 +160,18 @@
                                     <td>{{\App\Tools\LangueTools::getLangue(\App\Tools\TraductionTools::getTraductionById($demande->traduction_id)->cible)->content}}</td>
                                     <td>{{ \App\Tools\AdresseTools::getAdresse($demande->adresse_id)->adresse}}</td>
                                     <td>
-                                        <p data-placement="top" data-toggle="tooltip" title="Edit">
-                                            <a class="btn btn-warning btn-xs editButton" href="/demande/update?id={{$demande->id}}" >
+                                        <p>
+                                            <a data-placement="top" data-toggle="tooltip" title="Edit" class="btn btn-warning btn-xs editButton" href="/demande/update?id={{$demande->id}}" >
                                                 <span class="glyphicon glyphicon-pencil"></span>
                                             </a>
-                                            <button class="btn btn-success btn-xs seeButton" data-title="Delete" data-toggle="modal" data-target="#delete" data-id="{{$demande->id}}" >
+                                            <button data-placement="top" data-toggle="tooltip" title="View" class="btn btn-success btn-xs seeButton" data-id="{{$demande->id}}" >
                                                 <span class="glyphicon glyphicon-search"></span>
                                             </button>
-                                            <a class="btn btn-info btn-xs dupButton" href="/demande/duplicate?id={{$demande->id}}" >
+                                            <a data-placement="top" data-toggle="tooltip" title="Duplicate" class="btn btn-info btn-xs dupButton" href="/demande/duplicate?id={{$demande->id}}" >
                                                 <span class="glyphicon glyphicon-copy"></span>
+                                            </a>
+                                            <a data-placement="top" data-toggle="tooltip" title="Delete" class="btn btn-danger btn-xs dupButton" href="/demande/delete?id={{$demande->id}}" >
+                                                <span class="glyphicon glyphicon-trash"></span>
                                             </a>
                                         </p>
                                     </td>
@@ -236,14 +239,14 @@
                                         <td>{{\App\Tools\LangueTools::getLangue(\App\Tools\TraductionTools::getTraductionById($demande->traduction_id)->cible)->content}}</td>
                                         <td>{{ \App\Tools\AdresseTools::getAdresse($demande->adresse_id)->adresse}}</td>
                                         <td>
-                                            <p data-placement="top" data-toggle="tooltip" title="Edit">
-                                                <a class="btn btn-warning btn-xs editButton" href="/demande/update?id={{$demande->id}}" >
+                                            <p>
+                                                <a data-placement="top" data-toggle="tooltip" title="Edit" class="btn btn-warning btn-xs editButton" href="/demande/update?id={{$demande->id}}" >
                                                     <span class="glyphicon glyphicon-pencil"></span>
                                                 </a>
-                                                <button class="btn btn-success btn-xs deleteButton" data-title="Delete" data-toggle="modal" data-target="#delete" data-id="{{$demande->id}}" >
+                                                <button data-placement="top" data-toggle="tooltip" title="View" class="btn btn-success btn-xs seeButton" data-id="{{$demande->id}}" >
                                                     <span class="glyphicon glyphicon-search"></span>
                                                 </button>
-                                                <a class="btn btn-info btn-xs dupButton" href="/demande/duplicate?id={{$demande->id}}" >
+                                                <a data-placement="top" data-toggle="tooltip" title="Duplicate" class="btn btn-info btn-xs dupButton" href="/demande/duplicate?id={{$demande->id}}" >
                                                     <span class="glyphicon glyphicon-copy"></span>
                                                 </a>
                                             </p>

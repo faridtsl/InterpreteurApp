@@ -1,7 +1,6 @@
 $(document).ready(function() {
 
     table = $('#example').DataTable({
-        "pageLength": 10,
         dom: 'Bfrtip',
         buttons: [
             'colvis'
@@ -9,14 +8,12 @@ $(document).ready(function() {
         tableTools: {
             "columnDefs": [{"visible": false, "searchable": false, "targets": [0]}]
         }
-        
     });
-
 
     // Setup - add a text input to each footer cell
     $('#example tfoot th').each( function () {
         var title = $(this).text();
-        if(title!="" && title != 'Action') $(this).html( '<input type="text" placeholder="'+title+'" />' );
+        if(title!="" && title != 'Action') $(this).html( '<input type="text" placeholder="'+title+'"  style="width: 100%;" />' );
     } );
 
     // Apply the search
@@ -31,6 +28,8 @@ $(document).ready(function() {
             }
         } );
     } );
+    $("#example").css("width","100%");
+
 
     $('#resend').on('click',function (e) {
         $id = $(this).parent().find('#idResend').val();

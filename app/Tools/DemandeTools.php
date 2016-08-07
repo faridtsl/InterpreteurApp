@@ -81,7 +81,7 @@ class DemandeTools{
     public static function deleteDemande(User $u,$demande){
         $devis = DevisTools::getDevis($demande->id);
         foreach ($devis as $devi) {
-            $devi->delete();
+            DevisTools::deleteDevis($u,$devi);
         }
         $demande->etat()->associate(EtatTools::getEtatByName('Archivée'));
         $demande->save();
@@ -89,7 +89,10 @@ class DemandeTools{
     }
 
     public static function getDemande($id){
-        return Demande::find($id);
+        $demande = Demande::withTrashed()
+            ->where('id', $id)
+            ->get()->first();
+        return $demande;
     }
 
     public static function getDemandesByClient($id_client){
@@ -113,5 +116,27 @@ class DemandeTools{
         return $demande;
     }
 
+
+    public static function restoreDemande(User $u,$id){
+        $demande = Demande::withTrashed()
+            ->where('id', $id)
+            ->get()->first();
+        $errors = [];
+        if(DemandeTools::canBeRestored($demande)) $demande->restore();
+        else{
+            $errors = ['Demande ne peut pas etre restaurer'];
+        }
+        return $errors;
+    }
+
+    public static function getArchiveDemandes(){
+        $demandes = Demande::onlyTrashed()->get();
+        return $demandes;
+    }
+
+    public static function canBeRestored($demande){
+        $client = ClientTools::getClient($demande->client_id);
+        return ! $client->trashed();
+    }
 
 }

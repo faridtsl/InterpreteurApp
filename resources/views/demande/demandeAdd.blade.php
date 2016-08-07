@@ -111,27 +111,32 @@ Ajouter demande
                         <thead>
                         <tr>
                             <th>id</th>
-                            <th>Nom</th>
-                            <th>Prenom</th>
+                            <th>Nom Client</th>
                             <th>E-MAIL</th>
+                            <th>Telephone portable</th>
+                            <th>Telephone fixe</th>
                         </tr>
                         </thead>
                         <tfoot>
                         <tr>
                             <th>id</th>
-                            <th>Nom</th>
-                            <th>Prenom</th>
+                            <th>Nom Client</th>
                             <th>E-MAIL</th>
-
+                            <th>Telephone portable</th>
+                            <th>Telephone fixe</th>
                         </tr>
                         </tfoot>
                         <tbody>
                         @foreach($clients as $client)
                             <tr>
                                 <td>{{$client->id}}</td>
-                                <td>{{$client->nom}}</td>
-                                <td>{{$client->prenom}}</td>
+                                <td>
+                                    <img class="img-circle" src="/images/{{$client->image}}" style="width: 50px;height:50px;"/>
+                                    {{$client->nom}} {{$client->prenom}}
+                                </td>
                                 <td>{{$client->email}}</td>
+                                <td>{{$client->tel_portable}}</td>
+                                <td>{{$client->tel_fixe}}</td>
                             </tr>
                         @endforeach
 

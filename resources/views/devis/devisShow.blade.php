@@ -22,12 +22,11 @@
 </div>
 
 <div class="row">
-    <table id="example" class="table table-striped table-bordered display responsive nowrap" width="100%" cellspacing="0">
+    <table id="example" class="table table-striped table-bordered display responsive nowrap" cellspacing="0">
         <thead>
             <tr>
                 <th class="never">id</th>
                 <th>Nom de l'interpreteur</th>
-                <th>Adresse de l'interpreteur</th>
                 <th>Prix proposé</th>
                 <th>Resend</th>
                 <th>View</th>
@@ -35,6 +34,7 @@
                 <th>Valider</th>
                 <th>Demande</th>
                 <th>Client</th>
+                <th>Adresse de l'interpreteur</th>
                 <th>Date creation du devis</th>
                 <th>Date modification du devis</th>
             </tr>
@@ -43,7 +43,6 @@
             <tr>
                 <th>id</th>
                 <th>Nom de l'interpreteur</th>
-                <th>Adresse de l'interpreteur</th>
                 <th>Prix proposé</th>
                 <th></th>
                 <th></th>
@@ -51,6 +50,7 @@
                 <th></th>
                 <th>Demande</th>
                 <th>Client</th>
+                <th>Adresse de l'interpreteur</th>
                 <th>Date creation du devis</th>
                 <th>Date modification du devis</th>
             </tr>
@@ -60,7 +60,6 @@
                 <tr>
                     <td>{{$devi->id}}</td>
                     <td>{{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->nom}} {{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->prenom}}</td>
-                    <td>{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
                     <td>{{\App\Tools\DevisTools::getTotal($devi->id)}} &euro;</td>
                     <td>
                         <a href="home" id="resend{{$devi->id}}" data-id="{{$devi->id}}" class="resendButton"> <span class="glyphicon glyphicon-refresh"></span> </a>
@@ -71,11 +70,12 @@
                     <td>
                         <a href="/devis/edit?id={{$devi->id}}" class="editor_edit"><span class="glyphicon glyphicon-pencil"></span></a>
                         /
-                        <a id="delete{{$devi->id}}" href="/devis/remove?id={{$devi->id}}" class="editor_remove"><span class="glyphicon glyphicon-trash" ></span></a>
+                        <a id="delete{{$devi->id}}" href="/devis/delete?id={{$devi->id}}" class="editor_remove"><span class="glyphicon glyphicon-trash" ></span></a>
                     </td>
                     <td><a id="validate{{$devi->id}}" href="/devis/validate?id={{$devi->id}}" class="validateButton"><span class="glyphicon glyphicon-ok"></span></a></td>
                     <td><a href="/demande/update?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->id}}">{{\App\Tools\DemandeTools::getDemande($devi->demande_id)->titre}}</a></td>
                     <td><a href="/client/profile?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id}}">{{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id)->nom}} {{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id)->prenom}}</a></td>
+                    <td>{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
                     <td>{{$devi->created_at->format('l j F Y H:i')}}</td>
                     <td>{{$devi->updated_at->format('l j F Y H:i')}}</td>
                 </tr>

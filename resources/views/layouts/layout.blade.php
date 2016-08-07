@@ -157,7 +157,7 @@
                                     <a href="/demande/list">Afficher les demandes</a>
                                 </li>
                                 <li>
-                                    <a href="/demandes">Archive</a>
+                                    <a href="/demande/archive">Archive</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

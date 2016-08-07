@@ -64,4 +64,22 @@ class DevisController extends Controller{
         return view('emails.devis',['services'=>$services,'client'=>$client,'demande'=>$demande,'adresse'=>$adresse,'devis'=>$devis]);
     }
 
+    public function archiveDevis(){
+        $devis = DevisTools::getArchiveDevis();
+        return view('devis.devisArchive',['devis'=>$devis]);
+    }
+
+    public function deleteDevis(Request $request){
+        $devis = Devi::find($request['id']);
+        $connectedUser = Auth::user();
+        DevisTools::deleteDevis($connectedUser,$devis);
+        return redirect('devis/list');
+    }
+
+    public function restoreDevis(Request $request){
+        $connectedUser = Auth::user();
+        $err = DevisTools::restoreDevis($connectedUser,$request['id']);
+        return redirect('devis/archive')->withErrors($err);
+    }
+
 }

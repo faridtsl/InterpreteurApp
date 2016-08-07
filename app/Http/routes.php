@@ -147,6 +147,18 @@ Route::get(
     '/demande/duplicate',
     ['middleware'=>'auth','uses'=>'DemandeController@duplicateDemande','as'=>'/demande/list']
 );
+Route::get(
+    '/demande/archive',
+    ['middleware'=>'auth','uses'=>'DemandeController@archiveDemandes']
+);
+Route::get(
+    '/demande/restore',
+    ['middleware'=>'auth','uses'=>'DemandeController@restoreDemande']
+);
+Route::get(
+    '/demande/delete',
+    ['middleware'=>'auth','uses'=>'DemandeController@deleteDemande']
+);
 
 
 //Langues Routes
@@ -221,6 +233,18 @@ Route::get(
 Route::get(
     'devis/view',
     ['middleware'=>'auth','uses'=>'DevisController@viewDevis']
+);
+Route::get(
+    'devis/restore',
+    ['middleware'=>'auth','uses'=>'DevisController@restoreDevis']
+);
+Route::get(
+    'devis/archive',
+    ['middleware'=>'auth','uses'=>'DevisController@archiveDevis']
+);
+Route::get(
+    'devis/delete',
+    ['middleware'=>'auth','uses'=>'DevisController@deleteDevis']
 );
 
 //Images Routes

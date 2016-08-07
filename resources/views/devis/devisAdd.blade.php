@@ -230,35 +230,40 @@
                     <tr>
                         <th>id</th>
                         <th>Nom</th>
-                        <th>Prenom</th>
                         <th>E-MAIL</th>
+                        <th>Prestation</th>
                         <th>init=>dest</th>
-                        <th>Edit</th>
+                        <th>Adresse</th>
                         <th>image</th>
                         <th>tel_portable</th>
                         <th>adresse</th>
+                        <th>nomprenom</th>
                     </tr>
                     </thead>
                     <tfoot>
                     <tr>
                         <th>id</th>
                         <th>Nom</th>
-                        <th>Prenom</th>
                         <th>E-MAIL</th>
+                        <th>Prestation</th>
                         <th>init=>dest</th>
-                        <th>Edit</th>
+                        <th>Adresse</th>
                         <th>image</th>
                         <th>tel_portable</th>
                         <th>adresse</th>
+                        <th>nomprenom</th>
                     </tr>
                     </tfoot>
                     <tbody>
                     @foreach($interpreteurs as $interpreteur)
                         <tr>
                             <td>{{$interpreteur->id}}</td>
-                            <td>{{$interpreteur->nom}}</td>
-                            <td>{{$interpreteur->prenom}}</td>
+                            <td>
+                                <img class="img-circle" src="/images/{{$interpreteur->image}}" style="width: 50px;height:50px;"/>
+                                {{$interpreteur->nom}} {{$interpreteur->prenom}}
+                            </td>
                             <td>{{$interpreteur->email}}</td>
+                            <td>{{$interpreteur->prestation}} {{$interpreteur->devise}}</td>
                             <td>
                                 <select class="form-control" name="langue_ini">
                                     @foreach(\App\Tools\TraductionTools::getTraductionsByInterpreteur($interpreteur->id) as $traduction)
@@ -266,10 +271,11 @@
                                     @endforeach
                                 </select>
                             </td>
-                            <td><a href="/interpreteur/edit/{{$interpreteur->id}}" class="editor_edit"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                            <td>{{\App\Tools\AdresseTools::getAdresse($interpreteur->adresse_id)->adresse}}</td>
                             <td>{{$interpreteur->image}}</td>
                             <td>{{$interpreteur->tel_portable}}</td>
                             <td>{{\App\Tools\AdresseTools::getAdresse($interpreteur->adresse_id)->adresse}}</td>
+                            <td>{{$interpreteur->nom}} {{$interpreteur->prenom}}</td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -307,10 +313,11 @@
                                 <th>image</th>
                                 <th>tel_portable</th>
                                 <th>adresse</th>
+                                <th>Select</th>
                             </tr>
                             </thead>
                             <tbody class="searchable">
-                            @foreach($interpreteurs as $interpreteur)
+                            @foreach($interpreteurs as $key => $interpreteur)
                                 <tr>
                                     <td>{{$interpreteur->id}}</td>
                                     <td>{{$interpreteur->nom}}</td>
@@ -326,6 +333,7 @@
                                     <td>{{$interpreteur->image}}</td>
                                     <td>{{$interpreteur->tel_portable}}</td>
                                     <td>{{\App\Tools\AdresseTools::getAdresse($interpreteur->adresse_id)->adresse}}</td>
+                                    <td><button class="btn btn-info selectInterp" data-id="{{$key}}">Select</button></td>
                                 </tr>
                             @endforeach
                             </tbody>

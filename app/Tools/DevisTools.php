@@ -59,4 +59,32 @@ class DevisTools{
         MailTools::sendMail('Devis créée','devis','creadis.test@gmail.com',$client->email,[],['services'=>$services,'client'=>$client,'demande'=>$demande,'adresse'=>$adresse,'devis'=>$devis],'public/css/style_df.css');
     }
 
+    public static function deleteDevis(User $u,$devis){
+        $devis->delete();
+    }
+
+    public static function restoreDevis(User $u,$devis_id){
+        $devis = Devi::withTrashed()
+            ->where('id', $devis_id)
+            ->get()->first();
+        $err = [];
+        if(DevisTools::canBeRestored($devis))
+            $devis->restore();
+        else{
+            $err = ['Devis ne peut pas etre restaurer'];
+        }
+        return $err;
+    }
+
+    public static function getArchiveDevis(){
+        $devis = Devi::onlyTrashed()->get();
+        return $devis;
+    }
+
+    public static function canBeRestored($devis){
+        $interpreteur = InterpreteurTools::getInterpreteur($devis->interpreteur_id);
+        $demande = DemandeTools::getDemande($devis->demande_id);
+        return DemandeTools::canBeRestored($demande) && !$interpreteur->trashed();
+    }
+
 }

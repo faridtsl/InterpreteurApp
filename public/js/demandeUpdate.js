@@ -2,6 +2,7 @@ $(document).ready(function() {
 
     $('#clients').DataTable({
         "pageLength": 10,
+        dom: 'T<"clear">lfrtip',
         tableTools: {
             "sRowSelect": "single",
             fnRowSelected: function(nodes) {
@@ -120,6 +121,7 @@ $(document).ready(function() {
             }
         } );
     } );
+
 
     $(document.body).on('click','.resendButton',function (e) {
         e.preventDefault();

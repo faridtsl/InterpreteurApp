@@ -100,4 +100,23 @@ class DemandeController extends Controller{
         return view('demande.demandeShow',['demandes'=>$demandes,'message'=>'Demande dupliquée avec success']);
     }
 
+
+    public function archiveDemandes(){
+        $demandesArchive = DemandeTools::getArchiveDemandes();
+        return view('demande.demandeArchive',['demandes'=>$demandesArchive]);
+    }
+
+    public function restoreDemande(Request $request){
+        $connectedUser = Auth::user();
+        $err = DemandeTools::restoreDemande($connectedUser,$request['id']);
+        return redirect('demande/archive')->withErrors($err);
+    }
+
+    public function deleteDemande(Request $request){
+        $connectedUser = Auth::user();
+        $demande = Demande::find($request['id']);
+        DemandeTools::deleteDemande($connectedUser,$demande);
+        return redirect('demande/list');
+    }
+
 }
