@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="323faa9a-1b42-43af-ae09-e82e697c525e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/demande/demandeUpdate.blade.php" afterPath="$PROJECT_DIR$/resources/views/demande/demandeUpdate.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/demande/demandeShow.blade.php" afterPath="$PROJECT_DIR$/resources/views/demande/demandeShow.blade.php" />
     </list>
     <ignored path="InterpreteurApp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -23,17 +23,17 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="demandeShow.blade.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="demandeShow.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/demande/demandeShow.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="430">
-              <caret line="313" column="43" selection-start-line="313" selection-start-column="43" selection-end-line="313" selection-end-column="43" />
+            <state relative-caret-position="396">
+              <caret line="232" column="84" selection-start-line="232" selection-start-column="84" selection-end-line="232" selection-end-column="84" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="demandeUpdate.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="demandeUpdate.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/demande/demandeUpdate.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="396">
@@ -184,12 +184,12 @@
         <option value="$PROJECT_DIR$/app/Http/routes.php" />
         <option value="$PROJECT_DIR$/public/js/demandeJS.js" />
         <option value="$PROJECT_DIR$/app/Tools/DemandeTools.php" />
-        <option value="$PROJECT_DIR$/resources/views/demande/demandeShow.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/includes/popups.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/DemandeController.php" />
         <option value="$PROJECT_DIR$/database/migrations/2016_07_20_121454_create_factures_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2016_07_20_121450_create_devis_table.php" />
         <option value="$PROJECT_DIR$/resources/views/demande/demandeUpdate.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/demande/demandeShow.blade.php" />
       </list>
     </option>
   </component>
@@ -605,12 +605,12 @@
       <workItem from="1470503167763" duration="8125000" />
       <workItem from="1470519695390" duration="6131000" />
       <workItem from="1470569145234" duration="17115000" />
-      <workItem from="1470596725477" duration="4397000" />
+      <workItem from="1470596725477" duration="5025000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="324557000" />
+    <option name="totallyTimeSpent" value="325185000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="741" extended-state="6" />
@@ -979,14 +979,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/demande/demandeShow.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="313" column="43" selection-start-line="313" selection-start-column="43" selection-end-line="313" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/includes/popups.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="344">
@@ -1031,6 +1023,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
           <caret line="282" column="312" selection-start-line="282" selection-start-column="312" selection-end-line="282" selection-end-column="312" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/demande/demandeShow.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="232" column="84" selection-start-line="232" selection-start-column="84" selection-end-line="232" selection-end-column="84" />
           <folding />
         </state>
       </provider>

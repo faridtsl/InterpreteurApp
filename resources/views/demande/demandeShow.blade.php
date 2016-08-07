@@ -230,7 +230,7 @@
                             </tfoot>
                             <tbody>
                             @foreach($demandes as $demande)
-                                @if(\App\Tools\DemandeTools::tempsRestant($demande)>=0)
+                                @if(\App\Tools\DemandeTools::tempsRestant($demande)<0)
                                     <tr class="@if(\App\Tools\DemandeTools::tempsRestant($demande) < env('EVENT_DANGER_DELAI','0')) danger @elseif(\App\Tools\DemandeTools::tempsRestant($demande) < env('EVENT_WAR_DELAI','0')) warning @endif">
                                         <td>{{$demande->titre}}</td>
                                         <td>{{\App\Tools\EtatTools::getEtatById($demande->etat_id)->libelle}}</td>
