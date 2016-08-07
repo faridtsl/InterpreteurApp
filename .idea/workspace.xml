@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="323faa9a-1b42-43af-ae09-e82e697c525e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/DemandeController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/DemandeController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Tools/DemandeTools.php" afterPath="$PROJECT_DIR$/app/Tools/DemandeTools.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Tools/DevisTools.php" afterPath="$PROJECT_DIR$/app/Tools/DevisTools.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2016_07_20_121450_create_devis_table.php" afterPath="$PROJECT_DIR$/database/migrations/2016_07_20_121450_create_devis_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2016_07_20_121454_create_factures_table.php" afterPath="$PROJECT_DIR$/database/migrations/2016_07_20_121454_create_factures_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/demandeJS.js" afterPath="$PROJECT_DIR$/public/js/demandeJS.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/demande/demandeShow.blade.php" afterPath="$PROJECT_DIR$/resources/views/demande/demandeShow.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/includes/popups.blade.php" afterPath="$PROJECT_DIR$/resources/views/includes/popups.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/demande/demandeUpdate.blade.php" afterPath="$PROJECT_DIR$/resources/views/demande/demandeUpdate.blade.php" />
     </list>
     <ignored path="InterpreteurApp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -41,6 +33,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="demandeUpdate.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/demande/demandeUpdate.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="396">
+              <caret line="282" column="312" selection-start-line="282" selection-start-column="312" selection-end-line="282" selection-end-column="312" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="DemandeController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DemandeController.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -61,7 +63,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2016_07_20_121450_create_devis_table.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="2016_07_20_121450_create_devis_table.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/database/migrations/2016_07_20_121450_create_devis_table.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="306">
@@ -116,16 +118,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="150">
               <caret line="126" column="30" selection-start-line="126" selection-start-column="30" selection-end-line="126" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="interpreteursShow.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/interpreteur/interpreteursShow.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="73" column="158" selection-start-line="73" selection-start-column="107" selection-end-line="73" selection-end-column="158" />
               <folding />
             </state>
           </provider>
@@ -188,7 +180,6 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/DevisController.php" />
         <option value="$PROJECT_DIR$/resources/views/devis/devisArchive.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/devis/devisShow.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/demande/demandeUpdate.blade.php" />
         <option value="$PROJECT_DIR$/app/Tools/DevisTools.php" />
         <option value="$PROJECT_DIR$/app/Http/routes.php" />
         <option value="$PROJECT_DIR$/public/js/demandeJS.js" />
@@ -198,6 +189,7 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/DemandeController.php" />
         <option value="$PROJECT_DIR$/database/migrations/2016_07_20_121454_create_factures_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2016_07_20_121450_create_devis_table.php" />
+        <option value="$PROJECT_DIR$/resources/views/demande/demandeUpdate.blade.php" />
       </list>
     </option>
   </component>
@@ -613,12 +605,12 @@
       <workItem from="1470503167763" duration="8125000" />
       <workItem from="1470519695390" duration="6131000" />
       <workItem from="1470569145234" duration="17115000" />
-      <workItem from="1470596725477" duration="3828000" />
+      <workItem from="1470596725477" duration="4397000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="323988000" />
+    <option name="totallyTimeSpent" value="324557000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="741" extended-state="6" />
@@ -889,14 +881,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/demande/demandeUpdate.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-630">
-          <caret line="282" column="308" selection-start-line="282" selection-start-column="308" selection-end-line="282" selection-end-column="308" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/devis/devisShow.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
@@ -1039,6 +1023,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="21" column="49" selection-start-line="21" selection-start-column="49" selection-end-line="21" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/demande/demandeUpdate.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="282" column="312" selection-start-line="282" selection-start-column="312" selection-end-line="282" selection-end-column="312" />
           <folding />
         </state>
       </provider>
