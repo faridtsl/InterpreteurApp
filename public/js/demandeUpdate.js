@@ -123,14 +123,14 @@ $(document).ready(function() {
     } );
 
 
-    $(document.body).on('click','.resendButton',function (e) {
-        e.preventDefault();
-        $id = $(this).attr('data-id');
+    $('#resend').on('click',function (e) {
+        $id = $(this).parent().find('#idResend').val();
 
         $.ajax({
             url: '/devis/resend?id='+$id,
             type:"GET",
             success:function(data){
+                $("#resendModal").modal('hide');
                 $('#modalSuccess').find('.modal-body').html('Devis renvoyé au client');
                 $('#modalSuccess').modal('toggle');
             },error:function(){
@@ -138,5 +138,13 @@ $(document).ready(function() {
             }
         });
     });
+
+    $(document.body).on('click','.resendButton',function (e) {
+        e.preventDefault();
+        $("#idResend").val($(this).attr('data-id'));
+        console.log($("#idResend").val());
+        $("#resendModal").modal('show');
+    });
+
 
 });

@@ -71,7 +71,11 @@ class DevisTools{
         if(DevisTools::canBeRestored($devis))
             $devis->restore();
         else{
-            $err = ['Devis ne peut pas etre restaurer'];
+            $interpreteur = InterpreteurTools::getInterpreteur($devis->interpreteur_id);
+            $demande = DemandeTools::getDemande($devis->demande_id);
+            $err = [];
+            if($demande->trashed() || !DemandeTools::canBeRestored($demande)) $err = ['La demande a été supprimée'];
+            if($interpreteur->trashed()) array_push($err,'l\'interpréte a été supprimé ');
         }
         return $err;
     }

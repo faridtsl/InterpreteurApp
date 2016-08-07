@@ -351,6 +351,25 @@
 
 @include('includes.popups')
 
+
+
+<div class="modal fade" id="resendModal" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span>&times;</span></button>
+                <h4 class="modal-title custom_align" >Renvoi devis</h4>
+            </div>
+            <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> êtes-vous sur de vouloir renvoyer le devis?</div>
+            <div class="modal-footer ">
+                <input id="idResend" type="hidden" value="-1"/>
+                <button class="btn btn-success" id="resend" >Oui</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Non</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 @section('footer')

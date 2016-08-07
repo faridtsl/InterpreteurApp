@@ -74,6 +74,7 @@
     <script>
         @if (count($errors) > 0)
             $('#errorModal').modal('show');
+            $('#titleError').html('Ce devis ne peut pas être restauré');
         @endif
 
         @if (isset($message))

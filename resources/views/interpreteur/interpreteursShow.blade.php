@@ -244,7 +244,7 @@
                         <div class="form-group">
                             <input type="hidden" value="-1" id="idDel" name="id" />
                         </div>
-                        <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> êtes-vous sur de vouloir supprimer?</div>
+                        <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> êtes vous sur de vouloir supprimer l’interprète?</div>
                     </div>
                     <div class="modal-footer ">
                         <input class="btn btn-success" value="Oui" type="submit"/>

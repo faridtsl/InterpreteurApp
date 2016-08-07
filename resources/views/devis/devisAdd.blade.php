@@ -238,6 +238,7 @@
                         <th>tel_portable</th>
                         <th>adresse</th>
                         <th>nomprenom</th>
+                        <th>Select</th>
                     </tr>
                     </thead>
                     <tfoot>
@@ -252,10 +253,11 @@
                         <th>tel_portable</th>
                         <th>adresse</th>
                         <th>nomprenom</th>
+                        <th></th>
                     </tr>
                     </tfoot>
                     <tbody>
-                    @foreach($interpreteurs as $interpreteur)
+                    @foreach($interpreteurs as $key=>$interpreteur)
                         <tr>
                             <td>{{$interpreteur->id}}</td>
                             <td>
@@ -276,6 +278,7 @@
                             <td>{{$interpreteur->tel_portable}}</td>
                             <td>{{\App\Tools\AdresseTools::getAdresse($interpreteur->adresse_id)->adresse}}</td>
                             <td>{{$interpreteur->nom}} {{$interpreteur->prenom}}</td>
+                            <td><button class="btn btn-info selectInterpTab1" data-id="{{$key}}">Select</button></td>
                         </tr>
                     @endforeach
                     </tbody>

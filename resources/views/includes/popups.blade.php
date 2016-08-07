@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body">
                 <div class="alert alert-danger">
-                    <strong>Erreurs : </strong>
+                    <strong id="titleError">Erreurs : </strong>
                     <ul>
                         @foreach($errors->all() as $error)
                             <i class="fa fa fa-times fa-fw"></i> {{$error}} <br/>
