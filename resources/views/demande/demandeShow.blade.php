@@ -170,7 +170,7 @@
                                             <a data-placement="top" data-toggle="tooltip" title="Duplicate" class="btn btn-info btn-xs dupButton" href="/demande/duplicate?id={{$demande->id}}" >
                                                 <span class="glyphicon glyphicon-copy"></span>
                                             </a>
-                                            <a data-placement="top" data-toggle="tooltip" title="Delete" class="btn btn-danger btn-xs dupButton" href="/demande/delete?id={{$demande->id}}" >
+                                            <a data-placement="top" data-toggle="tooltip" title="Delete" class="btn btn-danger btn-xs delButton"  data-toggle="modal" data-target="#delete" data-id="{{$demande->id}}" >
                                                 <span class="glyphicon glyphicon-trash"></span>
                                             </a>
                                         </p>
@@ -197,12 +197,14 @@
                 </div>
                 <div id="collapse2" class="panel-collapse">
                     <div class="panel-body">
-                        <table id="tableExpire" class="table table-striped table-bordered display responsive nowrap" width="100%" cellspacing="0">
+                        <table id="example" class="table table-striped table-bordered display responsive nowrap" width="100%" cellspacing="0">
                             <thead>
+                            <tr>
                                 <th>Titre</th>
                                 <th>Etat</th>
                                 <th>Client</th>
                                 <th>Date Creation</th>
+                                <th>Date de Modification</th>
                                 <th>Date Debut</th>
                                 <th>Date Fin</th>
                                 <th>Langue Initiale</th>
@@ -217,6 +219,7 @@
                                 <th>Etat</th>
                                 <th>Client</th>
                                 <th>Date Creation</th>
+                                <th>Date de Modification</th>
                                 <th>Date Debut</th>
                                 <th>Date Fin</th>
                                 <th>Langue Initiale</th>
@@ -227,14 +230,15 @@
                             </tfoot>
                             <tbody>
                             @foreach($demandes as $demande)
-                                @if(\App\Tools\DemandeTools::tempsRestant($demande)<0)
-                                    <tr>
+                                @if(\App\Tools\DemandeTools::tempsRestant($demande)>=0)
+                                    <tr class="@if(\App\Tools\DemandeTools::tempsRestant($demande) < env('EVENT_DANGER_DELAI','0')) danger @elseif(\App\Tools\DemandeTools::tempsRestant($demande) < env('EVENT_WAR_DELAI','0')) warning @endif">
                                         <td>{{$demande->titre}}</td>
                                         <td>{{\App\Tools\EtatTools::getEtatById($demande->etat_id)->libelle}}</td>
                                         <td>{{\App\Tools\ClientTools::getClient($demande->client_id)->nom}} {{\App\Tools\ClientTools::getClient($demande->client_id)->prenom}}</td>
-                                        <td>{{$demande->created_at}}</td>
-                                        <td>{{$demande->dateEvent}}</td>
-                                        <td>{{$demande->dateEndEvent}}</td>
+                                        <td>{{\Carbon\Carbon::parse($demande->created_at)->format('l j F Y H:i')}}</td>
+                                        <td>{{\Carbon\Carbon::parse($demande->updated_at)->format('l j F Y H:i')}}</td>
+                                        <td>{{\Carbon\Carbon::parse($demande->dateEvent)->format('l j F Y H:i')}}</td>
+                                        <td>{{\Carbon\Carbon::parse($demande->dateEndEvent)->format('l j F Y H:i')}}</td>
                                         <td>{{\App\Tools\LangueTools::getLangue(\App\Tools\TraductionTools::getTraductionById($demande->traduction_id)->source)->content}}</td>
                                         <td>{{\App\Tools\LangueTools::getLangue(\App\Tools\TraductionTools::getTraductionById($demande->traduction_id)->cible)->content}}</td>
                                         <td>{{ \App\Tools\AdresseTools::getAdresse($demande->adresse_id)->adresse}}</td>
@@ -248,6 +252,9 @@
                                                 </button>
                                                 <a data-placement="top" data-toggle="tooltip" title="Duplicate" class="btn btn-info btn-xs dupButton" href="/demande/duplicate?id={{$demande->id}}" >
                                                     <span class="glyphicon glyphicon-copy"></span>
+                                                </a>
+                                                <a data-placement="top" data-toggle="tooltip" title="Delete" class="btn btn-danger btn-xs delButton"  data-toggle="modal" data-target="#delete" data-id="{{$demande->id}}" >
+                                                    <span class="glyphicon glyphicon-trash"></span>
                                                 </a>
                                             </p>
                                         </td>
@@ -268,6 +275,32 @@
 
 @section('modals')
     @include('includes.popups')
+
+    <!--Suppression popup-->
+    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span>&times;</span></button>
+                    <h4 class="modal-title custom_align" id="headDelete"></h4>
+                </div>
+                <form id="deleteForm" action="delete" method="post" enctype="multipart/form-data">
+                    {!! csrf_field() !!}
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="hidden" value="-1" id="idDel" name="id" />
+                        </div>
+                        <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> êtes-vous sur de vouloir supprimer?</div>
+                    </div>
+                    <div class="modal-footer ">
+                        <input class="btn btn-success" value="Oui" type="submit"/>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Non</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+    </div>
 @endsection
 
 
@@ -278,11 +311,11 @@
             $('#errorModal').modal('show');
         @endif
 
-        @if (isset($message))
-            $("#modalSuccess").modal('toggle');
+        @if(session()->has('message') != null)
+                $("#modalSuccess").modal('toggle');
         @endif
-    </script>
-    <script src="{{ asset("js/demandeJS.js") }}"> </script>
-    <script src="{{ asset("js/timeInitiator.js") }}"> </script>
+        </script>
+        <script src="{{ asset("js/demandeJS.js") }}"> </script>
+        <script src="{{ asset("js/timeInitiator.js") }}"> </script>
 
-@endsection
+    @endsection

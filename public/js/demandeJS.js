@@ -100,5 +100,25 @@ $(function () {
         });
     });
 
+    $(document.body).on('click','.delButton', function () {
+        // Get the record's ID via attribute
+        $id = $(this).attr('data-id');
+        $.ajax({
+            url: '/demande/get/'+$id,
+            type: "GET",
+            success: function (data) {
+                $("#idDel").val(data['id']);
+                var msg = "Suppresion de '";
+                var m2 = msg.concat(data['titre']);
+                m2 = m2.concat(' ');
+                var m = m2.concat("'");
+                $("#headDelete").text(m);
+                $('#delete').modal("show");
+            }, error: function () {
+                alert("error!!!!");
+            }
+        });
+    });
+
 
 });

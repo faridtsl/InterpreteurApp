@@ -124,7 +124,7 @@ class DemandeTools{
         $errors = [];
         if(DemandeTools::canBeRestored($demande)){
             $demande->restore();
-            $demande->associate(EtatTools::getEtatByName('Créée'));
+            $demande->etat()->associate(EtatTools::getEtatByName('Créée'));
             $demande->save();
         }else{
             $errors = ['Demande ne peut pas etre restaurer'];

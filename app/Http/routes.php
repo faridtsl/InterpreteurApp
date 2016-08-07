@@ -155,9 +155,13 @@ Route::get(
     '/demande/restore',
     ['middleware'=>'auth','uses'=>'DemandeController@restoreDemande']
 );
-Route::get(
+Route::post(
     '/demande/delete',
     ['middleware'=>'auth','uses'=>'DemandeController@deleteDemande']
+);
+Route::get(
+    '/demande/get/{id}',
+    ['middleware'=>'auth','uses'=>'DemandeController@getDemande']
 );
 
 

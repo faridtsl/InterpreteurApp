@@ -16,6 +16,7 @@ class CreateFacturesTable extends Migration{
             $table->integer('interpreteur_id')->unsigned();
             $table->boolean('fini');
             $table->timestamps();
+            $table->timestamp('date_envoi_mail');
             $table->softDeletes();
 
             #Constraints

@@ -15,6 +15,7 @@ use App\Http\Requests\DemandeRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Tools\MailTools;
+use Illuminate\Support\Facades\View;
 
 class DemandeController extends Controller{
 
@@ -115,8 +116,12 @@ class DemandeController extends Controller{
     public function deleteDemande(Request $request){
         $connectedUser = Auth::user();
         $demande = Demande::find($request['id']);
-        DemandeTools::deleteDemande($connectedUser,$demande);
-        return redirect('demande/list');
+        $err = DemandeTools::deleteDemande($connectedUser,$demande);
+        return redirect()->back()->with('message','Demande supprimée avec success')->withErrors($err);
+    }
+
+    public function getDemande($id){
+        return response(DemandeTools::getDemande($id));
     }
 
 }

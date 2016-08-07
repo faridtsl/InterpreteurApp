@@ -35,7 +35,7 @@
             <div class="modal-title">Success</div>
 
             <div class="modal-body">
-                @if(isset($message)){{$message}}@endif
+                @if(isset($message)){{$message}} @elseif(session()->has('message')) {{session('message')}} @endif
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>

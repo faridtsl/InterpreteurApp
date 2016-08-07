@@ -19,6 +19,7 @@ class CreateDevisTable extends Migration
             $table->integer('demande_id')->unsigned();
             $table->integer('interpreteur_id')->unsigned();
             $table->timestamps();
+            $table->timestamp('date_envoi_mail');
             $table->softDeletes();
 
             #Constraints

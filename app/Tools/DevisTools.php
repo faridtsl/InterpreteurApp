@@ -84,7 +84,7 @@ class DevisTools{
     public static function canBeRestored($devis){
         $interpreteur = InterpreteurTools::getInterpreteur($devis->interpreteur_id);
         $demande = DemandeTools::getDemande($devis->demande_id);
-        return DemandeTools::canBeRestored($demande) && !$interpreteur->trashed();
+        return DemandeTools::canBeRestored($demande) && !$interpreteur->trashed() && !$demande->trashed();
     }
 
 }
