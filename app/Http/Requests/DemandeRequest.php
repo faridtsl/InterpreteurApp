@@ -31,7 +31,9 @@ class DemandeRequest extends Request
             'langue_src' => 'required',
             'langue_dest' => 'required',
             'client' => 'required',
-            'adresse' => 'required'
+            'adresse' => 'required',
+            'lat' => 'required',
+            'long' => 'required'
         ];
     }
 }

@@ -28,7 +28,9 @@ class InterpreteurRequest extends Request{
             'adresse' => 'required',
             'langue_src' => 'required',
             'langue_dest' => 'required',
-            'prestation' => 'required|Integer|Min:0'
+            'prestation' => 'required|Integer|Min:0',
+            'lat' => 'required',
+            'long' => 'required'
         ];
     }
 }
