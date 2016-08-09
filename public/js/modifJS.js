@@ -51,10 +51,10 @@ $(function () {
         $csrfIn = '<input type="hidden" name="_token" value="'+$csrf+'">';
         $langsT = '';
         $langsT = $langsT.concat('<tr>');
-        $langsT = $langsT.concat('<td><label id="id'+$idT+'l'+$source+'">');
-        $langsT = $langsT.concat('</label></td> <td> <span class="glyphicon glyphicon-arrow-right"></span> </td> <td><label id="id'+$idT+'l'+$cible+'">');
+        $langsT = $langsT.concat('<td style="padding:0 15px 0 15px;"><label id="id'+$idT+'l'+$source+'">');
+        $langsT = $langsT.concat('</label></td> <td style="padding:0 15px 0 15px;"> <span class="glyphicon glyphicon-arrow-right"></span> </td> <td style="padding:0 15px 0 15px;"><label id="id'+$idT+'l'+$cible+'">');
         $langsT = $langsT.concat('</label></td>');
-        $langsT = $langsT.concat('<td><form method="post" action="/traduction/delete"><input id="idT" name="idT" type="hidden" value="'+$idT+'"><input id="idI" name="idI" type="hidden" value="'+$id+'">'+$csrfIn+'<button class="btn btn-danger btn-xs tradDel" style="margin-left: 10px" ><span class="glyphicon glyphicon-trash"></span> </button></td></tr>');
+        $langsT = $langsT.concat('<td style="padding:0 15px 0 15px;"><form method="post" action="/traduction/delete"><input id="idT" name="idT" type="hidden" value="'+$idT+'"><input id="idI" name="idI" type="hidden" value="'+$id+'">'+$csrfIn+'<button class="btn btn-danger btn-xs tradDel" style="margin-left: 10px" ><span class="glyphicon glyphicon-trash"></span> </button></td></tr>');
         $langs.append($langsT);
         ajaxGetLangue($idT,$source);
         ajaxGetLangue($idT,$cible);

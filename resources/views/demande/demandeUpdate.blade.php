@@ -45,6 +45,7 @@
                                 </div>
                                 <div class="col-lg-3 par">
                                     <span class="displayClass">{{$demande->titre}}</span>
+                                    <span class="label label-{{\App\Tools\EtatTools::getClassById($demande->etat_id)}} displayClass">{{\App\Tools\EtatTools::getEtatById($demande->etat_id)->libelle}}</span>
                                     <input class="form-control editClass" name="titre" value="{{ $demande->titre }}" placeholder="Saisir l'objet de la demande.">
                                 </div>
                             </div>

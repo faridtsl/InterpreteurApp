@@ -304,7 +304,7 @@
                     Interpret <strong class="nom"></strong> selectionné!
                 </div>
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-5">
                         <table id="dataTables-example2" class="table table-striped">
                             <thead>
                             <tr>
@@ -343,7 +343,7 @@
                         </table>
                         <button id="draw" type="button" class="btn btn-primary">Dessiner</button>
                     </div>
-                    <div class="col-lg-8">
+                    <div class="col-lg-7">
                         <div id="map"/>
                     </div>
                 </div>

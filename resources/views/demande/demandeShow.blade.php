@@ -197,7 +197,7 @@
                 </div>
                 <div id="collapse2" class="panel-collapse">
                     <div class="panel-body">
-                        <table id="example" class="table table-striped table-bordered display responsive nowrap" width="100%" cellspacing="0">
+                        <table id="tableExpire" class="table table-striped table-bordered display responsive nowrap" width="100%" cellspacing="0">
                             <thead>
                             <tr>
                                 <th>Titre</th>

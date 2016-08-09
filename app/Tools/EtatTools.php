@@ -32,4 +32,15 @@ class EtatTools{
         return Etat::find($id);
     }
 
+    public static function getClassById($id){
+        $etat = EtatTools::getEtatById($id);
+        $ret = "default";
+        if($etat->libelle == "Créée") $ret = "success";
+        if($etat->libelle == "En cours") $ret = "primary";
+        if($etat->libelle == "Traitée") $ret = "info";
+        if($etat->libelle == "Archivée") $ret = "warning";
+        if($etat->libelle == "Expirée") $ret = "danger";
+        return $ret;
+    }
+
 }

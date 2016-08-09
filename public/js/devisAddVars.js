@@ -23,7 +23,7 @@ $(document).ready(function() {
     table2 = $('#dataTables-example2').DataTable({
         "pageLength": 10,
         "columnDefs":
-            [ { "visible": false, "searchable": false, "targets":[0,4,5,6,7] }]
+            [ { "visible": false, "searchable": false, "targets":[0,5,6,7] }]
 
     });
 

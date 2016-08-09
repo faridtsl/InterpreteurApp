@@ -42,7 +42,7 @@ $(function () {
         buttons: [
             'colvis'
         ],
-        "bSort": false
+        "bSort": true
     } );
 
 
@@ -60,7 +60,6 @@ $(function () {
     } );
 
 
-    $("#collapse2").addClass('collapse');
 
 
     $('.toggle').click(function (event) {
@@ -119,6 +118,9 @@ $(function () {
             }
         });
     });
+
+
+    $("#collapse2").addClass('collapse');
 
 
 });
