@@ -35,6 +35,16 @@ class DevisTools{
         return $devis;
     }
 
+
+    public static function updateDevis($request,$devis,User $u){
+        $interp = InterpreteurTools::getInterpreteur($request['interpreteur_id']);
+        $devis->interpreteur()->associate($interp);
+        $devis->user()->associate($u);
+        $devis->total = ServiceTools::addServices($devis,$request);
+        $devis->save();
+        return $devis;
+    }
+
     public static function getDevis($demande_id){
         $devis = Devi::where('demande_id',$demande_id)->get();
         return $devis;

@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.0.2/css/responsive.bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('/css/myStyle.css')}}" />
     <link rel="stylesheet" href="{{ asset('css/success.css')}}" />
-    <script type="text/javascript" src="{{{ asset('js/jquery.popconfirm.js')}}}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.popconfirm.js')}}"></script>
 @endsection
 
 @section('content')

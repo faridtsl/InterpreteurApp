@@ -283,7 +283,7 @@
                             <td>{{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->nom}} {{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->prenom}}</td>
                             <td>{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
                             <td>{{\App\Tools\DevisTools::getTotal($devi->id)}} &euro;</td>
-                            <td><a href="home" data-id="{{$devi->id}}" class="resendButton"> <span class="glyphicon glyphicon-refresh"></span> </a> / <a href="/devis/edit/{{$devi->id}}" class="editor_edit"><span class="glyphicon glyphicon-pencil"></span></a> / <a id="delete{{$devi->id}}" href="/devis/delete?id={{$devi->id}}" class="editor_remove"><span class="glyphicon glyphicon-trash" ></span></a></td>
+                            <td><a href="home" data-id="{{$devi->id}}" class="resendButton"> <span class="glyphicon glyphicon-refresh"></span> </a> / <a href="/devis/update/{{$devi->id}}" class="editor_edit"><span class="glyphicon glyphicon-pencil"></span></a> / <a id="delete{{$devi->id}}" href="/devis/delete?id={{$devi->id}}" class="editor_remove"><span class="glyphicon glyphicon-trash" ></span></a></td>
                             <td><a id="validate{{$devi->id}}" href="/devis/validate/{{$devi->id}}" class="editor_edit"><span class="glyphicon glyphicon-ok"></span></a></td>
                         </tr>
                     @endforeach

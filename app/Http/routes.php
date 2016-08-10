@@ -254,6 +254,19 @@ Route::get(
     'devis/validate',
     ['middleware'=>'auth','uses'=>'DevisController@validateDevis']
 );
+Route::get(
+    'devis/update',
+    ['middleware'=>'auth','uses'=>'DevisController@devisUpdateShow']
+);
+Route::post(
+    'devis/update',
+    ['middleware'=>'auth','uses'=>'DevisController@devisUpdateStore']
+);
+
+Route::get(
+    'service/delete',
+    ['middleware'=>'auth','uses'=>'ServiceController@deleteService']
+);
 
 
 //Facture Routes

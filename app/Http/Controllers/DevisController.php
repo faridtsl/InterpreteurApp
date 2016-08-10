@@ -6,6 +6,7 @@ use App\Demande;
 use App\Devi;
 use App\Tools\AdresseTools;
 use App\Tools\ClientTools;
+use App\Tools\DemandeTools;
 use App\Tools\DevisEtatTools;
 use App\Tools\DevisTools;
 use App\Tools\InterpreteurTools;
@@ -74,7 +75,7 @@ class DevisController extends Controller{
         $devis = Devi::find($request['id']);
         $connectedUser = Auth::user();
         DevisTools::deleteDevis($connectedUser,$devis);
-        return redirect('devis/list');
+        return redirect()->back();
     }
 
     public function restoreDevis(Request $request){
@@ -86,13 +87,43 @@ class DevisController extends Controller{
     public function validateDevis(Request $request){
         $devis = Devi::find($request['id']);
         $etat = DevisEtatTools::getEtatById($devis->etat_id)->libelle;
+        $connectedUser = Auth::user();
         if($etat=='Commande') {
             $facture = DevisTools::facturerDevis($devis);
+            DevisTools::deleteDevis($connectedUser,$devis);
         }else if($etat=='Créé'){
-            $connectedUser = Auth::user();
             DevisTools::validerDevis($connectedUser,$devis);
         }
         return redirect('devis/list');
     }
+
+    public function devisUpdateShow(Request $request){
+        $devis = DevisTools::getDevisById($request['id']);
+        $services = ServiceTools::getServices($devis->id);
+        $interpreteur = InterpreteurTools::getInterpreteur($devis->interpreteur_id);
+        $interpreteurs = InterpreteurTools::getAllInterpreteurs();
+        $demande = DemandeTools::getDemande($devis->demande_id);
+        return view('devis.devisUpdate',['services'=>$services,'demande'=>$demande,'devis'=>$devis,'interp' => $interpreteur,'interpreteurs'=>$interpreteurs]);
+    }
+
+    public function devisUpdateStore(Request $request){
+        $devis = DevisTools::getDevisById($request['id']);
+        $services = ServiceTools::getServices($devis->id);
+
+        try {
+            DB::beginTransaction();
+            foreach ($services as $service) {
+                $service->delete();
+            }
+            $connectedUser = Auth::user();
+            DevisTools::updateDevis($request,$devis,$connectedUser);
+            DB::commit();
+        }catch(\Exception $e){
+            DB::rollback();
+        }
+        return $this->devisUpdateShow($request);
+    }
+
+
 
 }
