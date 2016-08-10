@@ -193,7 +193,7 @@
                             <a href="#"><i class="fa fa-sitemap fa-fw"></i> Gestion des factures<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="/factures">Les factures en cours</a>
+                                    <a href="/facture/list">Les factures en cours</a>
                                 </li>
                                 <li>
                                     <a href="/facture/archive">Archive</a>

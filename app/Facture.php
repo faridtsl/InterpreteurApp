@@ -10,4 +10,9 @@ class Facture extends Model{
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
+
+    public function devis(){
+        return $this->belongsTo(Devi::class,'devi_id');
+    }
+
 }

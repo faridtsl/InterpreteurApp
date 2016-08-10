@@ -250,6 +250,19 @@ Route::get(
     'devis/delete',
     ['middleware'=>'auth','uses'=>'DevisController@deleteDevis']
 );
+Route::get(
+    'devis/validate',
+    ['middleware'=>'auth','uses'=>'DevisController@validateDevis']
+);
+
+
+//Facture Routes
+Route::get(
+    'facture/list',
+    ['middleware'=>'auth','uses'=>'FactureController@showFactures']
+);
+
+
 
 //Images Routes
 Route::get('images/{img}',function ($img){

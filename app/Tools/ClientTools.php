@@ -85,4 +85,10 @@ class ClientTools{
         return true;
     }
 
+    public static function getClientByFacture($facture){
+        $devis = DevisTools::getDevisById($facture->devi_id);
+        $demande = DemandeTools::getDemande($devis->demande_id);
+        return self::getClient($demande->client_id);
+    }
+
 }

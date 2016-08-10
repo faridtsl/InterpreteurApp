@@ -23,4 +23,8 @@ class Devi extends Model{
         return $this->belongsTo(Interpreteur::class);
     }
 
+    public function etat(){
+        return $this->belongsTo(DevisEtat::class);
+    }
+
 }

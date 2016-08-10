@@ -6,6 +6,7 @@ use App\Demande;
 use App\Devi;
 use App\Tools\AdresseTools;
 use App\Tools\ClientTools;
+use App\Tools\DevisEtatTools;
 use App\Tools\DevisTools;
 use App\Tools\InterpreteurTools;
 use App\Tools\ServiceTools;
@@ -80,6 +81,18 @@ class DevisController extends Controller{
         $connectedUser = Auth::user();
         $err = DevisTools::restoreDevis($connectedUser,$request['id']);
         return redirect('devis/archive')->withErrors($err);
+    }
+
+    public function validateDevis(Request $request){
+        $devis = Devi::find($request['id']);
+        $etat = DevisEtatTools::getEtatById($devis->etat_id)->libelle;
+        if($etat=='Commande') {
+            $facture = DevisTools::facturerDevis($devis);
+        }else if($etat=='Créé'){
+            $connectedUser = Auth::user();
+            DevisTools::validerDevis($connectedUser,$devis);
+        }
+        return redirect('devis/list');
     }
 
 }

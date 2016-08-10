@@ -13,10 +13,10 @@ class CreateFacturesTable extends Migration{
         Schema::create('factures', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('devi_id')->unsigned();
-            $table->integer('interpreteur_id')->unsigned();
             $table->boolean('fini');
             $table->timestamps();
             $table->timestamp('date_envoi_mail');
+            $table->timestamp('date_paiement');
             $table->softDeletes();
 
             #Constraints

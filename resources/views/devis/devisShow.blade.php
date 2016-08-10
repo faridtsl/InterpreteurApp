@@ -22,82 +22,191 @@
 </div>
 
 <div class="row">
-    <table id="example" class="table table-striped table-bordered display responsive nowrap" cellspacing="0">
-        <thead>
-            <tr>
-                <th class="never">id</th>
-                <th>Nom de l'interpreteur</th>
-                <th>Prix proposé</th>
-                <th>Resend</th>
-                <th>View</th>
-                <th>Edit/Delete</th>
-                <th>Valider</th>
-                <th>Demande</th>
-                <th>Client</th>
-                <th>Adresse de l'interpreteur</th>
-                <th>Date creation du devis</th>
-                <th>Date modification du devis</th>
-            </tr>
-        </thead>
-        <tfoot>
-            <tr>
-                <th>id</th>
-                <th>Nom de l'interpreteur</th>
-                <th>Prix proposé</th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th>Demande</th>
-                <th>Client</th>
-                <th>Adresse de l'interpreteur</th>
-                <th>Date creation du devis</th>
-                <th>Date modification du devis</th>
-            </tr>
-        </tfoot>
-        <tbody>
-            @foreach($devis as $devi)
-                <tr>
-                    <td>{{$devi->id}}</td>
-                    <td>{{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->nom}} {{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->prenom}}</td>
-                    <td>{{\App\Tools\DevisTools::getTotal($devi->id)}} &euro;</td>
-                    <td>
-                        <a href="home" id="resend{{$devi->id}}" data-id="{{$devi->id}}" class="resendButton"> <span class="glyphicon glyphicon-refresh"></span> </a>
-                    </td>
-                    <td>
-                        <a href="/devis/view?id={{$devi->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
-                    </td>
-                    <td>
-                        <a href="/devis/edit?id={{$devi->id}}" class="editor_edit"><span class="glyphicon glyphicon-pencil"></span></a>
-                        /
-                        <a id="delete{{$devi->id}}" href="/devis/delete?id={{$devi->id}}" class="editor_remove"><span class="glyphicon glyphicon-trash" ></span></a>
-                    </td>
-                    <td><a id="validate{{$devi->id}}" href="/devis/validate?id={{$devi->id}}" class="validateButton"><span class="glyphicon glyphicon-ok"></span></a></td>
-                    <td><a href="/demande/update?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->id}}">{{\App\Tools\DemandeTools::getDemande($devi->demande_id)->titre}}</a></td>
-                    <td><a href="/client/profile?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id}}">{{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id)->nom}} {{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id)->prenom}}</a></td>
-                    <td>{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
-                    <td>{{$devi->created_at->format('l j F Y H:i')}}</td>
-                    <td>{{$devi->updated_at->format('l j F Y H:i')}}</td>
-                </tr>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse1">
+                    Devis créés
+                </a>
+            </h4>
+        </div>
+        <div id="collapse1" class="panel-collapse">
+            <div class="panel-body">
+                <table id="example" class="table table-striped table-bordered display responsive nowrap" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th class="never">id</th>
+                            <th>Nom de l'interpreteur</th>
+                            <th>Prix proposé</th>
+                            <th>Resend</th>
+                            <th>View</th>
+                            <th>Edit/Delete</th>
+                            <th>Reserver</th>
+                            <th>Demande</th>
+                            <th>Client</th>
+                            <th>Adresse de l'interpreteur</th>
+                            <th>Date creation du devis</th>
+                            <th>Date modification du devis</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>id</th>
+                            <th>Nom de l'interpreteur</th>
+                            <th>Prix proposé</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>Demande</th>
+                            <th>Client</th>
+                            <th>Adresse de l'interpreteur</th>
+                            <th>Date creation du devis</th>
+                            <th>Date modification du devis</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach($devis as $devi)
+                            @if(\App\Tools\DevisEtatTools::getEtatById($devi->etat_id)->libelle == "Créé")
+                            <tr>
+                                <td>{{$devi->id}}</td>
+                                <td>{{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->nom}} {{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->prenom}}</td>
+                                <td>{{\App\Tools\DevisTools::getTotal($devi->id)}} &euro;</td>
+                                <td>
+                                    <a href="home" id="resend{{$devi->id}}" data-id="{{$devi->id}}" class="resendButton"> <span class="glyphicon glyphicon-refresh"></span> </a>
+                                </td>
+                                <td>
+                                    <a href="/devis/view?id={{$devi->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
+                                </td>
+                                <td>
+                                    <a href="/devis/edit?id={{$devi->id}}" class="editor_edit"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    /
+                                    <a id="delete{{$devi->id}}" href="/devis/delete?id={{$devi->id}}" class="editor_remove"><span class="glyphicon glyphicon-trash" ></span></a>
+                                </td>
+                                <td><a id="validate{{$devi->id}}" href="/devis/validate?id={{$devi->id}}" class="validateButton"><span class="glyphicon glyphicon-ok"></span></a></td>
+                                <td><a href="/demande/update?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->id}}">{{\App\Tools\DemandeTools::getDemande($devi->demande_id)->titre}}</a></td>
+                                <td><a href="/client/profile?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id}}">{{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id)->nom}} {{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id)->prenom}}</a></td>
+                                <td>{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
+                                <td>{{$devi->created_at->format('l j F Y H:i')}}</td>
+                                <td>{{$devi->updated_at->format('l j F Y H:i')}}</td>
+                            </tr>
 
-                <script type="text/javascript">
-                    $(document).ready(function() {
-                        $("#delete{{$devi->id}}").popConfirm({
-                            title: "Message de confirmation ?",
-                            content: "Voulez vous supprimer l'objet !",
-                            placement: "bottom"
-                        });
+                            <script type="text/javascript">
+                                $(document).ready(function() {
+                                    $("#delete{{$devi->id}}").popConfirm({
+                                        title: "Message de confirmation ?",
+                                        content: "Voulez vous supprimer l'objet !",
+                                        placement: "bottom"
+                                    });
 
-                        $("#validate{{$devi->id}}").popConfirm({
-                            title: "Message de confirmation ?",
-                            content: "Voulez vous Valider le devis en cours !",
-                            placement: "bottom"
-                        });
-                    });
-                </script>
-            @endforeach
-        </tbody>
-    </table>
+                                    $("#validate{{$devi->id}}").popConfirm({
+                                        title: "Message de confirmation ?",
+                                        content: "Voulez vous Valider le devis en cours !",
+                                        placement: "bottom"
+                                    });
+                                });
+                            </script>
+                            @endif
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse2">
+                    Commandes en cours
+                </a>
+            </h4>
+        </div>
+        <div id="collapse2" class="panel-collapse">
+            <div class="panel-body">
+                <table id="tableCommande" class="table table-striped table-bordered display responsive nowrap" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th class="never">id</th>
+                        <th>Nom de l'interpreteur</th>
+                        <th>Prix proposé</th>
+                        <th>Resend</th>
+                        <th>View</th>
+                        <th>Edit/Delete</th>
+                        <th>Valider</th>
+                        <th>Demande</th>
+                        <th>Client</th>
+                        <th>Adresse de l'interpreteur</th>
+                        <th>Date creation du devis</th>
+                        <th>Date modification du devis</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>id</th>
+                        <th>Nom de l'interpreteur</th>
+                        <th>Prix proposé</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>Demande</th>
+                        <th>Client</th>
+                        <th>Adresse de l'interpreteur</th>
+                        <th>Date creation du devis</th>
+                        <th>Date modification du devis</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    @foreach($devis as $devi)
+                        @if(\App\Tools\DevisEtatTools::getEtatById($devi->etat_id)->libelle == "Commande")
+                        <tr>
+                            <td>{{$devi->id}}</td>
+                            <td>{{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->nom}} {{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->prenom}}</td>
+                            <td>{{\App\Tools\DevisTools::getTotal($devi->id)}} &euro;</td>
+                            <td>
+                                <a href="home" id="resend{{$devi->id}}" data-id="{{$devi->id}}" class="resendButton"> <span class="glyphicon glyphicon-refresh"></span> </a>
+                            </td>
+                            <td>
+                                <a href="/devis/view?id={{$devi->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
+                            </td>
+                            <td>
+                                <a href="/devis/edit?id={{$devi->id}}" class="editor_edit"><span class="glyphicon glyphicon-pencil"></span></a>
+                                /
+                                <a id="delete{{$devi->id}}" href="/devis/delete?id={{$devi->id}}" class="editor_remove"><span class="glyphicon glyphicon-trash" ></span></a>
+                            </td>
+                            <td><a id="validate{{$devi->id}}" href="/devis/validate?id={{$devi->id}}" class="validateButton"><span class="glyphicon glyphicon-ok"></span></a></td>
+                            <td><a href="/demande/update?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->id}}">{{\App\Tools\DemandeTools::getDemande($devi->demande_id)->titre}}</a></td>
+                            <td><a href="/client/profile?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id}}">{{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id)->nom}} {{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id)->prenom}}</a></td>
+                            <td>{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
+                            <td>{{$devi->created_at->format('l j F Y H:i')}}</td>
+                            <td>{{$devi->updated_at->format('l j F Y H:i')}}</td>
+                        </tr>
+
+                        <script type="text/javascript">
+                            $(document).ready(function() {
+                                $("#delete{{$devi->id}}").popConfirm({
+                                    title: "Message de confirmation ?",
+                                    content: "Voulez vous supprimer l'objet !",
+                                    placement: "bottom"
+                                });
+
+                                $("#validate{{$devi->id}}").popConfirm({
+                                    title: "Message de confirmation ?",
+                                    content: "Voulez vous Valider le devis en cours !",
+                                    placement: "bottom"
+                                });
+                            });
+                        </script>
+                        @endif
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 
 @endsection

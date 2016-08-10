@@ -16,6 +16,7 @@ class CreateDevisTable extends Migration
             $table->increments('id');
             $table->float('total');
             $table->integer('user_id')->unsigned();
+            $table->integer('etat_id')->unsigned();
             $table->integer('demande_id')->unsigned();
             $table->integer('interpreteur_id')->unsigned();
             $table->timestamps();
