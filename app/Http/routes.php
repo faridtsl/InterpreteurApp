@@ -44,7 +44,7 @@ Route::get(
 );
 
 Route::get(
-    'interpreteur/{id}',
+    'interpreteur/infos',
     ['middleware'=>'auth','uses'=>'InterpreteurController@showInterpreteur']
 );
 
@@ -88,27 +88,30 @@ Route::get(
     'client/archive',
     ['middleware'=>'auth','uses'=>'ClientController@archiveClients']
 );
-
-Route::get(
-    'client/{id}',
-    ['middleware'=>'auth','uses'=>'ClientController@showClient']
-);
-
 Route::post(
     'client/update',
     ['middleware'=>'auth','uses'=>'ClientController@updateClient']
 );
-
 Route::post(
     'client/delete',
     ['middleware'=>'auth','uses'=>'ClientController@deleteClient']
 );
-
 Route::post(
     'client/restore',
     ['middleware'=>'auth','uses'=>'ClientController@restoreClient']
 );
-
+Route::get(
+    'client/profile',
+    ['middleware'=>'auth','uses'=>'ClientController@profileClient']
+);
+Route::get(
+    'client/infos',
+    ['middleware'=>'auth','uses'=>'ClientController@showClient']
+);
+Route::get(
+    'client/profile/archive',
+    ['middleware'=>'auth','uses'=>'ClientController@profileArchiveClient']
+);
 
 
 

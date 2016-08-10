@@ -100,6 +100,12 @@ class DemandeTools{
         return $demandes;
     }
 
+
+    public static function getArchiveDemandesByClient($id_client){
+        $demandes = Demande::onlyTrashed()->where('client_id','=',$id_client)->get();
+        return $demandes;
+    }
+
     public static function dupDemande(User $u,Demande $d){
         $demande = new Demande();
         $demande->titre = $d->titre;

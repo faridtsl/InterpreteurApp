@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Tools\AdresseTools;
+use App\Tools\DemandeTools;
+use App\Tools\DevisTools;
+use App\Tools\FactureTools;
 use App\Tools\ImageTools;
 use App\Tools\ClientTools;
 use App\Tools\LangueTools;
@@ -55,8 +58,8 @@ class ClientController extends Controller{
         return view('client.clientArchive',['clients'=>$clientsArchive]);
     }
 
-    public function showClient($id){
-        return response(ClientTools::getClient($id));
+    public function showClient(Request $request){
+        return response(ClientTools::getClient($request['id']));
     }
 
 
@@ -91,6 +94,55 @@ class ClientController extends Controller{
         $connectedUser = Auth::user();
         ClientTools::restoreClient($connectedUser,$request['id']);
         return redirect('client/archive');
+    }
+
+    public function profileClient(Request $request){
+        $client = ClientTools::getClient($request['id']);
+        $demandes = DemandeTools::getDemandesByClient($client->id);
+        $devis = [];
+        $factures = [];
+        foreach ($demandes as $demande){
+            $devs = DevisTools::getDevis($demande->id);
+            if($devs != null){
+                foreach ($devs as $dev) {
+                    array_push($devis, $dev);
+                    $fact = FactureTools::getFactureByDevis($dev->id);
+                    if ($fact != null) array_push($factures, $fact);
+                }
+            }
+        }
+        return view('client.profileClient',['client'=>$client,'demandes'=>$demandes,'factures'=>$factures,'devis'=>$devis]);
+    }
+
+
+    public function profileArchiveClient(Request $request){
+        $client = ClientTools::getClient($request['id']);
+        $demandes = DemandeTools::getArchiveDemandesByClient($client->id);
+        $demandesCour = DemandeTools::getDemandesByClient($client->id);
+        $devis = [];
+        $factures = [];
+        foreach ($demandes as $demande){
+            $devs = DevisTools::getArchiveDevisByDemander($demande->id);
+            if($devs != null){
+                foreach ($devs as $dev) {
+                    array_push($devis, $dev);
+                    $fact = FactureTools::getFactureByDevis($dev->id);
+                    if ($fact != null) array_push($factures, $fact);
+                }
+            }
+        }
+
+        foreach ($demandesCour as $demande){
+            $devs = DevisTools::getArchiveDevisByDemander($demande->id);
+            if($devs != null){
+                foreach ($devs as $dev) {
+                    if($dev->trashed()) array_push($devis, $dev);
+                    $fact = FactureTools::getFactureByDevis($dev->id);
+                    if ($fact != null && $fact->trashed()) array_push($factures, $fact);
+                }
+            }
+        }
+        return view('client.profileClient',['client'=>$client,'demandes'=>$demandes,'factures'=>$factures,'devis'=>$devis]);
     }
 
 }

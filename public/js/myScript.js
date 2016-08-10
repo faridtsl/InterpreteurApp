@@ -57,7 +57,7 @@ $(function () {
         $id = $(this).attr('data-id');
 
         $.ajax({
-            url: $id,
+            url: "infos?id="+$id,
             type:"GET",
             success:function(data){
                 $("#id").val(data['id']);
@@ -80,7 +80,7 @@ $(function () {
         $id = $(this).attr('data-id');
 
         $.ajax({
-            url: $id,
+            url: "infos?id="+$id,
             type: "GET",
             success: function (data) {
                 $("#idDel").val(data['id']);
@@ -100,7 +100,7 @@ $(function () {
         // Get the record's ID via attribute
         $id = $(this).attr('data-id');
         $.ajax({
-            url: $id,
+            url: "infos?id="+$id,
             type: "GET",
             success: function (data) {
                 $("#idRestore").val(data['id']);

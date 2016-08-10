@@ -229,9 +229,6 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i>Statistiques</a>
-                        </li>
-                        <li>
                             <a href="index.html"><i class="fa fa-dashboard fa-fw"></i>Traces</a>
                         </li>
                         <li>

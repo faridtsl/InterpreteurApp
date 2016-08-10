@@ -59,7 +59,8 @@ class InterpreteurController extends Controller{
         return view('interpreteur.interpreteurArchive',['interpreteurs'=>$interpreteursArchive]);
     }
 
-    public function showInterpreteur($id){
+    public function showInterpreteur(Request $request){
+        $id = $request['id'];
         return response(InterpreteurTools::getInterpreteur($id));
     }
 

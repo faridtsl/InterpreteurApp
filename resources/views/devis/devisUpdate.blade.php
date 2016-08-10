@@ -32,6 +32,8 @@
 
     <link rel="stylesheet" href="{{ asset('/css/myStyle.css')}}" />
     <link rel="stylesheet" href="{{ asset('/css/success.css')}}" />
+
+    <script type="text/javascript" src="{{{ asset('js/jquery.popconfirm.js')}}}"></script>
 @endsection
 
 @section('content')
@@ -170,6 +172,16 @@
                                                 $('#qte{{$index}},#prixUnitaire{{$index}}').on('input', function() {
                                                     calculer({{$index}});
                                                 });
+                                            </script>
+                                            <script>
+                                                $(document).ready(function () {
+                                                    $("#del{{$index}}").popConfirm({
+                                                        title: "Message de confirmation ?",
+                                                        content: "Voulez vous supprimer le client !",
+                                                        placement: "bottom"
+                                                    });
+                                                });
+
                                             </script>
                                         @endforeach
                                     @else

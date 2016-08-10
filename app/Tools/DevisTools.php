@@ -50,6 +50,12 @@ class DevisTools{
         return $devis;
     }
 
+
+    public static function getArchiveDevisByDemander($demande_id){
+        $devis = Devi::withTrashed()->where('demande_id',$demande_id)->get();
+        return $devis;
+    }
+
     public static function getDevisById($id){
         $devis = Devi::withTrashed()->where('id',$id)->get()->first();
         return $devis;
