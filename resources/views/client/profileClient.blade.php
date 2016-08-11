@@ -20,7 +20,7 @@
     <div class="col-lg-12">
         <div class="container-fluid well span6">
             <div class="col-sm-2 col-md-2">
-                <img src="/images/{{$client->image}}" alt="" id="imgInterp" class="img-rounded img-responsive" />
+                <img src="/images/{{$client->image}}" style="width: 120px;height:120px;" class="img-circle img-responsive" />
             </div>
             <div class="col-sm-2 col-md-4">
                 <blockquote>

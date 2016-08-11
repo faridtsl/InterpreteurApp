@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('title')
-    Ajouter Devis
+    Modifier Devis
 @endsection
 
 @section('header')

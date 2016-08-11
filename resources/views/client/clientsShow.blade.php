@@ -56,6 +56,9 @@
                             <button class="btn btn-danger btn-xs deleteButton" data-title="Delete" data-toggle="modal" data-target="#delete" data-id="{{$client->id}}" >
                                 <span class="glyphicon glyphicon-trash"></span>
                             </button>
+                            <a class="btn btn-default btn-xs" href="/client/profile?id={{$client->id}}" >
+                                <span class="glyphicon glyphicon-user"></span>
+                            </a>
                         </p>
                     </td>
                 </tr>

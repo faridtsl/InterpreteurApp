@@ -66,6 +66,11 @@ class DevisTools{
         return $devis;
     }
 
+    public static function getArchiveByInterp($interpreteur_id){
+        $devis = Devi::onlyTrashed()->where('interpreteur_id',$interpreteur_id)->get();
+        return $devis;
+    }
+
     public static function getTotal($id){
         $services = Service::where('devi_id',$id)->get();
         $tot = 0;

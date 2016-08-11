@@ -27,40 +27,41 @@ Route::get(
     'interpreteur/add',
     ['middleware'=>'auth','uses' =>'InterpreteurController@show']
 );
-
 Route::post(
     'interpreteur/add',
     ['middleware'=>'auth','uses'=>'InterpreteurController@store']
 );
-
 Route::get(
     'interpreteur/list',
     ['middleware'=>'auth','uses'=>'InterpreteurController@showInterpreteurs']
 );
-
 Route::get(
     'interpreteur/archive',
     ['middleware'=>'auth','uses'=>'InterpreteurController@archiveInterpreteurs']
 );
-
 Route::get(
     'interpreteur/infos',
     ['middleware'=>'auth','uses'=>'InterpreteurController@showInterpreteur']
 );
-
 Route::post(
     'interpreteur/update',
     ['middleware'=>'auth','uses'=>'InterpreteurController@updateInterpreteur']
 );
-
 Route::post(
     'interpreteur/delete',
     ['middleware'=>'auth','uses'=>'InterpreteurController@deleteInterpreteur']
 );
-
 Route::post(
     'interpreteur/restore',
     ['middleware'=>'auth','uses'=>'InterpreteurController@restoreInterpreteur']
+);
+Route::get(
+    'interpreteur/profile',
+    ['middleware'=>'auth','uses'=>'InterpreteurController@showProfileInterpreteur']
+);
+Route::get(
+    'interpreteur/profile/archive',
+    ['middleware'=>'auth','uses'=>'InterpreteurController@showArchiveProfileInterpreteur']
 );
 
 

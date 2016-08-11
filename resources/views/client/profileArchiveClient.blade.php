@@ -22,7 +22,7 @@
     <div class="col-lg-12">
         <div class="container-fluid well span6">
             <div class="col-sm-2 col-md-2">
-                <img src="/images/{{$client->image}}" alt="" id="imgInterp" class="img-rounded img-responsive" />
+                <img src="/images/{{$client->image}}" alt="" id="imgInterp" class="img-circle img-responsive" />
             </div>
             <div class="col-sm-2 col-md-4">
                 <blockquote>
@@ -211,28 +211,9 @@
 </div>
 
 <div class="row">
-    <form action="/client/delete" method="post">
-        {!! csrf_field() !!}
-        <a class="btn btn-default" href="/client/profile?id={{$client->id}}">
-            <span class="glyphicon glyphicon-arrow-left"></span>Retour au profil client
-        </a>
-        <button class="btn btn-warning editButton" data-title="Edit" data-toggle="modal" data-target="#edit" data-id="{{$client->id}}" >
-            <span class="glyphicon glyphicon-pencil"></span> Modifier
-        </button>
-        <input type="hidden" name="id" value="{{$client->id}}"/>
-        <button class="btn btn-danger" id="supprimerClient" type="submit"><span class="glyphicon glyphicon-trash"></span>Supprimer</button>
-        <script>
-            $(document).ready(function () {
-                $("#supprimerClient").popConfirm({
-                    title: "Message de confirmation ?",
-                    content: "Voulez vous supprimer le client !",
-                    placement: "bottom"
-                });
-            });
-
-        </script>
-
-    </form>
+    <a class="btn btn-default" href="/client/profile?id={{$client->id}}">
+        <span class="glyphicon glyphicon-arrow-left"></span>Retour
+    </a>
 </div>
 </div>
 @endsection

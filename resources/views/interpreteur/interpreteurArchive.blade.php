@@ -55,6 +55,9 @@
                             <button class="btn btn-success btn-xs restoreButton" data-title="Restore" data-toggle="modal" data-target="#restore" data-id="{{$interpreteur->id}}" >
                                 <span class="glyphicon glyphicon-refresh"></span>
                             </button>
+                            <a class="btn btn-default btn-xs" href="/interpreteur/profile?id={{$interpreteur->id}}" >
+                                <span class="glyphicon glyphicon-user"></span>
+                            </a>
                         </p>
                     </td>
                 </tr>

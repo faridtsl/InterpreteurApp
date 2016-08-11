@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Tools\AdresseTools;
+use App\Tools\DevisTools;
+use App\Tools\FactureTools;
 use App\Tools\ImageTools;
 use App\Tools\InterpreteurTools;
 use App\Tools\LangueTools;
@@ -95,6 +97,28 @@ class InterpreteurController extends Controller{
         $connectedUser = Auth::user();
         InterpreteurTools::restoreInterpreteur($connectedUser,$request['id']);
         return redirect('interpreteur/archive');
+    }
+
+    public function showProfileInterpreteur(Request $request){
+        $interp = InterpreteurTools::getInterpreteur($request['id']);
+        $devs = DevisTools::getDevisByInterp($interp->id);
+        $factures = [];
+        foreach ($devs as $dev) {
+            $fact = FactureTools::getFactureByDevis($dev->id);
+            if ($fact != null) array_push($factures, $fact);
+        }
+        return view('interpreteur.profileInterpreteur',['interpreteur'=>$interp,'factures'=>$factures,'devis'=>$devs]);
+    }
+
+    public function showArchiveProfileInterpreteur(Request $request){
+        $interp = InterpreteurTools::getInterpreteur($request['id']);
+        $devs = DevisTools::getArchiveByInterp($interp->id);
+        $factures = [];
+        foreach ($devs as $dev) {
+            $fact = FactureTools::getFactureByDevis($dev->id);
+            if ($fact != null && $fact->trashed()) array_push($factures, $fact);
+        }
+        return view('interpreteur.profileArchiveInterpreteur',['interpreteur'=>$interp,'factures'=>$factures,'devis'=>$devs]);
     }
 
 }

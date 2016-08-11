@@ -15,4 +15,8 @@ class FactureController extends Controller{
         return view('facture.factureShow',['factures'=>$factures]);
     }
 
+    public function resendFacture(){
+
+    }
+
 }

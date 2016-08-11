@@ -33,7 +33,7 @@
                     	<a data-toggle="collapse" data-parent="#accordion" href="#demandePanel">Informations demande</a>
 		</h4>
                 </div>
-                <div class="panel-body panel-collapse collapse in" id="demandePanel">
+                <div class="panel-body panel-collapse collapse" id="demandePanel">
                     <form role="form" method="POST" action="/demande/update">
                     {!! csrf_field() !!}
                     <input type="hidden" value="{{$demande->id}}" name="id"/>

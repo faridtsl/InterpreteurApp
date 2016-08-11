@@ -74,6 +74,9 @@
                                     <button class="btn btn-danger btn-xs deleteButton" data-title="Delete" data-toggle="modal" data-target="#delete" data-id="{{$interpreteur->id}}" >
                                         <span class="glyphicon glyphicon-trash"></span>
                                     </button>
+                                    <a class="btn btn-default btn-xs" href="/interpreteur/profile?id={{$interpreteur->id}}" >
+                                        <span class="glyphicon glyphicon-user"></span>
+                                    </a>
                                 </p>
                             </td>
                             <td>{{$interpreteur->tel_fixe}}</td>
