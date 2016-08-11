@@ -49,27 +49,25 @@
                 <thead>
                 <tr>
                     <th class="never">id</th>
-                    <th>Nom du client</th>
+                    <th>Date d'envoi</th>
+                    <th>Date de paiement</th>
+                    <th>Total</th>
                     <th>Resend</th>
                     <th>View</th>
                     <th>View Devis</th>
                     <th>Valider</th>
-                    <th>Date d'envoi</th>
-                    <th>Date de paiement</th>
-                    <th>Total</th>
                 </tr>
                 </thead>
                 <tfoot>
                 <tr>
                     <th class="never">id</th>
-                    <th>Nom du client</th>
+                    <th>Date d'envoi</th>
+                    <th>Date de paiement</th>
+                    <th>Total</th>
                     <th>Resend</th>
                     <th>View</th>
                     <th>View Devis</th>
                     <th>Valider</th>
-                    <th>Date d'envoi</th>
-                    <th>Date de paiement</th>
-                    <th>Total</th>
                 </tr>
                 </tfoot>
                 <tbody>
@@ -77,9 +75,11 @@
 
                     <tr>
                         <td>{{$facture->id}}</td>
-                        <td>{{\App\Tools\ClientTools::getClientByFacture($facture)->nom}} {{\App\Tools\ClientTools::getClientByFacture($facture)->prenom}}</td>
+                        <td>{{$facture->date_envoi_mail}}</td>
+                        <td>@if($facture->fini){{$facture->date_paiement}}@else Non Payée @endif</td>
+                        <td>{{\App\Tools\DevisTools::getDevisById($facture->devi_id)->total}} &euro;</td>
                         <td>
-                            <a href="home" id="resend{{$facture->id}}" data-id="{{$facture->id}}" class="resendButton"> <span class="glyphicon glyphicon-refresh"></span> </a>
+                            <a href="home" id="resend{{$facture->id}}" data-id="{{$facture->id}}" class="resendFact"> <span class="glyphicon glyphicon-refresh"></span> </a>
                         </td>
                         <td>
                             <a href="/facture/view?id={{$facture->devi_id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
@@ -88,9 +88,6 @@
                             <a href="/devis/view?id={{$facture->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
                         </td>
                         <td><a id="validate{{$facture->id}}" href="/facture/validate?id={{$facture->id}}" class="validateButton"><span class="glyphicon glyphicon-ok"></span></a></td>
-                        <td>{{$facture->date_envoi_mail}}</td>
-                        <td>@if($facture->fini){{$facture->date_paiement}}@else Non Payée @endif</td>
-                        <td>{{\App\Tools\DevisTools::getDevisById($facture->devi_id)->total}} &euro;</td>
                     </tr>
 
 
@@ -121,43 +118,47 @@
                 <tr>
                     <th class="never">id</th>
                     <th>Nom de l'interpreteur</th>
+                    <th>Etat</th>
                     <th>Prix proposé</th>
+                    <th>Demande</th>
+                    <th>Adresse de l'interpreteur</th>
+                    <th>Date creation du devis</th>
+                    <th>Date modification du devis</th>
                     <th>Resend</th>
                     <th>View</th>
                     <th>Edit/Delete</th>
                     <th>Valider</th>
-                    <th>Demande</th>
-                    <th>Client</th>
-                    <th>Adresse de l'interpreteur</th>
-                    <th>Date creation du devis</th>
-                    <th>Date modification du devis</th>
                 </tr>
                 </thead>
                 <tfoot>
                 <tr>
                     <th>id</th>
                     <th>Nom de l'interpreteur</th>
+                    <th>Etat</th>
                     <th>Prix proposé</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
                     <th>Demande</th>
-                    <th>Client</th>
                     <th>Adresse de l'interpreteur</th>
                     <th>Date creation du devis</th>
                     <th>Date modification du devis</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
                 </tr>
                 </tfoot>
                 <tbody>
                 @foreach($devis as $devi)
-                    @if(\App\Tools\DevisEtatTools::getEtatById($devi->etat_id)->libelle != "Validé")
                         <tr>
                             <td>{{$devi->id}}</td>
                             <td>{{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->nom}} {{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->prenom}}</td>
+                            <td>{{\App\Tools\DevisEtatTools::getEtatById($devi->etat_id)->libelle }}</td>
                             <td>{{\App\Tools\DevisTools::getTotal($devi->id)}} &euro;</td>
+                            <td><a href="/demande/update?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->id}}">{{\App\Tools\DemandeTools::getDemande($devi->demande_id)->titre}}</a></td>
+                            <td>{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
+                            <td>{{$devi->created_at->format('l j F Y H:i')}}</td>
+                            <td>{{$devi->updated_at->format('l j F Y H:i')}}</td>
                             <td>
-                                <a href="home" id="resend{{$devi->id}}" data-id="{{$devi->id}}" class="resendButton"> <span class="glyphicon glyphicon-refresh"></span> </a>
+                                <a id="resend{{$devi->id}}" data-id="{{$devi->id}}" class="resendButton"> <span class="glyphicon glyphicon-refresh"></span> </a>
                             </td>
                             <td>
                                 <a href="/devis/view?id={{$devi->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
@@ -165,32 +166,10 @@
                             <td>
                                 <a href="/devis/update?id={{$devi->id}}" class="editor_edit"><span class="glyphicon glyphicon-pencil"></span></a>
                                 /
-                                <a id="delete{{$devi->id}}" href="/devis/delete?id={{$devi->id}}" class="editor_remove"><span class="glyphicon glyphicon-trash" ></span></a>
+                                <a id="delete{{$devi->id}}" data-id="{{$devi->id}}" class="editor_remove"><span class="glyphicon glyphicon-trash" ></span></a>
                             </td>
                             <td><a id="validate{{$devi->id}}" href="/devis/validate?id={{$devi->id}}" class="validateButton"><span class="glyphicon glyphicon-ok"></span></a></td>
-                            <td><a href="/demande/update?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->id}}">{{\App\Tools\DemandeTools::getDemande($devi->demande_id)->titre}}</a></td>
-                            <td><a href="/client/profile?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id}}">{{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id)->nom}} {{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id)->prenom}}</a></td>
-                            <td>{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
-                            <td>{{$devi->created_at->format('l j F Y H:i')}}</td>
-                            <td>{{$devi->updated_at->format('l j F Y H:i')}}</td>
                         </tr>
-
-                        <script type="text/javascript">
-                            $(document).ready(function() {
-                                $("#delete{{$devi->id}}").popConfirm({
-                                    title: "Message de confirmation ?",
-                                    content: "Voulez vous supprimer l'objet !",
-                                    placement: "bottom"
-                                });
-
-                                $("#validate{{$devi->id}}").popConfirm({
-                                    title: "Message de confirmation ?",
-                                    content: "Voulez vous Valider le devis en cours !",
-                                    placement: "bottom"
-                                });
-                            });
-                        </script>
-                    @endif
                 @endforeach
                 </tbody>
             </table>
@@ -209,7 +188,6 @@
                 <tr>
                     <th>Titre</th>
                     <th>Etat</th>
-                    <th>Client</th>
                     <th>Date Creation</th>
                     <th>Date de Modification</th>
                     <th>Date Debut</th>
@@ -224,7 +202,6 @@
                 <tr>
                     <th>Titre</th>
                     <th>Etat</th>
-                    <th>Client</th>
                     <th>Date Creation</th>
                     <th>Date de Modification</th>
                     <th>Date Debut</th>
@@ -241,7 +218,6 @@
                         <tr class="@if(\App\Tools\DemandeTools::tempsRestant($demande) < env('EVENT_DANGER_DELAI','0')) danger @elseif(\App\Tools\DemandeTools::tempsRestant($demande) < env('EVENT_WAR_DELAI','0')) warning @endif">
                             <td>{{$demande->titre}}</td>
                             <td>{{\App\Tools\EtatTools::getEtatById($demande->etat_id)->libelle}}</td>
-                            <td>{{\App\Tools\ClientTools::getClient($demande->client_id)->nom}} {{\App\Tools\ClientTools::getClient($demande->client_id)->prenom}}</td>
                             <td>{{\Carbon\Carbon::parse($demande->created_at)->format('l j F Y H:i')}}</td>
                             <td>{{\Carbon\Carbon::parse($demande->updated_at)->format('l j F Y H:i')}}</td>
                             <td>{{\Carbon\Carbon::parse($demande->dateEvent)->format('l j F Y H:i')}}</td>
@@ -260,7 +236,7 @@
                                     <a data-placement="top" data-toggle="tooltip" title="Duplicate" class="btn btn-info btn-xs dupButton" href="/demande/duplicate?id={{$demande->id}}" >
                                         <span class="glyphicon glyphicon-copy"></span>
                                     </a>
-                                    <a data-placement="top" data-toggle="tooltip" title="Delete" class="btn btn-danger btn-xs delButton"  data-toggle="modal" data-target="#delete" data-id="{{$demande->id}}" >
+                                    <a data-placement="top" data-toggle="tooltip" title="Delete" class="btn btn-danger btn-xs delButtonDem"  data-toggle="modal" data-target="#delete" data-id="{{$demande->id}}" >
                                         <span class="glyphicon glyphicon-trash"></span>
                                     </a>
                                 </p>
@@ -277,9 +253,14 @@
 <div class="row">
     <form action="/client/delete" method="post">
         {!! csrf_field() !!}
-        <a class="btn btn-warning" href="/client/profile/archive?id={{$client->id}}">Archives</a>
+        <a class="btn btn-default" href="/client/profile/archive?id={{$client->id}}">
+            <span class="glyphicon glyphicon-clock"></span>Archives
+        </a>
+        <button class="btn btn-warning editButton" data-title="Edit" data-toggle="modal" data-target="#edit" data-id="{{$client->id}}" >
+            <span class="glyphicon glyphicon-pencil"></span> Modifier
+        </button>
         <input type="hidden" name="id" value="{{$client->id}}"/>
-        <button class="btn btn-danger" id="supprimerClient" type="submit">Supprimer</button>
+        <button class="btn btn-danger" id="supprimerClient" type="submit"><span class="glyphicon glyphicon-trash"></span>Supprimer</button>
         <script>
             $(document).ready(function () {
                 $("#supprimerClient").popConfirm({
@@ -290,6 +271,7 @@
             });
 
         </script>
+
     </form>
 </div>
 
@@ -298,6 +280,77 @@
 
 @section('modals')
     @include('includes.popups')
+    @include('includes.clientModals')
+
+    <!--Suppression popup-->
+    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span>&times;</span></button>
+                    <h4 class="modal-title custom_align" id="headDelete"></h4>
+                </div>
+                <form id="deleteForm" action="delete" method="post" enctype="multipart/form-data">
+                    {!! csrf_field() !!}
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="hidden" value="-1" id="idDel" name="id" />
+                        </div>
+                        <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> êtes-vous sur de vouloir supprimer?</div>
+                    </div>
+                    <div class="modal-footer ">
+                        <input class="btn btn-success" value="Oui" type="submit"/>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Non</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+    </div>
+
+    <!--Resend popup-->
+    <div class="modal fade" id="resendModalDevis" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span>&times;</span></button>
+                    <h4 class="modal-title custom_align" id="headRes"></h4>
+                </div>
+                <form id="deleteForm" action="resend" method="get" enctype="multipart/form-data">
+                    {!! csrf_field() !!}
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="hidden" value="-1" id="idRes" name="id" />
+                        </div>
+                        <div class="alert alert-info"><span class="glyphicon glyphicon-refresh"></span> êtes-vous sur de vouloir renvoyer le devis?</div>
+                    </div>
+                    <div class="modal-footer ">
+                        <input class="btn btn-success" value="Oui" id="resendDev" type="submit"/>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Non</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="resendModalFact" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span>&times;</span></button>
+                    <h4 class="modal-title custom_align" >Renvoi facture</h4>
+                </div>
+                <div class="alert alert-info"><span class="glyphicon glyphicon-warning-sign"></span> êtes-vous sur de vouloir renvoyer la facture?</div>
+                <div class="modal-footer ">
+                    <input id="idResendFact" type="hidden" value="-1"/>
+                    <button class="btn btn-success" id="resendFact" >Oui</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Non</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('footer')

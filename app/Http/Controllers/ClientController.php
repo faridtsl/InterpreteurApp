@@ -142,7 +142,7 @@ class ClientController extends Controller{
                 }
             }
         }
-        return view('client.profileClient',['client'=>$client,'demandes'=>$demandes,'factures'=>$factures,'devis'=>$devis]);
+        return view('client.profileArchiveClient',['client'=>$client,'demandes'=>$demandes,'factures'=>$factures,'devis'=>$devis]);
     }
 
 }

@@ -64,7 +64,6 @@ $(document).ready(function() {
 
     $('#resend').on('click',function (e) {
         $id = $(this).parent().find('#idResend').val();
-
         $.ajax({
             url: '/devis/resend?id='+$id,
             type:"GET",
