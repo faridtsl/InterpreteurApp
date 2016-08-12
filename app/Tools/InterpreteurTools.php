@@ -111,4 +111,16 @@ class InterpreteurTools{
         return true;
     }
 
+    public static function getLanguages($interpreteur){
+        $traductions = TraductionTools::getTraductionsByInterpreteur($interpreteur->id);
+        $langs = [];
+        foreach ($traductions as $trad){
+            $l1 = LangueTools::getLangue($trad->cible);
+            $l2 = LangueTools::getLangue($trad->source);
+            array_push($langs,$l1,$l2);
+        }
+        $langs = array_unique($langs);
+        return $langs;
+    }
+
 }

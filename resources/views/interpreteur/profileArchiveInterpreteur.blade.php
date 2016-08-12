@@ -28,12 +28,12 @@
         <!-- edit form column -->
         <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
             <div class="form-horizontal" role="form">
-            <!--div class="form-group">
+            <div class="form-group">
                 <label class="col-lg-3 control-label">Adresse</label>
                 <div class="col-lg-8">
-                    <input class="form-control" value="mohammed@gmail.com" type="text" disabled="true">
+                    <input class="form-control" value="{{\App\Tools\AdresseTools::getAdresse($interpreteur->adresse_id)->adresse}}" type="text" disabled="true">
                 </div>
-            </div-->
+            </div>
                 <div class="form-group">
                     <label class="col-lg-3 control-label">tel fixe</label>
                     <div class="col-lg-8">

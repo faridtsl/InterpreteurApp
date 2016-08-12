@@ -28,12 +28,12 @@
         <!-- edit form column -->
         <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
             <div class="form-horizontal" role="form">
-            <!--div class="form-group">
+            <div class="form-group">
                 <label class="col-lg-3 control-label">Adresse</label>
                 <div class="col-lg-8">
-                    <input class="form-control" value="mohammed@gmail.com" type="text" disabled="true">
+                    <input class="form-control" value="{{\App\Tools\AdresseTools::getAdresse($interpreteur->adresse_id)->adresse}}" type="text" disabled="true">
                 </div>
-            </div-->
+            </div>
                 <div class="form-group">
                     <label class="col-lg-3 control-label">tel fixe</label>
                     <div class="col-lg-8">
@@ -50,6 +50,16 @@
                     <label class="col-lg-3 control-label">Email:</label>
                     <div class="col-lg-8">
                         <input class="form-control" value="{{$interpreteur->email}}" type="text" disabled="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Langues:</label>
+                    <div class="col-lg-8">
+                        @foreach(\App\Tools\TraductionTools::getTraductionsByInterpreteur($interpreteur->id) as $traduction)
+                            <a class="btn btn-primary" style="margin: 10px"><span class="glyphicon glyphicon-flag"></span>
+                                {{\App\Tools\LangueTools::getLangue($traduction->source)->content}} <span class="glyphicon glyphicon-arrow-right"></span> {{\App\Tools\LangueTools::getLangue($traduction->cible)->content}}
+                            </a>
+                        @endforeach
                     </div>
                 </div>
             </div>
