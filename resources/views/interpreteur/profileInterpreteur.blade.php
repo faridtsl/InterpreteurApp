@@ -22,7 +22,7 @@
         <!-- left column -->
         <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="text-center">
-                <img src="/images/{{$interpreteur->image}}" style="height: 200px;width:200px;" class="avatar img-circle img-thumbnail" alt="avatar">
+                <img src="/images/{{$interpreteur->image}}" style="height: 200px;width:200px;margin-bottom: 10px;" class="avatar img-circle img-thumbnail" alt="avatar">
             </div>
         </div>
         <!-- edit form column -->
