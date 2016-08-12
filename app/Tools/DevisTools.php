@@ -15,6 +15,7 @@ use App\DevisEtat;
 use App\Etat;
 use App\Service;
 use App\User;
+use Carbon\Carbon;
 
 class DevisTools{
 
@@ -135,6 +136,23 @@ class DevisTools{
         $devis->etat()->associate($etat);
         $devis->save();
         return $facture;
+    }
+
+    public static function getAllDevis(){
+        $devis = Devi::all();
+        return $devis;
+    }
+
+
+    public static function tempsRestant($dev){
+        $date_creation = new Carbon($dev->created_at);
+        $now = Carbon::now();
+        return $now->diffInDays($date_creation,false);
+    }
+
+    public static function tempsRestantFinEvent($dev){
+        $demande = DemandeTools::getDemande($dev->id);
+        return DemandeTools::tempsRestantFinEvent($demande);
     }
 
 }

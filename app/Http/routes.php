@@ -280,6 +280,12 @@ Route::get(
 );
 
 
+Route::get(
+    'remainders',
+    ['middleware'=>'auth','uses'=>'GeneralController@showRemainders']
+);
+
+
 
 //Images Routes
 Route::get('images/{img}',function ($img){

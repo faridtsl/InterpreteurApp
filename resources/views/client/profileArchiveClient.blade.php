@@ -18,28 +18,48 @@
 
 <div class="container-fluid">
 <br/>
-<div class="row">
-    <div class="col-lg-12">
-        <div class="container-fluid well span6">
-            <div class="col-sm-2 col-md-2">
-                <img src="/images/{{$client->image}}" alt="" id="imgInterp" class="img-circle img-responsive" />
-            </div>
-            <div class="col-sm-2 col-md-4">
-                <blockquote>
-                    <p id="nomInterp">{{$client->nom}} {{$client->prenom}}</p>@if($client->trashed())<small><cite title="Source Title" id="adresseInterp"><span class="label label-danger displayClass">Archivé</span></cite></small>@endif
-
-                </blockquote>
-                <p> <i class="glyphicon glyphicon-envelope"></i> <span id="emailInterp">{{$client->email}}</span>
-                    <br/> <i class="glyphicon glyphicon-phone"></i> <span id="telInterp">{{$client->tel_portable}}</span>
-                    <br/> <i class="glyphicon glyphicon-home"></i> <span id="telFixInterp">{{$client->tel_fixe}}</span>
-                </p>
+    <h3 class="page-header">{{$client->nom}} {{$client->prenom}} @if($client->trashed())<small><cite title="Source Title" id="adresseInterp"><span class="label label-danger displayClass">Archivé</span></cite></small>@endif</h3>
+    <div class="row">
+        <!-- left column -->
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="text-center">
+                <img src="/images/{{$client->image}}" style="height: 200px;width:200px;" class="avatar img-circle img-thumbnail" alt="avatar">
             </div>
         </div>
-        <hr>
-    </div>
-</div>
+        <!-- edit form column -->
+        <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
+            <div class="form-horizontal" role="form">
+            <!--div class="form-group">
+                <label class="col-lg-3 control-label">Adresse</label>
+                <div class="col-lg-8">
+                    <input class="form-control" value="mohammed@gmail.com" type="text" disabled="true">
+                </div>
+            </div-->
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">tel fixe</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" value="{{$client->tel_fixe}}" type="text" disabled="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">tel portable</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" value="{{$client->tel_portable}}" type="text" disabled="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Email:</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" value="{{$client->email}}" type="text" disabled="true">
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<div class="row">
+    </div>
+
+
+    <div class="row">
     <div class="panel panel-info">
         <div class="panel-heading">
             <h4 class="panel-title">

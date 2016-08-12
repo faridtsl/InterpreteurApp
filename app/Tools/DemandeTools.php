@@ -64,6 +64,18 @@ class DemandeTools{
         return $now->diffInDays($dateEvent,false);
     }
 
+    public static function tempsRestantMinutes(Demande $d){
+        $dateEvent = new Carbon($d->dateEndEvent);
+        $now = Carbon::now();
+        return $now->diffInMinutes($dateEvent,false);
+    }
+
+    public static function tempsRestantFinEvent(Demande $d){
+        $dateEvent = new Carbon($d->dateEndEvent);
+        $now = Carbon::now();
+        return $now->diffInDays($dateEvent,false);
+    }
+
     public static function updateDemande(Adresse $adr=null,Client $client=null,Etat $etat=null,Traduction $traduction=null,User $u,$a){
         $demande = Demande::find($a['id']);
         if($a['titre'] != null) $demande->titre = $a['titre'];
@@ -146,6 +158,11 @@ class DemandeTools{
     public static function canBeRestored($demande){
         $client = ClientTools::getClient($demande->client_id);
         return ! $client->trashed();
+    }
+
+    public static function getAllDemandes(){
+        $demandes = Demande::all();
+        return $demandes;
     }
 
 }

@@ -16,26 +16,45 @@
 
 @section('content')
     <br/>
+
+    <h3 class="page-header">{{$interpreteur->nom}} {{$interpreteur->prenom}} @if($interpreteur->trashed())<small><cite title="Source Title" id="adresseInterp"><span class="label label-danger displayClass">Archivé</span></cite></small>@endif</h3>
     <div class="row">
-        <div class="col-lg-12">
-
-
-            <div class="container-fluid well span6">
-                <div class="col-sm-2 col-md-2">
-                    <img src="/images/{{$interpreteur->image}}" alt="" id="imgInterp" class="img-circle img-responsive" />
+        <!-- left column -->
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="text-center">
+                <img src="/images/{{$interpreteur->image}}" style="height: 200px;width:200px;" class="avatar img-circle img-thumbnail" alt="avatar">
+            </div>
+        </div>
+        <!-- edit form column -->
+        <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
+            <div class="form-horizontal" role="form">
+            <!--div class="form-group">
+                <label class="col-lg-3 control-label">Adresse</label>
+                <div class="col-lg-8">
+                    <input class="form-control" value="mohammed@gmail.com" type="text" disabled="true">
                 </div>
-                <div class="col-sm-2 col-md-4">
-                    <blockquote>
-                        <p id="nomInterp">{{$interpreteur->nom}} {{$interpreteur->prenom}}</p>@if($interpreteur->trashed())<span class="label label-danger displayClass">Archivé</span>@endif
-                        <small><cite title="Source Title" id="adresseInterp">{{\App\Tools\AdresseTools::getAdresse($interpreteur->adresse_id)->adresse}}  <i class="glyphicon glyphicon-map-marker"></i></cite></small>
-                    </blockquote>
-                    <p> <i class="glyphicon glyphicon-envelope"></i> <span id="emailInterp">{{$interpreteur->email}}</span>
-                        <br
-                        /> <i class="glyphicon glyphicon-phone"></i> <span id="telInterp">{{$interpreteur->tel_portable}}</span>
+            </div-->
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">tel fixe</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" value="{{$interpreteur->tel_fixe}}" type="text" disabled="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">tel portable</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" value="{{$interpreteur->tel_portable}}" type="text" disabled="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Email:</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" value="{{$interpreteur->email}}" type="text" disabled="true">
+                    </div>
                 </div>
             </div>
-            <hr>
         </div>
+
     </div>
 
     <div class="row">

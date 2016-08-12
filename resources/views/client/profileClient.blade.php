@@ -9,18 +9,18 @@
     <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.1.2/css/buttons.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.0.2/css/responsive.bootstrap.min.css">
-    <link rel="stylesheet" href="{{ asset('/css/myStyle.css')}}" />
+    <link rel="stylesheet" href="{{ asset('/css/cardProfiles.css')}}" />
     <link rel="stylesheet" href="{{ asset('/css/success.css')}}" />
     <script type="text/javascript" src="{{ asset('js/jquery.popconfirm.js')}}"></script>
 @endsection
 
 @section('content')
 <br/>
-<div class="row">
+<!--div class="row">
     <div class="col-lg-12">
         <div class="container-fluid well span6">
-            <div class="col-sm-2 col-md-2">
-                <img src="/images/{{$client->image}}" style="width: 120px;height:120px;" class="img-circle img-responsive" />
+            <div class="col-sm-2 col-md-1">
+                <img src="/images/{{$client->image}}" style="width: 80px;height:80px;" class="img-circle" />
             </div>
             <div class="col-sm-2 col-md-4">
                 <blockquote>
@@ -35,6 +35,74 @@
         </div>
         <hr>
     </div>
+</div-->
+
+<!--div class="row text-center">
+    <div class="col-lg-12 col-sm-12 col-xs-12 text-center">
+
+        <div class="card hovercard">
+            <div class="cardheader">
+
+            </div>
+            <div class="avatar">
+                <img alt="" src="/images/{{$client->image}}">
+            </div>
+            <div class="info">
+                <div class="title">
+                    <span>{{$client->nom}} {{$client->prenom}}</span>
+                </div>
+                <div class="desc"> <i class="glyphicon glyphicon-envelope"></i>  {{$client->email}}</div>
+                <div class="desc"> <i class="glyphicon glyphicon-phone"></i> {{$client->tel_portable}}</div>
+                <div class="desc">  <i class="glyphicon glyphicon-home"></i> {{$client->tel_fixe}}</div>
+            </div>
+            <div class="bottom">
+                @if($client->trashed())<small><cite title="Source Title" id="adresseInterp"><span class="label label-danger displayClass">Archivé</span></cite></small>@endif
+            </div>
+        </div>
+
+    </div>
+
+</div-->
+
+
+<h3 class="page-header">{{$client->nom}} {{$client->prenom}} @if($client->trashed())<small><cite title="Source Title" id="adresseInterp"><span class="label label-danger displayClass">Archivé</span></cite></small>@endif</h3>
+<div class="row">
+    <!-- left column -->
+    <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="text-center">
+            <img src="/images/{{$client->image}}" style="height: 200px;width:200px;" class="avatar img-circle img-thumbnail" alt="avatar">
+        </div>
+    </div>
+    <!-- edit form column -->
+    <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
+        <div class="form-horizontal" role="form">
+            <!--div class="form-group">
+                <label class="col-lg-3 control-label">Adresse</label>
+                <div class="col-lg-8">
+                    <input class="form-control" value="mohammed@gmail.com" type="text" disabled="true">
+                </div>
+            </div-->
+            <div class="form-group">
+                <label class="col-lg-3 control-label">tel fixe</label>
+                <div class="col-lg-8">
+                    <input class="form-control" value="{{$client->tel_fixe}}" type="text" disabled="true">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label">tel portable</label>
+                <div class="col-lg-8">
+                    <input class="form-control" value="{{$client->tel_portable}}" type="text" disabled="true">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Email:</label>
+                <div class="col-lg-8">
+                    <input class="form-control" value="{{$client->email}}" type="text" disabled="true">
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <div class="row">
@@ -89,7 +157,6 @@
                         </td>
                         <td><a id="validate{{$facture->id}}" href="/facture/validate?id={{$facture->id}}" class="validateButton"><span class="glyphicon glyphicon-ok"></span></a></td>
                     </tr>
-
 
                     <script type="text/javascript">
                         $(document).ready(function() {
@@ -148,28 +215,28 @@
                 </tfoot>
                 <tbody>
                 @foreach($devis as $devi)
-                        <tr>
-                            <td>{{$devi->id}}</td>
-                            <td>{{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->nom}} {{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->prenom}}</td>
-                            <td>{{\App\Tools\DevisEtatTools::getEtatById($devi->etat_id)->libelle }}</td>
-                            <td>{{\App\Tools\DevisTools::getTotal($devi->id)}} &euro;</td>
-                            <td><a href="/demande/update?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->id}}">{{\App\Tools\DemandeTools::getDemande($devi->demande_id)->titre}}</a></td>
-                            <td>{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
-                            <td>{{$devi->created_at->format('l j F Y H:i')}}</td>
-                            <td>{{$devi->updated_at->format('l j F Y H:i')}}</td>
-                            <td>
-                                <a id="resend{{$devi->id}}" data-id="{{$devi->id}}" class="resendButton"> <span class="glyphicon glyphicon-refresh"></span> </a>
-                            </td>
-                            <td>
-                                <a href="/devis/view?id={{$devi->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
-                            </td>
-                            <td>
-                                <a href="/devis/update?id={{$devi->id}}" class="editor_edit"><span class="glyphicon glyphicon-pencil"></span></a>
-                                /
-                                <a id="delete{{$devi->id}}" data-id="{{$devi->id}}" class="editor_remove"><span class="glyphicon glyphicon-trash" ></span></a>
-                            </td>
-                            <td><a id="validate{{$devi->id}}" href="/devis/validate?id={{$devi->id}}" class="validateButton"><span class="glyphicon glyphicon-ok"></span></a></td>
-                        </tr>
+                    <tr>
+                        <td>{{$devi->id}}</td>
+                        <td>{{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->nom}} {{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->prenom}}</td>
+                        <td>{{\App\Tools\DevisEtatTools::getEtatById($devi->etat_id)->libelle }}</td>
+                        <td>{{\App\Tools\DevisTools::getTotal($devi->id)}} &euro;</td>
+                        <td><a href="/demande/update?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->id}}">{{\App\Tools\DemandeTools::getDemande($devi->demande_id)->titre}}</a></td>
+                        <td>{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
+                        <td>{{$devi->created_at->format('l j F Y H:i')}}</td>
+                        <td>{{$devi->updated_at->format('l j F Y H:i')}}</td>
+                        <td>
+                            <a id="resend{{$devi->id}}" data-id="{{$devi->id}}" class="resendButton"> <span class="glyphicon glyphicon-refresh"></span> </a>
+                        </td>
+                        <td>
+                            <a href="/devis/view?id={{$devi->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
+                        </td>
+                        <td>
+                            <a href="/devis/update?id={{$devi->id}}" class="editor_edit"><span class="glyphicon glyphicon-pencil"></span></a>
+                            /
+                            <a id="delete{{$devi->id}}" data-id="{{$devi->id}}" class="editor_remove"><span class="glyphicon glyphicon-trash" ></span></a>
+                        </td>
+                        <td><a id="validate{{$devi->id}}" href="/devis/validate?id={{$devi->id}}" class="validateButton"><span class="glyphicon glyphicon-ok"></span></a></td>
+                    </tr>
                 @endforeach
                 </tbody>
             </table>
@@ -227,7 +294,7 @@
                             <td>{{ \App\Tools\AdresseTools::getAdresse($demande->adresse_id)->adresse}}</td>
                             <td>
                                 <p>
-                                    <a data-placement="top" data-toggle="tooltip" title="Edit" class="btn btn-warning btn-xs editButton" href="/demande/update?id={{$demande->id}}" >
+                                    <a data-placement="top" data-toggle="tooltip" title="Edit" class="btn btn-warning btn-xs" href="/demande/update?id={{$demande->id}}" >
                                         <span class="glyphicon glyphicon-pencil"></span>
                                     </a>
                                     <button data-placement="top" data-toggle="tooltip" title="View" class="btn btn-success btn-xs seeButton" data-id="{{$demande->id}}" >

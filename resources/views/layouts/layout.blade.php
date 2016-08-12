@@ -229,10 +229,13 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i>Traces</a>
+                            <a href="/calendar"><i class="fa fa-table fa-fw"></i> Calendrier</a>
                         </li>
                         <li>
-                            <a href="/calendar"><i class="fa fa-table fa-fw"></i> Calendrier</a>
+                            <a href="/remainders"><i class="fa fa-dashboard fa-fw"></i>Remainders</a>
+                        </li>
+                        <li>
+                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i>Traces</a>
                         </li>
 </ul>
 </div>

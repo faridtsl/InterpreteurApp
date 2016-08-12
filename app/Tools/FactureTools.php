@@ -75,4 +75,10 @@ class FactureTools{
         return $factures;
     }
 
+    public static function tempsRestant($f){
+        $date_envoi = new Carbon($f->date_envoi_email);
+        $now = Carbon::now();
+        return $now->diffInDays($date_envoi,false);
+    }
+
 }
