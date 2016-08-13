@@ -80,7 +80,7 @@ class ClientTools{
         $demandes = DemandeTools::getDemandesByClient($client_id);
         foreach ($demandes as $demande){
             $etat = EtatTools::getEtatById($demande->etat_id);
-            if($etat->nom == 'Traitée') return false;
+            if($etat->libelle == 'Traitée') return false;
         }
         return true;
     }

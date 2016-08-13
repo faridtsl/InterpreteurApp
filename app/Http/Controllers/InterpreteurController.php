@@ -84,13 +84,18 @@ class InterpreteurController extends Controller{
         $interpreteur = InterpreteurTools::updateInterpreteur($connectedUser,$request);
         AdresseTools::updateAdresse($connectedUser,$request);
         InterpreteurTools::addTraductions($interpreteur,$request);
-        return redirect('interpreteur/list');
+        return redirect()->back();
     }
 
     public function deleteInterpreteur(Request $request){
         $connectedUser = Auth::user();
-        InterpreteurTools::deleteInterpreteur($connectedUser,$request['id']);
-        return redirect('interpreteur/list');
+        $errors = [];
+        if(InterpreteurTools::canBeDeleted($request['id'])) {
+            InterpreteurTools::deleteInterpreteur($connectedUser, $request['id']);
+        }else{
+            array_push($errors,'L\'interpreteur a des devis en cours');
+        }
+        return redirect()->back()->withErrors($errors);
     }
 
     public function restoreInterpreteur(Request $request){

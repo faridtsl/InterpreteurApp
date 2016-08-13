@@ -156,6 +156,7 @@ $(document).ready(function() {
                 m2 = m2.concat(' ');
                 var m = m2.concat("'");
                 $("#headDelete").text(m);
+                $("#deleteForm").attr('action','/demande/delete');
                 $('#delete').modal("show");
             }, error: function () {
                 alert("error!!!!");
@@ -168,6 +169,7 @@ $(document).ready(function() {
         $id = $(this).attr('data-id');
         $("#idDel").val($id);
         var msg = "Suppresion de devis";
+        $("#deleteForm").attr('action','/devis/delete');
         $("#headDelete").text(msg);
         $('#delete').modal("show");
     });

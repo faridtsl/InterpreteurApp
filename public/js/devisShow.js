@@ -77,12 +77,51 @@ $(document).ready(function() {
         });
     });
 
-    $('.resendButton').on('click',function (e) {
+   /* $(document.body).on('click','.resendButton',function (e) {
         e.preventDefault();
         $("#idResend").val($(this).attr('data-id'));
         console.log($("#idResend").val());
         $("#resendModal").modal('show');
     });
+*/
+    $(document.body).on('click','.editor_remove', function (e) {
+        e.preventDefault();
+        // Get the record's ID via attribute
+        $id = $(this).attr('data-id');
+        $("#idDel").val($id);
+        var msg = "Suppresion de devis";
+        $("#headDelete").text(msg);
+        $('#delete').modal("show");
+    });
+
+
+    $(document.body).on('click','.resendButton', function (e) {
+        e.preventDefault();
+        // Get the record's ID via attribute
+        $id = $(this).attr('data-id');
+        $("#idRes").val($id);
+        var msg = "Renvoi de devis";
+        $("#headRes").text(msg);
+        $('#resendModalDevis').modal("show");
+    });
+
+
+    $('#resendDev').on('click',function (e) {
+        e.preventDefault();
+        $id = $('#idRes').val();
+        $("#resendModalDevis").modal('hide');
+        $.ajax({
+            url: '/devis/resend?id='+$id,
+            type:"GET",
+            success:function(data){
+                $('#modalSuccess').find('.modal-body').html('Devis renvoyé au client');
+                $('#modalSuccess').modal('toggle');
+            },error:function(){
+                alert("error!!!!");
+            }
+        });
+    });
+
 
 
     $("#collapse2").addClass('collapse');

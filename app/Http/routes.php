@@ -254,6 +254,10 @@ Route::get(
     'devis/delete',
     ['middleware'=>'auth','uses'=>'DevisController@deleteDevis']
 );
+Route::post(
+    'devis/delete',
+    ['middleware'=>'auth','uses'=>'DevisController@deleteDevis']
+);
 Route::get(
     'devis/validate',
     ['middleware'=>'auth','uses'=>'DevisController@validateDevis']

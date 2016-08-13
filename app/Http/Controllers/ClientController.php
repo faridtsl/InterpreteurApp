@@ -77,17 +77,17 @@ class ClientController extends Controller{
         }
         $request['imageName'] = $imgName;
         ClientTools::updateClient($connectedUser,$request);
-        return redirect('client/list');
+        return redirect()->back();
     }
 
     public function deleteClient(Request $request){
         $connectedUser = Auth::user();
-        if(ClientTools::canBeDeleted($request['id']))
-            ClientTools::deleteClient($connectedUser,$request['id']);
-        else{
-            return redirect('client/list')->withErrors(['Le client a des demande non terminées']);
+        if(ClientTools::canBeDeleted($request['id'])) {
+            ClientTools::deleteClient($connectedUser, $request['id']);
+        }else{
+            return redirect()->back()->withErrors(['Le client a des commandes non terminées']);
         }
-        return redirect('client/list');
+        return redirect()->back()->with('message','Client supprimé avec success');
     }
 
     public function restoreClient(Request $request){

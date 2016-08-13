@@ -99,6 +99,8 @@
 
 @section('modals')
 
+    @include('includes.popups')
+
     <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

@@ -66,30 +66,28 @@
                 </tfoot>
                 <tbody>
                 @foreach($demandes as $demande)
-                    @if(\App\Tools\DemandeTools::tempsRestant($demande)>=0)
-                        <tr>
-                            <td>{{$demande->titre}}</td>
-                            <td>{{\App\Tools\EtatTools::getEtatById($demande->etat_id)->libelle}}</td>
-                            <td>{{\Carbon\Carbon::parse($demande->created_at)->format('l j F Y H:i')}}</td>
-                            <td>{{\Carbon\Carbon::parse($demande->updated_at)->format('l j F Y H:i')}}</td>
-                            <td>{{\Carbon\Carbon::parse($demande->deleted_at)->format('l j F Y H:i')}}</td>
-                            <td>{{\Carbon\Carbon::parse($demande->dateEvent)->format('l j F Y H:i')}}</td>
-                            <td>{{\Carbon\Carbon::parse($demande->dateEndEvent)->format('l j F Y H:i')}}</td>
-                            <td>{{\App\Tools\LangueTools::getLangue(\App\Tools\TraductionTools::getTraductionById($demande->traduction_id)->source)->content}}</td>
-                            <td>{{\App\Tools\LangueTools::getLangue(\App\Tools\TraductionTools::getTraductionById($demande->traduction_id)->cible)->content}}</td>
-                            <td>{{ \App\Tools\AdresseTools::getAdresse($demande->adresse_id)->adresse}}</td>
-                            <td>
-                                <p>
-                                    <a data-placement="top" data-toggle="tooltip" title="Restore" class="btn btn-success btn-xs restoreButton" href="/demande/restore?id={{$demande->id}}" >
-                                        <span class="glyphicon glyphicon-refresh"></span>
-                                    </a>
-                                    <button data-placement="top" data-toggle="tooltip" title="View" class="btn btn-info btn-xs seeButton" data-id="{{$demande->id}}" >
-                                        <span class="glyphicon glyphicon-search"></span>
-                                    </button>
-                                </p>
-                            </td>
-                        </tr>
-                    @endif
+                    <tr>
+                        <td>{{$demande->titre}}</td>
+                        <td>{{\App\Tools\EtatTools::getEtatById($demande->etat_id)->libelle}}</td>
+                        <td>{{\Carbon\Carbon::parse($demande->created_at)->format('l j F Y H:i')}}</td>
+                        <td>{{\Carbon\Carbon::parse($demande->updated_at)->format('l j F Y H:i')}}</td>
+                        <td>{{\Carbon\Carbon::parse($demande->deleted_at)->format('l j F Y H:i')}}</td>
+                        <td>{{\Carbon\Carbon::parse($demande->dateEvent)->format('l j F Y H:i')}}</td>
+                        <td>{{\Carbon\Carbon::parse($demande->dateEndEvent)->format('l j F Y H:i')}}</td>
+                        <td>{{\App\Tools\LangueTools::getLangue(\App\Tools\TraductionTools::getTraductionById($demande->traduction_id)->source)->content}}</td>
+                        <td>{{\App\Tools\LangueTools::getLangue(\App\Tools\TraductionTools::getTraductionById($demande->traduction_id)->cible)->content}}</td>
+                        <td>{{ \App\Tools\AdresseTools::getAdresse($demande->adresse_id)->adresse}}</td>
+                        <td>
+                            <p>
+                                <a data-placement="top" data-toggle="tooltip" title="Restore" class="btn btn-success btn-xs restoreButton" href="/demande/restore?id={{$demande->id}}" >
+                                    <span class="glyphicon glyphicon-refresh"></span>
+                                </a>
+                                <button data-placement="top" data-toggle="tooltip" title="View" class="btn btn-info btn-xs seeButton" data-id="{{$demande->id}}" >
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </p>
+                        </td>
+                    </tr>
                 @endforeach
                 </tbody>
             </table>

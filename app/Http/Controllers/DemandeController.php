@@ -116,8 +116,18 @@ class DemandeController extends Controller{
     public function deleteDemande(Request $request){
         $connectedUser = Auth::user();
         $demande = Demande::find($request['id']);
-        $err = DemandeTools::deleteDemande($connectedUser,$demande);
-        return redirect()->back()->with('message','Demande supprimée avec success')->withErrors($err);
+        if($request['can']=='?' && DemandeTools::canBeDeleted($demande) && EtatTools::getEtatById($demande->etat_id)->libelle == 'En cours'){
+            $msg = 'Cette demande à des devis envoyés aux clients, êtes-vous sur de bien vouloir le supprimer ?';
+            return redirect()->back()->with('message2', $msg)
+                ->with('id',$request['id']);
+        }
+        if(DemandeTools::canBeDeleted($demande)) {
+            DemandeTools::deleteDemande($connectedUser, $demande);
+            return redirect()->back()->with('message', 'Demande supprimée avec success');
+        }else{
+            $err = ['Demande a une commande en cours'];
+            return redirect()->back()->withErrors($err);
+        }
     }
 
     public function getDemande($id){

@@ -86,13 +86,16 @@ class DevisTools{
         $client = ClientTools::getClient($demande->client_id);
         $adresse = AdresseTools::getAdresse($demande->adresse_id);
         $services = ServiceTools::getServices($devis->id);
-        MailTools::sendMail('Devis créée','devis','creadis.test@gmail.com',$client->email,[],['services'=>$services,'client'=>$client,'demande'=>$demande,'adresse'=>$adresse,'devis'=>$devis],'public/css/style_df.css');
+        MailTools::sendMail('NEW QUOTATION HAS BEEN CREATED','devis','creadis.test@gmail.com',$client->email,[],['services'=>$services,'client'=>$client,'demande'=>$demande,'adresse'=>$adresse,'devis'=>$devis],'public/css/style_df.css');
     }
 
     public static function deleteDevis(User $u,$devis){
         $facture = FactureTools::getFactureByDevis($devis);
         if($facture == null) $devis->delete();
         else return false;
+        $demande = DemandeTools::getDemande($devis->demande_id);
+        $demande->etat()->associate(EtatTools::getEtatByName('En cours'));
+        $demande->save();
         return true;
     }
 
@@ -126,6 +129,14 @@ class DevisTools{
 
     public static function validerDevis(User $u,$devis){
         $etat = DevisEtatTools::getEtatByName('Commande');
+        $demande = DemandeTools::getDemande($devis->demande_id);
+        $devs = DevisTools::getArchiveDevisByDemander($demande->id);
+        if($devs != null)
+            foreach ($devs as $dev) {
+                if($dev->id != $devis->id) $dev->delete();
+            }
+        $demande->etat()->associate(EtatTools::getEtatByName('Traitée'));
+        $demande->save();
         $devis->etat()->associate($etat);
         $devis->save();
     }

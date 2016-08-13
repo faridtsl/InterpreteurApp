@@ -53,6 +53,12 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="col-lg-3 control-label">Prestation:</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" value="{{$interpreteur->prestation}} {{$interpreteur->devise}}" type="text" disabled="true">
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-lg-3 control-label">Langues:</label>
                     <div class="col-lg-8">
                         @foreach(\App\Tools\TraductionTools::getTraductionsByInterpreteur($interpreteur->id) as $traduction)
@@ -202,10 +208,7 @@
                 </table>
             </div>
         </div>
-        </div>
-    </div>
 
-    <div class="row">
         <form action="/interpreteur/delete" method="post">
             {!! csrf_field() !!}
             <a class="btn btn-default" href="/interpreteur/profile/archive?id={{$interpreteur->id}}">
@@ -221,7 +224,7 @@
                     $("#supprimerClient").popConfirm({
                         title: "Message de confirmation ?",
                         content: "Voulez vous supprimer l'interprete !",
-                        placement: "bottom"
+                        placement: "top"
                     });
                 });
 

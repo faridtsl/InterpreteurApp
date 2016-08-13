@@ -17,7 +17,7 @@
 @section('content')
 <br/>
 <!--div class="row">
-    <div class="col-lg-12">
+    <!--div class="col-lg-12">
         <div class="container-fluid well span6">
             <div class="col-sm-2 col-md-1">
                 <img src="/images/{{$client->image}}" style="width: 80px;height:80px;" class="img-circle" />
@@ -315,9 +315,7 @@
             </table>
         </div>
     </div>
-</div>
 
-<div class="row">
     <form action="/client/delete" method="post">
         {!! csrf_field() !!}
         <a class="btn btn-default" href="/client/profile/archive?id={{$client->id}}">
@@ -333,7 +331,7 @@
                 $("#supprimerClient").popConfirm({
                     title: "Message de confirmation ?",
                     content: "Voulez vous supprimer le client !",
-                    placement: "bottom"
+                    placement: "top"
                 });
             });
 

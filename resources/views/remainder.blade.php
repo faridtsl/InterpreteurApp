@@ -25,7 +25,7 @@
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <a data-toggle="collapse" href="#demandePanel">
-                        Liste des demandes
+                        Liste des demandes <span class="badge">{{count($demandes->filter(function($demande){return \App\Tools\DemandeTools::tempsRestant($demande)<=env('REMAINDER_DELAI_DEMANDE','0') && \App\Tools\DemandeTools::tempsRestant($demande)>=0;}))}}</span>
                     </a>
                 </h4>
             </div>
@@ -103,7 +103,7 @@
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#commandePanel">Commandes expirées</a>
+                    <a data-toggle="collapse" href="#commandePanel">Commandes expirées <span class="badge">{{count($devis->filter(function($devi) {return \App\Tools\DevisEtatTools::getEtatById($devi->etat_id)->libelle == "Commande" && \App\Tools\DevisTools::tempsRestantFinEvent($devi) <= 0;}))}}</span></a>
                 </h4>
             </div>
             <div id="commandePanel"  class="panel-body panel-collapse">
@@ -193,7 +193,7 @@
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#devisPanel">Devis en attente</a>
+                    <a data-toggle="collapse" href="#devisPanel">Devis en attente <span class="badge">{{count($devis->filter(function($devi) {return \App\Tools\DevisEtatTools::getEtatById($devi->etat_id)->libelle == "Créé" && \App\Tools\DevisTools::tempsRestant($devi) <= env('REMAINDER_DELAI_DEVIS','0');}))}}</span></a>
                 </h4>
             </div>
             <div id="devisPanel"  class="panel-body panel-collapse">
@@ -283,7 +283,7 @@
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#facturePanel">Factures en attente de paiement</a>
+                    <a data-toggle="collapse" href="#facturePanel">Factures en attente de paiement <span class="badge">{{count($factures)}}</span></a>
                 </h4>
             </div>
             <div id="facturePanel"  class="panel-body panel-collapse">

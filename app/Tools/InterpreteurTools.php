@@ -103,12 +103,9 @@ class InterpreteurTools{
         return $interp;
     }
 
-    public static function canBeDeleted($iterpreteur_id){
-        $factures = FactureTools::getFacturesByInterp($iterpreteur_id);
-        foreach($factures as $facture){
-            if($facture->fini == false) return false;
-        }
-        return true;
+    public static function canBeDeleted($interpreteur_id){
+        $devis = DevisTools::getDevisByInterp($interpreteur_id);
+        return count($devis)==0;
     }
 
     public static function getLanguages($interpreteur){

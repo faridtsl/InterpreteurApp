@@ -43,3 +43,16 @@
         </div> <!-- / .modal-content -->
     </div> <!-- / .modal-dialog -->
 </div>
+
+<script>
+
+    $(document).ready(function () {
+        @if (count($errors) > 0)
+            $('#errorModal').modal('show');
+        @endif
+
+        @if(session()->has('message') != null)
+                $("#modalSuccess").modal('toggle');
+        @endif
+    });
+</script>

@@ -228,9 +228,7 @@
             </table>
         </div>
     </div>
-</div>
 
-<div class="row">
     <a class="btn btn-default" href="/client/profile?id={{$client->id}}">
         <span class="glyphicon glyphicon-arrow-left"></span>Retour
     </a>

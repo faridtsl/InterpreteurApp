@@ -52,6 +52,22 @@
                         <input class="form-control" value="{{$interpreteur->email}}" type="text" disabled="true">
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Prestation:</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" value="{{$interpreteur->prestation}} {{$interpreteur->devise}}" type="text" disabled="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Langues:</label>
+                    <div class="col-lg-8">
+                        @foreach(\App\Tools\TraductionTools::getTraductionsByInterpreteur($interpreteur->id) as $traduction)
+                            <a class="btn btn-primary" style="margin: 10px"><span class="glyphicon glyphicon-flag"></span>
+                                {{\App\Tools\LangueTools::getLangue($traduction->source)->content}} <span class="glyphicon glyphicon-arrow-right"></span> {{\App\Tools\LangueTools::getLangue($traduction->cible)->content}}
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -194,15 +210,10 @@
                 </table>
             </div>
         </div>
-    </div>
-    </div>
 
-    <div class="row">
-        <div class="row">
-            <a class="btn btn-default" href="/interpreteur/profile?id={{$interpreteur->id}}">
-                <span class="glyphicon glyphicon-arrow-left"></span>Retour
-            </a>
-        </div>
+        <a class="btn btn-default" href="/interpreteur/profile?id={{$interpreteur->id}}">
+            <span class="glyphicon glyphicon-arrow-left"></span>Retour
+        </a>
     </div>
 
 @endsection

@@ -288,6 +288,7 @@
                     {!! csrf_field() !!}
                     <div class="modal-body">
                         <div class="form-group">
+                            <input type="hidden" value="?" id="can" name="can" />
                             <input type="hidden" value="-1" id="idDel" name="id" />
                         </div>
                         <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> êtes-vous sur de vouloir supprimer?</div>
@@ -301,6 +302,37 @@
             <!-- /.modal-content -->
         </div>
     </div>
+
+
+    @if(session()->has('message2') != null)
+    <!--Suppression popup-->
+    <div class="modal fade" id="modalConfirm" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span>&times;</span></button>
+                    <h4 class="modal-title custom_align"> Suppression demande</h4>
+                </div>
+                <form id="deleteForm" action="delete" method="post" enctype="multipart/form-data">
+                    {!! csrf_field() !!}
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="hidden" value="{{session('id')}}" id="idDel" name="id" />
+                        </div>
+                        <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> {{session('message2')}}</div>
+                    </div>
+                    <div class="modal-footer ">
+                        <input class="btn btn-success" value="Oui" type="submit"/>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Non</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+    </div>
+    @endif
+
+
 @endsection
 
 
@@ -314,8 +346,14 @@
         @if(session()->has('message') != null)
                 $("#modalSuccess").modal('toggle');
         @endif
-        </script>
-        <script src="{{ asset("js/demandeJS.js") }}"> </script>
-        <script src="{{ asset("js/timeInitiator.js") }}"> </script>
+
+        @if(session()->has('message2') != null)
+                $("#modalConfirm").modal('toggle');
+        @endif
+    </script>
+
+    <script src="{{ asset("js/steps.js") }}"> </script>
+    <script src="{{ asset("js/demandeJS.js") }}"> </script>
+    <script src="{{ asset("js/timeInitiator.js") }}"> </script>
 
     @endsection

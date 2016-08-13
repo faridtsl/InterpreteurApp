@@ -95,8 +95,6 @@ class DemandeTools{
         foreach ($devis as $devi) {
             DevisTools::deleteDevis($u,$devi);
         }
-        $demande->etat()->associate(EtatTools::getEtatByName('Archivée'));
-        $demande->save();
         $demande->delete();
     }
 
@@ -153,6 +151,10 @@ class DemandeTools{
     public static function getArchiveDemandes(){
         $demandes = Demande::onlyTrashed()->get();
         return $demandes;
+    }
+
+    public static function canBeDeleted($demande){
+        return EtatTools::getEtatById($demande->etat_id)->libelle != 'Traitée';
     }
 
     public static function canBeRestored($demande){

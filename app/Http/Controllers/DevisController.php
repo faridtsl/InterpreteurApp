@@ -37,7 +37,7 @@ class DevisController extends Controller{
             DB::beginTransaction();
             $devis = DevisTools::addDevis($request,$connectedUser);
             $services = ServiceTools::getServices($devis->id);
-            MailTools::sendMail('Devis créée','devis','creadis.test@gmail.com',$client->email,[],['services'=>$services,'client'=>$client,'demande'=>$demande,'adresse'=>$adresse,'devis'=>$devis],'public/css/style_df.css');
+            MailTools::sendMail('NEW QUOTATION HAS BEEN CREATED','devis','creadis.test@gmail.com',$client->email,[],['services'=>$services,'client'=>$client,'demande'=>$demande,'adresse'=>$adresse,'devis'=>$devis],'public/css/style_df.css');
             DB::commit();
             return view('devis.devisAdd',['demande'=>$demande,'interpreteurs'=>$interpreteurs,'message'=>'Devis ajouté avec success']);
         }catch(\Exception $e){
@@ -85,16 +85,26 @@ class DevisController extends Controller{
     }
 
     public function validateDevis(Request $request){
-        $devis = Devi::find($request['id']);
-        $etat = DevisEtatTools::getEtatById($devis->etat_id)->libelle;
-        $connectedUser = Auth::user();
-        if($etat=='Commande') {
-            $facture = DevisTools::facturerDevis($devis);
-            DevisTools::deleteDevis($connectedUser,$devis);
-        }else if($etat=='Créé'){
-            DevisTools::validerDevis($connectedUser,$devis);
+        try {
+            DB::beginTransaction();
+            $devis = Devi::find($request['id']);
+            $demande = DemandeTools::getDemande($devis->demande_id);
+            $adresse = AdresseTools::getAdresse($demande->adresse_id);
+            $client = ClientTools::getClient($demande->client_id);
+            $services = ServiceTools::getServices($devis->id);
+            $etat = DevisEtatTools::getEtatById($devis->etat_id)->libelle;
+            $connectedUser = Auth::user();
+            if ($etat == 'Commande') {
+                $facture = DevisTools::facturerDevis($devis);
+                MailTools::sendMail('NEW ORDER HAS BEEN CREATED', 'facturation', 'creadis.test@gmail.com', $client->email, [], ['facture'=>$facture,'services' => $services, 'client' => $client, 'demande' => $demande, 'adresse' => $adresse, 'devis' => $devis], 'public/css/style_df.css');
+            } else if ($etat == 'Créé') {
+                DevisTools::validerDevis($connectedUser, $devis);
+            }
+            DB::commit();
+        }catch(\Exception $e){
+            DB::rollback();
         }
-        return redirect('devis/list');
+        return redirect()->back();
     }
 
     public function devisUpdateShow(Request $request){
