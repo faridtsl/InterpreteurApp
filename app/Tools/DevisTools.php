@@ -91,11 +91,13 @@ class DevisTools{
 
     public static function deleteDevis(User $u,$devis){
         $facture = FactureTools::getFactureByDevis($devis);
-        if($facture == null) $devis->delete();
+        if($facture == null || $facture->fini) $devis->delete();
         else return false;
         $demande = DemandeTools::getDemande($devis->demande_id);
-        $demande->etat()->associate(EtatTools::getEtatByName('En cours'));
-        $demande->save();
+        if(count(DevisTools::getArchiveDevisByDemander($demande->id))==0){
+            $demande->etat()->associate(EtatTools::getEtatByName('En cours'));
+            $demande->save();
+        }
         return true;
     }
 
@@ -104,9 +106,9 @@ class DevisTools{
             ->where('id', $devis_id)
             ->get()->first();
         $err = [];
-        if(DevisTools::canBeRestored($devis))
+        if(DevisTools::canBeRestored($devis)) {
             $devis->restore();
-        else{
+        }else{
             $interpreteur = InterpreteurTools::getInterpreteur($devis->interpreteur_id);
             $demande = DemandeTools::getDemande($devis->demande_id);
             $err = [];

@@ -96,7 +96,6 @@
                     <td>{{$facture->date_envoi_mail}}</td>
                     <td>@if($facture->fini){{$facture->date_paiement}}@else Non Payée @endif</td>
                     <td>{{\App\Tools\DevisTools::getDevisById($facture->devi_id)->total}} &euro;</td>
-                    <td>{{\App\Tools\ClientTools::getClientByFacture($facture)->nom}} {{\App\Tools\ClientTools::getClientByFacture($facture)->prenom}}</td>
                     <td>
                         <a href="/facture/view?id={{$facture->devi_id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
                     </td>

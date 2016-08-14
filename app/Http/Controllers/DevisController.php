@@ -9,6 +9,7 @@ use App\Tools\ClientTools;
 use App\Tools\DemandeTools;
 use App\Tools\DevisEtatTools;
 use App\Tools\DevisTools;
+use App\Tools\FactureTools;
 use App\Tools\InterpreteurTools;
 use App\Tools\ServiceTools;
 use App\User;
@@ -88,15 +89,11 @@ class DevisController extends Controller{
         try {
             DB::beginTransaction();
             $devis = Devi::find($request['id']);
-            $demande = DemandeTools::getDemande($devis->demande_id);
-            $adresse = AdresseTools::getAdresse($demande->adresse_id);
-            $client = ClientTools::getClient($demande->client_id);
-            $services = ServiceTools::getServices($devis->id);
             $etat = DevisEtatTools::getEtatById($devis->etat_id)->libelle;
             $connectedUser = Auth::user();
             if ($etat == 'Commande') {
                 $facture = DevisTools::facturerDevis($devis);
-                MailTools::sendMail('NEW ORDER HAS BEEN CREATED', 'facturation', 'creadis.test@gmail.com', $client->email, [], ['facture'=>$facture,'services' => $services, 'client' => $client, 'demande' => $demande, 'adresse' => $adresse, 'devis' => $devis], 'public/css/style_df.css');
+                FactureTools::sendFactureMail($facture);
             } else if ($etat == 'Créé') {
                 DevisTools::validerDevis($connectedUser, $devis);
             }

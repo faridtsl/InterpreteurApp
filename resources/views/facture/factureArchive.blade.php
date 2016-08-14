@@ -30,10 +30,6 @@
                 <th>Date d'envoi</th>
                 <th>Date de paiement</th>
                 <th>Total</th>
-                <th>Resend</th>
-                <th>View</th>
-                <th>View Devis</th>
-                <th>Valider</th>
             </tr>
             </thead>
             <tfoot>
@@ -43,10 +39,6 @@
                 <th>Date d'envoi</th>
                 <th>Date de paiement</th>
                 <th>Total</th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
             </tr>
             </tfoot>
             <tbody>
@@ -58,28 +50,8 @@
                     <td>{{$facture->date_envoi_mail}}</td>
                     <td>@if($facture->fini){{$facture->date_paiement}}@else Non Payée @endif</td>
                     <td>{{\App\Tools\DevisTools::getDevisById($facture->devi_id)->total}} &euro;</td>
-                    <td>
-                        <a href="home" id="resend{{$facture->id}}" data-id="{{$facture->id}}" class="resendButton"> <span class="glyphicon glyphicon-refresh"></span> </a>
-                    </td>
-                    <td>
-                        <a href="/facture/view?id={{$facture->devi_id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
-                    </td>
-                    <td>
-                        <a href="/devis/view?id={{$facture->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
-                    </td>
-                    <td><a id="validate{{$facture->id}}" href="/facture/validate?id={{$facture->id}}" class="validateButton"><span class="glyphicon glyphicon-ok"></span></a></td>
                 </tr>
 
-
-                <script type="text/javascript">
-                    $(document).ready(function() {
-                        $("#validate{{$facture->id}}").popConfirm({
-                            title: "Message de confirmation ?",
-                            content: "Voulez vous Valider le devis en cours !",
-                            placement: "bottom"
-                        });
-                    });
-                </script>
             @endforeach
             </tbody>
         </table>
@@ -89,24 +61,6 @@
 
 @section('modals')
     @include('includes.popups')
-
-    <div class="modal fade" id="resendModal" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span>&times;</span></button>
-                    <h4 class="modal-title custom_align" >Renvoi facture</h4>
-                </div>
-                <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> êtes-vous sur de vouloir renvoyer la facture?</div>
-                <div class="modal-footer ">
-                    <input id="idResend" type="hidden" value="-1"/>
-                    <button class="btn btn-success" id="resend" >Oui</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Non</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
 @endsection
 
 @section('footer')

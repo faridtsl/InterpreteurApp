@@ -316,7 +316,6 @@
                     </tfoot>
                     <tbody>
                     @foreach($factures as $facture)
-                        @if(\App\Tools\FactureTools::tempsRestant($facture) >= env('REMAINDER_DELAI_FACTURE','0'))
                         <tr>
                             <td>{{$facture->id}}</td>
                             <td>{{\App\Tools\ClientTools::getClientByFacture($facture)->nom}} {{\App\Tools\ClientTools::getClientByFacture($facture)->prenom}}</td>
@@ -344,7 +343,6 @@
                                 });
                             });
                         </script>
-                        @endif
                     @endforeach
                     </tbody>
                 </table>

@@ -271,6 +271,7 @@ Route::post(
     ['middleware'=>'auth','uses'=>'DevisController@devisUpdateStore']
 );
 
+//Service Routes
 Route::get(
     'service/delete',
     ['middleware'=>'auth','uses'=>'ServiceController@deleteService']
@@ -281,6 +282,26 @@ Route::get(
 Route::get(
     'facture/list',
     ['middleware'=>'auth','uses'=>'FactureController@showFactures']
+);
+Route::get(
+    'facture/validate',
+    ['middleware'=>'auth','uses'=>'FactureController@paiementFacture']
+);
+Route::post(
+    'facture/validate',
+    ['middleware'=>'auth','uses'=>'FactureController@paiementFacture']
+);
+Route::get(
+    'facture/resend',
+    ['middleware'=>'auth','uses'=>'FactureController@resendFacture']
+);
+Route::post(
+    'facture/resend',
+    ['middleware'=>'auth','uses'=>'FactureController@resendFacture']
+);
+Route::get(
+    'facture/archive',
+    ['middleware'=>'auth','uses'=>'FactureController@archiveFactures']
 );
 
 

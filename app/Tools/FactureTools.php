@@ -9,6 +9,7 @@
 namespace App\Tools;
 
 
+use App\Devi;
 use App\Facture;
 use Carbon\Carbon;
 
@@ -25,6 +26,9 @@ class FactureTools{
         $facture->date_envoi_mail = Carbon::now();
         $facture->devis()->associate($devis);
         $facture->save();
+        $demande = DemandeTools::getDemande($devis->demande_id);
+        $demande->etat()->associate(EtatTools::getEtatByName('Finalisée'));
+        $demande->save();
         return $facture;
     }
 
@@ -80,5 +84,28 @@ class FactureTools{
         $now = Carbon::now();
         return $now->diffInDays($date_envoi,false);
     }
+
+    public static function sendFactureMail($facture){
+        $devis = Devi::find($facture->devi_id);
+        $demande = DemandeTools::getDemande($devis->demande_id);
+        $adresse = AdresseTools::getAdresse($demande->adresse_id);
+        $client = ClientTools::getClient($demande->client_id);
+        $services = ServiceTools::getServices($devis->id);
+        MailTools::sendMail('NEW ORDER HAS BEEN CREATED', 'facturation', 'creadis.test@gmail.com', $client->email, [], ['facture'=>$facture,'services' => $services, 'client' => $client, 'demande' => $demande, 'adresse' => $adresse, 'devis' => $devis], 'public/css/style_df.css');
+    }
+
+    public static function resendFacture($facture){
+        $facture->date_envoi_mail = Carbon::now();
+        $facture->save();
+        self::sendFactureMail($facture);
+    }
+
+    public static function paiementFacture($facture){
+        $facture->fini = true;
+        $facture->date_paiement = Carbon::now();
+        $facture->save();
+    }
+
+
 
 }
