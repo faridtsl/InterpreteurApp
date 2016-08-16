@@ -44,7 +44,7 @@
                             <th>Date modification du devis</th>
                             <th>Adresse de l'interpreteur</th>
                             <th>Resend</th>
-                            <th>View</th>
+                            <th>Show</th>
                             <th>Edit/Delete</th>
                             <th>Reserver</th>
                         </tr>
@@ -122,9 +122,9 @@
                         <th>Date creation du devis</th>
                         <th>Date modification du devis</th>
                         <th>Resend</th>
-                        <th>View</th>
+                        <th>Show</th>
                         <th>Edit/Delete</th>
-                        <th>Valider</th>
+                        <th>Factuer</th>
                     </tr>
                     </thead>
                     <tfoot>

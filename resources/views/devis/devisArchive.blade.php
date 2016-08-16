@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.0.2/css/responsive.bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('/css/myStyle.css')}}" />
     <link rel="stylesheet" href="{{ asset('css/success.css')}}" />
-    <script type="text/javascript" src="{{{ asset('js/jquery.popconfirm.js')}}}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.popconfirm.js')}}"></script>
 @endsection
 
 @section('content')
@@ -27,22 +27,24 @@
             <tr>
                 <th class="never">id</th>
                 <th>Nom de l'interpreteur</th>
+                <th>Etat</th>
                 <th>Prix proposé</th>
-                <th>Restorer</th>
-                <th>View</th>
                 <th>Date creation du devis</th>
                 <th>Date modification du devis</th>
+                <th>Date suppression du devis</th>
+                <th>Restorer</th>
             </tr>
             </thead>
             <tfoot>
             <tr>
                 <th>id</th>
                 <th>Nom de l'interpreteur</th>
+                <th>Etat</th>
                 <th>Prix proposé</th>
-                <th></th>
                 <th>Date creation du devis</th>
                 <th>Date modification du devis</th>
                 <th>Date suppression du devis</th>
+                <th></th>
             </tr>
             </tfoot>
             <tbody>
@@ -50,13 +52,14 @@
                 <tr>
                     <td>{{$devi->id}}</td>
                     <td>{{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->nom}} {{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->prenom}}</td>
+                    <td>{{\App\Tools\DevisEtatTools::getEtatById($devi->etat_id)->libelle}}</td>
                     <td>{{\App\Tools\DevisTools::getTotal($devi->id)}} &euro;</td>
-                    <td>
-                        <a href="/devis/restore?id={{$devi->id}}"> <span class="glyphicon glyphicon-refresh"></span> </a>
-                    </td>
                     <td>{{$devi->created_at->format('l j F Y H:i')}}</td>
                     <td>{{$devi->updated_at->format('l j F Y H:i')}}</td>
                     <td>{{$devi->deleted_at->format('l j F Y H:i')}}</td>
+                    <td>
+                        <a href="/devis/restore?id={{$devi->id}}"> <span class="glyphicon glyphicon-refresh"></span> </a>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

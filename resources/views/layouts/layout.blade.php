@@ -163,13 +163,13 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> Gestion des interpretes<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> Gestion des interprètes<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="/interpreteur/add">Ajouter un interprete</a>
+                                    <a href="/interpreteur/add">Ajouter un interprètes</a>
                                 </li>
                                 <li>
-                                    <a href="/interpreteur/list">Afficher les interpretes</a>
+                                    <a href="/interpreteur/list">Afficher les interprètes</a>
                                 </li>
                                 <li>
                                     <a href="/interpreteur/archive">Archive</a>

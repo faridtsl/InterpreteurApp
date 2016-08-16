@@ -31,9 +31,9 @@
                 <th>Date de paiement</th>
                 <th>Total</th>
                 <th>Resend</th>
-                <th>View</th>
-                <th>View Devis</th>
-                <th>Valider</th>
+                <th>Show</th>
+                <th>Show Devis</th>
+                <th>Payer</th>
             </tr>
             </thead>
             <tfoot>
@@ -67,7 +67,7 @@
                     <td>
                         <a href="/devis/view?id={{$facture->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
                     </td>
-                    <td><a id="validate{{$facture->id}}" href="/facture/validate?id={{$facture->id}}" class="validateButton"><span class="glyphicon glyphicon-ok"></span></a></td>
+                    <td>@if(!$facture->fini)<a id="validate{{$facture->id}}" href="/facture/validate?id={{$facture->id}}" class="validateButton"><span class="glyphicon glyphicon-ok"></span></a>@endif</td>
                 </tr>
 
 

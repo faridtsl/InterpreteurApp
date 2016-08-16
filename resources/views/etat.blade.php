@@ -17,7 +17,7 @@
             @endif
             <form role="form" method="POST" action="/etat/add" id="formID" enctype="multipart/form-data" class="col-md-6 col-md-offset-3">
                 {!! csrf_field() !!}
-                <div class="panel panel-default">
+                <div class="panel">
                     <div class="form-group">
                         <label>Nom Etat</label>
                         <input class="form-control" name="lib" required="true" value="{{ old('lib') }}" />

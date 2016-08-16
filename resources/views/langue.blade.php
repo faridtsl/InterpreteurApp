@@ -18,7 +18,7 @@
             @endif
             <form role="form" method="POST" action="/langue/add" id="formID" enctype="multipart/form-data" class="col-md-6 col-md-offset-3">
                 {!! csrf_field() !!}
-                <div class="panel panel-default">
+                <div class="panel">
                     <div class="form-group">
                         <label>Abreviation Langue</label>
                         <input class="form-control" name="abreviation" required="true" value="{{ old('abreviation') }}" />

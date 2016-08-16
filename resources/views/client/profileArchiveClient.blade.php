@@ -74,8 +74,8 @@
                     <th>Date d'envoi</th>
                     <th>Date de paiement</th>
                     <th>Total</th>
-                    <th>View</th>
-                    <th>View Devis</th>
+                    <th>Show</th>
+                    <th>Show Devis</th>
                 </tr>
                 </thead>
                 <tfoot>
@@ -127,7 +127,7 @@
                     <th>Adresse de l'interpreteur</th>
                     <th>Date creation du devis</th>
                     <th>Date modification du devis</th>
-                    <th>View</th>
+                    <th>Show</th>
                 </tr>
                 </thead>
                 <tfoot>

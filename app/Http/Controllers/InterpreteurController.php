@@ -93,7 +93,7 @@ class InterpreteurController extends Controller{
         if(InterpreteurTools::canBeDeleted($request['id'])) {
             InterpreteurTools::deleteInterpreteur($connectedUser, $request['id']);
         }else{
-            array_push($errors,'L\'interpreteur a des devis en cours');
+            array_push($errors,'L\'interpreteur a des devis en cours/Factures non payées');
         }
         return redirect()->back()->withErrors($errors);
     }
