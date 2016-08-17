@@ -7,7 +7,7 @@
  */
 
 namespace App\Tools;
-use Barryvdh\Snappy\Facades\SnappyPdf as PDF;
+use Barryvdh\DomPDF\Facade as PDF;
 
 use Illuminate\Support\Facades\Mail;
 use Waavi\Mailman\Facades\Mailman;
