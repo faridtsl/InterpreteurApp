@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap-material-datetimepicker.css') }}" />
     <script type="text/javascript" src="http://momentjs.com/downloads/moment-with-locales.min.js"></script>
     <script type="text/javascript" src="{{ asset('js/bootstrap-material-datetimepicker.js') }}"></script>
+    <link type="text/css" rel="stylesheet" href="{{asset('css/bootstrap-datatable.css')}}">
+    <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.1.2/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.0.2/css/responsive.bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('/css/myStyle.css')}}" />
     <link rel="stylesheet" href="{{ asset('css/success.css')}}" />
     <script src="http://cdn.ckeditor.com/4.5.8/full/ckeditor.js"></script>
