@@ -8,6 +8,7 @@ use App\Tools\AdresseTools;
 use App\Tools\ClientTools;
 use App\Tools\DemandeTools;
 use App\Tools\EtatTools;
+use App\Tools\FactureTools;
 use App\Tools\LangueTools;
 use App\Tools\TraductionTools;
 use Illuminate\Http\Request;
@@ -41,8 +42,8 @@ class DemandeController extends Controller{
             if($traduction==null)
                 return view('demande.demandeAdd',['langues' => $langues,'clients' => $clients])->withErrors(['Langue source doit être differente de la langues destination']);
             $demande = DemandeTools::addDemande($adresse,$client,$etat,$traduction,$connectedUser,$request);
-            DB::commit();
             MailTools::sendMail('Demande créée','createDemande','creadis.test@gmail.com',$client->email,[],['client'=>$client,'demande'=>$demande,'adresse'=>$adresse],'public/css/mailStyle.css');
+            DB::commit();
             return view('demande.demandeAdd', ['message' => 'Interpreteur ajouté avec success!','client' => $client, 'clients' => $clients,'langues' => $langues, 'demande' => $demande]);
         }catch(\Exception $e){
             DB::rollback();
@@ -70,11 +71,13 @@ class DemandeController extends Controller{
 
     public function showUpdate(Request $request){
         $demande = Demande::find($request['id']);
+        if($demande == null) return redirect('/demande/archive');
         $traduction = TraductionTools::getTraductionById($demande->traduction_id);
         $langues = LangueTools::getAllLangues();
         $clients = ClientTools::getAllClients();
         $client = ClientTools::getClient($demande->client_id);
-        return view('demande.demandeUpdate',['client'=>$client,'langues'=>$langues,'traduction'=>$traduction,'demande'=>$demande,'clients'=>$clients]);
+        $factures = FactureTools::getFactureByDemande($demande);
+        return view('demande.demandeUpdate',['client'=>$client,'langues'=>$langues,'traduction'=>$traduction,'demande'=>$demande,'clients'=>$clients,'factures'=>$factures]);
     }
 
     public function storeUpdate(Request $request){

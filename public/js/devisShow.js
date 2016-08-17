@@ -62,6 +62,37 @@ $(document).ready(function() {
     $("#tableCommande").css("width","100%");
 
 
+    table2 = $('#tableValide').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'colvis'
+        ],
+        tableTools: {
+            "columnDefs": [{"visible": false, "searchable": false, "targets": [0]}]
+        }
+    });
+
+    // Setup - add a text input to each footer cell
+    $('#tableValide tfoot th').each( function () {
+        var title = $(this).text();
+        if(title!="" && title != 'Action') $(this).html( '<input type="text" placeholder="'+title+'"  style="width: 100%;" />' );
+    } );
+
+    // Apply the search
+    table2.columns().every( function () {
+        var that = this;
+
+        $( 'input', this.footer() ).on( 'keyup change', function () {
+            if ( that.search() !== this.value ) {
+                that
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+    $("#tableValide").css("width","100%");
+
+
     $('#resend').on('click',function (e) {
         $id = $(this).parent().find('#idResend').val();
         $.ajax({
@@ -125,5 +156,6 @@ $(document).ready(function() {
 
 
     $("#collapse2").addClass('collapse');
+    $("#collapse3").addClass('collapse');
 
 });

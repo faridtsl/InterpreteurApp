@@ -162,7 +162,7 @@
                         $(document).ready(function() {
                             $("#validate{{$facture->id}}").popConfirm({
                                 title: "Message de confirmation ?",
-                                content: "Voulez vous Valider le devis en cours !",
+                                content: "Voulez-vous déclarer le paiement de la facture en cours ?",
                                 placement: "bottom"
                             });
                         });

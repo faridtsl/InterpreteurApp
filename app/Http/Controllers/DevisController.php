@@ -59,11 +59,12 @@ class DevisController extends Controller{
     }
 
     public function viewDevis(Request $request){
-        $devis = Devi::find($request['id']);
-        $demande = Demande::find($devis->demande_id);
+        $devis = DevisTools::getDevisById($request['id']);
+        $demande = DemandeTools::getDemande($devis->demande_id);
         $client = ClientTools::getClient($demande->client_id);
         $adresse = AdresseTools::getAdresse($demande->adresse_id);
         $services = ServiceTools::getServices($devis->id);
+        if($devis->trashed()) $services = ServiceTools::getServicesArchive($devis->id);
         return view('emails.devis',['services'=>$services,'client'=>$client,'demande'=>$demande,'adresse'=>$adresse,'devis'=>$devis]);
     }
 

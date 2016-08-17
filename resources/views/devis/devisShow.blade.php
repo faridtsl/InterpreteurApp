@@ -177,6 +177,77 @@
     </div>
 </div>
 
+
+<div class="row">
+    <div class="panel panel-warning">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse3">
+                    Devis validés
+                </a>
+            </h4>
+        </div>
+        <div id="collapse3" class="panel-collapse">
+            <div class="panel-body">
+                <table id="tableValide" class="table table-striped table-bordered display responsive nowrap" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th class="never">id</th>
+                        <th>Nom de l'interpreteur</th>
+                        <th>Prix proposé</th>
+                        <th>Demande</th>
+                        <th>Client</th>
+                        <th>Adresse de l'interpreteur</th>
+                        <th>Date creation du devis</th>
+                        <th>Date modification du devis</th>
+                        <th>Show</th>
+                        <th>Edit/Delete</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>id</th>
+                        <th>Nom de l'interpreteur</th>
+                        <th>Prix proposé</th>
+                        <th>Demande</th>
+                        <th>Client</th>
+                        <th>Adresse de l'interpreteur</th>
+                        <th>Date creation du devis</th>
+                        <th>Date modification du devis</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    @foreach($devis as $devi)
+                        @if($devi->etat_id == 3)
+                            <tr>
+                                <td>{{$devi->id}}</td>
+                                <td>{{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->nom}} {{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->prenom}}</td>
+                                <td>{{\App\Tools\DevisTools::getTotal($devi->id)}} &euro;</td>
+                                <td><a href="/demande/update?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->id}}">{{\App\Tools\DemandeTools::getDemande($devi->demande_id)->titre}}</a></td>
+                                <td><a href="/client/profile?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id}}">{{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id)->nom}} {{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id)->prenom}}</a></td>
+                                <td>{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
+                                <td>{{$devi->created_at->format('l j F Y H:i')}}</td>
+                                <td>{{$devi->updated_at->format('l j F Y H:i')}}</td>
+                                <td>
+                                    <a href="/devis/view?id={{$devi->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
+                                </td>
+                                <td>
+                                    <a href="/devis/update?id={{$devi->id}}" class="editor_edit"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    /
+                                    <a id="delete{{$devi->id}}" data-id="{{$devi->id}}" href="/devis/delete?id={{$devi->id}}" class="editor_remove"><span class="glyphicon glyphicon-trash" ></span></a>
+                                </td>
+                            </tr>
+                        @endif
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 @section('modals')

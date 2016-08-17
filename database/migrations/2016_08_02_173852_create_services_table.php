@@ -21,6 +21,7 @@ class CreateServicesTable extends Migration
             $table->string('Unite');
             $table->float('prix');
             $table->float('total');
+            $table->softDeletes();
             $table->integer('devi_id')->unsigned()->index();
             $table->foreign('devi_id')->references('id')->on('devis');
         });

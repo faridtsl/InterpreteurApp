@@ -147,4 +147,41 @@ $(document).ready(function() {
     });
 
 
+
+
+    table = $('#exampleFact').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'colvis'
+        ],
+        tableTools: {
+            "columnDefs": [{"visible": false, "searchable": false, "targets": [0]}]
+        }
+    });
+
+    // Setup - add a text input to each footer cell
+    $('#exampleFact tfoot th').each( function () {
+        var title = $(this).text();
+        if(title!="" && title != 'Action') $(this).html( '<input type="text" placeholder="'+title+'"  style="width: 100%;" />' );
+    } );
+
+    // Apply the search
+    table.columns().every( function () {
+        var that = this;
+
+        $( 'input', this.footer() ).on( 'keyup change', function () {
+            if ( that.search() !== this.value ) {
+                that
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+
+    $("#exampleFact").css("width","100%");
+
+
+
+    $("#factPanel").addClass('collapse');
+
 });

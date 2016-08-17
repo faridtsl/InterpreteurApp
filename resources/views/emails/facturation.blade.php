@@ -75,7 +75,7 @@
             <td class="grand total"></td>
             <td class="grand total"></td>
             <td class="grand total"></td>
-            <td class="grand total">GRAND TOTAL</td>
+            <td class="grand total"><strong>GRAND TOTAL</strong></td>
             <td class="grand total">{{(env('PERCENT_TAXES') * \App\Tools\DevisTools::getDevisById($facture->devi_id)->total) + \App\Tools\DevisTools::getDevisById($facture->devi_id)->total}}&euro;</td>
         </tr>
         </tbody>

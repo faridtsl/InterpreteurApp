@@ -30,6 +30,8 @@
                 <th>Date d'envoi</th>
                 <th>Date de paiement</th>
                 <th>Total</th>
+                <th>Show Devis</th>
+                <th>Show</th>
             </tr>
             </thead>
             <tfoot>
@@ -39,6 +41,8 @@
                 <th>Date d'envoi</th>
                 <th>Date de paiement</th>
                 <th>Total</th>
+                <th></th>
+                <th></th>
             </tr>
             </tfoot>
             <tbody>
@@ -50,6 +54,12 @@
                     <td>{{$facture->date_envoi_mail}}</td>
                     <td>@if($facture->fini){{$facture->date_paiement}}@else Non Payée @endif</td>
                     <td>{{\App\Tools\DevisTools::getDevisById($facture->devi_id)->total}} &euro;</td>
+                    <td>
+                        <a href="/devis/view?id={{$facture->devi_id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
+                    </td>
+                    <td>
+                        <a href="/facture/view?id={{$facture->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
+                    </td>
                 </tr>
 
             @endforeach

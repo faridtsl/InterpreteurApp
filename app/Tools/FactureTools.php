@@ -106,6 +106,14 @@ class FactureTools{
         $facture->save();
     }
 
-
+    public static function getFactureByDemande($demande){
+        $devis = DevisTools::getArchiveDevisByDemander($demande->id);
+        $factures = [];
+        foreach ($devis as $devi) {
+            $fact = FactureTools::getFactureByDevis($devi->id);
+            if($fact != null) array_push($factures,$fact);
+        }
+        return $factures;
+    }
 
 }

@@ -40,4 +40,11 @@ class ServiceTools{
         return $services;
     }
 
+
+    public static function getServicesArchive($devis_id){
+        $services = Service::withTrashed()->where('devi_id',$devis_id)->get();
+        return $services;
+    }
+
+
 }

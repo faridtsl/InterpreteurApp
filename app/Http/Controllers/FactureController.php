@@ -47,12 +47,12 @@ class FactureController extends Controller{
 
     public static function viewFacture(Request $request){
         $facture = FactureTools::getFactureById($request['id']);
-        $devis = Devi::find($facture->devi_id);
-        //dd([$devis,$facture]);
+        $devis = DevisTools::getDevisById($facture->devi_id);
         $demande = DemandeTools::getDemande($devis->demande_id);
         $adresse = AdresseTools::getAdresse($demande->adresse_id);
         $client = ClientTools::getClient($demande->client_id);
         $services = ServiceTools::getServices($devis->id);
+        if($devis->trashed()) $services = ServiceTools::getServicesArchive($devis->id);
         return view('emails.facturation', ['facture'=>$facture,'services' => $services, 'client' => $client, 'demande' => $demande, 'adresse' => $adresse, 'devis' => $devis]);
 
     }
