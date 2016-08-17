@@ -21,7 +21,7 @@ class DevisTools{
 
     public static function addDevis($request,User $u){
         $devis = new Devi();
-        $etat_devis = DevisEtatTools::getEtatByName('Créé');
+        $etat_devis = DevisEtatTools::getEtatById(1);
         $demande = DemandeTools::getDemande($request['demande_id']);
         $interp = InterpreteurTools::getInterpreteur($request['interpreteur_id']);
         $devis->interpreteur()->associate($interp);
@@ -31,7 +31,7 @@ class DevisTools{
         $devis->save();
         $devis->total = ServiceTools::addServices($devis,$request);
         $devis->save();
-        $demande->etat()->associate(EtatTools::getEtatByName('En cours'));
+        $demande->etat()->associate(EtatTools::getEtatById(2));
         $demande->save();
         return $devis;
     }
@@ -95,7 +95,7 @@ class DevisTools{
         else return false;
         $demande = DemandeTools::getDemande($devis->demande_id);
         if(count(DevisTools::getArchiveDevisByDemander($demande->id))==0){
-            $demande->etat()->associate(EtatTools::getEtatByName('En cours'));
+            $demande->etat()->associate(EtatTools::getEtatById(2));
             $demande->save();
         }
         return true;
@@ -130,14 +130,14 @@ class DevisTools{
     }
 
     public static function validerDevis(User $u,$devis){
-        $etat = DevisEtatTools::getEtatByName('Commande');
+        $etat = DevisEtatTools::getEtatById(2);
         $demande = DemandeTools::getDemande($devis->demande_id);
         $devs = DevisTools::getArchiveDevisByDemander($demande->id);
         if($devs != null)
             foreach ($devs as $dev) {
                 if($dev->id != $devis->id) $dev->delete();
             }
-        $demande->etat()->associate(EtatTools::getEtatByName('Traitée'));
+        $demande->etat()->associate(EtatTools::getEtatById(3));
         $demande->save();
         $devis->etat()->associate($etat);
         $devis->save();
@@ -145,7 +145,7 @@ class DevisTools{
 
     public static function facturerDevis($devis){
         $facture = FactureTools::addFacture($devis);
-        $etat = DevisEtatTools::getEtatByName('Validé');
+        $etat = DevisEtatTools::getEtatById(3);
         $devis->etat()->associate($etat);
         $devis->save();
         return $facture;

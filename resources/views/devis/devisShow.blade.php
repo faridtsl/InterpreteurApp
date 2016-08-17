@@ -67,7 +67,7 @@
                     </tfoot>
                     <tbody>
                         @foreach($devis as $devi)
-                            @if(\App\Tools\DevisEtatTools::getEtatById($devi->etat_id)->libelle == "Créé")
+                            @if($devi->etat_id == 1)
                             <tr>
                                 <td>{{$devi->id}}</td>
                                 <td>{{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->nom}} {{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->prenom}}</td>
@@ -145,7 +145,7 @@
                     </tfoot>
                     <tbody>
                     @foreach($devis as $devi)
-                        @if(\App\Tools\DevisEtatTools::getEtatById($devi->etat_id)->libelle == "Commande")
+                        @if($devi->etat_id == 2)
                         <tr>
                             <td>{{$devi->id}}</td>
                             <td>{{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->nom}} {{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->prenom}}</td>

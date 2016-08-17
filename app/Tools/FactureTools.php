@@ -27,7 +27,7 @@ class FactureTools{
         $facture->devis()->associate($devis);
         $facture->save();
         $demande = DemandeTools::getDemande($devis->demande_id);
-        $demande->etat()->associate(EtatTools::getEtatByName('Finalisée'));
+        $demande->etat()->associate(EtatTools::getEtatById(4));
         $demande->save();
         return $facture;
     }

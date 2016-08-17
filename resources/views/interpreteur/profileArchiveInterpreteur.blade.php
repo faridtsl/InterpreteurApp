@@ -90,9 +90,6 @@
                         <th>Date d'envoi</th>
                         <th>Date de paiement</th>
                         <th>Total</th>
-                        <th>Resend</th>
-                        <th>Show</th>
-                        <th>Show Devis</th>
                     </tr>
                     </thead>
                     <tfoot>
@@ -101,9 +98,6 @@
                         <th>Date d'envoi</th>
                         <th>Date de paiement</th>
                         <th>Total</th>
-                        <th>Resend</th>
-                        <th></th>
-                        <th></th>
                     </tr>
                     </tfoot>
                     <tbody>
@@ -114,15 +108,6 @@
                             <td>{{$facture->date_envoi_mail}}</td>
                             <td>@if($facture->fini){{$facture->date_paiement}}@else Non Payée @endif</td>
                             <td>{{\App\Tools\DevisTools::getDevisById($facture->devi_id)->total}} &euro;</td>
-                            <td>
-                                <a href="home" id="resend{{$facture->id}}" data-id="{{$facture->id}}" class="resendFact"> <span class="glyphicon glyphicon-refresh"></span> </a>
-                            </td>
-                            <td>
-                                <a href="/facture/view?id={{$facture->devi_id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
-                            </td>
-                            <td>
-                                <a href="/devis/view?id={{$facture->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
-                            </td>
                         </tr>
 
 
@@ -158,10 +143,7 @@
                         <th>Demande</th>
                         <th>Date creation du devis</th>
                         <th>Date modification du devis</th>
-                        <th>Resend</th>
-                        <th>Show</th>
-                        <th>Edit/Delete</th>
-                        <th>Valider</th>
+                        <th>Date suppression du devis</th>
                     </tr>
                     </thead>
                     <tfoot>
@@ -173,10 +155,7 @@
                         <th>Demande</th>
                         <th>Date creation du devis</th>
                         <th>Date modification du devis</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th>Date suppression du devis</th>
                     </tr>
                     </tfoot>
                     <tbody>
@@ -189,18 +168,7 @@
                             <td><a href="/demande/update?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->id}}">{{\App\Tools\DemandeTools::getDemande($devi->demande_id)->titre}}</a></td>
                             <td>{{$devi->created_at->format('l j F Y H:i')}}</td>
                             <td>{{$devi->updated_at->format('l j F Y H:i')}}</td>
-                            <td>
-                                <a id="resend{{$devi->id}}" data-id="{{$devi->id}}" class="resendButton"> <span class="glyphicon glyphicon-refresh"></span> </a>
-                            </td>
-                            <td>
-                                <a href="/devis/view?id={{$devi->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
-                            </td>
-                            <td>
-                                <a href="/devis/update?id={{$devi->id}}" class="editor_edit"><span class="glyphicon glyphicon-pencil"></span></a>
-                                /
-                                <a id="delete{{$devi->id}}" data-id="{{$devi->id}}" class="editor_remove"><span class="glyphicon glyphicon-trash" ></span></a>
-                            </td>
-                            <td><a id="validate{{$devi->id}}" href="/devis/validate?id={{$devi->id}}" class="validateButton"><span class="glyphicon glyphicon-ok"></span></a></td>
+                            <td>{{$devi->deleted_at->format('l j F Y H:i')}}</td>
                         </tr>
                     @endforeach
                     </tbody>

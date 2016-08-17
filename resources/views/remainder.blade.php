@@ -6,7 +6,7 @@
     <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.1.2/css/buttons.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.0.2/css/responsive.bootstrap.min.css">
-    <script type="text/javascript" src="{{{ asset('js/jquery.popconfirm.js')}}}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.popconfirm.js')}}"></script>
 @endsection
 
 @section('title')
@@ -142,7 +142,7 @@
                     </tfoot>
                     <tbody>
                     @foreach($devis as $devi)
-                        @if(\App\Tools\DevisEtatTools::getEtatById($devi->etat_id)->libelle == "Commande" && \App\Tools\DevisTools::tempsRestantFinEvent($devi) <= 0)
+                        @if($devi->etat_id == 2 && \App\Tools\DevisTools::tempsRestantFinEvent($devi) <= 0)
                             <tr>
                                 <td>{{$devi->id}}</td>
                                 <td>{{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->nom}} {{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->prenom}}</td>
@@ -232,7 +232,7 @@
                     </tfoot>
                     <tbody>
                     @foreach($devis as $devi)
-                        @if(\App\Tools\DevisEtatTools::getEtatById($devi->etat_id)->libelle == "Créé" && \App\Tools\DevisTools::tempsRestant($devi) <= env('REMAINDER_DELAI_DEVIS','0'))
+                        @if($devi->etat_id == 1 && \App\Tools\DevisTools::tempsRestant($devi) <= env('REMAINDER_DELAI_DEVIS','0'))
                             <tr>
                                 <td>{{$devi->id}}</td>
                                 <td>{{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->nom}} {{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->prenom}}</td>
@@ -296,8 +296,8 @@
                         <th>Date de paiement</th>
                         <th>Total</th>
                         <th>Resend</th>
-                        <th>View</th>
                         <th>View Devis</th>
+                        <th>View</th>
                         <th>Valider</th>
                     </tr>
                     </thead>
@@ -308,10 +308,10 @@
                         <th>Date d'envoi</th>
                         <th>Date de paiement</th>
                         <th>Total</th>
-                        <th>Resend</th>
-                        <th>View</th>
-                        <th>View Devis</th>
-                        <th>Valider</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
                     </tr>
                     </tfoot>
                     <tbody>
@@ -326,10 +326,10 @@
                             <a href="home" id="resend{{$facture->id}}" data-id="{{$facture->id}}" class="resendFact"> <span class="glyphicon glyphicon-refresh"></span> </a>
                             </td>
                             <td>
-                                <a href="/facture/view?id={{$facture->devi_id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
+                                <a href="/devis/view?id={{$facture->devi_id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
                             </td>
                             <td>
-                                <a href="/devis/view?id={{$facture->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
+                                <a href="/facture/view?id={{$facture->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
                             </td>
                             <td><a id="validate{{$facture->id}}" href="/facture/validate?id={{$facture->id}}" class="validateButton"><span class="glyphicon glyphicon-ok"></span></a></td>
 

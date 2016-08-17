@@ -31,8 +31,8 @@
                 <th>Date de paiement</th>
                 <th>Total</th>
                 <th>Resend</th>
-                <th>Show</th>
                 <th>Show Devis</th>
+                <th>Show</th>
                 <th>Payer</th>
             </tr>
             </thead>
@@ -62,10 +62,10 @@
                         <a href="home" id="resend{{$facture->id}}" data-id="{{$facture->id}}" class="resendButton"> <span class="glyphicon glyphicon-refresh"></span> </a>
                     </td>
                     <td>
-                        <a href="/facture/view?id={{$facture->devi_id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
+                        <a href="/devis/view?id={{$facture->devi_id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
                     </td>
                     <td>
-                        <a href="/devis/view?id={{$facture->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
+                        <a href="/facture/view?id={{$facture->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
                     </td>
                     <td>@if(!$facture->fini)<a id="validate{{$facture->id}}" href="/facture/validate?id={{$facture->id}}" class="validateButton"><span class="glyphicon glyphicon-ok"></span></a>@endif</td>
                 </tr>

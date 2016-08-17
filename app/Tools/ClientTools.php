@@ -79,8 +79,7 @@ class ClientTools{
     public static function canBeDeleted($client_id){
         $demandes = DemandeTools::getDemandesByClient($client_id);
         foreach ($demandes as $demande){
-            $etat = EtatTools::getEtatById($demande->etat_id);
-            if($etat->libelle == 'Traitée' || $etat->libelle == 'Finalisée') return false;
+            if($demande->etat_id == 3 || $demande->etat_id == 4) return false;
         }
         return true;
     }

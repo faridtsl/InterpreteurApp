@@ -140,7 +140,7 @@ class DemandeTools{
         $errors = [];
         if(DemandeTools::canBeRestored($demande)){
             $demande->restore();
-            $demande->etat()->associate(EtatTools::getEtatByName('Créée'));
+            $demande->etat()->associate(EtatTools::getEtatById(1));
             $demande->save();
         }else{
             $errors = ['Demande ne peut pas etre restaurer'];
@@ -154,7 +154,7 @@ class DemandeTools{
     }
 
     public static function canBeDeleted($demande){
-        return EtatTools::getEtatById($demande->etat_id)->libelle != 'Traitée';
+        return $demande->etat_id != 3;
     }
 
     public static function canBeRestored($demande){

@@ -74,8 +74,6 @@
                     <th>Date d'envoi</th>
                     <th>Date de paiement</th>
                     <th>Total</th>
-                    <th>Show</th>
-                    <th>Show Devis</th>
                 </tr>
                 </thead>
                 <tfoot>
@@ -84,8 +82,6 @@
                     <th>Date d'envoi</th>
                     <th>Date de paiement</th>
                     <th>Total</th>
-                    <th></th>
-                    <th></th>
                 </tr>
                 </tfoot>
                 <tbody>
@@ -96,12 +92,6 @@
                     <td>{{$facture->date_envoi_mail}}</td>
                     <td>@if($facture->fini){{$facture->date_paiement}}@else Non Payée @endif</td>
                     <td>{{\App\Tools\DevisTools::getDevisById($facture->devi_id)->total}} &euro;</td>
-                    <td>
-                        <a href="/facture/view?id={{$facture->devi_id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
-                    </td>
-                    <td>
-                        <a href="/devis/view?id={{$facture->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
-                    </td>
                 </tr>
                 @endforeach
                 </tbody>
@@ -127,7 +117,7 @@
                     <th>Adresse de l'interpreteur</th>
                     <th>Date creation du devis</th>
                     <th>Date modification du devis</th>
-                    <th>Show</th>
+                    <th>Date suppression du devis</th>
                 </tr>
                 </thead>
                 <tfoot>
@@ -140,7 +130,7 @@
                     <th>Adresse de l'interpreteur</th>
                     <th>Date creation du devis</th>
                     <th>Date modification du devis</th>
-                    <th></th>
+                    <th>Date suppression du devis</th>
                 </tr>
                 </tfoot>
                 <tbody>
@@ -154,9 +144,7 @@
                     <td>{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
                     <td>{{$devi->created_at->format('l j F Y H:i')}}</td>
                     <td>{{$devi->updated_at->format('l j F Y H:i')}}</td>
-                    <td>
-                        <a href="/devis/view?id={{$devi->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
-                    </td>
+                    <td>{{$devi->deleted_at->format('l j F Y H:i')}}</td>
                 </tr>
                 @endforeach
                 </tbody>

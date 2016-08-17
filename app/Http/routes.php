@@ -303,6 +303,10 @@ Route::get(
     'facture/archive',
     ['middleware'=>'auth','uses'=>'FactureController@archiveFactures']
 );
+Route::get(
+    'facture/view',
+    ['middleware'=>'auth','uses'=>'FactureController@viewFacture']
+);
 
 
 Route::get(

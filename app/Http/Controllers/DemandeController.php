@@ -33,7 +33,7 @@ class DemandeController extends Controller{
             DB::beginTransaction();
             $adresse = AdresseTools::addAdresse($request);
             $connectedUser = Auth::user();
-            $etat = EtatTools::getEtatByName('Créée');
+            $etat = EtatTools::getEtatById(1);
             $client = ClientTools::getClient($request['client']);
             $src = LangueTools::getLangue($request['langue_src']);
             $dst = LangueTools::getLangue($request['langue_dest']);

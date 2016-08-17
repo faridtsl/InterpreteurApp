@@ -89,12 +89,11 @@ class DevisController extends Controller{
         try {
             DB::beginTransaction();
             $devis = Devi::find($request['id']);
-            $etat = DevisEtatTools::getEtatById($devis->etat_id)->libelle;
             $connectedUser = Auth::user();
-            if ($etat == 'Commande') {
+            if ($devis->etat_id == 2) {
                 $facture = DevisTools::facturerDevis($devis);
                 FactureTools::sendFactureMail($facture);
-            } else if ($etat == 'Créé') {
+            } else if ($devis->etat_id == 1) {
                 DevisTools::validerDevis($connectedUser, $devis);
             }
             DB::commit();
