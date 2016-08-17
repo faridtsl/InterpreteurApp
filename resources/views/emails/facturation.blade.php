@@ -23,12 +23,12 @@
         <div><a href="mailto:company@example.com">company@example.com</a></div>
     </div>
     <div id="project">
-        <div><span>PROJECT</span> {{\App\Tools\DemandeTools::getDemande(\App\Tools\DevisTools::getDevisById($facture->devi_id)->demande_id)->titre}}</div>
-        <div><span>CLIENT</span> {{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande(\App\Tools\DevisTools::getDevisById($facture->devi_id)->demande_id)->client_id)->nom}} {{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande(\App\Tools\DevisTools::getDevisById($facture->devi_id)->demande_id)->client_id)->prenom}}</div>
-        <div><span>ADDRESS</span> {{\App\Tools\AdresseTools::getAdresse(\App\Tools\DemandeTools::getDemande(\App\Tools\DevisTools::getDevisById($facture->devi_id)->demande_id)->adresse_id)->adresse}}</div>
-        <div><span>EMAIL</span> <a href="mailto:{{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande(\App\Tools\DevisTools::getDevisById($facture->devi_id)->demande_id)->client_id)->email}}">{{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande(\App\Tools\DevisTools::getDevisById($facture->devi_id)->demande_id)->client_id)->email}}</a></div>
-        <div><span>CREATION DATE</span>{{date('D d M Y h:m:s',strtotime($facture->created_at))}}</div>
-        <div><span>EVENT DATE</span> {{date('D d M Y h:m:s',strtotime(\App\Tools\DemandeTools::getDemande(\App\Tools\DevisTools::getDevisById($facture->devi_id)->demande_id)->dateEvent))}}</div>
+        <div><span>PROJECT</span> <span style="width: 13px;"></span>{{\App\Tools\DemandeTools::getDemande(\App\Tools\DevisTools::getDevisById($facture->devi_id)->demande_id)->titre}}</div>
+        <div><span>CLIENT</span><span style="width: 13px;"></span> {{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande(\App\Tools\DevisTools::getDevisById($facture->devi_id)->demande_id)->client_id)->nom}} {{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande(\App\Tools\DevisTools::getDevisById($facture->devi_id)->demande_id)->client_id)->prenom}}</div>
+        <div><span>ADDRESS</span><span style="width: 13px;"></span> {{\App\Tools\AdresseTools::getAdresse(\App\Tools\DemandeTools::getDemande(\App\Tools\DevisTools::getDevisById($facture->devi_id)->demande_id)->adresse_id)->adresse}}</div>
+        <div><span>EMAIL</span><span style="width: 13px;"></span> <a href="mailto:{{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande(\App\Tools\DevisTools::getDevisById($facture->devi_id)->demande_id)->client_id)->email}}">{{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande(\App\Tools\DevisTools::getDevisById($facture->devi_id)->demande_id)->client_id)->email}}</a></div>
+        <div><span>CREATION DATE</span> <span style="width: 13px;"></span>{{date('D d M Y h:m:s',strtotime($facture->created_at))}}</div>
+        <div><span>EVENT DATE</span> <span style="width: 13px;"></span>{{date('D d M Y h:m:s',strtotime(\App\Tools\DemandeTools::getDemande(\App\Tools\DevisTools::getDevisById($facture->devi_id)->demande_id)->dateEvent))}}</div>
     </div>
 </header>
 <main>

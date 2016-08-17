@@ -124,10 +124,10 @@
                     <th>Etat</th>
                     <th>Prix proposé</th>
                     <th>Demande</th>
-                    <th>Adresse de l'interpreteur</th>
                     <th>Date creation du devis</th>
                     <th>Date modification du devis</th>
                     <th>Date suppression du devis</th>
+                    <th>Adresse de l'interpreteur</th>
                     <th>Show</th>
                 </tr>
                 </thead>
@@ -138,10 +138,10 @@
                     <th>Etat</th>
                     <th>Prix proposé</th>
                     <th>Demande</th>
-                    <th>Adresse de l'interpreteur</th>
                     <th>Date creation du devis</th>
                     <th>Date modification du devis</th>
                     <th>Date suppression du devis</th>
+                    <th>Adresse de l'interpreteur</th>
                     <th></th>
                 </tr>
                 </tfoot>
@@ -153,10 +153,10 @@
                     <td>{{\App\Tools\DevisEtatTools::getEtatById($devi->etat_id)->libelle }}</td>
                     <td>{{\App\Tools\DevisTools::getTotal($devi->id)}} &euro;</td>
                     <td><a href="/demande/update?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->id}}">{{\App\Tools\DemandeTools::getDemande($devi->demande_id)->titre}}</a></td>
-                    <td>{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
                     <td>{{$devi->created_at->format('l j F Y H:i')}}</td>
                     <td>{{$devi->updated_at->format('l j F Y H:i')}}</td>
                     <td>{{$devi->deleted_at->format('l j F Y H:i')}}</td>
+                    <td>{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
                     <td>
                         <a href="/devis/view?id={{$devi->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
                     </td>

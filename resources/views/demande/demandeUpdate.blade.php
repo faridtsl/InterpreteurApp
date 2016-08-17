@@ -327,17 +327,17 @@
                     <tr>
                         <th>Nom de l'interpreteur</th>
                         <th>Adresse de l'interpreteur</th>
+                        <th width="20px">Etat</th>
                         <th width="20px">Prix proposé</th>
-                        <th width="40px">Resend/Edit/Delete</th>
-                        <th width="20px">Valider</th>
+                        <th width="40px">Resend/Edit/Delete @if($demande->etat_id == 2)/Reserver @elseif($demande->etat_id == 3)/Facturer @endif</th>
                     </tr>
                     </thead>
                     <tfoot>
                     <tr>
                         <th>Nom de l'interpreteur</th>
                         <th>Adresse de l'interpreteur</th>
+                        <th>Etat</th>
                         <th>Prix proposé</th>
-                        <th></th>
                         <th></th>
                     </tr>
                     </tfoot>
@@ -346,9 +346,9 @@
                         <tr>
                             <td>{{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->nom}} {{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->prenom}}</td>
                             <td>{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
+                            <td>{{\App\Tools\DevisEtatTools::getEtatById($devi->etat_id)->libelle}}</td>
                             <td>{{\App\Tools\DevisTools::getTotal($devi->id)}} &euro;</td>
-                            <td><a href="home" data-id="{{$devi->id}}" class="resendButton"> <span class="glyphicon glyphicon-refresh"></span> </a> / <a href="/devis/update/{{$devi->id}}" class="editor_edit"><span class="glyphicon glyphicon-pencil"></span></a> / <a id="delete{{$devi->id}}" href="/devis/delete?id={{$devi->id}}" class="editor_remove"><span class="glyphicon glyphicon-trash" ></span></a></td>
-                            <td><a id="validate{{$devi->id}}" href="/devis/validate?id={{$devi->id}}" class="editor_edit"><span class="glyphicon glyphicon-ok"></span></a></td>
+                            <td><a href="home" data-id="{{$devi->id}}" class="resendButton"> <span class="glyphicon glyphicon-refresh"></span> </a> / <a href="/devis/update/{{$devi->id}}" class="editor_edit"><span class="glyphicon glyphicon-pencil"></span></a> / <a id="delete{{$devi->id}}" href="/devis/delete?id={{$devi->id}}" class="editor_remove"><span class="glyphicon glyphicon-trash" ></span></a> @if($demande->etat_id == 2 || $demande->etat_id == 3)/<a id="validate{{$devi->id}}" href="/devis/validate?id={{$devi->id}}" class="editor_edit"><span class="glyphicon glyphicon-ok"></span></a>@endif</td>
                         </tr>
                     @endforeach
                     </tbody>

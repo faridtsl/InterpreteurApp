@@ -181,6 +181,15 @@ $(document).ready(function() {
     $("#exampleFact").css("width","100%");
 
 
+    $("#devisModal").on('shown.bs.modal', function() {
+        //Get the datatable which has previously been initialized
+        var dataTable= $('#example').DataTable();
+        //recalculate the dimensions
+        dataTable.columns.adjust().responsive.recalc();
+
+    });
+    //myTable.responsive.recalc();
+
 
     $("#factPanel").addClass('collapse');
 
