@@ -29,14 +29,20 @@ class FactureController extends Controller{
     }
 
     public function paiementFacture(Request $request){
-        $connectedUser = Auth::user();
-        $facture = FactureTools::getFactureById($request['id']);
-        FactureTools::paiementFacture($facture);
-        $devis = Devi::find($facture->devi_id);
-        $demande = DemandeTools::getDemande($devis->demande_id);
-        DevisTools::deleteDevis($connectedUser,$devis);
-        DemandeTools::deleteDemande($connectedUser,$demande);
-        FactureTools::deleteFacture($facture->id);
+        try {
+            DB::beginTransaction();
+            $connectedUser = Auth::user();
+            $facture = FactureTools::getFactureById($request['id']);
+            FactureTools::paiementFacture($facture);
+            $devis = Devi::find($facture->devi_id);
+            $demande = DemandeTools::getDemande($devis->demande_id);
+            DevisTools::deleteDevis($connectedUser,$devis);
+            DemandeTools::deleteDemande($connectedUser,$demande);
+            FactureTools::deleteFacture($facture->id);
+            DB::commit();
+        }catch(\Exception $e){
+            DB::rollback();
+        }
         return redirect()->back();
     }
 
