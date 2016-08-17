@@ -9,6 +9,7 @@ use App\Tools\ClientTools;
 use App\Tools\DemandeTools;
 use App\Tools\DevisTools;
 use App\Tools\FactureTools;
+use App\Tools\MailTools;
 use App\Tools\ServiceTools;
 use Illuminate\Http\Request;
 
@@ -62,6 +63,17 @@ class FactureController extends Controller{
         if($devis->trashed()) $services = ServiceTools::getServicesArchive($devis->id);
         return view('emails.facturation', ['facture'=>$facture,'services' => $services, 'client' => $client, 'demande' => $demande, 'adresse' => $adresse, 'devis' => $devis]);
 
+    }
+
+    public function downloadFacture(Request $request){
+        $facture = FactureTools::getFactureById($request['id']);
+        $devis = DevisTools::getDevisById($facture->devi_id);
+        $demande = DemandeTools::getDemande($devis->demande_id);
+        $adresse = AdresseTools::getAdresse($demande->adresse_id);
+        $client = ClientTools::getClient($demande->client_id);
+        $services = ServiceTools::getServices($devis->id);
+        if($devis->trashed()) $services = ServiceTools::getServicesArchive($devis->id);
+        return MailTools::downloadAttach('facturation',['facture'=>$facture,'services' => $services, 'client' => $client, 'demande' => $demande, 'adresse' => $adresse, 'devis' => $devis]);
     }
 
 }

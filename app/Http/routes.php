@@ -307,6 +307,10 @@ Route::get(
     'facture/view',
     ['middleware'=>'auth','uses'=>'FactureController@viewFacture']
 );
+Route::get(
+    'facture/download',
+    ['middleware'=>'auth','uses'=>'FactureController@downloadFacture']
+);
 
 
 Route::get(

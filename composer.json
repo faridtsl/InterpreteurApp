@@ -7,7 +7,11 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
-        "waavi/mailman": "2.0.x"
+        "waavi/mailman": "2.0.x",
+        "barryvdh/laravel-dompdf": "^0.7.0",
+        "barryvdh/laravel-snappy": "^0.3.0",
+        "h4cc/wkhtmltopdf-amd64": "0.12.x",
+        "h4cc/wkhtmltoimage-amd64": "0.12.x"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

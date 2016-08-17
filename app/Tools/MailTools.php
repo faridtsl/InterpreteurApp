@@ -7,7 +7,7 @@
  */
 
 namespace App\Tools;
-
+use Barryvdh\Snappy\Facades\SnappyPdf as PDF;
 
 use Illuminate\Support\Facades\Mail;
 use Waavi\Mailman\Facades\Mailman;
@@ -24,6 +24,11 @@ class MailTools{
             $mail = $mail->attach($attach);
         }
         $mail->send();*/
+    }
+
+    public static function downloadAttach($filename,$params){
+        $pdf = PDF::loadView('emails.'.$filename, $params);
+        return $pdf->download($filename.'.pdf');
     }
 
 }
