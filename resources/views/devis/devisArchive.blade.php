@@ -18,7 +18,7 @@
 
 
     <div class="row">
-        <h1 class="center"> Liste des devis </h1>
+        <h1 class="center"> Archive des devis </h1>
     </div>
 
     <div class="row">
@@ -33,6 +33,7 @@
                 <th>Date modification du devis</th>
                 <th>Date suppression du devis</th>
                 <th>Restorer</th>
+                <th>Show</th>
             </tr>
             </thead>
             <tfoot>
@@ -44,6 +45,7 @@
                 <th>Date creation du devis</th>
                 <th>Date modification du devis</th>
                 <th>Date suppression du devis</th>
+                <th></th>
                 <th></th>
             </tr>
             </tfoot>
@@ -59,6 +61,9 @@
                     <td>{{$devi->deleted_at->format('l j F Y H:i')}}</td>
                     <td>
                         <a href="/devis/restore?id={{$devi->id}}"> <span class="glyphicon glyphicon-refresh"></span> </a>
+                    </td>
+                    <td>
+                        <a href="/devis/view?id={{$devi->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
                     </td>
                 </tr>
             @endforeach

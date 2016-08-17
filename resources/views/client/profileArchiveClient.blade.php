@@ -128,6 +128,7 @@
                     <th>Date creation du devis</th>
                     <th>Date modification du devis</th>
                     <th>Date suppression du devis</th>
+                    <th>Show</th>
                 </tr>
                 </thead>
                 <tfoot>
@@ -141,6 +142,7 @@
                     <th>Date creation du devis</th>
                     <th>Date modification du devis</th>
                     <th>Date suppression du devis</th>
+                    <th></th>
                 </tr>
                 </tfoot>
                 <tbody>
@@ -155,6 +157,9 @@
                     <td>{{$devi->created_at->format('l j F Y H:i')}}</td>
                     <td>{{$devi->updated_at->format('l j F Y H:i')}}</td>
                     <td>{{$devi->deleted_at->format('l j F Y H:i')}}</td>
+                    <td>
+                        <a href="/devis/view?id={{$devi->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
+                    </td>
                 </tr>
                 @endforeach
                 </tbody>

@@ -197,9 +197,9 @@
                         <th>Prix proposé</th>
                         <th>Demande</th>
                         <th>Client</th>
-                        <th>Adresse de l'interpreteur</th>
                         <th>Date creation du devis</th>
                         <th>Date modification du devis</th>
+                        <th>Adresse de l'interpreteur</th>
                         <th>Show</th>
                         <th>Edit/Delete</th>
                     </tr>
@@ -211,9 +211,9 @@
                         <th>Prix proposé</th>
                         <th>Demande</th>
                         <th>Client</th>
-                        <th>Adresse de l'interpreteur</th>
                         <th>Date creation du devis</th>
                         <th>Date modification du devis</th>
+                        <th>Adresse de l'interpreteur</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -227,9 +227,9 @@
                                 <td>{{\App\Tools\DevisTools::getTotal($devi->id)}} &euro;</td>
                                 <td><a href="/demande/update?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->id}}">{{\App\Tools\DemandeTools::getDemande($devi->demande_id)->titre}}</a></td>
                                 <td><a href="/client/profile?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id}}">{{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id)->nom}} {{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id)->prenom}}</a></td>
-                                <td>{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
                                 <td>{{$devi->created_at->format('l j F Y H:i')}}</td>
                                 <td>{{$devi->updated_at->format('l j F Y H:i')}}</td>
+                                <td>{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
                                 <td>
                                     <a href="/devis/view?id={{$devi->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
                                 </td>
