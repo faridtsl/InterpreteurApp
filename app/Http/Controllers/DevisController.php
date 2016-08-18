@@ -138,7 +138,7 @@ class DevisController extends Controller{
         $adresse = AdresseTools::getAdresse($demande->adresse_id);
         $services = ServiceTools::getServices($devis->id);
         if($devis->trashed()) $services = ServiceTools::getServicesArchive($devis->id);
-        return MailTools::downloadAttach('devis',['services'=>$services,'client'=>$client,'demande'=>$demande,'adresse'=>$adresse,'devis'=>$devis]);
+        return MailTools::downloadAttach('devis',['services'=>$services,'client'=>$client,'demande'=>$demande,'adresse'=>$adresse,'devis'=>$devis],"Devis_Ref_".$devis->id);
     }
 
 }

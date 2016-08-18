@@ -73,7 +73,7 @@ class FactureController extends Controller{
         $client = ClientTools::getClient($demande->client_id);
         $services = ServiceTools::getServices($devis->id);
         if($devis->trashed()) $services = ServiceTools::getServicesArchive($devis->id);
-        return MailTools::downloadAttach('facturation',['facture'=>$facture,'services' => $services, 'client' => $client, 'demande' => $demande, 'adresse' => $adresse, 'devis' => $devis]);
+        return MailTools::downloadAttach('facturation',['facture'=>$facture,'services' => $services, 'client' => $client, 'demande' => $demande, 'adresse' => $adresse, 'devis' => $devis],"Facture_Ref_".$facture->id);
     }
 
 }

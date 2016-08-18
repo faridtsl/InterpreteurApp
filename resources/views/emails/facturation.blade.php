@@ -234,7 +234,7 @@
     </table>
 
     <div>
-        <table border="1">
+        <table @if(!isset($PDF))border="1"@endif>
             <tr>
                 <th scope="col" colspan="2" width="50%">Account information</th>
                 <th scope="col">Notice</th>
