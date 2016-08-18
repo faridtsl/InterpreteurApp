@@ -44,7 +44,7 @@ class DemandeController extends Controller{
             $demande = DemandeTools::addDemande($adresse,$client,$etat,$traduction,$connectedUser,$request);
             MailTools::sendMail('Demande créée','createDemande','creadis.test@gmail.com',$client->email,[],['client'=>$client,'demande'=>$demande,'adresse'=>$adresse],'public/css/mailStyle.css');
             DB::commit();
-            return view('demande.demandeAdd', ['message' => 'Interpreteur ajouté avec success!','client' => $client, 'clients' => $clients,'langues' => $langues, 'demande' => $demande]);
+            return view('demande.demandeAdd', ['message' => 'Demande ajoutée avec success!','client' => $client, 'clients' => $clients,'langues' => $langues, 'demande' => $demande]);
         }catch(\Exception $e){
             DB::rollback();
         }
