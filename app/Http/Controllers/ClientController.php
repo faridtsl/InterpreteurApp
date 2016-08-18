@@ -10,6 +10,7 @@ use App\Tools\ImageTools;
 use App\Tools\ClientTools;
 use App\Tools\LangueTools;
 use App\Tools\TraductionTools;
+use App\Trace;
 use Illuminate\Http\Request;
 use App\Tools\MailTools;
 
@@ -38,8 +39,14 @@ class ClientController extends Controller{
             }
             $request['imageName'] = $imgName;
             $client = ClientTools::addClient($connectedUser, $request);
-            DB::commit();
+            $trace = new Trace();
+            $trace->operation = "Creation";
+            $trace->type = 'Client';
+            $trace->resultat = true;
+            $trace->user()->associate($connectedUser);
+            $client->traces()->save($trace);
             MailTools::sendMail('New profile has been created','createClient','creadis.test@gmail.com',$client->email,[],['client'=>$client],'public/css/mailStyle.css');
+            DB::commit();
             return view('client.clientAdd', ['message' => 'Client ajouté avec success!', 'img' => $imgName, 'client' => $client]);
         }catch(\Exception $e){
             DB::rollback();
@@ -76,7 +83,13 @@ class ClientController extends Controller{
             Input::file('image')->move(storage_path() . '/img', $imgName);
         }
         $request['imageName'] = $imgName;
-        ClientTools::updateClient($connectedUser,$request);
+        try {
+            DB::beginTransaction();
+            ClientTools::updateClient($connectedUser, $request);
+            DB::commit();
+        }catch(\Exception $e){
+            DB::rollback();
+        }
         return redirect()->back();
     }
 

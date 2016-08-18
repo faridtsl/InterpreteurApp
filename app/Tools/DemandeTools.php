@@ -14,6 +14,7 @@ use App\Client;
 use App\Demande;
 use App\Etat;
 use App\Http\Requests\DemandeSearchRequest;
+use App\Trace;
 use App\Traduction;
 use App\User;
 use Carbon\Carbon;
@@ -33,6 +34,13 @@ class DemandeTools{
         $demande->etat()->associate($etat);
         $demande->origin_id = 0;
         $demande->save();
+
+        $trace = new Trace();
+        $trace->operation = 'Creation';
+        $trace->type = 'Demande';
+        $trace->resultat = true;
+        $trace->user()->associate($u);
+        $demande->traces()->save($trace);
         return $demande;
     }
 
@@ -87,6 +95,13 @@ class DemandeTools{
         if($traduction != null) $demande->traduction()->associate($traduction);
         if($etat != null) $demande->etat()->associate($etat);
         $demande->save();
+
+        $trace = new Trace();
+        $trace->operation = 'Modification';
+        $trace->type = 'Demande';
+        $trace->resultat = true;
+        $trace->user()->associate($u);
+        $demande->traces()->save($trace);
         return $demande;
     }
 
@@ -95,6 +110,13 @@ class DemandeTools{
         foreach ($devis as $devi) {
             DevisTools::deleteDevis($u,$devi);
         }
+
+        $trace = new Trace();
+        $trace->operation = 'Suppression';
+        $trace->type = 'Demande';
+        $trace->resultat = true;
+        $trace->user()->associate($u);
+        $demande->traces()->save($trace);
         $demande->delete();
     }
 
@@ -129,6 +151,13 @@ class DemandeTools{
         $demande->etat()->associate($d->etat);
         $demande->origin_id = $d->id;
         $demande->save();
+
+        $trace = new Trace();
+        $trace->operation = 'Duplication';
+        $trace->type = 'Demande';
+        $trace->resultat = true;
+        $trace->user()->associate($u);
+        $demande->traces()->save($trace);
         return $demande;
     }
 
@@ -142,6 +171,13 @@ class DemandeTools{
             $demande->restore();
             $demande->etat()->associate(EtatTools::getEtatById(1));
             $demande->save();
+
+            $trace = new Trace();
+            $trace->operation = 'Restoration';
+            $trace->type = 'Demande';
+            $trace->resultat = true;
+            $trace->user()->associate($u);
+            $demande->traces()->save($trace);
         }else{
             $errors = ['Demande ne peut pas etre restaurer'];
         }

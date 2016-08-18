@@ -27,4 +27,8 @@ class Devi extends Model{
         return $this->belongsTo(DevisEtat::class);
     }
 
+    public function traces(){
+        return $this->morphMany(Trace::class,'concerned');
+    }
+
 }

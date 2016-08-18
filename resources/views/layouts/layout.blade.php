@@ -235,7 +235,7 @@
                             <a href="/remainders"><i class="fa fa-dashboard fa-fw"></i>Remainders</a>
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i>Traces</a>
+                            <a href="/traces"><i class="fa fa-dashboard fa-fw"></i>Traces</a>
                         </li>
 </ul>
 </div>

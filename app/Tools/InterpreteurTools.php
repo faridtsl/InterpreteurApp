@@ -11,6 +11,7 @@ namespace App\Tools;
 
 use App\Adresse;
 use App\Interpreteur;
+use App\Trace;
 use App\Traduction;
 use App\User;
 
@@ -30,6 +31,12 @@ class InterpreteurTools{
         $interp->adresse()->associate($adr);
         $interp->user()->associate($u);
         $interp->save();
+        $trace = new Trace();
+        $trace->operation = 'Suppression';
+        $trace->type = 'Interpreteur';
+        $trace->resultat = true;
+        $trace->user()->associate($u);
+        $interp->traces()->save($trace);
         return $interp;
     }
 
@@ -52,13 +59,20 @@ class InterpreteurTools{
 
     public static function deleteInterpreteur(User $u,$id){
         $interp = Interpreteur::find($id);
+
+        $trace = new Trace();
+        $trace->operation = 'Suppression';
+        $trace->type = 'Interpreteur';
+        $trace->resultat = true;
+        $trace->user()->associate($u);
+        $interp->traces()->save($trace);
         $devis = DevisTools::getDevisByInterp($id);
         foreach ($devis as $devi) {
-            $devi->delete();
+            DevisTools::deleteDevis($u,$devis);
         }
         $factures = FactureTools::getFacturesByInterp($id);
         foreach ($factures as $facture) {
-            $facture->delete();
+            FactureTools::deleteFacture($facture->id,$u);
         }
         $interp->delete();
     }
@@ -68,6 +82,13 @@ class InterpreteurTools{
             ->where('id', $id)
             ->get()->first();
         $interp->restore();
+
+        $trace = new Trace();
+        $trace->operation = 'Restoration';
+        $trace->type = 'Interpreteur';
+        $trace->resultat = true;
+        $trace->user()->associate($u);
+        $interp->traces()->save($trace);
     }
 
     public static function updateInterpreteur(User $u, $a){
@@ -82,6 +103,13 @@ class InterpreteurTools{
         if($a['tel_fixe'] != null) $interp->tel_fixe = $a['tel_fixe'];
         if($a['imageName'] != null) $interp->image = $a['imageName'];
         $interp->save();
+
+        $trace = new Trace();
+        $trace->operation = 'Modification';
+        $trace->type = 'Interpreteur';
+        $trace->resultat = true;
+        $trace->user()->associate($u);
+        $interp->traces()->save($trace);
         return $interp;
     }
 

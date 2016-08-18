@@ -15,4 +15,8 @@ class Facture extends Model{
         return $this->belongsTo(Devi::class,'devi_id');
     }
 
+    public function traces(){
+        return $this->morphMany(Trace::class,'concerned');
+    }
+
 }

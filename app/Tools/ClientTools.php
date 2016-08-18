@@ -11,6 +11,7 @@ namespace App\Tools;
 
 use App\Client;
 use App\Demande;
+use App\Trace;
 use App\User;
 
 class ClientTools{
@@ -34,6 +35,12 @@ class ClientTools{
         foreach ($demandes as $demande){
             DemandeTools::deleteDemande($u,$demande);
         }
+        $trace = new Trace();
+        $trace->operation = 'Suppression';
+        $trace->type = 'Client';
+        $trace->resultat = true;
+        $trace->user()->associate($u);
+        $client->traces()->save($trace);
         $client->delete();
     }
 
@@ -42,6 +49,13 @@ class ClientTools{
             ->where('id', $id)
             ->get()->first();
         $client->restore();
+
+        $trace = new Trace();
+        $trace->operation = 'Restoration';
+        $trace->type = 'Client';
+        $trace->resultat = true;
+        $trace->user()->associate($u);
+        $client->traces()->save($trace);
     }
 
     public static function updateClient(User $u, $a){
@@ -54,6 +68,12 @@ class ClientTools{
         if($a['tel_fixe'] != null) $client->tel_fixe = $a['tel_fixe'];
         if($a['imageName'] != null) $client->image = $a['imageName'];
         $client->save();
+        $trace = new Trace();
+        $trace->operation = 'Modification';
+        $trace->type = 'Client';
+        $trace->resultat = true;
+        $trace->user()->associate($u);
+        $client->traces()->save($trace);
         return $client;
     }
 

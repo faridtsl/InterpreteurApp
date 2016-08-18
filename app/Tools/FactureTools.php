@@ -11,6 +11,8 @@ namespace App\Tools;
 
 use App\Devi;
 use App\Facture;
+use App\Trace;
+use App\User;
 use Carbon\Carbon;
 
 class FactureTools{
@@ -20,12 +22,18 @@ class FactureTools{
         return $factures;
     }
 
-    public static function addFacture($devis){
+    public static function addFacture($devis,User $u){
         $facture = new Facture();
         $facture->fini = false;
         $facture->date_envoi_mail = Carbon::now();
         $facture->devis()->associate($devis);
         $facture->save();
+        $trace = new Trace();
+        $trace->operation = 'Creation';
+        $trace->type = 'Facture';
+        $trace->resultat = true;
+        $trace->user()->associate($u);
+        $facture->traces()->save($trace);
         $demande = DemandeTools::getDemande($devis->demande_id);
         $demande->etat()->associate(EtatTools::getEtatById(4));
         $demande->save();
@@ -33,25 +41,44 @@ class FactureTools{
     }
 
 
-    public static function updateFacture($devis,$a){
+    public static function updateFacture($devis,$a,User $u){
         $facture = Facture::find($a['id']);
         if($a['fini'] != null) $facture->fini = $a['fini'];
         if($a['date_paiement'] != null) $facture->date_paiement = $a['date_paiement'];
         if($devis != null) $facture->devis()->associate($devis);
         $facture->save();
+        $trace = new Trace();
+        $trace->operation = 'Modification';
+        $trace->type = 'Facture';
+        $trace->resultat = true;
+        $trace->user()->associate($u);
+        $facture->traces()->save($trace);
         return $facture;
     }
 
-    public static function deleteFacture($id){
+    public static function deleteFacture($id,User $u){
         $facture = Facture::find($id);
+        $trace = new Trace();
+        $trace->operation = 'Suppression';
+        $trace->type = 'Facture';
+        $trace->resultat = true;
+        $trace->user()->associate($u);
+        $facture->traces()->save($trace);
         $facture->delete();
     }
 
-    public static function restoreFacture($id){
+    public static function restoreFacture($id,User $u){
         $facture = Facture::withTrashed()
             ->where('id',$id)
             ->get()->first();
         $facture->restore();
+
+        $trace = new Trace();
+        $trace->operation = 'Restoration';
+        $trace->type = 'Facture';
+        $trace->resultat = true;
+        $trace->user()->associate($u);
+        $facture->traces()->save($trace);
     }
 
 

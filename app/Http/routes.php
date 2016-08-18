@@ -322,6 +322,10 @@ Route::get(
     ['middleware'=>'auth','uses'=>'GeneralController@showRemainders']
 );
 
+Route::get(
+    'traces',
+    ['middleware'=>'auth','uses'=>'GeneralController@showTraces']
+);
 
 
 //Images Routes

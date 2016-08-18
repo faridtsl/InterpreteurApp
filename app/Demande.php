@@ -31,4 +31,8 @@ class Demande extends Model{
         return $this->belongsTo(Etat::class);
     }
 
+    public function traces(){
+        return $this->morphMany(Trace::class,'concerned');
+    }
+
 }

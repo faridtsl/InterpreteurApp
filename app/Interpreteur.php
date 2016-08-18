@@ -14,13 +14,13 @@ class Interpreteur extends Model{
     public function adresse(){
         return $this->belongsTo(Adresse::class);
     }
-
     public function user(){
         return $this->belongsTo(User::class);
     }
-
     public function traductions(){
         return $this->belongsToMany(Traduction::class,'interpreteurs_traductions');
     }
-
+    public function traces(){
+        return $this->morphMany(Trace::class,'concerned');
+    }
 }

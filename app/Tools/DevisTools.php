@@ -14,6 +14,7 @@ use App\Devi;
 use App\DevisEtat;
 use App\Etat;
 use App\Service;
+use App\Trace;
 use App\User;
 use Carbon\Carbon;
 
@@ -33,6 +34,13 @@ class DevisTools{
         $devis->save();
         $demande->etat()->associate(EtatTools::getEtatById(2));
         $demande->save();
+
+        $trace = new Trace();
+        $trace->operation = 'Creation';
+        $trace->type = 'Devis';
+        $trace->resultat = true;
+        $trace->user()->associate($u);
+        $devis->traces()->save($trace);
         return $devis;
     }
 
@@ -43,6 +51,12 @@ class DevisTools{
         $devis->user()->associate($u);
         $devis->total = ServiceTools::addServices($devis,$request);
         $devis->save();
+        $trace = new Trace();
+        $trace->operation = 'Modification';
+        $trace->type = 'Devis';
+        $trace->resultat = true;
+        $trace->user()->associate($u);
+        $devis->traces()->save($trace);
         return $devis;
     }
 
@@ -91,8 +105,15 @@ class DevisTools{
 
     public static function deleteDevis(User $u,$devis){
         $facture = FactureTools::getFactureByDevis($devis);
-        if($facture == null || $facture->fini) $devis->delete();
-        else return false;
+        if($facture == null || $facture->fini){
+            $trace = new Trace();
+            $trace->operation = 'Suppression';
+            $trace->type = 'Devis';
+            $trace->resultat = true;
+            $trace->user()->associate($u);
+            $devis->traces()->save($trace);
+            $devis->delete();
+        }else return false;
         $demande = DemandeTools::getDemande($devis->demande_id);
         if(count(DevisTools::getArchiveDevisByDemander($demande->id))==0){
             $demande->etat()->associate(EtatTools::getEtatById(2));
@@ -108,6 +129,12 @@ class DevisTools{
         $err = [];
         if(DevisTools::canBeRestored($devis)) {
             $devis->restore();
+            $trace = new Trace();
+            $trace->operation = 'Restoration';
+            $trace->type = 'Devis';
+            $trace->resultat = true;
+            $trace->user()->associate($u);
+            $devis->traces()->save($trace);
         }else{
             $interpreteur = InterpreteurTools::getInterpreteur($devis->interpreteur_id);
             $demande = DemandeTools::getDemande($devis->demande_id);
