@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Facturation N: SAC-{{$facture->id}}</title>
     <link rel="stylesheet" href="{{ asset('css/style_df.css') }}" media="all" />
+    @if(isset($PDF))
     <style>
 
         .clearfix:after {
@@ -19,20 +20,22 @@
         }
 
         body {
-            position: relative;
-            width: 21cm;
-            height: 29.7cm;
+            #position: relative;
+            width: 19cm;
+            height: 20.7cm;
             margin: 0 auto;
             color: #001028;
             background: #FFFFFF;
             font-family: Arial, sans-serif;
-            font-size: 12px;
+            font-size: 9px;
             font-family: Arial;
         }
 
         header {
-            padding: 10px 0;
-            margin-bottom: 30px;
+            padding: 0px 0;
+            margin-bottom: 5px;
+            overflow: hidden;
+            height: 230px;
         }
 
         #logo {
@@ -41,7 +44,7 @@
         }
 
         #logo img {
-            width: 300px;
+            width: 200px;
         }
 
         h1 {
@@ -52,7 +55,7 @@
             line-height: 1.4em;
             font-weight: normal;
             text-align: center;
-            margin: 0 0 20px 0;
+            margin: 0 0 5px 0;
             background: url({{asset("images/dimension.png")}});
         }
 
@@ -84,11 +87,18 @@
             border-collapse: collapse;
             border-spacing: 0;
             margin-bottom: 20px;
+            border-width : 1px;
         }
 
         table tr:nth-child(2n-1) td {
             background: #F5F5F5;
         }
+
+        #normal tr:nth-child(2n-1) td {
+            background: #FFFFFF;
+        }
+
+
 
         table th,
         table td {
@@ -136,7 +146,7 @@
         footer {
             color: #5D6975;
             width: 100%;
-            height: 30px;
+            height: 20px;
             position: absolute;
             bottom: 0;
             border-top: 1px solid #C1CED9;
@@ -145,6 +155,7 @@
         }
 
     </style>
+    @endif
 </head>
 <body>
 <header class="clearfix">

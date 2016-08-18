@@ -64,6 +64,7 @@
                     </td>
                     <td>
                         <a href="/devis/view?id={{$devi->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
+                        /<a href="/devis/download?id={{$devi->id}}" class="downloadButton"> <span class="glyphicon glyphicon-download-alt"></span> </a>
                     </td>
                 </tr>
             @endforeach

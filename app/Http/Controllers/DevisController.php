@@ -131,6 +131,14 @@ class DevisController extends Controller{
         return $this->devisUpdateShow($request);
     }
 
-
+    public function downloadDevis(Request $request){
+        $devis = DevisTools::getDevisById($request['id']);
+        $demande = DemandeTools::getDemande($devis->demande_id);
+        $client = ClientTools::getClient($demande->client_id);
+        $adresse = AdresseTools::getAdresse($demande->adresse_id);
+        $services = ServiceTools::getServices($devis->id);
+        if($devis->trashed()) $services = ServiceTools::getServicesArchive($devis->id);
+        return MailTools::downloadAttach('devis',['services'=>$services,'client'=>$client,'demande'=>$demande,'adresse'=>$adresse,'devis'=>$devis]);
+    }
 
 }

@@ -270,6 +270,10 @@ Route::post(
     'devis/update',
     ['middleware'=>'auth','uses'=>'DevisController@devisUpdateStore']
 );
+Route::get(
+    'devis/download',
+    ['middleware'=>'auth','uses'=>'DevisController@downloadDevis']
+);
 
 //Service Routes
 Route::get(
