@@ -11,6 +11,7 @@ use App\Tools\EtatTools;
 use App\Tools\FactureTools;
 use App\Tools\LangueTools;
 use App\Tools\TraductionTools;
+use App\Trace;
 use Illuminate\Http\Request;
 use App\Http\Requests\DemandeRequest;
 use Illuminate\Support\Facades\Auth;
@@ -30,10 +31,10 @@ class DemandeController extends Controller{
     public function store(DemandeRequest $request){
         $langues = LangueTools::getAllLangues();
         $clients = ClientTools::getAllClients();
+        $connectedUser = Auth::user();
         try {
             DB::beginTransaction();
             $adresse = AdresseTools::addAdresse($request);
-            $connectedUser = Auth::user();
             $etat = EtatTools::getEtatById(1);
             $client = ClientTools::getClient($request['client']);
             $src = LangueTools::getLangue($request['langue_src']);
@@ -48,6 +49,12 @@ class DemandeController extends Controller{
         }catch(\Exception $e){
             DB::rollback();
         }
+        $trace = new Trace();
+        $trace->operation = "Creation";
+        $trace->type = 'Demande';
+        $trace->resultat = false;
+        $trace->user()->associate($connectedUser);
+        $trace->save();
         $errors = ['Veuillez remplire toutes la correspondance src->dest'];
         return view('demande.demandeAdd', ['langues' => $langues,'clients' => $clients])->withErrors($errors);
     }

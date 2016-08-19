@@ -12,6 +12,7 @@ use App\Tools\DevisTools;
 use App\Tools\FactureTools;
 use App\Tools\InterpreteurTools;
 use App\Tools\ServiceTools;
+use App\Trace;
 use App\User;
 use Illuminate\Http\Request;
 use App\Tools\MailTools;
@@ -43,6 +44,13 @@ class DevisController extends Controller{
             return view('devis.devisAdd',['demande'=>$demande,'interpreteurs'=>$interpreteurs,'message'=>'Devis ajouté avec success']);
         }catch(\Exception $e){
             DB::rollback();
+            $trace = new Trace();
+            $trace->operation = "Creation";
+            $trace->type = 'Devis';
+            $trace->resultat = false;
+            $trace->user()->associate($connectedUser);
+            $trace->save();
+            DB::commit();
         }
         $errors = ['Une erreur s\'est survenu veuillez reverifier vos données'];
         return view('devis.devisAdd',['demande'=>$demande,'interpreteurs'=>$interpreteurs])->withErrors($errors);
@@ -117,16 +125,23 @@ class DevisController extends Controller{
         $devis = DevisTools::getDevisById($request['id']);
         $services = ServiceTools::getServices($devis->id);
 
+        $connectedUser = Auth::user();
         try {
             DB::beginTransaction();
             foreach ($services as $service) {
                 $service->delete();
             }
-            $connectedUser = Auth::user();
             DevisTools::updateDevis($request,$devis,$connectedUser);
             DB::commit();
         }catch(\Exception $e){
             DB::rollback();
+            $trace = new Trace();
+            $trace->operation = "Modification";
+            $trace->type = 'Devis';
+            $trace->resultat = false;
+            $trace->user()->associate($connectedUser);
+            $trace->save();
+            DB::commit();
         }
         return $this->devisUpdateShow($request);
     }

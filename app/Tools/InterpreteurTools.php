@@ -32,7 +32,7 @@ class InterpreteurTools{
         $interp->user()->associate($u);
         $interp->save();
         $trace = new Trace();
-        $trace->operation = 'Suppression';
+        $trace->operation = 'Creation';
         $trace->type = 'Interpreteur';
         $trace->resultat = true;
         $trace->user()->associate($u);

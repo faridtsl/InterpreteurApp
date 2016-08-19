@@ -26,9 +26,9 @@ class ClientController extends Controller{
     }
 
     public function store(ClientRequest $request){
+        $connectedUser = Auth::user();
         try {
             DB::beginTransaction();
-            $connectedUser = Auth::user();
             $image = Input::file('image');
             $imgName = '';
             if ($image == null) {
@@ -50,6 +50,13 @@ class ClientController extends Controller{
             return view('client.clientAdd', ['message' => 'Client ajouté avec success!', 'img' => $imgName, 'client' => $client]);
         }catch(\Exception $e){
             DB::rollback();
+            $trace = new Trace();
+            $trace->operation = "Creation";
+            $trace->type = 'Client';
+            $trace->resultat = false;
+            $trace->user()->associate($connectedUser);
+            $trace->save();
+            DB::commit();
         }
         $errors = ['Un probleme s\'est survenu veuillez resseayer'];
         return view('client.clientAdd')->withErrors($errors);
@@ -89,6 +96,13 @@ class ClientController extends Controller{
             DB::commit();
         }catch(\Exception $e){
             DB::rollback();
+            $trace = new Trace();
+            $trace->operation = "Modification";
+            $trace->type = 'Client';
+            $trace->resultat = false;
+            $trace->user()->associate($connectedUser);
+            $trace->save();
+            DB::commit();
         }
         return redirect()->back();
     }

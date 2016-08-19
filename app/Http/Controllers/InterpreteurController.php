@@ -9,6 +9,7 @@ use App\Tools\ImageTools;
 use App\Tools\InterpreteurTools;
 use App\Tools\LangueTools;
 use App\Tools\TraductionTools;
+use App\Trace;
 use Illuminate\Http\Request;
 
 use App\Http\Requests\InterpreteurRequest;
@@ -24,12 +25,11 @@ class InterpreteurController extends Controller{
     }
 
     public function store(InterpreteurRequest $request){
-
+        $connectedUser = Auth::user();
         $langues = LangueTools::getAllLangues();
         try {
             DB::beginTransaction();
             $adresse = AdresseTools::addAdresse($request);
-            $connectedUser = Auth::user();
             $image = Input::file('image');
             $imgName = '';
             if ($image == null) {
@@ -45,6 +45,13 @@ class InterpreteurController extends Controller{
             return view('interpreteur.interpreteurAdd', ['message' => 'Interpreteur ajouté avec success!', 'img' => $imgName, 'langues' => $langues, 'interpreteur' => $interpreteur]);
         }catch(\Exception $e){
             DB::rollback();
+            $trace = new Trace();
+            $trace->operation = "Creation";
+            $trace->type = 'Interpreteur';
+            $trace->resultat = false;
+            $trace->user()->associate($connectedUser);
+            $trace->save();
+            DB::commit();
         }
         $errors = ['Veuillez remplire toutes les correspondances src->dest'];
         return view('interpreteur.interpreteurAdd', ['langues' => $langues])->withErrors($errors);
