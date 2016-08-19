@@ -6,3 +6,5 @@ Homestead.json
 .env
 /storage/img/*
 !/storage/img/unknown.jpg
+/storage/devis.pdf
+/storage/facture.pdf
