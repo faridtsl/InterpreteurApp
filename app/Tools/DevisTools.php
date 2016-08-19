@@ -104,7 +104,7 @@ class DevisTools{
         $params = ['services'=>$services,'client'=>$client,'demande'=>$demande,'adresse'=>$adresse,'devis'=>$devis];
         $params['PDF'] = 'set';
         $pdf = PDF::loadView('emails.devis', $params);
-        $pdf->save(public_path().'/devis.pdf');
+        $pdf->save(storage_path().'/devis.pdf');
         $params['PDF'] = null;
         MailTools::sendMail('NEW QUOTATION HAS BEEN CREATED','devis','creadis.test@gmail.com',$client->email,[public_path().'/devis.pdf'],$params,'public/css/style_df.css');
     }

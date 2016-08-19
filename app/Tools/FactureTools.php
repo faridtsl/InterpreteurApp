@@ -122,7 +122,7 @@ class FactureTools{
         $params = ['facture'=>$facture,'services' => $services, 'client' => $client, 'demande' => $demande, 'adresse' => $adresse, 'devis' => $devis];
         $params['PDF'] = 'set';
         $pdf = PDF::loadView('emails.facturation', $params);
-        $pdf->save(public_path().'/facture.pdf');
+        $pdf->save(storage_path().'/facture.pdf');
         $params['PDF'] = null;
         MailTools::sendMail('NEW ORDER HAS BEEN CREATED', 'facturation', 'creadis.test@gmail.com', $client->email, [public_path().'/facture.pdf'],$params , 'public/css/style_df.css');
     }
