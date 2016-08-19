@@ -158,7 +158,7 @@
                     <td>{{$devi->created_at->format('l j F Y H:i')}}</td>
                     <td>{{$devi->updated_at->format('l j F Y H:i')}}</td>
                     <td>{{$devi->deleted_at->format('l j F Y H:i')}}</td>
-                    <td>{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
+                    <td width="100px">{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
                     <td>
                         <a href="/devis/view?id={{$devi->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
                         /<a href="/devis/download?id={{$devi->id}}" class="downloadButton"> <span class="glyphicon glyphicon-download-alt"></span> </a>
@@ -218,7 +218,7 @@
                     <td>{{\Carbon\Carbon::parse($demande->dateEndEvent)->format('l j F Y H:i')}}</td>
                     <td>{{\App\Tools\LangueTools::getLangue(\App\Tools\TraductionTools::getTraductionById($demande->traduction_id)->source)->content}}</td>
                     <td>{{\App\Tools\LangueTools::getLangue(\App\Tools\TraductionTools::getTraductionById($demande->traduction_id)->cible)->content}}</td>
-                    <td>{{ \App\Tools\AdresseTools::getAdresse($demande->adresse_id)->adresse}}</td>
+                    <td width="100px">{{ \App\Tools\AdresseTools::getAdresse($demande->adresse_id)->adresse}}</td>
                     <td>
                         <p>
                             <a data-placement="top" data-toggle="tooltip" title="Restore" class="btn btn-success btn-xs restoreButton" href="/demande/restore?id={{$demande->id}}" >

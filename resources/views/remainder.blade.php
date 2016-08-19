@@ -74,7 +74,7 @@
                                 <td>{{\Carbon\Carbon::parse($demande->dateEndEvent)->format('l j F Y H:i')}}</td>
                                 <td>{{\App\Tools\LangueTools::getLangue(\App\Tools\TraductionTools::getTraductionById($demande->traduction_id)->source)->content}}</td>
                                 <td>{{\App\Tools\LangueTools::getLangue(\App\Tools\TraductionTools::getTraductionById($demande->traduction_id)->cible)->content}}</td>
-                                <td>{{ \App\Tools\AdresseTools::getAdresse($demande->adresse_id)->adresse}}</td>
+                                <td width="100px">{{ \App\Tools\AdresseTools::getAdresse($demande->adresse_id)->adresse}}</td>
                                 <td>
                                     <p>
                                         <a data-placement="top" data-toggle="tooltip" title="Edit" class="btn btn-warning btn-xs" href="/demande/update?id={{$demande->id}}" >
@@ -103,7 +103,7 @@
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#commandePanel">Commandes expirées <span class="badge">{{count($devis->filter(function($devi) {return $devi->etat_id == 2 && \App\Tools\DevisTools::tempsRestantFinEvent($devi) <= 0;}))}}</span></a>
+                    <a data-toggle="collapse" href="#commandePanel">Commandes expirées <cite class="text-danger">(Commandes des événements expirés)</cite>  <span class="badge">{{count($devis->filter(function($devi) {return $devi->etat_id == 2 && \App\Tools\DevisTools::tempsRestantFinEvent($devi) <= 0;}))}}</span></a>
                 </h4>
             </div>
             <div id="commandePanel"  class="panel-body panel-collapse">
@@ -151,7 +151,7 @@
                                 <td><a href="/client/profile?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id}}">{{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id)->nom}} {{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id)->prenom}}</a></td>
                                 <td>{{$devi->created_at->format('l j F Y H:i')}}</td>
                                 <td>{{$devi->updated_at->format('l j F Y H:i')}}</td>
-                                <td>{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
+                                <td width="100px">{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
                                 <td>
                                     <a id="resend{{$devi->id}}" data-id="{{$devi->id}}" class="resendButton"> <span class="glyphicon glyphicon-refresh"></span> </a>
                                 </td>
@@ -242,7 +242,7 @@
                                 <td><a href="/client/profile?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id}}">{{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id)->nom}} {{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id)->prenom}}</a></td>
                                 <td>{{$devi->created_at->format('l j F Y H:i')}}</td>
                                 <td>{{$devi->updated_at->format('l j F Y H:i')}}</td>
-                                <td>{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
+                                <td width="100px">{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
                                 <td>
                                     <a id="resend2{{$devi->id}}" data-id="{{$devi->id}}" class="resendButton"> <span class="glyphicon glyphicon-refresh"></span> </a>
                                 </td>

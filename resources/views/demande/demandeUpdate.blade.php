@@ -349,10 +349,11 @@
                     @foreach(\App\Tools\DevisTools::getDevis($demande->id) as $devi)
                         <tr>
                             <td>{{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->nom}} {{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->prenom}}</td>
-                            <td>{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
+                            <td width="100px">{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
                             <td>{{\App\Tools\DevisEtatTools::getEtatById($devi->etat_id)->libelle}}</td>
                             <td>{{\App\Tools\DevisTools::getTotal($devi->id)}} &euro;</td>
                             <td><a href="home" data-id="{{$devi->id}}" class="resendButton"> <span class="glyphicon glyphicon-refresh"></span> </a> / <a href="/devis/update/{{$devi->id}}" class="editor_edit"><span class="glyphicon glyphicon-pencil"></span></a> / <a id="delete{{$devi->id}}" href="/devis/delete?id={{$devi->id}}" class="editor_remove"><span class="glyphicon glyphicon-trash" ></span></a> @if($demande->etat_id == 2 || $demande->etat_id == 3)/<a id="validate{{$devi->id}}" href="/devis/validate?id={{$devi->id}}" class="editor_edit"><span class="glyphicon glyphicon-ok"></span></a>@endif</td>
+                            <td>
                             <td>
                                 <a href="/devis/view?id={{$devi->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
                                 /<a href="/devis/download?id={{$devi->id}}" class="downloadButton"> <span class="glyphicon glyphicon-download-alt"></span> </a>

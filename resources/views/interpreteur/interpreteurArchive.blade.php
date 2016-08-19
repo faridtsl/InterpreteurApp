@@ -48,7 +48,7 @@
                     <td>{{$interpreteur->email}}</td>
                     <td>{{$interpreteur->prestation}} {{$interpreteur->devise}}</td>
                     <td>{{$interpreteur->tel_fixe}} / {{$interpreteur->tel_portable}}</td>
-                    <td>{{\App\Tools\AdresseTools::getAdresse($interpreteur->adresse_id)->adresse}}</td>
+                    <td width="100px">{{\App\Tools\AdresseTools::getAdresse($interpreteur->adresse_id)->adresse}}</td>
 
                     <td>
                         <p data-placement="top" data-toggle="tooltip" title="Edit">
