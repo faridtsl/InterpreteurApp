@@ -25,7 +25,7 @@
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <a data-toggle="collapse" href="#demandePanel">
-                        Liste des demandes <span class="badge">{{count($demandes->filter(function($demande){return \App\Tools\DemandeTools::tempsRestant($demande)<=env('REMAINDER_DELAI_DEMANDE','0') && \App\Tools\DemandeTools::tempsRestant($demande)>=0;}))}}</span>
+                        Liste des demandes <cite class="text-danger">(evenement dans {{env('REMAINDER_DELAI_FACTURE','0')}} jours ou moins )</cite>  <span class="badge">{{count($demandes->filter(function($demande){return \App\Tools\DemandeTools::tempsRestant($demande)<=env('REMAINDER_DELAI_DEMANDE','0') && \App\Tools\DemandeTools::tempsRestant($demande)>=0;}))}}</span>
                     </a>
                 </h4>
             </div>
@@ -103,7 +103,7 @@
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#commandePanel">Commandes expirées <span class="badge">{{count($devis->filter(function($devi) {return $devi->etat_id == 2 && \App\Tools\DevisTools::tempsRestantFinEvent($devi) <= 0;}))}}</span></a>
+                    <a data-toggle="collapse" href="#commandePanel">Commandes expirées <cite class="text-danger">(commande d'un événement fini)</cite>  <span class="badge">{{count($devis->filter(function($devi) {return $devi->etat_id == 2 && \App\Tools\DevisTools::tempsRestantFinEvent($devi) <= 0;}))}}</span></a>
                 </h4>
             </div>
             <div id="commandePanel"  class="panel-body panel-collapse">
@@ -194,7 +194,7 @@
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#devisPanel">Devis en attente <span class="badge">{{count($devis->filter(function($devi) {return $devi->etat_id == 1 && \App\Tools\DevisTools::tempsRestant($devi) <= env('REMAINDER_DELAI_DEVIS','0');}))}}</span></a>
+                    <a data-toggle="collapse" href="#devisPanel">Devis en attente <cite class="text-danger">(reste {{env('REMAINDER_DELAI_DEVIS','0')}} jours ou moins)</cite>  <span class="badge">{{count($devis->filter(function($devi) {return $devi->etat_id == 1 && \App\Tools\DevisTools::tempsRestant($devi) <= env('REMAINDER_DELAI_DEVIS','0');}))}}</span></a>
                 </h4>
             </div>
             <div id="devisPanel"  class="panel-body panel-collapse">

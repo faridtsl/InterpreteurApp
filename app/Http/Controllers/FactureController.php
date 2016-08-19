@@ -11,6 +11,7 @@ use App\Tools\DevisTools;
 use App\Tools\FactureTools;
 use App\Tools\MailTools;
 use App\Tools\ServiceTools;
+use App\Trace;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -39,7 +40,7 @@ class FactureController extends Controller{
             $devis = Devi::find($facture->devi_id);
             $demande = DemandeTools::getDemande($devis->demande_id);
             DevisTools::deleteDevis($connectedUser,$devis);
-            DemandeTools::deleteDemande($connectedUser,$demande);
+            if(count(DevisTools::getDevisByDemander($demande->id)->filter(function ($devi){return $devi->etat_id == 3 || $devi->etat_id == 2;}))==0) DemandeTools::deleteDemande($connectedUser,$demande);
             FactureTools::deleteFacture($facture->id,$connectedUser);
             DB::commit();
         }catch(\Exception $e){

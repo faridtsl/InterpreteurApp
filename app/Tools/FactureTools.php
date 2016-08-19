@@ -146,7 +146,7 @@ class FactureTools{
     }
 
     public static function getFactureByDemande($demande){
-        $devis = DevisTools::getArchiveDevisByDemander($demande->id);
+        $devis = DevisTools::getDevisByDemander($demande->id);
         $factures = [];
         foreach ($devis as $devi) {
             $fact = FactureTools::getFactureByDevis($devi->id);

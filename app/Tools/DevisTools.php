@@ -33,9 +33,10 @@ class DevisTools{
         $devis->save();
         $devis->total = ServiceTools::addServices($devis,$request);
         $devis->save();
-        $demande->etat()->associate(EtatTools::getEtatById(2));
-        $demande->save();
-
+        if($demande->etat_id == 1) {
+            $demande->etat()->associate(EtatTools::getEtatById(2));
+            $demande->save();
+        }
         $trace = new Trace();
         $trace->operation = 'Creation';
         $trace->type = 'Devis';
@@ -69,6 +70,11 @@ class DevisTools{
 
     public static function getArchiveDevisByDemander($demande_id){
         $devis = Devi::withTrashed()->where('demande_id',$demande_id)->get();
+        return $devis;
+    }
+
+    public static function getDevisByDemander($demande_id){
+        $devis = Devi::where('demande_id',$demande_id)->get();
         return $devis;
     }
 
@@ -110,8 +116,8 @@ class DevisTools{
     }
 
     public static function deleteDevis(User $u,$devis){
-        $facture = FactureTools::getFactureByDevis($devis);
-        if($facture == null || $facture->fini){
+        $facture = FactureTools::getFactureByDevis($devis->id);
+        if($devis->etat_id!=3 || ($facture == null || $facture->fini)){
             $trace = new Trace();
             $trace->operation = 'Suppression';
             $trace->type = 'Devis';
@@ -121,9 +127,15 @@ class DevisTools{
             $devis->delete();
         }else return false;
         $demande = DemandeTools::getDemande($devis->demande_id);
-        if(count(DevisTools::getArchiveDevisByDemander($demande->id))==0){
-            $demande->etat()->associate(EtatTools::getEtatById(2));
-            $demande->save();
+        if($demande->etat_id != 4) {
+            if($demande->etat_id == 3 && count((DevisTools::getDevisByDemander($demande->id))->filter(function($devi){return $devi->etat_id == 2;}))==0) {
+                $demande->etat()->associate(EtatTools::getEtatById(2));
+                $demande->save();
+            }
+            if($demande->etat_id==2 && count((DevisTools::getDevisByDemander($demande->id))->filter(function($devi){return $devi->etat_id == 1;}))==0){
+                $demande->etat()->associate(EtatTools::getEtatById(1));
+                $demande->save();
+            }
         }
         return true;
     }
@@ -133,6 +145,7 @@ class DevisTools{
             ->where('id', $devis_id)
             ->get()->first();
         $err = [];
+        $demande = DemandeTools::getDemande($devis->demande_id);
         if(DevisTools::canBeRestored($devis)) {
             $devis->restore();
             $trace = new Trace();
@@ -141,9 +154,12 @@ class DevisTools{
             $trace->resultat = true;
             $trace->user()->associate($u);
             $devis->traces()->save($trace);
+            if($demande->etat_id == 1) {
+                $demande->etat()->associate(EtatTools::getEtatById(2));
+                $demande->save();
+            }
         }else{
             $interpreteur = InterpreteurTools::getInterpreteur($devis->interpreteur_id);
-            $demande = DemandeTools::getDemande($devis->demande_id);
             $err = [];
             if($demande->trashed() || !DemandeTools::canBeRestored($demande)) $err = ['La demande a été supprimée'];
             if($interpreteur->trashed()) array_push($err,'l\'interpréte a été supprimé ');
@@ -165,11 +181,6 @@ class DevisTools{
     public static function validerDevis(User $u,$devis){
         $etat = DevisEtatTools::getEtatById(2);
         $demande = DemandeTools::getDemande($devis->demande_id);
-        $devs = DevisTools::getArchiveDevisByDemander($demande->id);
-        if($devs != null)
-            foreach ($devs as $dev) {
-                if($dev->id != $devis->id) $dev->delete();
-            }
         $demande->etat()->associate(EtatTools::getEtatById(3));
         $demande->save();
         $devis->etat()->associate($etat);
