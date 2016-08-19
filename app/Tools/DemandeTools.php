@@ -190,6 +190,10 @@ class DemandeTools{
     }
 
     public static function canBeDeleted($demande){
+        $factures = FactureTools::getFactureByDemande($demande);
+        foreach ($factures as $facture) {
+            if(!$facture->fini) return false;
+        }
         return $demande->etat_id != 3;
     }
 
