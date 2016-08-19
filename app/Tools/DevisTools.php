@@ -176,8 +176,8 @@ class DevisTools{
         $devis->traces()->save($trace);
     }
 
-    public static function facturerDevis($devis){
-        $facture = FactureTools::addFacture($devis);
+    public static function facturerDevis(User $u,$devis){
+        $facture = FactureTools::addFacture($devis,$u);
         $etat = DevisEtatTools::getEtatById(3);
         $devis->etat()->associate($etat);
         $devis->save();

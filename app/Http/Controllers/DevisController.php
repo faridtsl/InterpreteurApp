@@ -95,12 +95,12 @@ class DevisController extends Controller{
     }
 
     public function validateDevis(Request $request){
+        $connectedUser = Auth::user();
         try {
             DB::beginTransaction();
             $devis = Devi::find($request['id']);
-            $connectedUser = Auth::user();
             if ($devis->etat_id == 2) {
-                $facture = DevisTools::facturerDevis($devis);
+                $facture = DevisTools::facturerDevis($connectedUser,$devis);
                 FactureTools::sendFactureMail($facture);
             } else if ($devis->etat_id == 1) {
                 DevisTools::validerDevis($connectedUser, $devis);
@@ -108,6 +108,12 @@ class DevisController extends Controller{
             DB::commit();
         }catch(\Exception $e){
             DB::rollback();
+            $trace = new Trace();
+            $trace->operation = "Validation";
+            $trace->type = 'Devis';
+            $trace->resultat = false;
+            $trace->user()->associate($connectedUser);
+            $trace->save();
         }
         return redirect()->back();
     }

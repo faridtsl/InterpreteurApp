@@ -127,10 +127,16 @@ class FactureTools{
         self::sendFactureMail($facture);
     }
 
-    public static function paiementFacture($facture){
+    public static function paiementFacture($facture, User $u){
         $facture->fini = true;
         $facture->date_paiement = Carbon::now();
         $facture->save();
+        $trace = new Trace();
+        $trace->operation = 'Paiement';
+        $trace->type = 'Facture';
+        $trace->resultat = true;
+        $trace->user()->associate($u);
+        $facture->traces()->save($trace);
     }
 
     public static function getFactureByDemande($demande){
