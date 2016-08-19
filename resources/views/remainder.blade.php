@@ -103,7 +103,7 @@
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#commandePanel">Commandes expirées <cite class="text-danger">(commande d'un événement fini)</cite>  <span class="badge">{{count($devis->filter(function($devi) {return $devi->etat_id == 2 && \App\Tools\DevisTools::tempsRestantFinEvent($devi) <= 0;}))}}</span></a>
+                    <a data-toggle="collapse" href="#commandePanel">Commandes expirées <span class="badge">{{count($devis->filter(function($devi) {return $devi->etat_id == 2 && \App\Tools\DevisTools::tempsRestantFinEvent($devi) <= 0;}))}}</span></a>
                 </h4>
             </div>
             <div id="commandePanel"  class="panel-body panel-collapse">
