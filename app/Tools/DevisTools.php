@@ -168,6 +168,12 @@ class DevisTools{
         $demande->save();
         $devis->etat()->associate($etat);
         $devis->save();
+        $trace = new Trace();
+        $trace->operation = 'Reserver';
+        $trace->type = 'Devis';
+        $trace->resultat = true;
+        $trace->user()->associate($u);
+        $devis->traces()->save($trace);
     }
 
     public static function facturerDevis($devis){
