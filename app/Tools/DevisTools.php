@@ -116,9 +116,8 @@ class DevisTools{
     }
 
     public static function deleteDevis(User $u,$devis){
-        if($devis == null) return false;
         $facture = FactureTools::getFactureByDevis($devis->id);
-        if(($facture == null || $facture->fini)){
+        if($devis->etat_id!=3 || $facture == null || $facture->fini){
             $trace = new Trace();
             $trace->operation = 'Suppression';
             $trace->type = 'Devis';
@@ -129,11 +128,11 @@ class DevisTools{
         }else return false;
         $demande = DemandeTools::getDemande($devis->demande_id);
         if($demande->etat_id != 4) {
-            if($demande->etat_id == 3 && count((DevisTools::getDevisByDemander($demande->id))->filter(function($devi){return $devi->etat_id == 2;}))==0) {
+            if($demande->etat_id == 3 && count(DevisTools::getDevisByDemander($demande->id)->filter(function($devi){return $devi->etat_id == 2;}))==0) {
                 $demande->etat()->associate(EtatTools::getEtatById(2));
                 $demande->save();
             }
-            if($demande->etat_id==2 && count((DevisTools::getDevisByDemander($demande->id))->filter(function($devi){return $devi->etat_id == 1;}))==0){
+            if($demande->etat_id==2 && count(DevisTools::getDevisByDemander($demande->id)->filter(function($devi){return $devi->etat_id == 1;}))==0){
                 $demande->etat()->associate(EtatTools::getEtatById(1));
                 $demande->save();
             }
