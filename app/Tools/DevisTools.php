@@ -116,6 +116,7 @@ class DevisTools{
     }
 
     public static function deleteDevis(User $u,$devis){
+
         $facture = FactureTools::getFactureByDevis($devis->id);
         if($devis->etat_id!=3 || ($facture == null || $facture->fini)){
             $trace = new Trace();
