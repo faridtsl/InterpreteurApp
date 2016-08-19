@@ -103,7 +103,7 @@
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#commandePanel">Commandes expirées <span class="badge">{{count($devis->filter(function($devi) {return \App\Tools\DevisEtatTools::getEtatById($devi->etat_id)->libelle == "Commande" && \App\Tools\DevisTools::tempsRestantFinEvent($devi) <= 0;}))}}</span></a>
+                    <a data-toggle="collapse" href="#commandePanel">Commandes expirées <span class="badge">{{count($devis->filter(function($devi) {return $devi->etat_id == 2 && \App\Tools\DevisTools::tempsRestantFinEvent($devi) <= 0;}))}}</span></a>
                 </h4>
             </div>
             <div id="commandePanel"  class="panel-body panel-collapse">
@@ -157,6 +157,7 @@
                                 </td>
                                 <td>
                                     <a href="/devis/view?id={{$devi->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
+                                    /<a href="/devis/download?id={{$devi->id}}" class="downloadButton"> <span class="glyphicon glyphicon-download-alt"></span> </a>
                                 </td>
                                 <td>
                                     <a href="/devis/update?id={{$devi->id}}" class="editor_edit"><span class="glyphicon glyphicon-pencil"></span></a>
@@ -176,7 +177,7 @@
 
                                     $("#validate{{$devi->id}}").popConfirm({
                                         title: "Message de confirmation ?",
-                                        content: "Voulez vous Valider le devis en cours !",
+                                        content: "Voulez vous Facturer la commande en cours !",
                                         placement: "bottom"
                                     });
                                 });
@@ -193,7 +194,7 @@
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#devisPanel">Devis en attente <span class="badge">{{count($devis->filter(function($devi) {return \App\Tools\DevisEtatTools::getEtatById($devi->etat_id)->libelle == "Créé" && \App\Tools\DevisTools::tempsRestant($devi) <= env('REMAINDER_DELAI_DEVIS','0');}))}}</span></a>
+                    <a data-toggle="collapse" href="#devisPanel">Devis en attente <span class="badge">{{count($devis->filter(function($devi) {return $devi->etat_id == 1 && \App\Tools\DevisTools::tempsRestant($devi) <= env('REMAINDER_DELAI_DEVIS','0');}))}}</span></a>
                 </h4>
             </div>
             <div id="devisPanel"  class="panel-body panel-collapse">
@@ -247,6 +248,7 @@
                                 </td>
                                 <td>
                                     <a href="/devis/view?id={{$devi->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
+                                    /<a href="/devis/download?id={{$devi->id}}" class="downloadButton"> <span class="glyphicon glyphicon-download-alt"></span> </a>
                                 </td>
                                 <td>
                                     <a href="/devis/update?id={{$devi->id}}" class="editor_edit"><span class="glyphicon glyphicon-pencil"></span></a>
@@ -266,7 +268,7 @@
 
                                     $("#validate2{{$devi->id}}").popConfirm({
                                         title: "Message de confirmation ?",
-                                        content: "Voulez vous Valider le devis en cours !",
+                                        content: "Voulez vous Reserver le devis en cours !",
                                         placement: "bottom"
                                     });
                                 });
@@ -283,7 +285,7 @@
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#facturePanel">Factures en attente de paiement <span class="badge">{{count($factures)}}</span></a>
+                    <a data-toggle="collapse" href="#facturePanel">Factures en attente de paiement <cite class="text-danger">(envoyées depuis {{env('REMAINDER_DELAI_FACTURE','0')}} jours ou plus )</cite> <span class="badge">{{count($factures)}}</span></a>
                 </h4>
             </div>
             <div id="facturePanel"  class="panel-body panel-collapse">
@@ -296,9 +298,9 @@
                         <th>Date de paiement</th>
                         <th>Total</th>
                         <th>Resend</th>
-                        <th>View Devis</th>
-                        <th>View</th>
-                        <th>Valider</th>
+                        <th>Show Devis</th>
+                        <th>Show</th>
+                        <th>Payer</th>
                     </tr>
                     </thead>
                     <tfoot>
@@ -327,18 +329,19 @@
                             </td>
                             <td>
                                 <a href="/devis/view?id={{$facture->devi_id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
+                                /<a href="/facture/download?id={{$facture->devi_id}}" class="downloadButton"> <span class="glyphicon glyphicon-download-alt"></span> </a>
                             </td>
                             <td>
                                 <a href="/facture/view?id={{$facture->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
+                                /<a href="/facture/download?id={{$facture->id}}" class="downloadButton"> <span class="glyphicon glyphicon-download-alt"></span> </a>
                             </td>
                             <td><a id="validate{{$facture->id}}" href="/facture/validate?id={{$facture->id}}" class="validateButton"><span class="glyphicon glyphicon-ok"></span></a></td>
-
                         </tr>
                         <script type="text/javascript">
                             $(document).ready(function() {
                                 $("#validate{{$facture->id}}").popConfirm({
                                     title: "Message de confirmation ?",
-                                    content: "Voulez vous Valider le devis en cours !",
+                                    content: "Voulez-vous déclarer le paiement de la facture en cours ?!",
                                     placement: "bottom"
                                 });
                             });

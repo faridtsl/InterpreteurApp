@@ -14,6 +14,7 @@ use App\Facture;
 use App\Trace;
 use App\User;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class FactureTools{
 
@@ -118,7 +119,12 @@ class FactureTools{
         $adresse = AdresseTools::getAdresse($demande->adresse_id);
         $client = ClientTools::getClient($demande->client_id);
         $services = ServiceTools::getServices($devis->id);
-        MailTools::sendMail('NEW ORDER HAS BEEN CREATED', 'facturation', 'creadis.test@gmail.com', $client->email, [], ['facture'=>$facture,'services' => $services, 'client' => $client, 'demande' => $demande, 'adresse' => $adresse, 'devis' => $devis], 'public/css/style_df.css');
+        $params = ['facture'=>$facture,'services' => $services, 'client' => $client, 'demande' => $demande, 'adresse' => $adresse, 'devis' => $devis];
+        $params['PDF'] = 'set';
+        $pdf = PDF::loadView('emails.facturation', $params);
+        $pdf->save(public_path().'/facture.pdf');
+        $params['PDF'] = null;
+        MailTools::sendMail('NEW ORDER HAS BEEN CREATED', 'facturation', 'creadis.test@gmail.com', $client->email, [public_path().'/facture.pdf'],$params , 'public/css/style_df.css');
     }
 
     public static function resendFacture($facture){

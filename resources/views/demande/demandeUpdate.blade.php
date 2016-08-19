@@ -239,7 +239,7 @@
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#factPanel">Facturation</a>
+                        <a data-toggle="collapse" data-parent="#accordion" href="#factPanel">Factures</a>
                     </h4>
                 </div>
                 <div id="factPanel"  class="panel-body panel-collapse">
@@ -283,9 +283,11 @@
                                 </td>
                                 <td>
                                     <a href="/devis/view?id={{$facture->devi_id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
+                                    /<a href="/facture/download?id={{$facture->devi_id}}" class="downloadButton"> <span class="glyphicon glyphicon-download-alt"></span> </a>
                                 </td>
                                 <td>
                                     <a href="/facture/view?id={{$facture->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
+                                    /<a href="/facture/download?id={{$facture->id}}" class="downloadButton"> <span class="glyphicon glyphicon-download-alt"></span> </a>
                                 </td>
                                 <td>@if(!$facture->fini)<a id="validate{{$facture->id}}" href="/facture/validate?id={{$facture->id}}" class="validateButton"><span class="glyphicon glyphicon-ok"></span></a>@endif</td>
                             </tr>
@@ -330,6 +332,7 @@
                         <th width="20px">Etat</th>
                         <th width="20px">Prix proposé</th>
                         <th width="40px">Resend/Edit/Delete @if($demande->etat_id == 2)/Reserver @elseif($demande->etat_id == 3)/Facturer @endif</th>
+                        <th width="40px">Show</th>
                     </tr>
                     </thead>
                     <tfoot>
@@ -338,6 +341,7 @@
                         <th>Adresse de l'interpreteur</th>
                         <th>Etat</th>
                         <th>Prix proposé</th>
+                        <th></th>
                         <th></th>
                     </tr>
                     </tfoot>
@@ -349,6 +353,10 @@
                             <td>{{\App\Tools\DevisEtatTools::getEtatById($devi->etat_id)->libelle}}</td>
                             <td>{{\App\Tools\DevisTools::getTotal($devi->id)}} &euro;</td>
                             <td><a href="home" data-id="{{$devi->id}}" class="resendButton"> <span class="glyphicon glyphicon-refresh"></span> </a> / <a href="/devis/update/{{$devi->id}}" class="editor_edit"><span class="glyphicon glyphicon-pencil"></span></a> / <a id="delete{{$devi->id}}" href="/devis/delete?id={{$devi->id}}" class="editor_remove"><span class="glyphicon glyphicon-trash" ></span></a> @if($demande->etat_id == 2 || $demande->etat_id == 3)/<a id="validate{{$devi->id}}" href="/devis/validate?id={{$devi->id}}" class="editor_edit"><span class="glyphicon glyphicon-ok"></span></a>@endif</td>
+                            <td>
+                                <a href="/devis/view?id={{$devi->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
+                                /<a href="/devis/download?id={{$devi->id}}" class="downloadButton"> <span class="glyphicon glyphicon-download-alt"></span> </a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>

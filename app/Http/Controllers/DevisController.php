@@ -39,7 +39,7 @@ class DevisController extends Controller{
             DB::beginTransaction();
             $devis = DevisTools::addDevis($request,$connectedUser);
             $services = ServiceTools::getServices($devis->id);
-            MailTools::sendMail('NEW QUOTATION HAS BEEN CREATED','devis','creadis.test@gmail.com',$client->email,[],['services'=>$services,'client'=>$client,'demande'=>$demande,'adresse'=>$adresse,'devis'=>$devis],'public/css/style_df.css');
+            DevisTools::sendDevisMail($devis);
             DB::commit();
             return view('devis.devisAdd',['demande'=>$demande,'interpreteurs'=>$interpreteurs,'message'=>'Devis ajouté avec success']);
         }catch(\Exception $e){

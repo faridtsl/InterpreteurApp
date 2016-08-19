@@ -16,6 +16,7 @@ use App\Etat;
 use App\Service;
 use App\Trace;
 use App\User;
+use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 
 class DevisTools{
@@ -100,7 +101,12 @@ class DevisTools{
         $client = ClientTools::getClient($demande->client_id);
         $adresse = AdresseTools::getAdresse($demande->adresse_id);
         $services = ServiceTools::getServices($devis->id);
-        MailTools::sendMail('NEW QUOTATION HAS BEEN CREATED','devis','creadis.test@gmail.com',$client->email,[],['services'=>$services,'client'=>$client,'demande'=>$demande,'adresse'=>$adresse,'devis'=>$devis],'public/css/style_df.css');
+        $params = ['services'=>$services,'client'=>$client,'demande'=>$demande,'adresse'=>$adresse,'devis'=>$devis];
+        $params['PDF'] = 'set';
+        $pdf = PDF::loadView('emails.devis', $params);
+        $pdf->save(public_path().'/devis.pdf');
+        $params['PDF'] = null;
+        MailTools::sendMail('NEW QUOTATION HAS BEEN CREATED','devis','creadis.test@gmail.com',$client->email,[public_path().'/devis.pdf'],$params,'public/css/style_df.css');
     }
 
     public static function deleteDevis(User $u,$devis){
