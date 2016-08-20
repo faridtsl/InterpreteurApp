@@ -114,12 +114,13 @@ class InterpreteurController extends Controller{
     public function showProfileInterpreteur(Request $request){
         $interp = InterpreteurTools::getInterpreteur($request['id']);
         $devs = DevisTools::getDevisByInterp($interp->id);
+        $langues = LangueTools::getAllLangues();
         $factures = [];
         foreach ($devs as $dev) {
             $fact = FactureTools::getFactureByDevis($dev->id);
             if ($fact != null) array_push($factures, $fact);
         }
-        return view('interpreteur.profileInterpreteur',['interpreteur'=>$interp,'factures'=>$factures,'devis'=>$devs]);
+        return view('interpreteur.profileInterpreteur',['interpreteur'=>$interp,'factures'=>$factures,'devis'=>$devs,'langues'=>$langues]);
     }
 
     public function showArchiveProfileInterpreteur(Request $request){

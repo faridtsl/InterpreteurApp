@@ -40,7 +40,13 @@ class TraductionTools{
 
     public static function getTraductionsByInterpreteur($id){
         $res = Traduction::join('interpreteurs_traductions', 'traductions.id', '=', 'interpreteurs_traductions.traduction_id')
-        ->where('interpreteurs_traductions.interpreteur_id',$id)->get();
+            ->where('interpreteurs_traductions.interpreteur_id',$id)->get();
+        return $res;
+    }
+
+    public static function getTraductionsByDemande($id){
+        $res = Traduction::join('demandes_traductions', 'traductions.id', '=', 'demandes_traductions.traduction_id')
+            ->where('demandes_traductions.demande_id',$id)->get();
         return $res;
     }
 

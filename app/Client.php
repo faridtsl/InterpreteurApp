@@ -19,4 +19,8 @@ class Client extends Model{
         return $this->morphMany(Trace::class,'concerned');
     }
 
+    public function adresse(){
+        return $this->belongsTo(Adresse::class);
+    }
+
 }

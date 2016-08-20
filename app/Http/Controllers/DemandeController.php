@@ -37,12 +37,9 @@ class DemandeController extends Controller{
             $adresse = AdresseTools::addAdresse($request);
             $etat = EtatTools::getEtatById(1);
             $client = ClientTools::getClient($request['client']);
-            $src = LangueTools::getLangue($request['langue_src']);
-            $dst = LangueTools::getLangue($request['langue_dest']);
-            $traduction = TraductionTools::getTraduction($src,$dst);
-            if($traduction==null)
-                return view('demande.demandeAdd',['langues' => $langues,'clients' => $clients])->withErrors(['Langue source doit être differente de la langues destination']);
-            $demande = DemandeTools::addDemande($adresse,$client,$etat,$traduction,$connectedUser,$request);
+                //return view('demande.demandeAdd',['langues' => $langues,'clients' => $clients])->withErrors(['Langue source doit être differente de la langues destination']);
+            $demande = DemandeTools::addDemande($adresse,$client,$etat,$connectedUser,$request);
+            DemandeTools::addTraductions($demande,$request);
             MailTools::sendMail('Demande créée','createDemande','creadis.test@gmail.com',$client->email,[],['client'=>$client,'demande'=>$demande,'adresse'=>$adresse],'public/css/mailStyle.css');
             DB::commit();
             return view('demande.demandeAdd', ['message' => 'Demande ajoutée avec success!','client' => $client, 'clients' => $clients,'langues' => $langues, 'demande' => $demande]);
@@ -64,8 +61,7 @@ class DemandeController extends Controller{
         if($request->isMethod('post')){
             $demandes = DemandeTools::searchByDates($request);
         }
-        $demandes = $demandes->sortBy(function($demande)
-        {
+        $demandes = $demandes->sortBy(function($demande){
             return $demande->dateEvent;
         });
         return view('demande.demandeShow',['demandes'=>$demandes]);
@@ -91,11 +87,9 @@ class DemandeController extends Controller{
         $connectedUser = Auth::user();
         $etat = EtatTools::getEtatByName('NULL');
         $client = ClientTools::getClient($request['client']);
-        $src = LangueTools::getLangue($request['langue_src']);
-        $dst = LangueTools::getLangue($request['langue_dest']);
-        if($src != null && $dst != null) $traduction = TraductionTools::getTraduction($src,$dst);
-        else $traduction = null;
-        DemandeTools::updateDemande(null,$client,$etat,$traduction,$connectedUser,$request);
+        if($request['idD'] != null) $request['id'] = $request['idD'];
+        $demande = DemandeTools::updateDemande(null,$client,$etat,$connectedUser,$request);
+        DemandeTools::addTraductions($demande,$request);
         return $this->showUpdate($request);
     }
 

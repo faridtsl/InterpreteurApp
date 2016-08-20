@@ -9,6 +9,7 @@
 namespace App\Tools;
 
 
+use App\Adresse;
 use App\Client;
 use App\Demande;
 use App\Trace;
@@ -16,7 +17,7 @@ use App\User;
 
 class ClientTools{
 
-    public static function addClient(User $u, $a){
+    public static function addClient(Adresse $adr, User $u, $a){
         $client = new Client();
         $client->nom = $a['nom'];
         $client->prenom = $a['prenom'];
@@ -25,6 +26,7 @@ class ClientTools{
         $client->commentaire = $a['commentaire'];
         $client->tel_fixe = $a['tel_fixe'];
         $client->image = $a['imageName'];
+        $client->adresse()->associate($adr);
         $client->user()->associate($u);
         $client->save();
         return $client;
@@ -58,7 +60,7 @@ class ClientTools{
         $client->traces()->save($trace);
     }
 
-    public static function updateClient(User $u, $a){
+    public static function updateClient(Adresse $adr=null,User $u, $a){
         $client = Client::find($a['id']);
         if($a['nom'] != null) $client->nom = $a['nom'];
         if($a['prenom'] != null) $client->prenom = $a['prenom'];

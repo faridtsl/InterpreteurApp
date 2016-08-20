@@ -21,22 +21,24 @@
     <div class="row">
         <table id="example" class="table table-striped table-bordered display responsive nowrap" width="100%" cellspacing="0">
             <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Email</th>
-                <th>Telephone portable</th>
-                <th>Telephone fixe</th>
-                <th>Action</th>
-            </tr>
+                <tr>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Telephone portable</th>
+                    <th>Telephone fixe</th>
+                    <th>Adresse</th>
+                    <th>Action</th>
+                </tr>
             </thead>
             <tfoot>
-            <tr>
-                <th>Nom</th>
-                <th>Email</th>
-                <th>Telephone portable</th>
-                <th>Telephone fixe</th>
-                <th></th>
-            </tr>
+                <tr>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Telephone portable</th>
+                    <th>Telephone fixe</th>
+                    <th>Adresse</th>
+                    <th></th>
+                </tr>
             </tfoot>
             <tbody>
             @foreach($clients as $client)
@@ -48,6 +50,7 @@
                     <td>{{$client->email}}</td>
                     <td>{{$client->tel_portable}}</td>
                     <td>{{$client->tel_fixe}}</td>
+                    <td width="100px">{{\App\Tools\AdresseTools::getAdresse($client->adresse_id)->adresse}}</td>
                     <td>
                         <p data-placement="top" data-toggle="tooltip" title="Edit">
                             <button class="btn btn-warning btn-xs editButton" data-title="Edit" data-toggle="modal" data-target="#edit" data-id="{{$client->id}}" >

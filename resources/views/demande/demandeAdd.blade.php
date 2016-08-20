@@ -18,7 +18,7 @@ Ajouter demande
 @section('content')
 
     <hr>
-    <form role="form" method="POST" action="/demande/add">
+    <form role="form" method="POST" id="formID" action="/demande/add">
         {!! csrf_field() !!}
         <div class="col-lg-12">
             <div class="panel panel-info" id="demandePanel">
@@ -54,41 +54,50 @@ Ajouter demande
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Langue initiale : </label>
-                                    <select class="form-control" name="langue_src">
-                                        <option value="" disabled selected>Langue source</option>
-                                        @foreach($langues as $langue)
-                                            @if($langue->id == old('langue_src'))
-                                                <option value="{{$langue->id}}" selected>{{$langue->content}}</option>
-                                            @else
-                                                <option value="{{$langue->id}}">{{$langue->content}}</option>
+                    <div id="langs">
+                        <div class="entry input-group">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-5">
+                                        <label>Langue initiale : </label>
+                                        <select class="form-control" name="langue_src[]">
+                                            <option value="" disabled selected>Langue source</option>
+                                            @foreach($langues as $langue)
+                                                @if($langue->id == old('langue_src'))
+                                                    <option value="{{$langue->id}}" selected>{{$langue->content}}</option>
+                                                @else
+                                                    <option value="{{$langue->id}}">{{$langue->content}}</option>
 
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Langue destination : </label>
-                                    <select class="form-control" name="langue_dest">
-                                        <option value="" disabled selected>Langue destination</option>
-                                        @foreach($langues as $langue)
-                                            @if($langue->id == old('langue_dest'))
-                                                <option value="{{$langue->id}}" selected>{{$langue->content}}</option>
-                                            @else
-                                                <option value="{{$langue->id}}">{{$langue->content}}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <label>Langue destination : </label>
+                                        <select class="form-control" name="langue_dest[]">
+                                            <option value="" disabled selected>Langue destination</option>
+                                            @foreach($langues as $langue)
+                                                @if($langue->id == old('langue_dest'))
+                                                    <option value="{{$langue->id}}" selected>{{$langue->content}}</option>
+                                                @else
+                                                    <option value="{{$langue->id}}">{{$langue->content}}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <label></label>
+                                        <span class="input-group-btn">
+                                          <button class="btn btn-success btn-add" type="button">
+                                              <span class="glyphicon glyphicon-plus"></span>
+                                          </button>
+                                      </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label>Contenu de la demande</label>
                         <textarea class="form-control ckeditor" id="content" rows="10" name="content">{{ old('content') }}</textarea>

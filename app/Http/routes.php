@@ -197,7 +197,7 @@ Route::post(
 );
 
 Route::get(
-    'traductions/{id}',
+    'traductions',
     ['middleware'=>'auth','uses'=>'TraductionController@getTraductions']
 );
 Route::post(

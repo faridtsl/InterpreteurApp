@@ -21,7 +21,7 @@ use Carbon\Carbon;
 
 class DemandeTools{
 
-    public static function addDemande(Adresse $adr,Client $client,Etat $etat,Traduction $traduction,User $u,$a){
+    public static function addDemande(Adresse $adr,Client $client,Etat $etat, User $u,$a){
         $demande = new Demande();
         $demande->titre = $a['titre'];
         $demande->content = $a['content'];
@@ -30,7 +30,6 @@ class DemandeTools{
         $demande->adresse()->associate($adr);
         $demande->user()->associate($u);
         $demande->client()->associate($client);
-        $demande->traduction()->associate($traduction);
         $demande->etat()->associate($etat);
         $demande->origin_id = 0;
         $demande->save();
@@ -84,7 +83,7 @@ class DemandeTools{
         return $now->diffInDays($dateEvent,false);
     }
 
-    public static function updateDemande(Adresse $adr=null,Client $client=null,Etat $etat=null,Traduction $traduction=null,User $u,$a){
+    public static function updateDemande(Adresse $adr=null,Client $client=null,Etat $etat=null, User $u,$a){
         $demande = Demande::find($a['id']);
         if($a['titre'] != null) $demande->titre = $a['titre'];
         if($a['content'] != null) $demande->content = $a['content'];
@@ -92,7 +91,6 @@ class DemandeTools{
         if($a['dateEndEvent'] != null) $demande->dateEndEvent = $a['dateEndEvent'];
         if($adr != null) $demande->adresse()->associate($adr);
         if($client != null) $demande->client()->associate($client);
-        if($traduction != null) $demande->traduction()->associate($traduction);
         if($etat != null) $demande->etat()->associate($etat);
         $demande->save();
 
@@ -207,4 +205,22 @@ class DemandeTools{
         return $demandes;
     }
 
+
+
+    public static function addTraduction(Demande $demande, Traduction $trad){
+        $demande->traductions()->attach($trad);
+    }
+
+    public static function addTraductions(Demande $demande,$a){
+        $langs_init = $a['langue_src'];
+        $langs_dest = $a['langue_dest'];
+        if($langs_init == null) return;
+        foreach ($langs_init as $index => $value) {
+            $src = LangueTools::getLangue($value);
+            $dst = LangueTools::getLangue($langs_dest[$index]);
+            $traduction = TraductionTools::getTraduction($src, $dst);
+            if($traduction != null)
+                DemandeTools::addTraduction($demande, $traduction);
+        }
+    }
 }

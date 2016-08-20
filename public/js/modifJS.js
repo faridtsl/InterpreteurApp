@@ -64,7 +64,7 @@ $(function () {
         $id = $("#id").val();
 
         $.ajax({
-            url: '/traductions/'+$id,
+            url: '/traductions?idI='+$id,
             type:"GET",
             success:function(data){
                 $langs = $("#oldLangs>tbody");
@@ -79,23 +79,23 @@ $(function () {
     }
 
     $(document.body).on('click', '.tradDel',function (e) {
-            e.preventDefault();
-            $form = $(this).parent('form');
+        e.preventDefault();
+        $form = $(this).parent('form');
 
-            $.ajax({
-                url: '/traduction/delete',
-                type:"POST",
-                data:$form.serialize(),
-                success:function(data){
-                    $langs = $("#oldLangs>tbody");
-                    $langs.html('');
-                    $.each(data,function (d) {
-                        ajaxCall(data,d);
-                    });
-                },error:function(){
-                    alert("error!!!!");
-                }
-            });
+        $.ajax({
+            url: '/traduction/delete',
+            type:"POST",
+            data:$form.serialize(),
+            success:function(data){
+                $langs = $("#oldLangs>tbody");
+                $langs.html('');
+                $.each(data,function (d) {
+                    ajaxCall(data,d);
+                });
+            },error:function(){
+                alert("error!!!!");
+            }
+        });
     });
 
 

@@ -10,4 +10,8 @@ class Traduction extends Model{
         return $this->belongsToMany(Interpreteur::class,'interpreteurs_tradutions');
     }
 
+    public function demandes(){
+        return $this->belongsToMany(Demande::class,'demandes_tradutions');
+    }
+
 }

@@ -29,6 +29,7 @@ class ClientController extends Controller{
         $connectedUser = Auth::user();
         try {
             DB::beginTransaction();
+            $adresse = AdresseTools::addAdresse($request);
             $image = Input::file('image');
             $imgName = '';
             if ($image == null) {
@@ -38,7 +39,7 @@ class ClientController extends Controller{
                 Input::file('image')->move(storage_path() . '/img', $imgName);
             }
             $request['imageName'] = $imgName;
-            $client = ClientTools::addClient($connectedUser, $request);
+            $client = ClientTools::addClient($adresse,$connectedUser, $request);
             $trace = new Trace();
             $trace->operation = "Creation";
             $trace->type = 'Client';
@@ -92,7 +93,7 @@ class ClientController extends Controller{
         $request['imageName'] = $imgName;
         try {
             DB::beginTransaction();
-            ClientTools::updateClient($connectedUser, $request);
+            ClientTools::updateClient(null,$connectedUser, $request);
             DB::commit();
         }catch(\Exception $e){
             DB::rollback();

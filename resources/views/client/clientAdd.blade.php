@@ -2,6 +2,7 @@
 
 @section('header')
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <link rel="stylesheet" href="{{ asset('/css/myStyle.css')}}" />
 @endsection
 
 @section('title')
@@ -10,48 +11,59 @@
 
 @section('content')
     <h3 class="page-header">Ajouter un nouveau client</h3>
-
+    <form role="form" method="POST" action="/client/add" id="formID" enctype="multipart/form-data">
     <div class="panel-body">
         <div class="row">
             <div class="col-lg-6">
-                <form role="form" method="POST" action="/client/add" id="formID" enctype="multipart/form-data">
-                    {!! csrf_field() !!}
-                    <div class="form-group">
-                        <label>Nom du client</label>
-                        <input class="form-control" name="nom" value="{{ old('nom') }}" placeholder="Nom">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        {!! csrf_field() !!}
+                        <div class="form-group">
+                            <label>Nom du client</label>
+                            <input class="form-control" name="nom" value="{{ old('nom') }}" placeholder="Nom">
+                        </div>
+                        <div class="form-group">
+                            <label>Prenom</label>
+                            <input class="form-control" value="{{ old('prenom') }}"  name="prenom" placeholder="Prenom">
+                        </div>
+                        <div class="form-group">
+                            <label>email</label>
+                            <input class="form-control" value="{{ old('email') }}"  name="email" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <label>Image : </label>
+                            <input type="file" name="image" value="{{ old('image') }}">
+                        </div>
+                        <div class="form-group">
+                            <label>tel portable</label>
+                            <input class="form-control" value="{{ old('tel_portable') }}"  name="tel_portable" placeholder="Telephone portable">
+                        </div>
+                        <div class="form-group">
+                            <label>tel fixe</label>
+                            <input class="form-control"  value="{{ old('tel_fixe') }}" name="tel_fixe" placeholder="Telephone fixe">
+                        </div>
+                        <div class="form-group">
+                            <label>Commentaire</label>
+                            <textarea class="form-control" name="commentaire" rows="3">{{ old('commentaire') }}</textarea>
+                        </div>
+                        <button id="send" type="submit" class="btn btn-outline btn-primary">Ajouter</button>
+                        <button type="reset" class="btn btn-outline btn-primary">Supprimer</button>
+                        <hr>
                     </div>
-                    <div class="form-group">
-                        <label>Prenom</label>
-                        <input class="form-control" value="{{ old('prenom') }}"  name="prenom" placeholder="Prenom">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            @include('includes.adresseForm')
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>email</label>
-                        <input class="form-control" value="{{ old('email') }}"  name="email" placeholder="Email">
-                    </div>
-                    <div class="form-group">
-                        <label>Image : </label>
-                        <input type="file" name="image" value="{{ old('image') }}">
-                    </div>
-                    <div class="form-group">
-                        <label>tel portable</label>
-                        <input class="form-control" value="{{ old('tel_portable') }}"  name="tel_portable" placeholder="Telephone portable">
-                    </div>
-                    <div class="form-group">
-                        <label>tel fixe</label>
-                        <input class="form-control"  value="{{ old('tel_fixe') }}" name="tel_fixe" placeholder="Telephone fixe">
-                    </div>
-                    <div class="form-group">
-                        <label>Commentaire</label>
-                        <textarea class="form-control" name="commentaire" rows="3">{{ old('commentaire') }}</textarea>
-                    </div>
-                    <button id="send" type="submit" class="btn btn-outline btn-primary">Ajouter</button>
-                    <button type="reset" class="btn btn-outline btn-primary">Supprimer</button>
-                </form>
-
-                <hr>
+                </div>
             </div>
         </div>
     </div>
+    </form>
 @endsection
 
 
@@ -137,4 +149,8 @@
 
 
     <script src="{{ asset("js/myScript.js") }}"> </script>
+    <script src="{{ asset("js/mapsJS.js") }}"> </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_KEY')}}&signed_in=true&libraries=places&callback=initAutocomplete"
+            async defer></script>
+
 @endsection

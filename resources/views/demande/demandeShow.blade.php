@@ -124,9 +124,8 @@
                                     <th>Date de Modification</th>
                                     <th>Date Debut</th>
                                     <th>Date Fin</th>
-                                    <th>Langue Initiale</th>
-                                    <th>Langue Destination</th>
                                     <th>Adresse de l'evenement</th>
+                                    <th>Traductions</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -139,9 +138,8 @@
                                     <th>Date de Modification</th>
                                     <th>Date Debut</th>
                                     <th>Date Fin</th>
-                                    <th>Langue Initiale</th>
-                                    <th>Langue Destination</th>
                                     <th>Adresse de l'evenement</th>
+                                    <th>Traductions</th>
                                     <th></th>
                                 </tr>
                             </tfoot>
@@ -156,9 +154,14 @@
                                     <td>{{\Carbon\Carbon::parse($demande->updated_at)->format('l j F Y H:i')}}</td>
                                     <td>{{\Carbon\Carbon::parse($demande->dateEvent)->format('l j F Y H:i')}}</td>
                                     <td>{{\Carbon\Carbon::parse($demande->dateEndEvent)->format('l j F Y H:i')}}</td>
-                                    <td>{{\App\Tools\LangueTools::getLangue(\App\Tools\TraductionTools::getTraductionById($demande->traduction_id)->source)->content}}</td>
-                                    <td>{{\App\Tools\LangueTools::getLangue(\App\Tools\TraductionTools::getTraductionById($demande->traduction_id)->cible)->content}}</td>
                                     <td>{{ \App\Tools\AdresseTools::getAdresse($demande->adresse_id)->adresse}}</td>
+                                    <td>
+                                        |
+                                        @foreach(\App\Tools\TraductionTools::getTraductionsByDemande($demande->id) as $traduction)
+                                            {{\App\Tools\LangueTools::getLangue($traduction->source)->content}} <span class="glyphicon glyphicon-arrow-right"></span> {{\App\Tools\LangueTools::getLangue($traduction->cible)->content}}
+                                            |
+                                        @endforeach
+                                    </td>
                                     <td>
                                         <p>
                                             <a data-placement="top" data-toggle="tooltip" title="Edit" class="btn btn-warning btn-xs editButton" href="/demande/update?id={{$demande->id}}" >
@@ -207,9 +210,8 @@
                                 <th>Date de Modification</th>
                                 <th>Date Debut</th>
                                 <th>Date Fin</th>
-                                <th>Langue Initiale</th>
-                                <th>Langue Destination</th>
                                 <th>Adresse de l'evenement</th>
+                                <th>Traductions</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -222,9 +224,8 @@
                                 <th>Date de Modification</th>
                                 <th>Date Debut</th>
                                 <th>Date Fin</th>
-                                <th>Langue Initiale</th>
-                                <th>Langue Destination</th>
                                 <th>Adresse de l'evenement</th>
+                                <th>Traductions</th>
                                 <th></th>
                             </tr>
                             </tfoot>
@@ -239,9 +240,14 @@
                                         <td>{{\Carbon\Carbon::parse($demande->updated_at)->format('l j F Y H:i')}}</td>
                                         <td>{{\Carbon\Carbon::parse($demande->dateEvent)->format('l j F Y H:i')}}</td>
                                         <td>{{\Carbon\Carbon::parse($demande->dateEndEvent)->format('l j F Y H:i')}}</td>
-                                        <td>{{\App\Tools\LangueTools::getLangue(\App\Tools\TraductionTools::getTraductionById($demande->traduction_id)->source)->content}}</td>
-                                        <td>{{\App\Tools\LangueTools::getLangue(\App\Tools\TraductionTools::getTraductionById($demande->traduction_id)->cible)->content}}</td>
                                         <td width="100px">{{ \App\Tools\AdresseTools::getAdresse($demande->adresse_id)->adresse}}</td>
+                                        <td>
+                                            |
+                                            @foreach(\App\Tools\TraductionTools::getTraductionsByDemande($demande->id) as $traduction)
+                                                {{\App\Tools\LangueTools::getLangue($traduction->source)->content}} <span class="glyphicon glyphicon-arrow-right"></span> {{\App\Tools\LangueTools::getLangue($traduction->cible)->content}}
+                                                |
+                                            @endforeach
+                                        </td>
                                         <td>
                                             <p>
                                                 <a data-placement="top" data-toggle="tooltip" title="Edit" class="btn btn-warning btn-xs editButton" href="/demande/update?id={{$demande->id}}" >

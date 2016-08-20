@@ -68,7 +68,7 @@ class InterpreteurTools{
         $interp->traces()->save($trace);
         $devis = DevisTools::getDevisByInterp($id);
         foreach ($devis as $devi) {
-            DevisTools::deleteDevis($u,$devis);
+            DevisTools::deleteDevis($u,$devi);
         }
         $factures = FactureTools::getFacturesByInterp($id);
         foreach ($factures as $facture) {

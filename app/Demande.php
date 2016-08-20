@@ -23,8 +23,8 @@ class Demande extends Model{
         return $this->belongsTo(Client::class);
     }
 
-    public function traduction(){
-        return $this->belongsTo(Traduction::class);
+    public function traductions(){
+        return $this->belongsToMany(Traduction::class,'demandes_traductions');
     }
 
     public function etat(){
