@@ -61,4 +61,21 @@ $(document).ready(function() {
         $('#demandePanel').addClass('panel-info').removeClass('panel-danger').removeClass('panel-success').removeClass('panel-collapsed').find('.panel-body').slideDown();
     });
 
+    $('#submitButton').on('click', function (e) {
+        e.preventDefault();
+        $('#confirmMail').modal('show');
+    });
+
+    $(document.body).on('click','#yesMail',function (e) {
+        e.preventDefault();
+        $('#sendMail').val(1);
+        $('#formID').submit();
+    });
+
+    $(document.body).on('click','#nonMail',function (e) {
+        e.preventDefault();
+        $('#sendMail').val(0);
+        $('#formID').submit();
+    });
+
 });

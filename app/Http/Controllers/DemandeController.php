@@ -40,7 +40,7 @@ class DemandeController extends Controller{
                 //return view('demande.demandeAdd',['langues' => $langues,'clients' => $clients])->withErrors(['Langue source doit être differente de la langues destination']);
             $demande = DemandeTools::addDemande($adresse,$client,$etat,$connectedUser,$request);
             DemandeTools::addTraductions($demande,$request);
-            MailTools::sendMail('Demande créée','createDemande','creadis.test@gmail.com',$client->email,[],['client'=>$client,'demande'=>$demande,'adresse'=>$adresse],'public/css/mailStyle.css');
+            if($request['sendMail'] == 1) MailTools::sendMail('Demande créée','createDemande','creadis.test@gmail.com',$client->email,[],['client'=>$client,'demande'=>$demande,'adresse'=>$adresse],'public/css/mailStyle.css');
             DB::commit();
             return view('demande.demandeAdd', ['message' => 'Demande ajoutée avec success!','client' => $client, 'clients' => $clients,'langues' => $langues, 'demande' => $demande]);
         }catch(\Exception $e){

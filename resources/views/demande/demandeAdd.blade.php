@@ -167,7 +167,8 @@ Ajouter demande
                     <div class="form-group">
                         @include('includes.adresseForm')
                     </div>
-                    <button type="submit" class="btn btn-outline btn-primary">Ajouter</button>
+                    <input type="hidden" id="sendMail" name="sendMail" value="0"/>
+                    <button type="submit" id="submitButton" class="btn btn-outline btn-primary">Ajouter</button>
                     <button class="btn btn-warning" id="returnCli">Return</button>
                     <button type="reset" class="btn btn-danger">Supprimer</button>
                 </div>
@@ -227,11 +228,26 @@ Ajouter demande
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
-            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
     </div>
 
+    <div class="modal fade" id="confirmMail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header modal-header-success">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Envoyer le mail de la demande ?</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-success"> Voullez vous envoyer le mail de la demande ?</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="yesMail">Oui</button>
+                    <button type="button" class="btn btn-default" id="nonMail">Non</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('footer')
