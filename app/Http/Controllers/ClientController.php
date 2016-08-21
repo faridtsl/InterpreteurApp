@@ -94,6 +94,7 @@ class ClientController extends Controller{
         try {
             DB::beginTransaction();
             ClientTools::updateClient(null,$connectedUser, $request);
+            AdresseTools::updateAdresse($connectedUser,$request);
             DB::commit();
         }catch(\Exception $e){
             DB::rollback();

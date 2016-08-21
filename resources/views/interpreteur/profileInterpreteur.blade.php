@@ -11,6 +11,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.0.2/css/responsive.bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('/css/myStyle.css')}}" />
     <link rel="stylesheet" href="{{ asset('/css/success.css')}}" />
+    <style type="text/css"> .pac-container { z-index: 1051 !important; } </style>
+    <meta name="_token" content="{{ csrf_token() }}">
     <script type="text/javascript" src="{{ asset('js/jquery.popconfirm.js')}}"></script>
 @endsection
 
@@ -95,7 +97,7 @@
                 </h4>
             </div>
             <div id="factPanel"  class="panel-body panel-collapse">
-                <table id="example" class="table table-striped table-bordered display responsive nowrap" cellspacing="0">
+                <table id="tableFactures" class="table table-striped table-bordered display responsive nowrap" cellspacing="0">
                     <thead>
                     <tr>
                         <th class="never">id</th>
@@ -256,7 +258,7 @@
 
 @section('modals')
     @include('includes.popups')
-    @include('includes.clientModals')
+    @include('includes.interpreteurModals')
 
     <!--Suppression popup-->
     <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
@@ -331,4 +333,10 @@
 
 @section('footer')
     <script src="{{ asset("js/profileClient.js") }}"> </script>
+    <script src="{{ asset("js/steps.js") }}"> </script>
+    <script src="{{ asset("js/myScript.js") }}"> </script>
+    <script src="{{ asset("js/modifJS.js") }}"> </script>
+    <script src="{{ asset("js/mapsJS.js") }}"> </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVuJ8zI1I-V9ckmycKWAbNRJmcTzs7nZE&signed_in=true&libraries=places&callback=initAutocomplete"
+            async defer></script>
 @endsection

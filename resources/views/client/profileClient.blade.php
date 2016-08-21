@@ -11,6 +11,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.0.2/css/responsive.bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('/css/cardProfiles.css')}}" />
     <link rel="stylesheet" href="{{ asset('/css/success.css')}}" />
+    <style type="text/css"> .pac-container { z-index: 1051 !important; } </style>
+    <meta name="_token" content="{{ csrf_token() }}">
     <script type="text/javascript" src="{{ asset('js/jquery.popconfirm.js')}}"></script>
 @endsection
 
@@ -76,12 +78,12 @@
     <!-- edit form column -->
     <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
         <div class="form-horizontal" role="form">
-            <!--div class="form-group">
+            <div class="form-group">
                 <label class="col-lg-3 control-label">Adresse</label>
                 <div class="col-lg-8">
-                    <input class="form-control" value="mohammed@gmail.com" type="text" disabled="true">
+                    <input class="form-control" value="{{ \App\Tools\AdresseTools::getAdresse($client->adresse_id)->adresse}}" type="text" disabled="true">
                 </div>
-            </div-->
+            </div>
             <div class="form-group">
                 <label class="col-lg-3 control-label">tel fixe</label>
                 <div class="col-lg-8">
@@ -113,7 +115,7 @@
             </h4>
         </div>
         <div id="factPanel"  class="panel-body panel-collapse">
-            <table id="example" class="table table-striped table-bordered display responsive nowrap" cellspacing="0">
+            <table id="tableFactures" class="table table-striped table-bordered display responsive nowrap" cellspacing="0">
                 <thead>
                 <tr>
                     <th class="never">id</th>
@@ -428,4 +430,10 @@
 
 @section('footer')
     <script src="{{ asset("js/profileClient.js") }}"> </script>
+    <script src="{{ asset("js/steps.js") }}"> </script>
+    <script src="{{ asset("js/myScript.js") }}"> </script>
+    <script src="{{ asset("js/modifJS.js") }}"> </script>
+    <script src="{{ asset("js/mapsJS.js") }}"> </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVuJ8zI1I-V9ckmycKWAbNRJmcTzs7nZE&signed_in=true&libraries=places&callback=initAutocomplete"
+            async defer></script>
 @endsection

@@ -11,7 +11,7 @@ $(document).ready(function() {
     });
 
     // Setup - add a text input to each footer cell
-    $('#example tfoot th').each( function () {
+    $('#tableFactures tfoot th').each( function () {
         var title = $(this).text();
         if(title!="" && title != 'Action') $(this).html( '<input type="text" placeholder="'+title+'"  style="width: 100%;" />' );
     } );
@@ -91,7 +91,7 @@ $(document).ready(function() {
 
     $("#tableCommande").css("width","100%");
     $("#demandesTable").css("width","100%");
-    $("#example").css("width","100%");
+    $("#tableFactures").css("width","100%");
 
 
     $('#resendFact').on('click',function (e) {
