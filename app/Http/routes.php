@@ -64,6 +64,15 @@ Route::get(
     ['middleware'=>'auth','uses'=>'InterpreteurController@showArchiveProfileInterpreteur']
 );
 
+Route::get(
+    'interpreteur/cv',
+    ['middleware'=>'auth','uses'=>'InterpreteurController@getCv']
+);
+Route::get(
+    'interpreteur/cv/anonyme',
+    ['middleware'=>'auth','uses'=>'InterpreteurController@getCvAnonyme']
+);
+
 
 
 

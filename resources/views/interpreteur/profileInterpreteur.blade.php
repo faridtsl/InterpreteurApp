@@ -59,6 +59,20 @@
                     </div>
                 </div>
                 <div class="form-group">
+                @if($interpreteur->cv_anonyme != null)
+                    <label class="col-lg-3 control-label">CV anonyme:</label>
+                    <div class="col-lg-1">
+                        <a class="btn btn-circle" href="/interpreteur/cv/anonyme?id={{$interpreteur->id}}"><span class="glyphicon glyphicon-question-sign" style="font-size: 25px;"></span></a>
+                    </div>
+                @endif
+                @if($interpreteur->cv != null)
+                    <label class="col-lg-3 control-label">CV:</label>
+                    <div class="col-lg-3">
+                        <a class="btn btn-circle" href="/interpreteur/cv?id={{$interpreteur->id}}"><span class="glyphicon glyphicon-download" style="font-size: 25px;"></span></a>
+                    </div>
+                @endif
+                </div>
+                <div class="form-group">
                     <label class="col-lg-3 control-label">Langues:</label>
                     <div class="col-lg-8">
                         @foreach(\App\Tools\TraductionTools::getTraductionsByInterpreteur($interpreteur->id) as $traduction)

@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Storage;
 
 class ImageTools{
 
-    public static function getName($image,$request){
-        return $request['nom'].'_'.$request['prenom'].rand(11111,99999).'.'.$image->getClientOriginalExtension();
+    public static function getName($file,$request){
+        return $request['nom'].'_'.$request['prenom'].rand(11111,99999).'.'.$file->getClientOriginalExtension();
     }
 
     public static function getImage($img){

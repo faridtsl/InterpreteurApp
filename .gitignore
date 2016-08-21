@@ -5,6 +5,8 @@ Homestead.yaml
 Homestead.json
 .env
 /storage/img/*
+/storage/cv/*
+/storage/cv_anonyme/*
 !/storage/img/unknown.jpg
 /storage/devis.pdf
 /storage/facture.pdf

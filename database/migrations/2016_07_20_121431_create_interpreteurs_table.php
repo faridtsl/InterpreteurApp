@@ -21,6 +21,8 @@ class CreateInterpreteursTable extends Migration{
             $table->text('commentaire');
             $table->string('tel_fixe');
             $table->string('image');
+            $table->string('cv');
+            $table->string('cv_anonyme');
             $table->integer('adresse_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->timestamps();

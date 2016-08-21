@@ -35,6 +35,14 @@
                                 <input type="file" name="image">
                             </div>
                             <div class="form-group">
+                                <label>CV : </label>
+                                <input type="file" name="cv">
+                            </div>
+                            <div class="form-group">
+                                <label>CV Anonyme : </label>
+                                <input type="file" name="cv_anonyme">
+                            </div>
+                            <div class="form-group">
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label>Prix préstation</label>

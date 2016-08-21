@@ -38,6 +38,18 @@ class InterpreteurController extends Controller{
                 $imgName = ImageTools::getName($image, $request);
                 Input::file('image')->move(storage_path() . '/img', $imgName);
             }
+            $cv = Input::file('cv');
+            if($cv != null){
+                $cvName = ImageTools::getName($cv,$request);
+                Input::file('cv')->move(storage_path().'/cv',$cvName);
+                $request['cvName'] = $cvName;
+            }
+            $cv_anonyme = Input::file('cv_anonyme');
+            if($cv_anonyme != null){
+                $cvName = ImageTools::getName($cv_anonyme,$request);
+                Input::file('cv_anonyme')->move(storage_path().'/cv_anonyme',$cvName);
+                $request['cvAnonymeName'] = $cvName;
+            }
             $request['imageName'] = $imgName;
             $interpreteur = InterpreteurTools::addInterpreteur($adresse, $connectedUser, $request);
             InterpreteurTools::addTraductions($interpreteur,$request);
@@ -87,6 +99,18 @@ class InterpreteurController extends Controller{
             Input::file('image')->move(storage_path() . '/img', $imgName);
         }
         $request['imageName'] = $imgName;
+        $cv = Input::file('cv');
+        if($cv != null){
+            $cvName = ImageTools::getName($cv,$request);
+            Input::file('cv')->move(storage_path().'/cv',$cvName);
+            $request['cvName'] = $cvName;
+        }
+        $cv_anonyme = Input::file('cv_anonyme');
+        if($cv_anonyme != null){
+            $cvName = ImageTools::getName($cv_anonyme,$request);
+            Input::file('cv_anonyme')->move(storage_path().'/cv_anonyme',$cvName);
+            $request['cvAnonymeName'] = $cvName;
+        }
 
         $interpreteur = InterpreteurTools::updateInterpreteur($connectedUser,$request);
         AdresseTools::updateAdresse($connectedUser,$request);
@@ -132,6 +156,29 @@ class InterpreteurController extends Controller{
             if ($fact != null && $fact->trashed()) array_push($factures, $fact);
         }
         return view('interpreteur.profileArchiveInterpreteur',['interpreteur'=>$interp,'factures'=>$factures,'devis'=>$devs]);
+    }
+
+    private function getDownload($fileName,$downName){
+        //PDF file is stored under project/public/download/info.pdf
+        $file= storage_path().$fileName;
+
+        $headers = array(
+            'Content-Type: application/pdf',
+        );
+
+        return response()->download($file, $downName , $headers);
+    }
+
+    public function getCvAnonyme(Request $request){
+        if($request['id'] == null) return redirect()->back();
+        $interp = InterpreteurTools::getInterpreteur($request['id']);
+        return $this->getDownload('/cv_anonyme/'.$interp->cv_anonyme,'cv_anonyme.pdf');
+    }
+
+    public function getCv(Request $request){
+        if($request['id'] == null) return redirect()->back();
+        $interp = InterpreteurTools::getInterpreteur($request['id']);
+        return $this->getDownload('/cv/'.$interp->cv,$interp->nom.'_'.$interp->prenom.'_CV.pdf');
     }
 
 }

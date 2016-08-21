@@ -28,6 +28,8 @@ class InterpreteurTools{
         $interp->commentaire = $a['commentaire'];
         $interp->tel_fixe = $a['tel_fixe'];
         $interp->image = $a['imageName'];
+        $interp->cv = $a['cvName'];
+        $interp->cv_anonyme = $a['cvAnonymeName'];
         $interp->adresse()->associate($adr);
         $interp->user()->associate($u);
         $interp->save();
@@ -102,6 +104,8 @@ class InterpreteurTools{
         if($a['commentaire'] != null) $interp->commentaire = $a['commentaire'];
         if($a['tel_fixe'] != null) $interp->tel_fixe = $a['tel_fixe'];
         if($a['imageName'] != null) $interp->image = $a['imageName'];
+        if($a['cvName'] != null) $interp->cv = $a['cvName'];
+        if($a['cvAnonymeName'] != null) $interp->cv_anonyme = $a['cvAnonymeName'];
         $interp->save();
 
         $trace = new Trace();
