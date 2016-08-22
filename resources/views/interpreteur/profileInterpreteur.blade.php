@@ -61,13 +61,13 @@
                     </div>
                 </div>
                 <div class="form-group">
-                @if($interpreteur->cv_anonyme != null)
+                @if($interpreteur->cv_anonyme != null and $interpreteur->cv_anonyme != 'NULL')
                     <label class="col-lg-3 control-label">CV anonyme:</label>
                     <div class="col-lg-1">
                         <a class="btn btn-circle" href="/interpreteur/cv/anonyme?id={{$interpreteur->id}}"><span class="glyphicon glyphicon-question-sign" style="font-size: 25px;"></span></a>
                     </div>
                 @endif
-                @if($interpreteur->cv != null)
+                @if($interpreteur->cv != null and $interpreteur->cv != 'NULL')
                     <label class="col-lg-3 control-label">CV:</label>
                     <div class="col-lg-3">
                         <a class="btn btn-circle" href="/interpreteur/cv?id={{$interpreteur->id}}"><span class="glyphicon glyphicon-download" style="font-size: 25px;"></span></a>

@@ -36,13 +36,11 @@
                     <thead>
                         <tr>
                             <th class="never">id</th>
-                            <th>Nom de l'interpreteur</th>
                             <th>Prix proposé</th>
                             <th>Demande</th>
                             <th>Client</th>
                             <th>Date creation du devis</th>
                             <th>Date modification du devis</th>
-                            <th>Adresse de l'interpreteur</th>
                             <th>Resend</th>
                             <th>Show</th>
                             <th>Edit/Delete</th>
@@ -52,13 +50,11 @@
                     <tfoot>
                         <tr>
                             <th>id</th>
-                            <th>Nom de l'interpreteur</th>
                             <th>Prix proposé</th>
                             <th>Demande</th>
                             <th>Client</th>
                             <th>Date creation du devis</th>
                             <th>Date modification du devis</th>
-                            <th>Adresse de l'interpreteur</th>
                             <th></th>
                             <th></th>
                             <th></th>
@@ -70,13 +66,11 @@
                             @if($devi->etat_id == 1)
                             <tr>
                                 <td>{{$devi->id}}</td>
-                                <td>{{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->nom}} {{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->prenom}}</td>
                                 <td>{{\App\Tools\DevisTools::getTotal($devi->id)}} &euro;</td>
                                 <td><a href="/demande/update?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->id}}">{{\App\Tools\DemandeTools::getDemande($devi->demande_id)->titre}}</a></td>
                                 <td><a href="/client/profile?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id}}">{{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id)->nom}} {{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id)->prenom}}</a></td>
                                 <td>{{$devi->created_at->format('l j F Y H:i')}}</td>
                                 <td>{{$devi->updated_at->format('l j F Y H:i')}}</td>
-                                <td>{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
                                 <td>
                                     <a href="home" id="resend{{$devi->id}}" data-id="{{$devi->id}}" class="resendButton"> <span class="glyphicon glyphicon-refresh"></span> </a>
                                 </td>
@@ -114,11 +108,9 @@
                     <thead>
                     <tr>
                         <th class="never">id</th>
-                        <th>Nom de l'interpreteur</th>
                         <th>Prix proposé</th>
                         <th>Demande</th>
                         <th>Client</th>
-                        <th>Adresse de l'interpreteur</th>
                         <th>Date creation du devis</th>
                         <th>Date modification du devis</th>
                         <th>Resend</th>
@@ -130,11 +122,9 @@
                     <tfoot>
                     <tr>
                         <th>id</th>
-                        <th>Nom de l'interpreteur</th>
                         <th>Prix proposé</th>
                         <th>Demande</th>
                         <th>Client</th>
-                        <th>Adresse de l'interpreteur</th>
                         <th>Date creation du devis</th>
                         <th>Date modification du devis</th>
                         <th></th>
@@ -148,11 +138,9 @@
                         @if($devi->etat_id == 2)
                         <tr>
                             <td>{{$devi->id}}</td>
-                            <td>{{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->nom}} {{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->prenom}}</td>
                             <td>{{\App\Tools\DevisTools::getTotal($devi->id)}} &euro;</td>
                             <td><a href="/demande/update?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->id}}">{{\App\Tools\DemandeTools::getDemande($devi->demande_id)->titre}}</a></td>
                             <td><a href="/client/profile?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id}}">{{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id)->nom}} {{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id)->prenom}}</a></td>
-                            <td>{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
                             <td>{{$devi->created_at->format('l j F Y H:i')}}</td>
                             <td>{{$devi->updated_at->format('l j F Y H:i')}}</td>
                             <td>
@@ -193,13 +181,11 @@
                     <thead>
                     <tr>
                         <th class="never">id</th>
-                        <th>Nom de l'interpreteur</th>
                         <th>Prix proposé</th>
                         <th>Demande</th>
                         <th>Client</th>
                         <th>Date creation du devis</th>
                         <th>Date modification du devis</th>
-                        <th>Adresse de l'interpreteur</th>
                         <th>Show</th>
                         <th>Edit/Delete</th>
                     </tr>
@@ -207,13 +193,11 @@
                     <tfoot>
                     <tr>
                         <th>id</th>
-                        <th>Nom de l'interpreteur</th>
                         <th>Prix proposé</th>
                         <th>Demande</th>
                         <th>Client</th>
                         <th>Date creation du devis</th>
                         <th>Date modification du devis</th>
-                        <th>Adresse de l'interpreteur</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -223,13 +207,11 @@
                         @if($devi->etat_id == 3)
                             <tr>
                                 <td>{{$devi->id}}</td>
-                                <td>{{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->nom}} {{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->prenom}}</td>
                                 <td>{{\App\Tools\DevisTools::getTotal($devi->id)}} &euro;</td>
                                 <td><a href="/demande/update?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->id}}">{{\App\Tools\DemandeTools::getDemande($devi->demande_id)->titre}}</a></td>
                                 <td><a href="/client/profile?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id}}">{{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id)->nom}} {{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id)->prenom}}</a></td>
                                 <td>{{$devi->created_at->format('l j F Y H:i')}}</td>
                                 <td>{{$devi->updated_at->format('l j F Y H:i')}}</td>
-                                <td width="100px">{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
                                 <td>
                                     <a href="/devis/view?id={{$devi->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
                                     /<a href="/devis/download?id={{$devi->id}}" class="downloadButton"> <span class="glyphicon glyphicon-download-alt"></span> </a>

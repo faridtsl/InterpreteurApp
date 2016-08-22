@@ -193,8 +193,8 @@
 
                             @foreach(array_slice(\App\Tools\DevisTools::getDevis($demande->id)->all(),0,4) as $devis)
                                 <a href="/devis/edit/{{$devis->id}}" class="list-group-item">
-                                    <i class="fa fa fa-money fa-fw"></i> Interpreteur :
-                                    <strong>{{\App\Tools\InterpreteurTools::getInterpreteur($devis->interpreteur_id)->nom}} {{\App\Tools\InterpreteurTools::getInterpreteur($devis->interpreteur_id)->prenom}}</strong><br/>
+                                    <i class="fa fa fa-money fa-fw"></i> Etat :
+                                    <strong>{{\App\Tools\DevisEtatTools::getEtatById($devis->etat_id)->libelle }}</strong><br/>
                                     Crée le : <strong>{{date('D d M Y h:m:s',strtotime($devis->created_at))}}</strong>
                                     <span class="pull-right text-muted small"><em>Prix : <strong>{{ \App\Tools\DevisTools::getTotal($devis->id)}} &euro;</strong></em></span>
                                 </a>
@@ -317,8 +317,6 @@
                            cellspacing="0">
                         <thead>
                         <tr>
-                            <th>Nom de l'interpreteur</th>
-                            <th>Adresse de l'interpreteur</th>
                             <th width="20px">Etat</th>
                             <th width="20px">Prix proposé</th>
                             <th width="40px">Resend/Edit/Delete @if($demande->etat_id == 2)
@@ -328,8 +326,6 @@
                         </thead>
                         <tfoot>
                         <tr>
-                            <th>Nom de l'interpreteur</th>
-                            <th>Adresse de l'interpreteur</th>
                             <th>Etat</th>
                             <th>Prix proposé</th>
                             <th></th>
@@ -339,8 +335,6 @@
                         <tbody>
                         @foreach(\App\Tools\DevisTools::getDevis($demande->id) as $devi)
                             <tr>
-                                <td>{{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->nom}} {{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->prenom}}</td>
-                                <td width="100px">{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
                                 <td>{{\App\Tools\DevisEtatTools::getEtatById($devi->etat_id)->libelle}}</td>
                                 <td>{{\App\Tools\DevisTools::getTotal($devi->id)}} &euro;</td>
                                 <td><a href="home" data-id="{{$devi->id}}" class="resendButton"> <span
@@ -353,7 +347,6 @@
                                         /<a id="validate{{$devi->id}}" href="/devis/validate?id={{$devi->id}}"
                                             class="editor_edit"><span class="glyphicon glyphicon-ok"></span></a>@endif
                                 </td>
-                                <td>
                                 <td>
                                     <a href="/devis/view?id={{$devi->id}}" class="viewButton"> <span
                                                 class="glyphicon glyphicon-eye-open"></span> </a>

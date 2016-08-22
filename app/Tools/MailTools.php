@@ -15,7 +15,7 @@ use Waavi\Mailman\Facades\Mailman;
 class MailTools{
 
     public static function sendMail($subject, $filename, $from, $to, $attachments, $params, $css){
-        /*$mail = Mailman::make('emails.'.$filename,$params);
+        $mail = Mailman::make('emails.'.$filename,$params);
         $mail = $mail->from($from);
         $mail = $mail->to($to);
         $mail = $mail->subject($subject);
@@ -23,7 +23,7 @@ class MailTools{
         foreach ($attachments as $attach) {
             $mail = $mail->attach($attach);
         }
-        $mail->send();*/
+        $mail->send();
     }
 
     public static function downloadAttach($filename,$params,$downName){

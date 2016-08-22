@@ -43,12 +43,16 @@ class InterpreteurController extends Controller{
                 $cvName = ImageTools::getName($cv,$request);
                 Input::file('cv')->move(storage_path().'/cv',$cvName);
                 $request['cvName'] = $cvName;
+            }else{
+                $request['cvName'] = 'NULL';
             }
             $cv_anonyme = Input::file('cv_anonyme');
             if($cv_anonyme != null){
                 $cvName = ImageTools::getName($cv_anonyme,$request);
                 Input::file('cv_anonyme')->move(storage_path().'/cv_anonyme',$cvName);
                 $request['cvAnonymeName'] = $cvName;
+            }else{
+                $request['cvAnonymeName'] = 'NULL';
             }
             $request['imageName'] = $imgName;
             $interpreteur = InterpreteurTools::addInterpreteur($adresse, $connectedUser, $request);

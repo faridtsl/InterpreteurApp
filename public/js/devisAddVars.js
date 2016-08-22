@@ -67,6 +67,8 @@ $(document).ready(function() {
         addInterpreteur(row[0][0],row[0][9] ,row[0][2],row[0][6],row[0][7],row[0][8]);
     });
 
-
-
+    t = $('#dynamicInterp').DataTable({
+        "pageLength": 10,
+    });
+    counter = 0;
 });

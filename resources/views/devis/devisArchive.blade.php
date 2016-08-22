@@ -26,7 +26,6 @@
             <thead>
             <tr>
                 <th class="never">id</th>
-                <th>Nom de l'interpreteur</th>
                 <th>Etat</th>
                 <th>Prix proposé</th>
                 <th>Date creation du devis</th>
@@ -39,7 +38,6 @@
             <tfoot>
             <tr>
                 <th>id</th>
-                <th>Nom de l'interpreteur</th>
                 <th>Etat</th>
                 <th>Prix proposé</th>
                 <th>Date creation du devis</th>
@@ -53,7 +51,6 @@
             @foreach($devis as $devi)
                 <tr>
                     <td>{{$devi->id}}</td>
-                    <td>{{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->nom}} {{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->prenom}}</td>
                     <td>{{\App\Tools\DevisEtatTools::getEtatById($devi->etat_id)->libelle}}</td>
                     <td>{{\App\Tools\DevisTools::getTotal($devi->id)}} &euro;</td>
                     <td>{{$devi->created_at->format('l j F Y H:i')}}</td>

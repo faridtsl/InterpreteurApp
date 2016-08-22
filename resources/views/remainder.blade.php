@@ -114,13 +114,11 @@
                     <thead>
                     <tr>
                         <th class="never">id</th>
-                        <th>Nom de l'interpreteur</th>
                         <th>Prix proposé</th>
                         <th>Demande</th>
                         <th>Client</th>
                         <th>Date creation du devis</th>
                         <th>Date modification du devis</th>
-                        <th>Adresse de l'interpreteur</th>
                         <th>Resend</th>
                         <th>View</th>
                         <th>Edit/Delete</th>
@@ -130,13 +128,11 @@
                     <tfoot>
                     <tr>
                         <th>id</th>
-                        <th>Nom de l'interpreteur</th>
                         <th>Prix proposé</th>
                         <th>Demande</th>
                         <th>Client</th>
                         <th>Date creation du devis</th>
                         <th>Date modification du devis</th>
-                        <th>Adresse de l'interpreteur</th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -148,13 +144,11 @@
                         @if($devi->etat_id == 2 && \App\Tools\DevisTools::tempsRestantFinEvent($devi) <= 0)
                             <tr>
                                 <td>{{$devi->id}}</td>
-                                <td>{{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->nom}} {{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->prenom}}</td>
                                 <td>{{\App\Tools\DevisTools::getTotal($devi->id)}} &euro;</td>
                                 <td><a href="/demande/update?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->id}}">{{\App\Tools\DemandeTools::getDemande($devi->demande_id)->titre}}</a></td>
                                 <td><a href="/client/profile?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id}}">{{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id)->nom}} {{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id)->prenom}}</a></td>
                                 <td>{{$devi->created_at->format('l j F Y H:i')}}</td>
                                 <td>{{$devi->updated_at->format('l j F Y H:i')}}</td>
-                                <td width="100px">{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
                                 <td>
                                     <a id="resend{{$devi->id}}" data-id="{{$devi->id}}" class="resendButton"> <span class="glyphicon glyphicon-refresh"></span> </a>
                                 </td>
@@ -205,13 +199,11 @@
                     <thead>
                     <tr>
                         <th class="never">id</th>
-                        <th>Nom de l'interpreteur</th>
                         <th>Prix proposé</th>
                         <th>Demande</th>
                         <th>Client</th>
                         <th>Date creation du devis</th>
                         <th>Date modification du devis</th>
-                        <th>Adresse de l'interpreteur</th>
                         <th>Resend</th>
                         <th>View</th>
                         <th>Edit/Delete</th>
@@ -221,13 +213,11 @@
                     <tfoot>
                     <tr>
                         <th>id</th>
-                        <th>Nom de l'interpreteur</th>
                         <th>Prix proposé</th>
                         <th>Demande</th>
                         <th>Client</th>
                         <th>Date creation du devis</th>
                         <th>Date modification du devis</th>
-                        <th>Adresse de l'interpreteur</th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -239,13 +229,11 @@
                         @if($devi->etat_id == 1 && \App\Tools\DevisTools::tempsRestant($devi) <= env('REMAINDER_DELAI_DEVIS','0'))
                             <tr>
                                 <td>{{$devi->id}}</td>
-                                <td>{{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->nom}} {{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->prenom}}</td>
                                 <td>{{\App\Tools\DevisTools::getTotal($devi->id)}} &euro;</td>
                                 <td><a href="/demande/update?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->id}}">{{\App\Tools\DemandeTools::getDemande($devi->demande_id)->titre}}</a></td>
                                 <td><a href="/client/profile?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id}}">{{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id)->nom}} {{\App\Tools\ClientTools::getClient(\App\Tools\DemandeTools::getDemande($devi->demande_id)->client_id)->prenom}}</a></td>
                                 <td>{{$devi->created_at->format('l j F Y H:i')}}</td>
                                 <td>{{$devi->updated_at->format('l j F Y H:i')}}</td>
-                                <td width="100px">{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
                                 <td>
                                     <a id="resend2{{$devi->id}}" data-id="{{$devi->id}}" class="resendButton"> <span class="glyphicon glyphicon-refresh"></span> </a>
                                 </td>

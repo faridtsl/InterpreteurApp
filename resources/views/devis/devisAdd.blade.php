@@ -51,7 +51,7 @@
                         <div id="collapse2" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <br><br>
-                                <div class="container-fluid well span6">
+                                <!--div class="container-fluid well span6">
                                     <div class="col-sm-2 col-md-2">
                                         <img src="/images/unknown.jpg" alt="" id="imgInterp" class="img-rounded img-responsive" />
                                     </div>
@@ -63,7 +63,28 @@
                                             <br
                                             /> <i class="glyphicon glyphicon-phone"></i> <span id="telInterp">Aucun</span>
                                     </div>
-                                </div>
+                                </div--->
+
+                                <table class="table table-striped table-bordered table-hover" id="dynamicInterp" cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>Nom</th>
+                                        <th>Prestation</th>
+                                        <th>Envoyer CV</th>
+                                        <th>Deselect</th>
+                                    </tr>
+                                    </thead>
+                                    <tfoot>
+                                    <tr>
+                                        <th>Nom</th>
+                                        <th>Prestation</th>
+                                        <th>Envoyer CV</th>
+                                        <th></th>
+                                    </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    </tbody>
+                                </table>
                                 <hr>
                                 <div class="row">
                                     <div class="col-lg-3">
@@ -383,13 +404,30 @@
     <script type="text/javascript">
 
         function addInterpreteur(id,nom,email,img,tel,adr){
-            $("#interpreteur").val(id);
-            $("#nomInterp").text(nom);
-            $("#emailInterp").text(email);
-            $("#telInterp").text(tel);
-            $("#adresseInterp").text(adr);
-            $("#imgInterp").attr('src','/images/'+img);
-            if(nom != "Aucun"){
+            $col1 = nom;
+            $col2 = email;
+            $col3 = '<input type="hidden" name="idInterp[]" value="'+id+'" />\
+            <select name="sendMail[]">\
+                    <option class="radio" value="cv"> CV</option> \
+                    <option class="radio" value="cv_anonyme"> CV anonyme</option>\
+                    <option class="radio" selected value="non"> rien</option>\
+            <select>';
+            $col4 = '<button class="btn btn-danger" id="deselect'+counter+'">Supprimer</button>';
+            $(document.body).on('click','#deselect'+counter,function (e) {
+                e.preventDefault();
+                var row = t.row( $(this).parents('tr') );
+                row.remove();
+                t.draw();
+
+            });
+            if(nom != "Aucun" && $('#dynamicInterp tr > td:contains('+email+')').length == 0){
+                t.row.add([
+                    $col1,
+                    $col2,
+                    $col3,
+                    $col4
+                ]).draw( false );
+                counter++;
                 $('.success-alert').find('.nom').text(nom);
                 $('.success-alert').alert();
                 $(".success-alert").fadeTo(2000, 500).slideUp(500, function(){

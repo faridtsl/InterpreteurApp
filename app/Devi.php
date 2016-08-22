@@ -30,5 +30,8 @@ class Devi extends Model{
     public function traces(){
         return $this->morphMany(Trace::class,'concerned');
     }
+    public function interpreteurs(){
+        return $this->belongsToMany(Interpreteur::class,'devis_interpreteurs');
+    }
 
 }

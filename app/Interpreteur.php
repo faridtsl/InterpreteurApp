@@ -20,6 +20,9 @@ class Interpreteur extends Model{
     public function traductions(){
         return $this->belongsToMany(Traduction::class,'interpreteurs_traductions');
     }
+    public function devis(){
+        return $this->belongsToMany(Devi::class,'devis_interpreteurs');
+    }
     public function traces(){
         return $this->morphMany(Trace::class,'concerned');
     }

@@ -188,11 +188,9 @@
                 <thead>
                 <tr>
                     <th class="never">id</th>
-                    <th>Nom de l'interpreteur</th>
                     <th>Etat</th>
                     <th>Prix proposé</th>
                     <th>Demande</th>
-                    <th>Adresse de l'interpreteur</th>
                     <th>Date creation du devis</th>
                     <th>Date modification du devis</th>
                     <th>Resend</th>
@@ -204,11 +202,9 @@
                 <tfoot>
                 <tr>
                     <th>id</th>
-                    <th>Nom de l'interpreteur</th>
                     <th>Etat</th>
                     <th>Prix proposé</th>
                     <th>Demande</th>
-                    <th>Adresse de l'interpreteur</th>
                     <th>Date creation du devis</th>
                     <th>Date modification du devis</th>
                     <th></th>
@@ -222,11 +218,9 @@
                     @if($devi->etat_id == 2 || $devi->etat_id == 1)
                         <tr>
                             <td>{{$devi->id}}</td>
-                            <td>{{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->nom}} {{\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->prenom}}</td>
                             <td>{{\App\Tools\DevisEtatTools::getEtatById($devi->etat_id)->libelle }}</td>
                             <td>{{\App\Tools\DevisTools::getTotal($devi->id)}} &euro;</td>
                             <td><a href="/demande/update?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->id}}">{{\App\Tools\DemandeTools::getDemande($devi->demande_id)->titre}}</a></td>
-                            <td width="100px">{{\App\Tools\AdresseTools::getAdresse(\App\Tools\InterpreteurTools::getInterpreteur($devi->interpreteur_id)->adresse_id)->adresse}}</td>
                             <td>{{$devi->created_at->format('l j F Y H:i')}}</td>
                             <td>{{$devi->updated_at->format('l j F Y H:i')}}</td>
                             <td>
