@@ -30,6 +30,7 @@ class DevisTools{
         $devis->etat()->associate($etat_devis);
         $devis->save();
         $devis->total = ServiceTools::addServices($devis,$request);
+        $devis->tva = $request['tva'];
         $devis->save();
         if($demande->etat_id == 1) {
             $demande->etat()->associate(EtatTools::getEtatById(2));
@@ -48,6 +49,7 @@ class DevisTools{
     public static function updateDevis($request,$devis,User $u){
         $devis->user()->associate($u);
         $devis->total = ServiceTools::addServices($devis,$request);
+        if($request['tva'] != null) $devis->tva = $request['tva'];
         $devis->save();
         $trace = new Trace();
         $trace->operation = 'Modification';

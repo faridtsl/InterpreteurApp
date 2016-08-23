@@ -27,9 +27,9 @@ class MailTools{
     }
 
     public static function downloadAttach($filename,$params,$downName){
-        /*$params['PDF'] = 'set';
+        $params['PDF'] = 'set';
         $pdf = PDF::loadView('emails.'.$filename, $params);
-        return $pdf->download($downName.'.pdf');*/
+        return $pdf->download($downName.'.pdf');
     }
 
 }

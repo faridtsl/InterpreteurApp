@@ -16,6 +16,7 @@ class CreateClientsTable extends Migration{
             $table->string('prenom');
             $table->string('email')->unique();
             $table->string('tel_portable');
+            $table->string('nationalite');
             $table->text('commentaire');
             $table->string('tel_fixe');
             $table->string('image');

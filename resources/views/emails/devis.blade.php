@@ -219,8 +219,8 @@
             <td></td>
             <td></td>
             <td></td>
-            <td>TAX {{env('PERCENT_TAXES') * 100}}%</td>
-            <td class="total">{{(env('PERCENT_TAXES') * \App\Tools\DevisTools::getTotal($devis->id))}}&euro;</td>
+            <td>TAX {{$devis->tva * 100}}%</td>
+            <td class="total">{{($devis->tva * \App\Tools\DevisTools::getTotal($devis->id))}}&euro;</td>
         </tr>
         <tr>
             <td class="grand total"></td>
@@ -228,7 +228,7 @@
             <td class="grand total"></td>
             <td class="grand total"></td>
             <td class="grand total"><strong>GRAND TOTAL</strong></td>
-            <td class="grand total">{{(env('PERCENT_TAXES') * \App\Tools\DevisTools::getTotal($devis->id)) + \App\Tools\DevisTools::getTotal($devis->id) }}&euro;</td>
+            <td class="grand total">{{($devis->tva * \App\Tools\DevisTools::getTotal($devis->id)) + \App\Tools\DevisTools::getTotal($devis->id) }}&euro;</td>
         </tr>
         </tbody>
     </table>

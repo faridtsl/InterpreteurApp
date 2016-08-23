@@ -30,8 +30,20 @@
                                 <input type="text" value="-1" id="email" name="email" class="form-control"/>
                             </div>
                             <div class="form-group">
+                                <label>nationalite</label>
+                                <input class="form-control" value="{{ old('nationalite') }}"  name="nationalite" placeholder="nationalite">
+                            </div>
+                            <div class="form-group">
                                 <label>Image : </label>
                                 <input type="file" name="image" />
+                            </div>
+                            <div class="form-group">
+                                <label>CV : </label>
+                                <input type="file" name="cv">
+                            </div>
+                            <div class="form-group">
+                                <label>CV Anonyme : </label>
+                                <input type="file" name="cv_anonyme">
                             </div>
                             <div class="form-group">
                                 <div class="row">

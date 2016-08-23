@@ -219,8 +219,8 @@
             <td></td>
             <td></td>
             <td></td>
-            <td>TAX {{env('PERCENT_TAXES') * 100}}%</td>
-            <td class="total">{{(env('PERCENT_TAXES') * \App\Tools\DevisTools::getDevisById($facture->devi_id)->total)}}&euro;</td>
+            <td>TAX {{\App\Tools\DevisTools::getDevisById($facture->devi_id)->tva * 100}}%</td>
+            <td class="total">{{(\App\Tools\DevisTools::getDevisById($facture->devi_id)->tva * \App\Tools\DevisTools::getDevisById($facture->devi_id)->total)}}&euro;</td>
         </tr>
         <tr>
             <td class="grand total"></td>
@@ -228,7 +228,7 @@
             <td class="grand total"></td>
             <td class="grand total"></td>
             <td class="grand total"><strong>GRAND TOTAL</strong></td>
-            <td class="grand total">{{(env('PERCENT_TAXES') * \App\Tools\DevisTools::getDevisById($facture->devi_id)->total) + \App\Tools\DevisTools::getDevisById($facture->devi_id)->total}}&euro;</td>
+            <td class="grand total">{{(\App\Tools\DevisTools::getDevisById($facture->devi_id) * \App\Tools\DevisTools::getDevisById($facture->devi_id)->total) + \App\Tools\DevisTools::getDevisById($facture->devi_id)->total}}&euro;</td>
         </tr>
         </tbody>
     </table>

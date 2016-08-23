@@ -22,6 +22,7 @@ class InterpreteurTools{
         $interp->nom = $a['nom'];
         $interp->prenom = $a['prenom'];
         $interp->email = $a['email'];
+        $interp->nationalite = $a['nationalite'];
         $interp->devise = $a['devise'];
         $interp->prestation = $a['prestation'];
         $interp->tel_portable = $a['tel_portable'];
@@ -98,6 +99,7 @@ class InterpreteurTools{
         if($a['nom'] != null) $interp->nom = $a['nom'];
         if($a['prenom'] != null) $interp->prenom = $a['prenom'];
         if($a['email'] != null) $interp->email = $a['email'];
+        if($a['nationalite'] != null) $interp->nationalite = $a['nationalite'];
         if($a['devise'] != null) $interp->devise = $a['devise'];
         if($a['prestation'] != null) $interp->prestation = $a['prestation'];
         if($a['tel_portable'] != null) $interp->tel_portable = $a['tel_portable'];

@@ -14,7 +14,8 @@ class CreateDevisTable extends Migration
     {
         Schema::create('devis', function (Blueprint $table) {
             $table->increments('id');
-            $table->float('total');
+            $table->double('total');
+            $table->double('tva');
             $table->integer('user_id')->unsigned();
             $table->integer('etat_id')->unsigned();
             $table->integer('demande_id')->unsigned();

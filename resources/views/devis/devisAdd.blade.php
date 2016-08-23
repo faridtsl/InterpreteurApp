@@ -220,6 +220,10 @@
                                     @endif
                                     </tbody>
                                 </table>
+                                <div>
+                                    <label>TVA :</label>
+                                    <input id="tva" name='tva' value="{{env('PERCENT_TAXES')}}" class="form-control"/>
+                                </div>
                                 <div class="pull-right">
                                     <button id="add_row" type="button" class="btn btn-outline btn-default">Ajouter une ligne</button>
                                     <button type="submit" class="btn btn-outline btn-default">Valider</button>

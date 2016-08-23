@@ -18,6 +18,7 @@ class CreateInterpreteursTable extends Migration{
             $table->string('devise');
             $table->string('prestation');
             $table->string('tel_portable');
+            $table->string('nationalite');
             $table->text('commentaire');
             $table->string('tel_fixe');
             $table->string('image');

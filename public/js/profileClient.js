@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    table = $('#example').DataTable({
+    table = $('#tableFactures').DataTable({
         dom: 'Bfrtip',
         buttons: [
             'colvis'
