@@ -69,15 +69,15 @@
                                     <thead>
                                     <tr>
                                         <th>Nom</th>
-                                        <th>Prestation</th>
+                                        <th>Email</th>
                                         <th>Envoyer CV</th>
-                                        <th>Deselect</th>
+                                        <th>Supprimer</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
                                         <th>Nom</th>
-                                        <th>Prestation</th>
+                                        <th>Email</th>
                                         <th>Envoyer CV</th>
                                         <th></th>
                                     </tr>
@@ -282,30 +282,7 @@
                     </tr>
                     </tfoot>
                     <tbody>
-                    @foreach($interpreteurs as $key=>$interpreteur)
-                        <tr>
-                            <td>{{$interpreteur->id}}</td>
-                            <td>
-                                <img class="img-circle" src="/images/{{$interpreteur->image}}" style="width: 50px;height:50px;"/>
-                                {{$interpreteur->nom}} {{$interpreteur->prenom}}
-                            </td>
-                            <td>{{$interpreteur->email}}</td>
-                            <td>{{$interpreteur->prestation}} {{$interpreteur->devise}}</td>
-                            <td>
-                                <select class="form-control" name="langue_ini">
-                                    @foreach(\App\Tools\TraductionTools::getTraductionsByInterpreteur($interpreteur->id) as $traduction)
-                                        <option><strong>{{\App\Tools\LangueTools::getLangue($traduction->source)->content}}→{{\App\Tools\LangueTools::getLangue($traduction->cible)->content}}</strong></option>
-                                    @endforeach
-                                </select>
-                            </td>
-                            <td>{{\App\Tools\AdresseTools::getAdresse($interpreteur->adresse_id)->adresse}}</td>
-                            <td>{{$interpreteur->image}}</td>
-                            <td>{{$interpreteur->tel_portable}}</td>
-                            <td>{{\App\Tools\AdresseTools::getAdresse($interpreteur->adresse_id)->adresse}}</td>
-                            <td>{{$interpreteur->nom}} {{$interpreteur->prenom}}</td>
-                            <td><button class="btn btn-info selectInterpTab1" data-id="{{$key}}">Select</button></td>
-                        </tr>
-                    @endforeach
+
                     </tbody>
                 </table>
             </div>
@@ -335,35 +312,19 @@
                             <tr>
                                 <th>id</th>
                                 <th>Nom</th>
-                                <th>Prenom</th>
                                 <th>E-MAIL</th>
+                                <th>Prestation</th>
                                 <th>init=>dest</th>
                                 <th>image</th>
                                 <th>tel_portable</th>
                                 <th>adresse</th>
                                 <th>Select</th>
+                                <th>lat</th>
+                                <th>long</th>
                             </tr>
                             </thead>
                             <tbody class="searchable">
-                            @foreach($interpreteurs as $key => $interpreteur)
-                                <tr>
-                                    <td>{{$interpreteur->id}}</td>
-                                    <td>{{$interpreteur->nom}}</td>
-                                    <td>{{$interpreteur->prenom}}</td>
-                                    <td>{{$interpreteur->email}}</td>
-                                    <td>
-                                        <select class="form-control" name="langue_ini">
-                                            @foreach(\App\Tools\TraductionTools::getTraductionsByInterpreteur($interpreteur->id) as $traduction)
-                                                <option><strong>{{\App\Tools\LangueTools::getLangue($traduction->source)->content}}→{{\App\Tools\LangueTools::getLangue($traduction->cible)->content}}</strong></option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td>{{$interpreteur->image}}</td>
-                                    <td>{{$interpreteur->tel_portable}}</td>
-                                    <td>{{\App\Tools\AdresseTools::getAdresse($interpreteur->adresse_id)->adresse}}</td>
-                                    <td><button class="btn btn-info selectInterp" data-id="{{$key}}">Select</button></td>
-                                </tr>
-                            @endforeach
+
                             </tbody>
                         </table>
                         <button id="draw" type="button" class="btn btn-primary">Dessiner</button>
@@ -408,7 +369,7 @@
     <script type="text/javascript">
 
         function addInterpreteur(id,nom,email,img,tel,adr){
-            $col1 = nom;
+            $col1 = '<img class="img-circle" src="/images/'+img+'" style="width: 50px;height:50px;"/>' + nom;
             $col2 = email;
             $col3 = '<input type="hidden" name="idInterp[]" value="'+id+'" />\
             <select name="sendMail[]">\
@@ -494,16 +455,66 @@
             });
 
             $('#dataTables-example2').on('search.dt',function(){
-
-                table2.rows().eq(0).each( function ( index ) {
-                    var row = table.row( index );
-                    markers[row.data()[0]].setVisible(false);
-                } );
+                for( id in markers) {
+                    markers[id].setVisible(false);
+                }
 
                 table2.rows({filter:'applied'}).eq(0).each( function ( index ) {
                     var row = table.row( index );
-                    markers[row.data()[0]].setVisible(true);
+                    row = $.map(row.data(), function(value, index) {
+                        return [value];
+                    });
+
+                    console.log('Second : ' + row[1]);
+                    markers[row[0]].setVisible(true);
                 } );
+            });
+        }
+
+        function markersNewPage(id,idx,nom,prenom,email,image,tel_portable,adresse,lt,lng){
+            markers[id] = new google.maps.Marker({
+                position: {lat: lt, lng: lng},
+                map: map,
+                title: nom + ' ' + prenom
+            });
+            infowindows[idx] = new google.maps.InfoWindow({
+                content:
+                        '\
+                        <div class="container" style="width:300px">\
+                          <div class="row">\
+                            <img class="img-circle" src="/images/'+image+'" style="width: 50px;height:50px;">\
+                          </div>\
+                          <div class="row">\
+                            <div class="col-lg-3"><strong>Nom</strong></div>\
+                            <div class="col-lg-9">'+nom+'</div>\
+</div>\
+<div class="row">\
+  <div class="col-lg-3"><strong>Prenom</strong></div>\
+  <div class="col-lg-9">'+prenom +'</div>\
+</div>\
+<div class="row">\
+  <div class="col-lg-3"><strong>email</strong></div>\
+  <div class="col-lg-9">'+email +'</div>\
+</div>\
+<div class="row">\
+  <div class="col-lg-3"><strong>Portable</strong></div>\
+  <div class="col-lg-9">'+tel_portable +'</div>\
+</div>\
+<div class="row">\
+  <div class="col-lg-3"><strong>Fixe</strong></div>\
+  <div class="col-lg-9">'+tel_fixe +'</div>\
+</div>\
+<div class="row">\
+  <div class="col-lg-8"></div>\
+  <div class="col-lg-4"><button type="button" onclick="addInterpreteur('+ id +',\''+nom+' '+prenom+'\',\''+email+'\',\''+image+'\',\''+tel_portable+'\',\''+adresse+'\')" class="btn btn-primary">Select</button></div>\
+</div>\
+</div>'
+            });
+
+
+
+            markers[idx].addListener('click', function() {
+                infowindows[idx].open(map, markers[idx]);
             });
         }
 

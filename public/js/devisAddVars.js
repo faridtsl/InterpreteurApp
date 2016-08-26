@@ -14,17 +14,41 @@ $(document).ready(function() {
     });
 
     table = $('#dataTables-example').DataTable({
-        "pageLength": 10,
-        "columnDefs":
-            [ { "visible": false, "searchable": false, "targets":[0,6,7,8,9] }]
-
+        "processing": true,
+        "serverSide": true,
+        "ajax": "/interpreteur/query1",
+        "columns": [
+            {data: 'id', name: 'interpreteurs.id' , visible:false},
+            {data: 'nom', name: 'interpreteurs.nom'},
+            {data: 'email', name: 'interpreteurs.email'},
+            {data: 'prestation', name: 'interpreteurs.prestation'},
+            {data: 'traductions', name: 'traductions',orderable: false, searchable: false},
+            {data: 'adresse', name: 'adresses.adresse'},
+            {data: 'image', name: 'interpreteurs.image', visible:false, searchable:false},
+            {data: 'tel_portable', name: 'interpreteurs.tel_portable', visible:false, searchable:false},
+            {data: 'adresse', name: 'adresses.adresse', visible:false, searchable:false},
+            {data: 'nomprenom', name: 'prenom', visible:false, searchable:false},
+            {data: 'butts', name: 'butts' ,orderable: false, searchable: false}
+        ]
     });
 
     table2 = $('#dataTables-example2').DataTable({
-        "pageLength": 10,
-        "columnDefs":
-            [ { "visible": false, "searchable": false, "targets":[0,5,6,7] }]
-
+        "processing": true,
+        "serverSide": true,
+        "ajax": "/interpreteur/query1",
+        "columns": [
+            {data: 'id', name: 'interpreteurs.id' , visible:false},
+            {data: 'nom', name: 'interpreteurs.nom'},
+            {data: 'email', name: 'interpreteurs.email'},
+            {data: 'prestation', name: 'interpreteurs.prestation'},
+            {data: 'traductions', name: 'traductions',orderable: false, searchable: false},
+            {data: 'image', name: 'interpreteurs.image', visible:false, searchable:false},
+            {data: 'tel_portable', name: 'interpreteurs.tel_portable', visible:false, searchable:false},
+            {data: 'adresse', name: 'adresses.adresse', visible:false, searchable:false},
+            {data: 'butts', name: 'butts' ,orderable: false, searchable: false},
+            {data: 'lat', name: 'adresses.lat' , visible:false ,orderable: false, searchable: false},
+            {data: 'long', name: 'adresses.long' , visible:false ,orderable: false, searchable: false}
+        ]
     });
 
     // Setup - add a text input to each footer cell
@@ -50,21 +74,26 @@ $(document).ready(function() {
 
     $(document.body).on('click','.selectInterp',function (e) {
         var id = $(this).attr('data-id');
-        console.log(id);
-        var row = table2.rows(id).data();
-        console.log(row[0]);
-        $('#interpreteur').val(row[0][0]);
-        addInterpreteur(row[0][0],row[0][1] + " " + row[0][2] ,row[0][3],row[0][5],row[0][6],row[0][7]);
+        console.log(table.columns(0).search(id).data());
+        var row = table.columns(0).search(id).data();
+        console.log(row);
+        $('#interpreteur').val(row[0]);
+        addInterpreteur(row[0],row[1] + " " + row[2] ,row[3],row[5],row[6],row[7]);
     });
 
 
     $(document.body).on('click','.selectInterpTab1',function (e) {
         var id = $(this).attr('data-id');
-        console.log(id);
-        var row = table.rows(id).data();
-        console.log(row[0]);
-        $('#interpreteur').val(row[0][0]);
-        addInterpreteur(row[0][0],row[0][9] ,row[0][2],row[0][6],row[0][7],row[0][8]);
+        var row = null;
+        table.rows().every( function ( rowIdx, tableLoop, rowLoop ) {
+            var data = this.data();
+            if(data['id'] == id) row = $.map(data, function(value, index) {
+                return [value];
+            });
+        } );
+        console.log(row);
+        $('#interpreteur').val(row[0]);
+        addInterpreteur(row[0],row[12] ,row[3],row[9],row[7],row[6]);
     });
 
     t = $('#dynamicInterp').DataTable({

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Interpreteur;
 use App\Tools\AdresseTools;
 use App\Tools\DevisTools;
 use App\Tools\FactureTools;
@@ -16,6 +17,7 @@ use App\Http\Requests\InterpreteurRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Yajra\Datatables\Datatables;
 
 class InterpreteurController extends Controller{
 
@@ -74,9 +76,46 @@ class InterpreteurController extends Controller{
     }
 
     public function showInterpreteurs(){
-        $langues = LangueTools::getAllLangues();
-        $interpreteurs = InterpreteurTools::getAllInterpreteurs();
-        return view('interpreteur.interpreteursShow',['interpreteurs'=>$interpreteurs,'langues'=>$langues]);
+        return view('interpreteur.interpreteursShow',['langues'=>LangueTools::getAllLangues()]);
+    }
+
+    public function queryInterpreteurs(Request $request){
+        $intepreteurs = Interpreteur::join('adresses','interpreteurs.adresse_id','=','adresses.id')->select(array('interpreteurs.id','nom','prenom','email','prestation','devise','adresse','tel_fixe','tel_portable','image','interpreteurs.created_at','interpreteurs.updated_at'));
+        $ssData = Datatables::of($intepreteurs);//->addColumn('adresse','{{ \App\Tools\AdresseTools::getAdresse($id)->adresse }}');
+        $ssData = $ssData->editColumn('nom','<img class="img-circle" src="/images/{{$image}}" style="width: 50px;height:50px;"/> {{$nom}} {{$prenom}}');
+        $ssData = $ssData->addColumn('traductions','
+                                |
+                                @foreach(\App\Tools\TraductionTools::getTraductionsByInterpreteur($id) as $traduction)
+                                    {{\App\Tools\LangueTools::getLangue($traduction->source)->content}} <span class="glyphicon glyphicon-arrow-right"></span> {{\App\Tools\LangueTools::getLangue($traduction->cible)->content}}
+                                     |
+                                @endforeach');
+        $ssData = $ssData->addColumn('butts','<p data-placement="top" data-toggle="tooltip" title="Edit">
+                                    <button class="btn btn-warning btn-xs editButton" data-title="Edit" data-toggle="modal" data-target="#edit" data-id="{{$id}}" >
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </button>
+                                    <button class="btn btn-danger btn-xs deleteButton" data-title="Delete" data-toggle="modal" data-target="#delete" data-id="{{$id}}" >
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
+                                    <a class="btn btn-default btn-xs" href="/interpreteur/profile?id={{$id}}" >
+                                        <span class="glyphicon glyphicon-user"></span>
+                                    </a>
+                                </p>');
+        return $ssData->make(true);
+    }
+
+    public function query1Interpreteurs(Request $request){
+        $intepreteurs = Interpreteur::join('adresses','interpreteurs.adresse_id','=','adresses.id')->select(array('interpreteurs.id','nom','prenom','email','prestation','devise','adresse','tel_fixe','tel_portable','image','interpreteurs.created_at','interpreteurs.updated_at','adresses.lat','adresses.long'));
+        $ssData = Datatables::of($intepreteurs);//->addColumn('adresse','{{ \App\Tools\AdresseTools::getAdresse($id)->adresse }}');
+        $ssData = $ssData->editColumn('nom','<img class="img-circle" src="/images/{{$image}}" style="width: 50px;height:50px;"/> {{$nom}} {{$prenom}}');
+        $ssData = $ssData->addColumn('nomprenom','{{$nom}} {{$prenom}}');
+        $ssData = $ssData->addColumn('traductions','
+                                    <select class="form-control" name="langue_ini">
+                                        @foreach(\App\Tools\TraductionTools::getTraductionsByInterpreteur($id) as $traduction)
+                                            <option><strong>{{\App\Tools\LangueTools::getLangue($traduction->source)->content}}→{{\App\Tools\LangueTools::getLangue($traduction->cible)->content}}</strong></option>
+                                        @endforeach
+                                    </select>');
+        $ssData = $ssData->addColumn('butts','<button class="btn btn-info selectInterpTab1" data-id="{{$id}}">Select</button>');
+        return $ssData->make(true);
     }
 
     public function archiveInterpreteurs(){

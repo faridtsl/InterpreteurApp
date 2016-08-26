@@ -146,7 +146,7 @@ return [
         Illuminate\Session\SessionServiceProvider::class,
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
-        Illuminate\View\ViewServiceProvider::class,Barryvdh\Snappy\ServiceProvider::class,
+        Illuminate\View\ViewServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -158,6 +158,7 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
         \Waavi\Mailman\MailmanServiceProvider::class,
         Barryvdh\Snappy\ServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class,
 
     ],
 
@@ -207,6 +208,7 @@ return [
         'Mailman' => \Waavi\Mailman\Facades\Mailman::class,
         'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
         'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
+        'Datatables' => Yajra\Datatables\Facades\Datatables::class,
     ],
 
 ];

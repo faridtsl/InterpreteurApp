@@ -32,13 +32,13 @@
                     <th>Nom</th>
                     <th>Email</th>
                     <th>Prestation</th>
-                    <th>Adresse</th>
                     <th>Telephone portable</th>
-                    <th>Action</th>
                     <th>Telephone fixe</th>
+                    <th>Adresse</th>
                     <th>Date creation</th>
                     <th>Date modification</th>
                     <th>Traductions</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tfoot>
@@ -46,51 +46,17 @@
                     <th>Nom</th>
                     <th>Email</th>
                     <th>Prestation</th>
-                    <th>Adresse</th>
                     <th>Telephone portable</th>
-                    <th></th>
                     <th>Telephone fixe</th>
+                    <th>Adresse</th>
                     <th>Date creation</th>
                     <th>Date modification</th>
                     <th>Traductions</th>
+                    <th></th>
                 </tr>
                 </tfoot>
                 <tbody>
-                    @foreach($interpreteurs as $interpreteur)
-                        <tr>
-                            <td>
-                                <img class="img-circle" src="/images/{{$interpreteur->image}}" style="width: 50px;height:50px;"/>
-                                {{$interpreteur->nom}} {{$interpreteur->prenom}}
-                            </td>
-                            <td>{{$interpreteur->email}}</td>
-                            <td>{{$interpreteur->prestation}} {{$interpreteur->devise}}</td>
-                            <td width="100px">{{\App\Tools\AdresseTools::getAdresse($interpreteur->adresse_id)->adresse}}</td>
-                            <td>{{$interpreteur->tel_portable}}</td>
-                            <td>
-                                <p data-placement="top" data-toggle="tooltip" title="Edit">
-                                    <button class="btn btn-warning btn-xs editButton" data-title="Edit" data-toggle="modal" data-target="#edit" data-id="{{$interpreteur->id}}" >
-                                        <span class="glyphicon glyphicon-pencil"></span>
-                                    </button>
-                                    <button class="btn btn-danger btn-xs deleteButton" data-title="Delete" data-toggle="modal" data-target="#delete" data-id="{{$interpreteur->id}}" >
-                                        <span class="glyphicon glyphicon-trash"></span>
-                                    </button>
-                                    <a class="btn btn-default btn-xs" href="/interpreteur/profile?id={{$interpreteur->id}}" >
-                                        <span class="glyphicon glyphicon-user"></span>
-                                    </a>
-                                </p>
-                            </td>
-                            <td>{{$interpreteur->tel_fixe}}</td>
-                            <td>{{$interpreteur->created_at->format('l j F Y H:i')}}</td>
-                            <td>{{$interpreteur->updated_at->format('l j F Y H:i')}}</td>
-                            <td>
-                                |
-                                @foreach(\App\Tools\TraductionTools::getTraductionsByInterpreteur($interpreteur->id) as $traduction)
-                                    {{\App\Tools\LangueTools::getLangue($traduction->source)->content}} <span class="glyphicon glyphicon-arrow-right"></span> {{\App\Tools\LangueTools::getLangue($traduction->cible)->content}}
-                                     |
-                                @endforeach
-                            </td>
-                        </tr>
-                    @endforeach
+
                 </tbody>
             </table>
         </div>
@@ -276,7 +242,7 @@
 @section('footer')
     <script src="{{ asset("js/tableTools.js") }}"> </script>
     <script src="{{ asset("js/steps.js") }}"> </script>
-    <script src="{{ asset("js/myScript.js") }}"> </script>
+    <script src="{{ asset("js/interpShow.js") }}"> </script>
     <script src="{{ asset("js/modifJS.js") }}"> </script>
     <script src="{{ asset("js/mapsJS.js") }}"> </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVuJ8zI1I-V9ckmycKWAbNRJmcTzs7nZE&signed_in=true&libraries=places&callback=initAutocomplete"

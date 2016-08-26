@@ -35,6 +35,18 @@ Route::get(
     'interpreteur/list',
     ['middleware'=>'auth','uses'=>'InterpreteurController@showInterpreteurs']
 );
+Route::any(
+    'interpreteur/query',
+    ['middleware'=>'auth','uses'=>'InterpreteurController@queryInterpreteurs']
+);
+Route::any(
+    'interpreteur/query1',
+    ['middleware'=>'auth','uses'=>'InterpreteurController@query1Interpreteurs']
+);
+Route::any(
+    'interpreteur/query2',
+    ['middleware'=>'auth','uses'=>'InterpreteurController@query2Interpreteurs']
+);
 Route::get(
     'interpreteur/archive',
     ['middleware'=>'auth','uses'=>'InterpreteurController@archiveInterpreteurs']
@@ -355,3 +367,4 @@ Route::auth();
 
 
 Route::get('/home', 'HomeController@index');
+Route::any('/home/data', 'HomeController@q');

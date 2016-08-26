@@ -5,14 +5,18 @@ namespace App\Http\Controllers;
 use App\Demande;
 use App\Devi;
 use App\Http\Requests;
+use App\Interpreteur;
 use App\Tools\AdresseTools;
 use App\Tools\ClientTools;
 use App\Tools\DemandeTools;
 use App\Tools\DevisTools;
 use App\Tools\FactureTools;
+use App\Tools\LangueTools;
 use App\Tools\MailTools;
 use App\Tools\ServiceTools;
 use Illuminate\Http\Request;
+use Yajra\Datatables\Datatables;
+
 
 class HomeController extends Controller
 {
@@ -32,28 +36,36 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $client = ClientTools::getClient(1);
-        $demandes = DemandeTools::getDemandesByClient($client->id);
-        $devis = [];
-        $factures = [];
-        foreach ($demandes as $demande){
-            $devs = DevisTools::getDevis($demande->id);
-            if($devs != null){
-                foreach ($devs as $dev) {
-                    array_push($devis, $dev);
-                    $fact = FactureTools::getFactureByDevis($dev->id);
-                    if ($fact != null) array_push($factures, $fact);
-                }
-            }
-        }
-        return view('home',['client'=>$client,'demandes'=>$demandes,'factures'=>$factures,'devis'=>$devis]);
+        return view('home',['langues'=>LangueTools::getAllLangues()]);
+    }
 
-        $devis = Devi::find(9);
-        $demande = Demande::find($devis->demande_id);
-        $client = ClientTools::getClient($demande->client_id);
-        $adresse = AdresseTools::getAdresse($demande->adresse_id);
-        $services = ServiceTools::getServices($devis->id);
-        MailTools::sendMail('Devis créée','devis','faridkaiba@gmail.com','faridkaiba@gmail.com',[],['services'=>$services,'client'=>$client,'demande'=>$demande,'adresse'=>$adresse,'devis'=>$devis],'public/css/style_df.css');
-        return view('emails.devis',['services'=>$services,'client'=>$client,'demande'=>$demande,'adresse'=>$adresse,'devis'=>$devis]);
+    public function q(){
+        $intepreteurs = Interpreteur::join('adresses','interpreteurs.adresse_id','=','adresses.id')->select(array('interpreteurs.id','nom','prenom','email','prestation','devise','adresse','tel_fixe','tel_portable','image','interpreteurs.created_at','interpreteurs.updated_at'));
+        $ssData = Datatables::of($intepreteurs);//->addColumn('adresse','{{ \App\Tools\AdresseTools::getAdresse($id)->adresse }}');
+        $ssData = $ssData->editColumn('nom','<img class="img-circle" src="/images/{{$image}}" style="width: 50px;height:50px;"/> {{$nom}} {{$prenom}}');
+        $ssData = $ssData->addColumn('traductions','
+                                |
+                                @foreach(\App\Tools\TraductionTools::getTraductionsByInterpreteur($id) as $traduction)
+                                    {{\App\Tools\LangueTools::getLangue($traduction->source)->content}} <span class="glyphicon glyphicon-arrow-right"></span> {{\App\Tools\LangueTools::getLangue($traduction->cible)->content}}
+                                     |
+                                @endforeach');
+        $ssData = $ssData->addColumn('butts','<p data-placement="top" data-toggle="tooltip" title="Edit">
+                                    <button class="btn btn-warning btn-xs editButton" data-title="Edit" data-toggle="modal" data-target="#edit" data-id="{{$id}}" >
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </button>
+                                    <button class="btn btn-danger btn-xs deleteButton" data-title="Delete" data-toggle="modal" data-target="#delete" data-id="{{$id}}" >
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
+                                    <a class="btn btn-default btn-xs" href="/interpreteur/profile?id={{$id}}" >
+                                        <span class="glyphicon glyphicon-user"></span>
+                                    </a>
+                                </p>');
+        return $ssData->make(true);
+        return $ssData->getData()->data;
     }
 }
+
+/*
+ *
+ *
+ */
