@@ -159,12 +159,13 @@ class DevisController extends Controller{
         $services = ServiceTools::getServices($devis->id);
         $demande = DemandeTools::getDemande($devis->demande_id);
         $connectedUser = Auth::user();
+        $intps = InterpreteurTools::getInterpreteurByDevis($devis->id);
         try {
             DB::beginTransaction();
             $interps = $request['idInterp'];
             $sends = $request['sendMail'];
             DB::table('devis_interpreteurs')->where('devi_id','=',$devis->id)->delete();
-            if($interps==null) return view('devis.devisUpdate',['demande'=>$demande,'devis'=>$devis,'interps'=>InterpreteurTools::getInterpreteurByDevis($devis->id)])->withErrors(['Vous devez choisir au moins un inteprete']);
+            if($interps==null) return view('devis.devisUpdate',['services'=>$services,'demande'=>$demande,'devis'=>$devis,'interps'=>$intps])->withErrors(['Vous devez choisir au moins un inteprete']);
             $attachs = [];
             foreach($interps as $key => $value){
                 $interp = InterpreteurTools::getInterpreteur($value);
