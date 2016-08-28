@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="323faa9a-1b42-43af-ae09-e82e697c525e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/includes/interpreteurModals.blade.php" afterPath="$PROJECT_DIR$/resources/views/includes/interpreteurModals.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/includes/clientModals.blade.php" afterPath="$PROJECT_DIR$/resources/views/includes/clientModals.blade.php" />
     </list>
     <ignored path="InterpreteurApp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -61,7 +61,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="interpreteurModals.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="interpreteurModals.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/includes/interpreteurModals.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="288">
@@ -71,16 +71,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="profileClient.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/profileClient.js">
+      <file leaf-file-name="clientsShow.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/client/clientsShow.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="134" column="55" selection-start-line="134" selection-start-column="55" selection-end-line="134" selection-end-column="55" />
-              <folding>
-                <marker date="1472417759649" expanded="true" signature="525:537" ph="..." />
-                <marker date="1472417759649" expanded="true" signature="1391:1403" ph="..." />
-                <marker date="1472417759649" expanded="true" signature="2258:2270" ph="..." />
-              </folding>
+            <state relative-caret-position="-993">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="clientModals.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/includes/clientModals.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="33" column="116" selection-start-line="33" selection-start-column="116" selection-end-line="33" selection-end-column="116" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -133,30 +139,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="InterpreteurController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/InterpreteurController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="591">
-              <caret line="203" column="14" selection-start-line="203" selection-start-column="14" selection-end-line="203" selection-end-column="14" />
-              <folding>
-                <marker date="1472316465371" expanded="true" signature="3654:3678" ph="..." />
-                <marker date="1472316465371" expanded="true" signature="4327:5206" ph="..." />
-                <marker date="1472316465371" expanded="true" signature="4490:4626" ph="..." />
-                <marker date="1472316465371" expanded="true" signature="4794:4929" ph="..." />
-                <marker date="1472316465371" expanded="true" signature="5040:5169" ph="..." />
-                <marker date="1472316465371" expanded="true" signature="5856:5880" ph="..." />
-                <marker date="1472316465371" expanded="true" signature="6117:6555" ph="..." />
-                <marker date="1472316465371" expanded="true" signature="7302:7326" ph="..." />
-                <marker date="1472316465371" expanded="true" signature="7563:8001" ph="..." />
-                <marker date="1472316465371" expanded="true" signature="8767:8791" ph="..." />
-                <marker date="1472316465371" expanded="true" signature="9440:9970" ph="..." />
-                <marker date="1472316465371" expanded="true" signature="9604:9725" ph="..." />
-                <marker date="1472316465371" expanded="true" signature="9828:9941" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="InterpreteurTools.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Tools/InterpreteurTools.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -185,7 +167,6 @@
       <list>
         <option value="$PROJECT_DIR$/database/migrations/2016_07_20_121431_create_interpreteurs_table.php" />
         <option value="$PROJECT_DIR$/resources/views/client/clientAdd.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/includes/clientModals.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/interpreteur/interpreteurAdd.blade.php" />
         <option value="$PROJECT_DIR$/app/Tools/MailTools.php" />
         <option value="$PROJECT_DIR$/config/app.php" />
@@ -234,6 +215,7 @@
         <option value="$PROJECT_DIR$/resources/views/interpreteur/interpreteursShow.blade.php" />
         <option value="$PROJECT_DIR$/public/js/modifJS.js" />
         <option value="$PROJECT_DIR$/resources/views/includes/interpreteurModals.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/includes/clientModals.blade.php" />
       </list>
     </option>
   </component>
@@ -383,6 +365,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="devis" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="InterpreteurApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="InterpreteurApp" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -662,12 +666,12 @@
       <workItem from="1472301789483" duration="8222000" />
       <workItem from="1472325589586" duration="8650000" />
       <workItem from="1472379948594" duration="7533000" />
-      <workItem from="1472412388557" duration="9477000" />
+      <workItem from="1472412388557" duration="9652000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="649720000" />
+    <option name="totallyTimeSpent" value="649895000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="741" extended-state="6" />
@@ -712,20 +716,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/views/interpreteur/interpreteurArchive.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/interpArchive.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="56" selection-start-line="11" selection-start-column="56" selection-end-line="11" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/client/profileArchiveClient.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -1150,6 +1140,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
           <caret line="124" column="108" selection-start-line="124" selection-start-column="108" selection-end-line="124" selection-end-column="108" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/client/clientsShow.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-993">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/includes/clientModals.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="33" column="116" selection-start-line="33" selection-start-column="116" selection-end-line="33" selection-end-column="116" />
           <folding />
         </state>
       </provider>
