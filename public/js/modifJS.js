@@ -113,7 +113,6 @@ $(function () {
 
     $(document.body).on('click', '.btn-add', function (e) {
         e.preventDefault();
-        console.log("Are u serious ????");
         var teams = $(this).parents('#langs:first');
         var controlForm = $('#updateForm'),
             currentEntry = $(this).parents('.entry:first'),
@@ -122,7 +121,7 @@ $(function () {
         controlForm.find('.entry:not(:last) .btn-add')
             .removeClass('btn-add').addClass('btn-remove')
             .removeClass('btn-success').addClass('btn-danger')
-            .html('<span class="glyphicon glyphicon-minus"></span>');
+            .removeClass('glyphicon-plus').addClass('glyphicon-minus');
     }).on('click', '.btn-remove', function (e) {
         $(this).parents('.entry:first').remove();
 

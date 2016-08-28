@@ -191,10 +191,8 @@
                                                 <div class="col-lg-2">
                                                     <label></label>
                                                     <span class="input-group-btn">
-                                                  <button class="btn btn-success btn-add" type="button">
-                                                      <span class="glyphicon glyphicon-plus"></span>
-                                                  </button>
-                                              </span>
+                                                      <a class="btn btn-success btn-add glyphicon glyphicon-plus" type="button"></a>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
