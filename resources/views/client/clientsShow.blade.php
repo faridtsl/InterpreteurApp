@@ -26,6 +26,8 @@
                     <th>Email</th>
                     <th>Telephone portable</th>
                     <th>Telephone fixe</th>
+                    <th>Date creation</th>
+                    <th>Date Modfication</th>
                     <th>Adresse</th>
                     <th>Action</th>
                 </tr>
@@ -36,36 +38,14 @@
                     <th>Email</th>
                     <th>Telephone portable</th>
                     <th>Telephone fixe</th>
+                    <th>Date creation</th>
+                    <th>Date Modfication</th>
                     <th>Adresse</th>
                     <th></th>
                 </tr>
             </tfoot>
             <tbody>
-            @foreach($clients as $client)
-                <tr>
-                    <td>
-                        <img class="img-circle" src="/images/{{$client->image}}" style="width: 50px;height:50px;"/>
-                        {{$client->nom}} {{$client->prenom}}
-                    </td>
-                    <td>{{$client->email}}</td>
-                    <td>{{$client->tel_portable}}</td>
-                    <td>{{$client->tel_fixe}}</td>
-                    <td width="100px">{{\App\Tools\AdresseTools::getAdresse($client->adresse_id)->adresse}}</td>
-                    <td>
-                        <p data-placement="top" data-toggle="tooltip" title="Edit">
-                            <button class="btn btn-warning btn-xs editButton" data-title="Edit" data-toggle="modal" data-target="#edit" data-id="{{$client->id}}" >
-                                <span class="glyphicon glyphicon-pencil"></span>
-                            </button>
-                            <button class="btn btn-danger btn-xs deleteButton" data-title="Delete" data-toggle="modal" data-target="#delete" data-id="{{$client->id}}" >
-                                <span class="glyphicon glyphicon-trash"></span>
-                            </button>
-                            <a class="btn btn-default btn-xs" href="/client/profile?id={{$client->id}}" >
-                                <span class="glyphicon glyphicon-user"></span>
-                            </a>
-                        </p>
-                    </td>
-                </tr>
-            @endforeach
+
             </tbody>
         </table>
     </div>
@@ -114,7 +94,7 @@
     <script src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"> </script>
     <script src="https://cdn.datatables.net/responsive/1.0.7/js/dataTables.responsive.min.js"> </script>
     <script src="{{ asset("js/steps.js") }}"> </script>
-    <script src="{{ asset("js/myScript.js") }}"> </script>
+    <script src="{{ asset("js/clientShow.js") }}"> </script>
     <script src="{{ asset("js/modifJS.js") }}"> </script>
     <script src="{{ asset("js/mapsJS.js") }}"> </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVuJ8zI1I-V9ckmycKWAbNRJmcTzs7nZE&signed_in=true&libraries=places&callback=initAutocomplete"

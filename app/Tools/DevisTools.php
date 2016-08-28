@@ -169,15 +169,29 @@ class DevisTools{
         return $err;
     }
 
+    public static function searchByDates($request){
+        $devi = Devi::where('id','>=',0);
+        if(!empty($request['dateCreationDeb'])){
+            $devi = Devi::where('created_at', '>=', $request['dateCreationDeb']);
+        }
+
+        if(!empty($request['dateCreationFin'])){
+            $devi = $devi->where('created_at', '<=', $request['dateCreationFin']);
+        }
+
+        $devis = $devi->get();
+        return $devis;
+    }
+
     public static function getArchiveDevis(){
         $devis = Devi::onlyTrashed()->get();
         return $devis;
     }
 
     public static function canBeRestored($devis){
-        //$interpreteur = InterpreteurTools::getInterpreteur($devis->interpreteur_id);
+        $interpreteurs = InterpreteurTools::getArchiveInterpreteurByDevis($devis->id);
         $demande = DemandeTools::getDemande($devis->demande_id);
-        return DemandeTools::canBeRestored($demande) && !$demande->trashed();
+        return DemandeTools::canBeRestored($demande) && !$demande->trashed() && count($interpreteurs)==0;
     }
 
     public static function validerDevis(User $u,$devis){

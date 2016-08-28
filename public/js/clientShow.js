@@ -1,29 +1,30 @@
-$(document).ready(function() {
-    oTable = $('#example').DataTable({
+
+$(function () {
+
+    table = $('#example').DataTable({
         "processing": true,
         "serverSide": true,
-        "ajax": "/interpreteur/query",
+        "ajax": "/client/query",
         "columns": [
-            {data: 'nom', name: 'interpreteurs.nom'},
-            {data: 'email', name: 'interpreteurs.email'},
-            {data: 'prestation', name: 'interpreteurs.prestation'},
-            {data: 'tel_portable', name: 'interpreteurs.tel_portable'},
-            {data: 'tel_fixe', name: 'interpreteurs.tel_fixe'},
+            {data: 'nom', name: 'clients.nom'},
+            {data: 'email', name: 'clients.email'},
+            {data: 'tel_portable', name: 'clients.tel_portable'},
+            {data: 'tel_fixe', name: 'clients.tel_fixe'},
+            {data: 'created_at', name: 'clients.created_at'},
+            {data: 'updated_at', name: 'clients.updated_at'},
             {data: 'adresse', name: 'adresses.adresse'},
-            {data: 'created_at', name: 'interpreteurs.created_at'},
-            {data: 'updated_at', name: 'interpreteurs.updated_at'},
-            {data: 'traductions', name: 'traductions',orderable: false, searchable: false},
             {data: 'butts', name: 'butts' ,orderable: false, searchable: false}
         ]
     });
 
+    // Setup - add a text input to each footer cell
     $('#example tfoot th').each( function () {
         var title = $(this).text();
         if(title!="" && title != 'Action') $(this).html( '<input type="text" placeholder="'+title+'" style="width: 100%;" />' );
     } );
 
     // Apply the search
-    oTable.columns().every( function () {
+    table.columns().every( function () {
         var that = this;
 
         $( 'input', this.footer() ).on( 'keyup change', function () {
@@ -35,28 +36,11 @@ $(document).ready(function() {
         } );
     } );
 
+
     $('.toggle').click(function (event) {
         event.preventDefault();
         var target = $(this).attr('href');
         $(target).toggleClass('hidden show');
-    });
-
-    $(document).on('click', '.btn-add', function(e){
-        e.preventDefault();
-        var teams = $(this).parents('#langs:first');
-        var controlForm = $('#formID'),
-            currentEntry = $(this).parents('.entry:first'),
-            newEntry = $(currentEntry.clone()).appendTo(teams);
-        newEntry.find('input').val('');
-        controlForm.find('.entry:not(:last) .btn-add')
-            .removeClass('btn-add').addClass('btn-remove')
-            .removeClass('btn-success').addClass('btn-danger')
-            .html('<span class="glyphicon glyphicon-minus"></span>');
-    }).on('click', '.btn-remove', function(e){
-        $(this).parents('.entry:first').remove();
-
-        e.preventDefault();
-        return false;
     });
 
     $(document.body).on('click','.editButton', function () {

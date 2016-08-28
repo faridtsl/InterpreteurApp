@@ -40,6 +40,10 @@ Route::any(
     ['middleware'=>'auth','uses'=>'InterpreteurController@queryInterpreteurs']
 );
 Route::any(
+    'interpreteur/archive/query',
+    ['middleware'=>'auth','uses'=>'InterpreteurController@queryArchiveInterpreteurs']
+);
+Route::any(
     'interpreteur/query1',
     ['middleware'=>'auth','uses'=>'InterpreteurController@query1Interpreteurs']
 );
@@ -95,17 +99,22 @@ Route::get(
     'client/add',
     ['middleware'=>'auth','uses'=>'ClientController@show']
 );
-
 Route::post(
     'client/add',
     ['middleware'=>'auth','uses'=>'ClientController@store']
 );
-
 Route::get(
     'client/list',
     ['middleware'=>'auth','uses'=>'ClientController@showClients']
 );
-
+Route::any(
+    'client/query',
+    ['middleware'=>'auth','uses'=>'ClientController@queryClients']
+);
+Route::any(
+    'client/archive/query',
+    ['middleware'=>'auth','uses'=>'ClientController@queryArchiveClients']
+);
 Route::get(
     'client/archive',
     ['middleware'=>'auth','uses'=>'ClientController@archiveClients']
@@ -155,6 +164,10 @@ Route::post(
 Route::get(
     'demande/list',
     ['middleware'=>'auth','uses'=>'DemandeController@showList']
+);
+Route::any(
+    'demande/archive/query',
+    ['middleware'=>'auth','uses'=>'DemandeController@queryArchiveDemandes']
 );
 Route::get(
     '/calendar',
@@ -255,6 +268,10 @@ Route::get(
     'devis/list',
     ['middleware'=>'auth','uses'=>'DevisController@showDevis']
 );
+Route::post(
+    'devis/list',
+    ['middleware'=>'auth','uses'=>'DevisController@showDevis']
+);
 Route::get(
     'devis/resend',
     ['middleware'=>'auth','uses'=>'DevisController@resendDevis']
@@ -270,6 +287,10 @@ Route::get(
 Route::get(
     'devis/archive',
     ['middleware'=>'auth','uses'=>'DevisController@archiveDevis']
+);
+Route::any(
+    'devis/archive/query',
+    ['middleware'=>'auth','uses'=>'DevisController@queryArchiveDevis']
 );
 Route::get(
     'devis/delete',
@@ -308,6 +329,10 @@ Route::get(
     'facture/list',
     ['middleware'=>'auth','uses'=>'FactureController@showFactures']
 );
+Route::post(
+    'facture/list',
+    ['middleware'=>'auth','uses'=>'FactureController@showFactures']
+);
 Route::get(
     'facture/validate',
     ['middleware'=>'auth','uses'=>'FactureController@paiementFacture']
@@ -327,6 +352,10 @@ Route::post(
 Route::get(
     'facture/archive',
     ['middleware'=>'auth','uses'=>'FactureController@archiveFactures']
+);
+Route::any(
+    'facture/archive/query',
+    ['middleware'=>'auth','uses'=>'FactureController@queryArchiveFactures']
 );
 Route::get(
     'facture/view',

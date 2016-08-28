@@ -63,35 +63,7 @@
                 </tr>
                 </tfoot>
                 <tbody>
-                @foreach($demandes as $demande)
-                    <tr>
-                        <td>{{$demande->titre}}</td>
-                        <td>{{\App\Tools\EtatTools::getEtatById($demande->etat_id)->libelle}}</td>
-                        <td>{{\Carbon\Carbon::parse($demande->created_at)->format('l j F Y H:i')}}</td>
-                        <td>{{\Carbon\Carbon::parse($demande->updated_at)->format('l j F Y H:i')}}</td>
-                        <td>{{\Carbon\Carbon::parse($demande->deleted_at)->format('l j F Y H:i')}}</td>
-                        <td>{{\Carbon\Carbon::parse($demande->dateEvent)->format('l j F Y H:i')}}</td>
-                        <td>{{\Carbon\Carbon::parse($demande->dateEndEvent)->format('l j F Y H:i')}}</td>
-                        <td width="100px">{{ \App\Tools\AdresseTools::getAdresse($demande->adresse_id)->adresse}}</td>
-                        <td>
-                            |
-                            @foreach(\App\Tools\TraductionTools::getTraductionsByDemande($demande->id) as $traduction)
-                                {{\App\Tools\LangueTools::getLangue($traduction->source)->content}} <span class="glyphicon glyphicon-arrow-right"></span> {{\App\Tools\LangueTools::getLangue($traduction->cible)->content}}
-                                |
-                            @endforeach
-                        </td>
-                        <td>
-                            <p>
-                                <a data-placement="top" data-toggle="tooltip" title="Restore" class="btn btn-success btn-xs restoreButton" href="/demande/restore?id={{$demande->id}}" >
-                                    <span class="glyphicon glyphicon-refresh"></span>
-                                </a>
-                                <button data-placement="top" data-toggle="tooltip" title="View" class="btn btn-info btn-xs seeButton" data-id="{{$demande->id}}" >
-                                    <span class="glyphicon glyphicon-search"></span>
-                                </button>
-                            </p>
-                        </td>
-                    </tr>
-                @endforeach
+
                 </tbody>
             </table>
         </div>
@@ -115,7 +87,7 @@
             $("#modalSuccess").modal('toggle');
         @endif
     </script>
-    <script src="{{ asset("js/demandeJS.js") }}"> </script>
+    <script src="{{ asset("js/demandeArchive.js") }}"> </script>
     <script src="{{ asset("js/timeInitiator.js") }}"> </script>
 
 @endsection

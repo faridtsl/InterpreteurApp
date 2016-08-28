@@ -18,14 +18,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Tools\MailTools;
 use Illuminate\Support\Facades\View;
+use Yajra\Datatables\Datatables;
 
 class DemandeController extends Controller{
 
 
     public function show(){
         $langues = LangueTools::getAllLangues();
-        $clients = ClientTools::getAllClients();
-        return view('demande.demandeAdd', ['langues' => $langues, 'clients' => $clients]);
+        return view('demande.demandeAdd', ['langues' => $langues]);
     }
 
     public function store(DemandeRequest $request){
@@ -77,10 +77,9 @@ class DemandeController extends Controller{
         if($demande == null) return redirect('/demande/archive');
         $traduction = TraductionTools::getTraductionById($demande->traduction_id);
         $langues = LangueTools::getAllLangues();
-        $clients = ClientTools::getAllClients();
         $client = ClientTools::getClient($demande->client_id);
         $factures = FactureTools::getFactureByDemande($demande);
-        return view('demande.demandeUpdate',['client'=>$client,'langues'=>$langues,'traduction'=>$traduction,'demande'=>$demande,'clients'=>$clients,'factures'=>$factures]);
+        return view('demande.demandeUpdate',['client'=>$client,'langues'=>$langues,'traduction'=>$traduction,'demande'=>$demande,'factures'=>$factures]);
     }
 
     public function storeUpdate(Request $request){
@@ -107,9 +106,30 @@ class DemandeController extends Controller{
 
 
     public function archiveDemandes(){
-        $demandesArchive = DemandeTools::getArchiveDemandes();
-        return view('demande.demandeArchive',['demandes'=>$demandesArchive]);
+        return view('demande.demandeArchive');
     }
+
+    public function queryArchiveDemandes(Request $request){
+        $clients = Demande::onlyTrashed()->join('adresses','demandes.adresse_id','=','adresses.id')->select(array('demandes.id','titre','etat_id','dateEvent','dateEndEvent','adresses.adresse','demandes.deleted_at','demandes.created_at','demandes.updated_at'));
+        $ssData = Datatables::of($clients);
+        $ssData = $ssData->editColumn('etat_id','{{\App\Tools\EtatTools::getEtatById($etat_id)->libelle}}');
+        $ssData = $ssData->addColumn('butts','<p>
+                                <a data-placement="top" data-toggle="tooltip" title="Restore" class="btn btn-success btn-xs restoreButton" href="/demande/restore?id={{$id}}" >
+                                    <span class="glyphicon glyphicon-refresh"></span>
+                                </a>
+                                <button data-placement="top" data-toggle="tooltip" title="View" class="btn btn-info btn-xs seeButton" data-id="{{$id}}" >
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </p>');
+        $ssData = $ssData->addColumn('trads','
+                            |
+                            @foreach(\App\Tools\TraductionTools::getTraductionsByDemande($id) as $traduction)
+                                {{\App\Tools\LangueTools::getLangue($traduction->source)->content}} <span class="glyphicon glyphicon-arrow-right"></span> {{\App\Tools\LangueTools::getLangue($traduction->cible)->content}}
+                                |
+                            @endforeach');
+        return $ssData->make(true);
+    }
+
 
     public function restoreDemande(Request $request){
         $connectedUser = Auth::user();

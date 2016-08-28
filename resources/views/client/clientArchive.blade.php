@@ -24,6 +24,7 @@
                 <th>Email</th>
                 <th>Telephone fixe</th>
                 <th>Telephone portable</th>
+                <th>Adresse</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -33,31 +34,11 @@
                 <th>Email</th>
                 <th>Telephone fixe</th>
                 <th>Telephone portable</th>
+                <th>Adresse</th>
                 <th></th>
             </tr>
             </tfoot>
             <tbody>
-            @foreach($clients as $client)
-                <tr>
-                    <td>
-                        <img class="img-circle" src="/images/{{$client->image}}" style="width: 50px;height:50px;"/>
-                        {{$client->nom}} {{$client->prenom}}
-                    </td>
-                    <td>{{$client->email}}</td>
-                    <td>{{$client->tel_fixe}}</td>
-                    <td>{{$client->tel_portable}}</td>
-                    <td>
-                        <p data-placement="top" data-toggle="tooltip" title="Edit">
-                            <button class="btn btn-success btn-xs restoreButton" data-title="Restore" data-toggle="modal" data-target="#restore" data-id="{{$client->id}}" >
-                                <span class="glyphicon glyphicon-refresh"></span>
-                            </button>
-                            <a class="btn btn-default btn-xs" href="/client/profile?id={{$client->id}}" >
-                                <span class="glyphicon glyphicon-user"></span>
-                            </a>
-                        </p>
-                    </td>
-                </tr>
-            @endforeach
             </tbody>
         </table>
     </div>
@@ -94,5 +75,5 @@
 
 
 @section('footer')
-    <script src="{{ asset("js/myScript.js") }}"> </script>
+    <script src="{{ asset("js/clientArchive.js") }}"> </script>
 @endsection

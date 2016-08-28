@@ -8,15 +8,23 @@ $(document).ready(function() {
             fnRowSelected: function(nodes) {
                 var ttInstance = TableTools.fnGetInstance("dataTables-example");
                 var row = ttInstance.fnGetSelectedData();
-                $('#client').val(row[0][0]);
-                console.log(row[0][0]);
+                $('#client').val(row[0]['id']);
             },
 
             fnRowDeselected: function ( node ) {
                 $('#client').val("-1");
             }
-        },"columnDefs":
-            [ { "visible": false, "searchable": false, "targets":[0] }]
+        },
+        "processing": true,
+        "serverSide": true,
+        "ajax": "/client/query",
+        "columns": [
+            {data: 'id', name: 'clients.id', visible:false},
+            {data: 'nom', name: 'clients.nom'},
+            {data: 'email', name: 'clients.email'},
+            {data: 'tel_portable', name: 'clients.tel_portable'},
+            {data: 'tel_fixe', name: 'clients.tel_fixe'}
+        ]
 
     });
 

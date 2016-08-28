@@ -18,11 +18,6 @@ use Barryvdh\DomPDF\Facade as PDF;
 
 class FactureTools{
 
-    public static function getFacturesByInterp($interp_id){
-        $factures = Facture::where('interpreteur_id',$interp_id)->get();
-        return $factures;
-    }
-
     public static function addFacture($devis,User $u){
         $facture = new Facture();
         $facture->fini = false;
@@ -95,6 +90,28 @@ class FactureTools{
             ->where('devi_id',$devi_id)
             ->get()->first();
         return $facture;
+    }
+
+    public static function searchByDates($request){
+        $facture = Facture::where('id','>=',0);
+        if(!empty($request['dateCreationDeb'])){
+            $facture = Facture::where('created_at', '>=', $request['dateCreationDeb']);
+        }
+
+        if(!empty($request['dateCreationFin'])){
+            $facture = $facture->where('created_at', '<=', $request['dateCreationFin']);
+        }
+
+        if(!empty($request['dateEnvoiDeb'])){
+            $facture = $facture->where('date_envoi_mail', '>=', $request['dateEnvoiDeb']);
+        }
+
+        if(!empty($request['dateEnvoiFin'])){
+            $facture = $facture->where('date_envoi_mail', '<=', $request['dateEnvoiFin']);
+        }
+
+        $factures = $facture->get();
+        return $factures;
     }
 
     public static function getFactures(){

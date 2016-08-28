@@ -16,7 +16,7 @@ $(document).ready(function() {
     table = $('#dataTables-example').DataTable({
         "processing": true,
         "serverSide": true,
-        "ajax": "/interpreteur/query1",
+        "ajax": "/interpreteur/query2",
         "columns": [
             {data: 'id', name: 'interpreteurs.id' , visible:false},
             {data: 'nom', name: 'interpreteurs.nom'},
@@ -33,6 +33,9 @@ $(document).ready(function() {
     });
 
     table2 = $('#dataTables-example2').DataTable({
+        "lengthMenu": [[10, 100, 200, 500, -1], [10, 100, 200, 500, "All"]],
+        "scrollY": "500px",
+        "scrollCollapse": true,
         "processing": true,
         "serverSide": true,
         "ajax": "/interpreteur/query1",
@@ -74,26 +77,34 @@ $(document).ready(function() {
 
     $(document.body).on('click','.selectInterp',function (e) {
         var id = $(this).attr('data-id');
-        console.log(table.columns(0).search(id).data());
-        var row = table.columns(0).search(id).data();
+        var row = null;
+        table.rows().every( function ( rowIdx, tableLoop, rowLoop ) {
+            var data = this.data();
+            if(data['id'] == id) {
+                console.log(id);
+                row = $.map(data, function (value, index) {
+                    return [value];
+                });
+            }
+        } );
         console.log(row);
         $('#interpreteur').val(row[0]);
-        addInterpreteur(row[0],row[1] + " " + row[2] ,row[3],row[5],row[6],row[7]);
+        addInterpreteur(row[0],row[12],row[3],row[9],row[7],row[6]);
     });
 
 
     $(document.body).on('click','.selectInterpTab1',function (e) {
         var id = $(this).attr('data-id');
         var row = null;
-        table.rows().every( function ( rowIdx, tableLoop, rowLoop ) {
+        table2.rows().every( function ( rowIdx, tableLoop, rowLoop ) {
             var data = this.data();
             if(data['id'] == id) row = $.map(data, function(value, index) {
                 return [value];
             });
         } );
-        console.log(row);
         $('#interpreteur').val(row[0]);
-        addInterpreteur(row[0],row[12] ,row[3],row[9],row[7],row[6]);
+        console.log(row);
+        addInterpreteur(row[0],row[14] ,row[3],row[9],row[7],row[6]);
     });
 
     t = $('#dynamicInterp').DataTable({

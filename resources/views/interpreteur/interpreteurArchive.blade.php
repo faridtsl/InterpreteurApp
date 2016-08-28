@@ -39,29 +39,7 @@
             </tr>
             </tfoot>
             <tbody>
-            @foreach($interpreteurs as $interpreteur)
-                <tr>
-                    <td>
-                        <img class="img-circle" src="/images/{{$interpreteur->image}}" style="width: 50px;height:50px;"/>
-                        {{$interpreteur->nom}} {{$interpreteur->prenom}}
-                    </td>
-                    <td>{{$interpreteur->email}}</td>
-                    <td>{{$interpreteur->prestation}} {{$interpreteur->devise}}</td>
-                    <td>{{$interpreteur->tel_fixe}} / {{$interpreteur->tel_portable}}</td>
-                    <td width="100px">{{\App\Tools\AdresseTools::getAdresse($interpreteur->adresse_id)->adresse}}</td>
 
-                    <td>
-                        <p data-placement="top" data-toggle="tooltip" title="Edit">
-                            <button class="btn btn-success btn-xs restoreButton" data-title="Restore" data-toggle="modal" data-target="#restore" data-id="{{$interpreteur->id}}" >
-                                <span class="glyphicon glyphicon-refresh"></span>
-                            </button>
-                            <a class="btn btn-default btn-xs" href="/interpreteur/profile?id={{$interpreteur->id}}" >
-                                <span class="glyphicon glyphicon-user"></span>
-                            </a>
-                        </p>
-                    </td>
-                </tr>
-            @endforeach
             </tbody>
         </table>
     </div>
@@ -98,5 +76,5 @@
 
 
 @section('footer')
-    <script src="{{ asset("js/myScript.js") }}"> </script>
+    <script src="{{ asset("js/interpArchive.js") }}"> </script>
 @endsection

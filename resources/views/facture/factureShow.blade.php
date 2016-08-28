@@ -5,6 +5,12 @@
 @endsection
 
 @section('header')
+    <script type="text/javascript" src="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/js/material.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-material-datetimepicker.css') }}" />
+    <script type="text/javascript" src="http://momentjs.com/downloads/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap-material-datetimepicker.js') }}"></script>
+
     <link type="text/css" rel="stylesheet" href="{{asset('css/bootstrap-datatable.css')}}">
     <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.1.2/css/buttons.dataTables.min.css">
@@ -15,6 +21,84 @@
 @endsection
 
 @section('content')
+
+
+    <div class="searchDiv row" style="margin-bottom: 30px;margin-top: 20px">
+        <a href="#search" data-toggle="collapse">+ Recherche avancée</a>
+        <div id="search" class="row collapse">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <h3 class="col-lg-4">Recherche avancée</h3>
+                        </div>
+                    </div>
+                    <form role="form" method="POST" action="/facture/list" id="formID" enctype="multipart/form-data" class="col-lg-10 col-lg-offset-1">
+                        {!! csrf_field() !!}
+                        <div class="container-fluid">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="row"></div>
+                                        <label>Date de la creation:</label>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label>Debut:</label>
+                                        <div class="input-group date" >
+                                            <input class="form-control" name="dateCreationDeb" id="dateCreateDeb" placeholder="Date min">
+                                            <div class="input-group-addon">
+                                                <span class="glyphicon glyphicon-th"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label>Fin:</label>
+                                        <div class="input-group date" >
+                                            <input class="form-control" name="dateCreationFin" id="dateCreateFin" placeholder="Date max">
+                                            <div class="input-group-addon">
+                                                <span class="glyphicon glyphicon-th"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <span></span>
+                                        <label>Date d'envoi:</label>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label>Debut:</label>
+                                        <div class="input-group date" >
+                                            <input class="form-control" name="dateEnvoiDeb" id="dateEnvoiDeb" placeholder="Date min">
+                                            <div class="input-group-addon">
+                                                <span class="glyphicon glyphicon-th"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label>Fin:</label>
+                                        <div class="input-group date" >
+                                            <input class="form-control" name="dateEnvoiFin" id="dateEnvoiFin" placeholder="Date max">
+                                            <div class="input-group-addon">
+                                                <span class="glyphicon glyphicon-th"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <input type="submit" value="Recherche" class="btn btn-info"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <div class="row">
@@ -113,5 +197,6 @@
 
 @section('footer')
     <script src="{{ asset("js/tableTools.js") }}"> </script>
+    <script src="{{ asset("js/timeInitiator.js") }}"> </script>
     <script src="{{ asset("js/factureShow.js") }}"> </script>
 @endsection

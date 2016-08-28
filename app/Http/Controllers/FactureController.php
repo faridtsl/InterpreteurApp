@@ -17,12 +17,16 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Yajra\Datatables\Datatables;
 
 class FactureController extends Controller{
 
 
     public function showFactures(Request $request){
         $factures = Facture::all();
+        if($request->isMethod('post')){
+            $factures = FactureTools::searchByDates($request);
+        }
         return view('facture.factureShow',['factures'=>$factures]);
     }
 
@@ -56,9 +60,22 @@ class FactureController extends Controller{
     }
 
     public static function archiveFactures(Request $request){
-        $factures = FactureTools::getArchiveFactures();
-        return view('facture.factureArchive',['factures'=>$factures]);
+        return view('facture.factureArchive');
     }
+
+    public function queryArchiveFactures(Request $request){
+        $factures = Facture::onlyTrashed()->select(array('id','fini','date_envoi_mail','devi_id','date_paiement','deleted_at','created_at','updated_at'));
+        $ssData = Datatables::of($factures);
+        $ssData = $ssData->addColumn('nom','{{\App\Tools\ClientTools::getClientByFactureId($id)->nom}} {{\App\Tools\ClientTools::getClientByFactureId($id)->prenom}}');
+        $ssData = $ssData->addColumn('pay','@if($fini){{$date_paiement}}@else Non Payée @endif');
+        $ssData = $ssData->addColumn('butts','<a href="/devis/view?id={{$devi_id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
+                        /<a href="/devis/download?id={{$devi_id}}" class="downloadButton"> <span class="glyphicon glyphicon-download-alt"></span> </a>');
+        $ssData = $ssData->addColumn('fact','<a href="/facture/view?id={{$id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
+                        /<a href="/facture/download?id={{$id}}" class="downloadButton"> <span class="glyphicon glyphicon-download-alt"></span> </a>');
+        $ssData = $ssData->addColumn('total','{{\App\Tools\DevisTools::getDevisById($devi_id)->total}} &euro;');
+        return $ssData->make(true);
+    }
+
 
     public static function viewFacture(Request $request){
         $facture = FactureTools::getFactureById($request['id']);

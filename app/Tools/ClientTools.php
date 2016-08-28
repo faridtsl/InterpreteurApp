@@ -114,4 +114,9 @@ class ClientTools{
         return self::getClient($demande->client_id);
     }
 
+
+    public static function getClientByFactureId($id){
+        return self::getClientByFacture(FactureTools::getFactureById($id));
+    }
+
 }

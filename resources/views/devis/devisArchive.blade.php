@@ -25,7 +25,6 @@
         <table id="example" class="table table-striped table-bordered display responsive nowrap" cellspacing="0">
             <thead>
             <tr>
-                <th class="never">id</th>
                 <th>Etat</th>
                 <th>Prix proposé</th>
                 <th>Date creation du devis</th>
@@ -37,7 +36,6 @@
             </thead>
             <tfoot>
             <tr>
-                <th>id</th>
                 <th>Etat</th>
                 <th>Prix proposé</th>
                 <th>Date creation du devis</th>
@@ -48,23 +46,7 @@
             </tr>
             </tfoot>
             <tbody>
-            @foreach($devis as $devi)
-                <tr>
-                    <td>{{$devi->id}}</td>
-                    <td>{{\App\Tools\DevisEtatTools::getEtatById($devi->etat_id)->libelle}}</td>
-                    <td>{{\App\Tools\DevisTools::getTotal($devi->id)}} &euro;</td>
-                    <td>{{$devi->created_at->format('l j F Y H:i')}}</td>
-                    <td>{{$devi->updated_at->format('l j F Y H:i')}}</td>
-                    <td>{{$devi->deleted_at->format('l j F Y H:i')}}</td>
-                    <td>
-                        <a href="/devis/restore?id={{$devi->id}}"> <span class="glyphicon glyphicon-refresh"></span> </a>
-                    </td>
-                    <td>
-                        <a href="/devis/view?id={{$devi->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
-                        /<a href="/devis/download?id={{$devi->id}}" class="downloadButton"> <span class="glyphicon glyphicon-download-alt"></span> </a>
-                    </td>
-                </tr>
-            @endforeach
+
             </tbody>
         </table>
     </div>
@@ -88,5 +70,5 @@
         @endif
     </script>
     <script src="{{ asset("js/tableTools.js") }}"> </script>
-    <script src="{{ asset("js/devisShow.js") }}"> </script>
+    <script src="{{ asset("js/devisArchive.js") }}"> </script>
 @endsection

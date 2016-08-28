@@ -58,15 +58,15 @@
                                     <thead>
                                     <tr>
                                         <th>Nom</th>
-                                        <th>Prestation</th>
+                                        <th>Email</th>
                                         <th>Envoyer CV</th>
-                                        <th>Deselect</th>
+                                        <th>Supprimer</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
                                         <th>Nom</th>
-                                        <th>Prestation</th>
+                                        <th>Email</th>
                                         <th>Envoyer CV</th>
                                         <th></th>
                                     </tr>
@@ -74,8 +74,8 @@
                                     <tbody>
                                     @foreach($interps as $key => $interp)
                                         <tr>
-                                            <td>{{$interp->nom}} {{$interp->prenom}}</td>
-                                            <td>{{$interp->prestation}} {{$interp->devise}}</td>
+                                            <td><img class="img-circle" src="/images/{{$interp->image}}" style="width: 50px;height:50px;"/> {{$interp->nom}} {{$interp->prenom}}</td>
+                                            <td>{{$interp->email}}</td>
                                             <td><input type="hidden" name="idInterp[]" value="{{$interp->id}}" />
                                                 <select name="sendMail[]">
                                                     <option class="radio" value="cv"> CV</option>
@@ -154,6 +154,17 @@
                                         <th></th>
                                         <th></th>
                                         <th></th>
+                                        <th>TVA:</th>
+                                        <th>
+                                            <input id="tva" name='tva' value="{{$devis->tva}}" class="form-control"/>
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
                                         <th>Total:</th>
                                         <th>
                                             <div id="total">
@@ -197,7 +208,7 @@
                                                     </script>
                                                 </td>
                                                 <td data-name="del">
-                                                    <a id="del{{$index}}" name="del{{$index}}" href="/service/delete?id={{$service->id}}" class="btn btn-danger glyphicon glyphicon-remove row-remove"></a>
+                                                    <a href="/service/delete?id={{$service->id}}" class="btn btn-danger glyphicon glyphicon-remove row-remove"></a>
                                                 </td>
                                             </tr>
                                             <script type="text/javascript">
@@ -243,10 +254,6 @@
                                     @endif
                                     </tbody>
                                 </table>
-                                <div>
-                                    <label>TVA :</label>
-                                    <input id="tva" name='tva' value="{{$devis->tva}}" class="form-control"/>
-                                </div>
                                 <div class="pull-right">
                                     <button id="add_row" type="button" class="btn btn-outline btn-default">Ajouter une ligne</button>
                                     <button type="submit" class="btn btn-outline btn-default">Valider</button>
@@ -305,30 +312,6 @@
                         </tr>
                         </tfoot>
                         <tbody>
-                        @foreach($interpreteurs as $key=>$interpreteur)
-                            <tr>
-                                <td>{{$interpreteur->id}}</td>
-                                <td>
-                                    <img class="img-circle" src="/images/{{$interpreteur->image}}" style="width: 50px;height:50px;"/>
-                                    {{$interpreteur->nom}} {{$interpreteur->prenom}}
-                                </td>
-                                <td>{{$interpreteur->email}}</td>
-                                <td>{{$interpreteur->prestation}} {{$interpreteur->devise}}</td>
-                                <td>
-                                    <select class="form-control" name="langue_ini">
-                                        @foreach(\App\Tools\TraductionTools::getTraductionsByInterpreteur($interpreteur->id) as $traduction)
-                                            <option><strong>{{\App\Tools\LangueTools::getLangue($traduction->source)->content}}→{{\App\Tools\LangueTools::getLangue($traduction->cible)->content}}</strong></option>
-                                        @endforeach
-                                    </select>
-                                </td>
-                                <td>{{\App\Tools\AdresseTools::getAdresse($interpreteur->adresse_id)->adresse}}</td>
-                                <td>{{$interpreteur->image}}</td>
-                                <td>{{$interpreteur->tel_portable}}</td>
-                                <td>{{\App\Tools\AdresseTools::getAdresse($interpreteur->adresse_id)->adresse}}</td>
-                                <td>{{$interpreteur->nom}} {{$interpreteur->prenom}}</td>
-                                <td><button class="btn btn-info selectInterpTab1" data-id="{{$key}}">Select</button></td>
-                            </tr>
-                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -368,28 +351,9 @@
                                 </tr>
                                 </thead>
                                 <tbody class="searchable">
-                                @foreach($interpreteurs as $key => $interpreteur)
-                                    <tr>
-                                        <td>{{$interpreteur->id}}</td>
-                                        <td>{{$interpreteur->nom}}</td>
-                                        <td>{{$interpreteur->prenom}}</td>
-                                        <td>{{$interpreteur->email}}</td>
-                                        <td>
-                                            <select class="form-control" name="langue_ini">
-                                                @foreach(\App\Tools\TraductionTools::getTraductionsByInterpreteur($interpreteur->id) as $traduction)
-                                                    <option><strong>{{\App\Tools\LangueTools::getLangue($traduction->source)->content}}→{{\App\Tools\LangueTools::getLangue($traduction->cible)->content}}</strong></option>
-                                                @endforeach
-                                            </select>
-                                        </td>
-                                        <td>{{$interpreteur->image}}</td>
-                                        <td>{{$interpreteur->tel_portable}}</td>
-                                        <td>{{\App\Tools\AdresseTools::getAdresse($interpreteur->adresse_id)->adresse}}</td>
-                                        <td><button class="btn btn-info selectInterp" data-id="{{$key}}">Select</button></td>
-                                    </tr>
-                                @endforeach
                                 </tbody>
                             </table>
-                            <button id="draw" type="button" class="btn btn-primary">Dessiner</button>
+                            <button id="afficherTout" type="button" class="btn btn-primary">Dessiner</button>
                         </div>
                         <div class="col-lg-7">
                             <div id="map"/>
@@ -431,16 +395,16 @@
     <script type="text/javascript">
 
         function addInterpreteur(id,nom,email,img,tel,adr){
-            $col1 = nom;
+            $col1 = '<img class="img-circle" src="/images/'+img+'" style="width: 50px;height:50px;"/>' + nom;
             $col2 = email;
             $col3 = '<input type="hidden" name="idInterp[]" value="'+id+'" />\
             <select name="sendMail[]">\
                     <option class="radio" value="cv"> CV</option> \
                     <option class="radio" value="cv_anonyme"> CV anonyme</option>\
                     <option class="radio" selected value="non"> rien</option>\
-            </select>';
-            $col4 = '<button class="btn btn-danger" id="deselect'+cnt+'">Supprimer</button>';
-            $(document.body).on('click','#deselect'+cnt,function (e) {
+            <select>';
+            $col4 = '<button class="btn btn-danger" id="deselect'+counter+'">Supprimer</button>';
+            $(document.body).on('click','#deselect'+counter,function (e) {
                 e.preventDefault();
                 var row = t.row( $(this).parents('tr') );
                 row.remove();
@@ -454,7 +418,7 @@
                     $col3,
                     $col4
                 ]).draw( false );
-                cnt++;
+                counter++;
                 $('.success-alert').find('.nom').text(nom);
                 $('.success-alert').alert();
                 $(".success-alert").fadeTo(2000, 500).slideUp(500, function(){
@@ -462,7 +426,6 @@
                 });
             }
         }
-
 
         function initMarkersAndWindows(){
             @foreach($interpreteurs as $interpreteur)
@@ -513,21 +476,77 @@
             @endforeach
 
 
+            $('#afficherTout').on('click',function (e) {
+                e.preventDefault();
+                for(id in markers)
+                    markers[id].setVisible(false);
+                markers = [];
+                var cnt = 0;
+                table2.rows().eq(0).each( function ( index ) {
+                    var row = table2.row( index );
+                    row = $.map(row.data(), function(value, index) {
+                        return [value];
+                    });
+                    var npr = row[14].split(' ');
+                    markersNewPage(row[0],cnt,npr[0],npr[1],row[3],row[9],row[7],row[8],row[6],parseFloat(row[12]),parseFloat(row[13]));
+                    cnt++;
+                } );
+                console.log(cnt);
+            });
+
             google.maps.event.addListenerOnce(map, 'idle', function() {
                 google.maps.event.trigger(map, 'resize');
             });
 
             $('#dataTables-example2').on('search.dt',function(){
 
-                table2.rows().eq(0).each( function ( index ) {
-                    var row = table.row( index );
-                    markers[row.data()[0]].setVisible(false);
-                } );
+            });
+        }
 
-                table2.rows({filter:'applied'}).eq(0).each( function ( index ) {
-                    var row = table.row( index );
-                    markers[row.data()[0]].setVisible(true);
-                } );
+        function markersNewPage(id,idx,nom,prenom,email,image,tel_portable,tel_fixe,adresse,lt,lng){
+            markers[idx] = new google.maps.Marker({
+                position: {lat: lt, lng: lng},
+                map: map,
+                title: nom + ' ' + prenom
+            });
+            infowindows[idx] = new google.maps.InfoWindow({
+                content:
+                '\
+                <div class="container" style="width:300px">\
+                  <div class="row">\
+                    <img class="img-circle" src="/images/'+image+'" style="width: 50px;height:50px;">\
+                          </div>\
+                          <div class="row">\
+                            <div class="col-lg-3"><strong>Nom</strong></div>\
+                            <div class="col-lg-9">'+nom+'</div>\
+</div>\
+<div class="row">\
+  <div class="col-lg-3"><strong>Prenom</strong></div>\
+  <div class="col-lg-9">'+prenom +'</div>\
+</div>\
+<div class="row">\
+  <div class="col-lg-3"><strong>email</strong></div>\
+  <div class="col-lg-9">'+email +'</div>\
+</div>\
+<div class="row">\
+  <div class="col-lg-3"><strong>Portable</strong></div>\
+  <div class="col-lg-9">'+tel_portable +'</div>\
+</div>\
+<div class="row">\
+  <div class="col-lg-3"><strong>Fixe</strong></div>\
+  <div class="col-lg-9">'+tel_fixe +'</div>\
+</div>\
+<div class="row">\
+  <div class="col-lg-8"></div>\
+  <div class="col-lg-4"><button type="button" onclick="addInterpreteur('+ id +',\''+nom+' '+prenom+'\',\''+email+'\',\''+image+'\',\''+tel_portable+'\',\''+adresse+'\')" class="btn btn-primary">Select</button></div>\
+</div>\
+</div>'
+            });
+
+
+
+            markers[idx].addListener('click', function() {
+                infowindows[idx].open(map, markers[idx]);
             });
         }
 
@@ -544,15 +563,6 @@
                 map: map,
                 title:  '{{ $demande->client->nom }} {{ $demande->client->prenom }}',
                 icon: image
-            });
-        }
-
-        function drawFiltredRows(){
-            createMap();
-            var filteredRows = table2.rows({filter:'applied'});
-            filteredRows.every( function ( rowIdx, tableLoop, rowLoop ) {
-                var data = this.data();
-                markers[data[0]].setMap(map);
             });
         }
 
@@ -576,8 +586,6 @@
 
         $(document).ready(function() {
 
-            var rowsCnt = @if(isset($services)) {{count($services)}} @else 1 @endif ;
-
             $('#MapModal').on('show.bs.modal', function(){
                 createMap();
                 initMarkersAndWindows();
@@ -586,7 +594,7 @@
 
             $("#add_row").on("click", function() {
                 // Dynamic Rows Code
-                rowsCnt++;
+
                 // Get max row id and set new id
                 var newid = 0;
                 $.each($("#tab_logic tr"), function() {
@@ -636,8 +644,7 @@
                     calculer(newid);
                 });
 
-                $(tr).find("td .row-remove").on("click", function(e) {
-                    e.preventDefault();
+                $(tr).find("td button.row-remove").on("click", function() {
                     $("#qte"+newid).val(0);
                     $("#prixUnitaire"+newid).val(0);
                     calculer(newid);

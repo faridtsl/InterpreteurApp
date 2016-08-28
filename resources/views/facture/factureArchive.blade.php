@@ -46,25 +46,6 @@
             </tr>
             </tfoot>
             <tbody>
-            @foreach($factures as $facture)
-
-                <tr>
-                    <td>{{$facture->id}}</td>
-                    <td>{{\App\Tools\ClientTools::getClientByFacture($facture)->nom}} {{\App\Tools\ClientTools::getClientByFacture($facture)->prenom}}</td>
-                    <td>{{$facture->date_envoi_mail}}</td>
-                    <td>@if($facture->fini){{$facture->date_paiement}}@else Non Payée @endif</td>
-                    <td>{{\App\Tools\DevisTools::getDevisById($facture->devi_id)->total}} &euro;</td>
-                    <td>
-                        <a href="/devis/view?id={{$facture->devi_id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
-                        /<a href="/devis/download?id={{$facture->devi_id}}" class="downloadButton"> <span class="glyphicon glyphicon-download-alt"></span> </a>
-                    </td>
-                    <td>
-                        <a href="/facture/view?id={{$facture->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
-                        /<a href="/facture/download?id={{$facture->id}}" class="downloadButton"> <span class="glyphicon glyphicon-download-alt"></span> </a>
-                    </td>
-                </tr>
-
-            @endforeach
             </tbody>
         </table>
     </div>
@@ -77,5 +58,5 @@
 
 @section('footer')
     <script src="{{ asset("js/tableTools.js") }}"> </script>
-    <script src="{{ asset("js/factureShow.js") }}"> </script>
+    <script src="{{ asset("js/factureArchive.js") }}"> </script>
 @endsection

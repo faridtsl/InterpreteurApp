@@ -141,6 +141,17 @@
                                         <th></th>
                                         <th></th>
                                         <th></th>
+                                        <th>TVA:</th>
+                                        <th>
+                                            <input id="tva" name='tva' value="{{env('PERCENT_TAXES')}}" class="form-control"/>
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
                                         <th>Total:</th>
                                         <th>
                                             <div id="total">
@@ -220,10 +231,6 @@
                                     @endif
                                     </tbody>
                                 </table>
-                                <div>
-                                    <label>TVA :</label>
-                                    <input id="tva" name='tva' value="{{env('PERCENT_TAXES')}}" class="form-control"/>
-                                </div>
                                 <div class="pull-right">
                                     <button id="add_row" type="button" class="btn btn-outline btn-default">Ajouter une ligne</button>
                                     <button type="submit" class="btn btn-outline btn-default">Valider</button>
@@ -327,7 +334,7 @@
 
                             </tbody>
                         </table>
-                        <button id="draw" type="button" class="btn btn-primary">Dessiner</button>
+                        <button id="afficherTout" type="button" class="btn btn-danger">Dessiner</button>
                     </div>
                     <div class="col-lg-7">
                         <div id="map"/>
@@ -402,77 +409,31 @@
         }
 
         function initMarkersAndWindows(){
-            @foreach($interpreteurs as $interpreteur)
-                    markers[{{$interpreteur->id}}] = new google.maps.Marker({
-                position: {lat: {{ $interpreteur->adresse->lat }}, lng: {{ $interpreteur->adresse->long }} },
-                map: map,
-                title:  '{{ $interpreteur->nom }} {{ $interpreteur->prenom }}'
+            $('#afficherTout').on('click',function (e) {
+                e.preventDefault();
+                for(id in markers)
+                    markers[id].setVisible(false);
+                markers = [];
+                var cnt = 0;
+                table2.rows().eq(0).each( function ( index ) {
+                    var row = table2.row( index );
+                    row = $.map(row.data(), function(value, index) {
+                        return [value];
+                    });
+                    var npr = row[14].split(' ');
+                    markersNewPage(row[0],cnt,npr[0],npr[1],row[3],row[9],row[7],row[8],row[6],parseFloat(row[12]),parseFloat(row[13]));
+                    cnt++;
+                } );
+               console.log(cnt);
             });
-            infowindows[{{$interpreteur->id}}] = new google.maps.InfoWindow({
-                content:
-                        '\
-                        <div class="container" style="width:300px">\
-                          <div class="row">\
-                            <img class="img-circle" src="/images/{{$interpreteur->image}}" style="width: 50px;height:50px;">\
-                          </div>\
-                          <div class="row">\
-                            <div class="col-lg-3"><strong>Nom</strong></div>\
-                            <div class="col-lg-9">{{ $interpreteur->nom }}</div>\
-</div>\
-<div class="row">\
-  <div class="col-lg-3"><strong>Prenom</strong></div>\
-  <div class="col-lg-9">{{ $interpreteur->prenom }}</div>\
-</div>\
-<div class="row">\
-  <div class="col-lg-3"><strong>email</strong></div>\
-  <div class="col-lg-9">{{ $interpreteur->email }}</div>\
-</div>\
-<div class="row">\
-  <div class="col-lg-3"><strong>Portable</strong></div>\
-  <div class="col-lg-9">{{ $interpreteur->tel_portable }}</div>\
-</div>\
-<div class="row">\
-  <div class="col-lg-3"><strong>Fixe</strong></div>\
-  <div class="col-lg-9">{{ $interpreteur->tel_fixe }}</div>\
-</div>\
-<div class="row">\
-  <div class="col-lg-8"></div>\
-  <div class="col-lg-4"><button type="button" onclick="addInterpreteur({{ $interpreteur->id }},\'{{$interpreteur->nom}} {{$interpreteur->prenom}}\',\'{{$interpreteur->email}}\',\'{{$interpreteur->image}}\',\'{{$interpreteur->tel_portable}}\',\'{{\App\Tools\AdresseTools::getAdresse($interpreteur->adresse_id)->adresse}}\')" class="btn btn-primary">Select</button></div>\
-</div>\
-</div>'
-            });
-
-
-
-            markers[{{$interpreteur->id}}].addListener('click', function() {
-                infowindows[{{$interpreteur->id}}].open(map, markers[{{$interpreteur->id}}]);
-            });
-            @endforeach
-
 
             google.maps.event.addListenerOnce(map, 'idle', function() {
                 google.maps.event.trigger(map, 'resize');
             });
-
-            $('#dataTables-example2').on('search.dt',function(){
-                for( id in markers) {
-                    markers[id].setVisible(false);
-                }
-
-                table2.rows({filter:'applied'}).eq(0).each( function ( index ) {
-                    var row = table.row( index );
-                    row = $.map(row.data(), function(value, index) {
-                        return [value];
-                    });
-
-                    console.log('Second : ' + row[1]);
-                    markers[row[0]].setVisible(true);
-                } );
-            });
         }
 
-        function markersNewPage(id,idx,nom,prenom,email,image,tel_portable,adresse,lt,lng){
-            markers[id] = new google.maps.Marker({
+        function markersNewPage(id,idx,nom,prenom,email,image,tel_portable,tel_fixe,adresse,lt,lng){
+            markers[idx] = new google.maps.Marker({
                 position: {lat: lt, lng: lng},
                 map: map,
                 title: nom + ' ' + prenom

@@ -136,18 +136,6 @@ Ajouter demande
                         </tr>
                         </tfoot>
                         <tbody>
-                        @foreach($clients as $client)
-                            <tr>
-                                <td>{{$client->id}}</td>
-                                <td>
-                                    <img class="img-circle" src="/images/{{$client->image}}" style="width: 50px;height:50px;"/>
-                                    {{$client->nom}} {{$client->prenom}}
-                                </td>
-                                <td>{{$client->email}}</td>
-                                <td>{{$client->tel_portable}}</td>
-                                <td>{{$client->tel_fixe}}</td>
-                            </tr>
-                        @endforeach
 
                         </tbody>
                     </table>

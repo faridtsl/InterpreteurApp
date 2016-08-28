@@ -62,7 +62,6 @@ class InterpreteurTools{
 
     public static function deleteInterpreteur(User $u,$id){
         $interp = Interpreteur::find($id);
-
         $trace = new Trace();
         $trace->operation = 'Suppression';
         $trace->type = 'Interpreteur';
@@ -72,10 +71,6 @@ class InterpreteurTools{
         $devis = DevisTools::getDevisByInterp($id);
         foreach ($devis as $devi) {
             DevisTools::deleteDevis($u,$devi);
-        }
-        $factures = FactureTools::getFacturesByInterp($id);
-        foreach ($factures as $facture) {
-            FactureTools::deleteFacture($facture->id,$u);
         }
         $interp->delete();
     }
@@ -128,6 +123,12 @@ class InterpreteurTools{
     public static function getArchiveInterpreteurs(){
         $interpreteurs = Interpreteur::onlyTrashed()->get();
         return $interpreteurs;
+    }
+
+    public static function getArchiveInterpreteurByDevis($devi_id){
+        $res = Interpreteur::onlyTrashed()->join('devis_interpreteurs', 'interpreteurs.id', '=', 'devis_interpreteurs.devi_id')
+            ->where('devis_interpreteurs.devi_id',$devi_id)->get();
+        return $res;
     }
 
     public static function getInterpreteur($id){

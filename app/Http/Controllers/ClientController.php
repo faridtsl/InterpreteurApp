@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Client;
 use App\Tools\AdresseTools;
 use App\Tools\DemandeTools;
 use App\Tools\DevisTools;
@@ -18,6 +19,7 @@ use App\Http\Requests\ClientRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Yajra\Datatables\Datatables;
 
 class ClientController extends Controller{
 
@@ -64,13 +66,52 @@ class ClientController extends Controller{
     }
 
     public function showClients(){
-        $clients = ClientTools::getAllClients();
-        return view('client.clientsShow',['clients'=>$clients]);
+        //$clients = ClientTools::getAllClients();
+        return view('client.clientsShow');
+    }
+
+    public function queryClients(Request $request){
+        $clients = Client::join('adresses','clients.adresse_id','=','adresses.id')->select(array('clients.id','nom','prenom','email','adresse','tel_fixe','tel_portable','image','clients.created_at','clients.updated_at'));
+        $ssData = Datatables::of($clients);
+        $ssData = $ssData->editColumn('nom','
+                        <img class="img-circle" src="/images/{{$image}}" style="width: 50px;height:50px;"/>
+                        {{$nom}} {{$prenom}}');
+        $ssData = $ssData->addColumn('butts','
+                        <p data-placement="top" data-toggle="tooltip" title="Edit">
+                            <button class="btn btn-warning btn-xs editButton" data-title="Edit" data-toggle="modal" data-target="#edit" data-id="{{$id}}" >
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </button>
+                            <button class="btn btn-danger btn-xs deleteButton" data-title="Delete" data-toggle="modal" data-target="#delete" data-id="{{$id}}" >
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                            <a class="btn btn-default btn-xs" href="/client/profile?id={{$id}}" >
+                                <span class="glyphicon glyphicon-user"></span>
+                            </a>
+                        </p>
+                    ');
+        return $ssData->make(true);
+    }
+
+    public function queryArchiveClients(Request $request){
+        $clients = Client::onlyTrashed()->join('adresses','clients.adresse_id','=','adresses.id')->select(array('clients.id','nom','prenom','email','adresse','tel_fixe','tel_portable','image','clients.created_at','clients.updated_at'));
+        $ssData = Datatables::of($clients);
+        $ssData = $ssData->editColumn('nom','
+                        <img class="img-circle" src="/images/{{$image}}" style="width: 50px;height:50px;"/>
+                        {{$nom}} {{$prenom}}');
+        $ssData = $ssData->addColumn('butts','
+                        <p data-placement="top" data-toggle="tooltip" title="Edit">
+                            <button class="btn btn-success btn-xs restoreButton" data-title="Restore" data-toggle="modal" data-target="#restore" data-id="{{$id}}" >
+                                <span class="glyphicon glyphicon-refresh"></span>
+                            </button>
+                            <a class="btn btn-default btn-xs" href="/client/profile?id={{$id}}" >
+                                <span class="glyphicon glyphicon-user"></span>
+                            </a>
+                        </p>');
+        return $ssData->make(true);
     }
 
     public function archiveClients(){
-        $clientsArchive = ClientTools::getArchiveClients();
-        return view('client.clientArchive',['clients'=>$clientsArchive]);
+        return view('client.clientArchive');
     }
 
     public function showClient(Request $request){

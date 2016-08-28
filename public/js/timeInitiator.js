@@ -10,6 +10,16 @@ $(function () {
         $('#dateEventFin').bootstrapMaterialDatePicker('setMinDate', date);
     });
 
+    $("#dateEnvoiFin").bootstrapMaterialDatePicker({
+        weekStart: 0, format: 'YYYY-MM-DD HH:mm:00', lang : 'fr'
+    });
+
+    $("#dateEnvoiDeb").bootstrapMaterialDatePicker({
+        weekStart: 0, format: 'YYYY-MM-DD HH:mm:00', lang : 'fr'
+    }).on('change', function(e, date) {
+        $('#dateEnvoiFin').bootstrapMaterialDatePicker('setMinDate', date);
+    });
+
     $("#dateCreateFin").bootstrapMaterialDatePicker({
         weekStart: 0, format: 'YYYY-MM-DD HH:mm:00', lang : 'fr'
     });
