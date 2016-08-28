@@ -113,6 +113,7 @@ $(function () {
 
     $(document.body).on('click', '.btn-add', function (e) {
         e.preventDefault();
+        console.log("Are u serious ????");
         var teams = $(this).parents('#langs:first');
         var controlForm = $('#updateForm'),
             currentEntry = $(this).parents('.entry:first'),
