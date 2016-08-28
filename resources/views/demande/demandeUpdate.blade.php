@@ -411,7 +411,7 @@
     <div class="modal fade" id="editTraductions" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content modal-md">
+            <div class="modal-content">
                 <form role="form" method="post" id="formID" action="/demande/update" enctype="multipart/form-data">
                 <div class="modal-header  modal-header-info">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
