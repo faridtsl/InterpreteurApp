@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="323faa9a-1b42-43af-ae09-e82e697c525e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/DevisController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/DevisController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/modifJS.js" afterPath="$PROJECT_DIR$/public/js/modifJS.js" />
     </list>
     <ignored path="InterpreteurApp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -85,11 +85,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DevisController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DevisController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DevisController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="161" column="71" selection-start-line="161" selection-start-column="71" selection-end-line="161" selection-end-column="71" />
+            <state relative-caret-position="-234">
+              <caret line="161" column="63" selection-start-line="161" selection-start-column="63" selection-end-line="161" selection-end-column="63" />
               <folding />
             </state>
           </provider>
@@ -98,36 +98,24 @@
       <file leaf-file-name="interpreteursShow.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/interpreteur/interpreteursShow.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1821">
+            <state relative-caret-position="-1807">
               <caret line="124" column="76" selection-start-line="124" selection-start-column="70" selection-end-line="124" selection-end-column="76" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="modifJS.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="modifJS.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/js/modifJS.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1098">
-              <caret line="85" column="38" selection-start-line="85" selection-start-column="38" selection-end-line="85" selection-end-column="38" />
+            <state relative-caret-position="198">
+              <caret line="113" column="19" selection-start-line="113" selection-start-column="19" selection-end-line="113" selection-end-column="19" />
               <folding>
-                <marker date="1472416721901" expanded="true" signature="1665:1687" ph="..." />
-                <marker date="1472416721901" expanded="true" signature="1787:1809" ph="..." />
-                <marker date="1472416721901" expanded="true" signature="1883:1905" ph="..." />
-                <marker date="1472416721901" expanded="true" signature="2041:2063" ph="..." />
-                <marker date="1472416721901" expanded="true" signature="2292:2309" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="interpShow.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/interpShow.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
-              <caret line="59" column="26" selection-start-line="59" selection-start-column="26" selection-end-line="59" selection-end-column="26" />
-              <folding>
-                <marker date="1472417583001" expanded="true" signature="1077:1089" ph="..." />
+                <marker date="1472421470201" expanded="true" signature="1665:1687" ph="..." />
+                <marker date="1472421470201" expanded="true" signature="1787:1809" ph="..." />
+                <marker date="1472421470201" expanded="true" signature="1883:1905" ph="..." />
+                <marker date="1472421470201" expanded="true" signature="2041:2063" ph="..." />
+                <marker date="1472421470201" expanded="true" signature="2292:2309" ph="..." />
               </folding>
             </state>
           </provider>
@@ -225,7 +213,6 @@
         <option value="$PROJECT_DIR$/resources/missing.blade.php" />
         <option value="$PROJECT_DIR$/public/js/myScript.js" />
         <option value="$PROJECT_DIR$/resources/views/interpreteur/profileInterpreteur.blade.php" />
-        <option value="$PROJECT_DIR$/public/js/modifJS.js" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/TraductionController.php" />
         <option value="$PROJECT_DIR$/resources/views/interpreteur/interpreteursShow.blade.php" />
         <option value="$PROJECT_DIR$/public/js/interpShow.js" />
@@ -234,6 +221,7 @@
         <option value="$PROJECT_DIR$/app/Tools/InterpreteurTools.php" />
         <option value="$PROJECT_DIR$/resources/views/devis/devisUpdate.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/DevisController.php" />
+        <option value="$PROJECT_DIR$/public/js/modifJS.js" />
       </list>
     </option>
   </component>
@@ -662,12 +650,12 @@
       <workItem from="1472301789483" duration="8222000" />
       <workItem from="1472325589586" duration="8650000" />
       <workItem from="1472379948594" duration="7533000" />
-      <workItem from="1472412388557" duration="6373000" />
+      <workItem from="1472412388557" duration="7178000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="646616000" />
+    <option name="totallyTimeSpent" value="647421000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="741" extended-state="6" />
@@ -1052,38 +1040,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/interpShow.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="59" column="26" selection-start-line="59" selection-start-column="26" selection-end-line="59" selection-end-column="26" />
-          <folding>
-            <marker date="1472417583001" expanded="true" signature="1077:1089" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/interpreteur/interpreteursShow.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1821">
-          <caret line="124" column="76" selection-start-line="124" selection-start-column="70" selection-end-line="124" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/modifJS.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1098">
-          <caret line="85" column="38" selection-start-line="85" selection-start-column="38" selection-end-line="85" selection-end-column="38" />
-          <folding>
-            <marker date="1472416721901" expanded="true" signature="1665:1687" ph="..." />
-            <marker date="1472416721901" expanded="true" signature="1787:1809" ph="..." />
-            <marker date="1472416721901" expanded="true" signature="1883:1905" ph="..." />
-            <marker date="1472416721901" expanded="true" signature="2041:2063" ph="..." />
-            <marker date="1472416721901" expanded="true" signature="2292:2309" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/interpreteur/profileInterpreteur.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1325">
@@ -1148,9 +1104,41 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DevisController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="161" column="71" selection-start-line="161" selection-start-column="71" selection-end-line="161" selection-end-column="71" />
+        <state relative-caret-position="-234">
+          <caret line="161" column="63" selection-start-line="161" selection-start-column="63" selection-end-line="161" selection-end-column="63" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/interpShow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1062">
+          <caret line="59" column="26" selection-start-line="59" selection-start-column="26" selection-end-line="59" selection-end-column="26" />
+          <folding>
+            <marker date="1472417583001" expanded="true" signature="1077:1089" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/interpreteur/interpreteursShow.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1807">
+          <caret line="124" column="76" selection-start-line="124" selection-start-column="70" selection-end-line="124" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/modifJS.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="113" column="19" selection-start-line="113" selection-start-column="19" selection-end-line="113" selection-end-column="19" />
+          <folding>
+            <marker date="1472421470201" expanded="true" signature="1665:1687" ph="..." />
+            <marker date="1472421470201" expanded="true" signature="1787:1809" ph="..." />
+            <marker date="1472421470201" expanded="true" signature="1883:1905" ph="..." />
+            <marker date="1472421470201" expanded="true" signature="2041:2063" ph="..." />
+            <marker date="1472421470201" expanded="true" signature="2292:2309" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

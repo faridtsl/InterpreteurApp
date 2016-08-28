@@ -111,7 +111,7 @@ $(function () {
         completeCallback: ajaxSubmit
     });
 
-    $(document).on('click', '.btn-add', function (e) {
+    $(document.body).on('click', '.btn-add', function (e) {
         e.preventDefault();
         var teams = $(this).parents('#langs:first');
         var controlForm = $('#updateForm'),
