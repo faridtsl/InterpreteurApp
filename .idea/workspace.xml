@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="323faa9a-1b42-43af-ae09-e82e697c525e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/modifJS.js" afterPath="$PROJECT_DIR$/public/js/modifJS.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/interpreteur/interpreteursShow.blade.php" afterPath="$PROJECT_DIR$/resources/views/interpreteur/interpreteursShow.blade.php" />
     </list>
     <ignored path="InterpreteurApp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -96,7 +95,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="interpreteursShow.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="interpreteursShow.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/interpreteur/interpreteursShow.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="339">
@@ -118,17 +117,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="modifJS.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="modifJS.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/js/modifJS.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="326">
-              <caret line="123" column="71" selection-start-line="123" selection-start-column="71" selection-end-line="123" selection-end-column="71" />
+            <state relative-caret-position="560">
+              <caret line="90" column="19" selection-start-line="90" selection-start-column="19" selection-end-line="90" selection-end-column="19" />
               <folding>
-                <marker date="1472422796613" expanded="true" signature="1665:1687" ph="..." />
-                <marker date="1472422796613" expanded="true" signature="1787:1809" ph="..." />
-                <marker date="1472422796613" expanded="true" signature="1883:1905" ph="..." />
-                <marker date="1472422796613" expanded="true" signature="2041:2063" ph="..." />
-                <marker date="1472422796613" expanded="true" signature="2292:2309" ph="..." />
+                <marker date="1472422985429" expanded="true" signature="1665:1687" ph="..." />
+                <marker date="1472422985429" expanded="true" signature="1787:1809" ph="..." />
+                <marker date="1472422985429" expanded="true" signature="1883:1905" ph="..." />
+                <marker date="1472422985429" expanded="true" signature="2041:2063" ph="..." />
+                <marker date="1472422985429" expanded="true" signature="2292:2309" ph="..." />
               </folding>
             </state>
           </provider>
@@ -663,12 +662,12 @@
       <workItem from="1472301789483" duration="8222000" />
       <workItem from="1472325589586" duration="8650000" />
       <workItem from="1472379948594" duration="7533000" />
-      <workItem from="1472412388557" duration="8340000" />
+      <workItem from="1472412388557" duration="8527000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="648583000" />
+    <option name="totallyTimeSpent" value="648770000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="741" extended-state="6" />
@@ -1123,6 +1122,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/interpreteur/interpreteursShow.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="193" column="112" selection-start-line="193" selection-start-column="112" selection-end-line="193" selection-end-column="112" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/interpShow.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="290">
@@ -1135,23 +1142,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/modifJS.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="123" column="71" selection-start-line="123" selection-start-column="71" selection-end-line="123" selection-end-column="71" />
+        <state relative-caret-position="560">
+          <caret line="90" column="19" selection-start-line="90" selection-start-column="19" selection-end-line="90" selection-end-column="19" />
           <folding>
-            <marker date="1472422796613" expanded="true" signature="1665:1687" ph="..." />
-            <marker date="1472422796613" expanded="true" signature="1787:1809" ph="..." />
-            <marker date="1472422796613" expanded="true" signature="1883:1905" ph="..." />
-            <marker date="1472422796613" expanded="true" signature="2041:2063" ph="..." />
-            <marker date="1472422796613" expanded="true" signature="2292:2309" ph="..." />
+            <marker date="1472422985429" expanded="true" signature="1665:1687" ph="..." />
+            <marker date="1472422985429" expanded="true" signature="1787:1809" ph="..." />
+            <marker date="1472422985429" expanded="true" signature="1883:1905" ph="..." />
+            <marker date="1472422985429" expanded="true" signature="2041:2063" ph="..." />
+            <marker date="1472422985429" expanded="true" signature="2292:2309" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/interpreteur/interpreteursShow.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="193" column="112" selection-start-line="193" selection-start-column="112" selection-end-line="193" selection-end-column="112" />
-          <folding />
         </state>
       </provider>
     </entry>
