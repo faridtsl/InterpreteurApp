@@ -43,6 +43,14 @@ class InterpreteurTools{
         return $interp;
     }
 
+    private static function exists(Interpreteur $interpreteur, Traduction $traduction){
+        $trads = TraductionTools::getTraductionsByInterpreteur($interpreteur->id);
+        foreach ($trads as $trad) {
+            if($trad->id == $traduction->id) return 1;
+        }
+        return 0;
+    }
+
     public static function addTraduction(Interpreteur $interp, Traduction $trad){
         $interp->traductions()->attach($trad);
     }
@@ -55,7 +63,7 @@ class InterpreteurTools{
             $src = LangueTools::getLangue($value);
             $dst = LangueTools::getLangue($langs_dest[$index]);
             $traduction = TraductionTools::getTraduction($src, $dst);
-            if($traduction != null)
+            if($traduction != null && ! self::exists($interp,$traduction))
                 InterpreteurTools::addTraduction($interp, $traduction);
         }
     }
@@ -127,6 +135,12 @@ class InterpreteurTools{
 
     public static function getArchiveInterpreteurByDevis($devi_id){
         $res = Interpreteur::onlyTrashed()->join('devis_interpreteurs', 'interpreteurs.id', '=', 'devis_interpreteurs.devi_id')
+            ->where('devis_interpreteurs.devi_id',$devi_id)->get();
+        return $res;
+    }
+
+    public static function getInterpreteurByDevis($devi_id){
+        $res = Interpreteur::join('devis_interpreteurs', 'interpreteurs.id', '=', 'devis_interpreteurs.devi_id')
             ->where('devis_interpreteurs.devi_id',$devi_id)->get();
         return $res;
     }

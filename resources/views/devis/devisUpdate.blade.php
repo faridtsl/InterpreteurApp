@@ -262,7 +262,7 @@
                         </div>
                     </div>
                 </div>
-                <input type="hidden" name="interpreteur_id" value="{{$interp->id}}" id="interpreteur"/>
+                <input type="hidden" name="interpreteur_id" value="" id="interpreteur"/>
                 <input type="hidden" name="id" value="{{$devis->id}}"/>
             </div>
         </div>
@@ -428,53 +428,6 @@
         }
 
         function initMarkersAndWindows(){
-            @foreach($interpreteurs as $interpreteur)
-                    markers[{{$interpreteur->id}}] = new google.maps.Marker({
-                position: {lat: {{ $interpreteur->adresse->lat }}, lng: {{ $interpreteur->adresse->long }} },
-                map: map,
-                title:  '{{ $interpreteur->nom }} {{ $interpreteur->prenom }}'
-            });
-            infowindows[{{$interpreteur->id}}] = new google.maps.InfoWindow({
-                content:
-                        '\
-                        <div class="container" style="width:300px">\
-                          <div class="row">\
-                            <img class="img-circle" src="/images/{{$interpreteur->image}}" style="width: 50px;height:50px;">\
-                          </div>\
-                          <div class="row">\
-                            <div class="col-lg-3"><strong>Nom</strong></div>\
-                            <div class="col-lg-9">{{ $interpreteur->nom }}</div>\
-</div>\
-<div class="row">\
-  <div class="col-lg-3"><strong>Prenom</strong></div>\
-  <div class="col-lg-9">{{ $interpreteur->prenom }}</div>\
-</div>\
-<div class="row">\
-  <div class="col-lg-3"><strong>email</strong></div>\
-  <div class="col-lg-9">{{ $interpreteur->email }}</div>\
-</div>\
-<div class="row">\
-  <div class="col-lg-3"><strong>Portable</strong></div>\
-  <div class="col-lg-9">{{ $interpreteur->tel_portable }}</div>\
-</div>\
-<div class="row">\
-  <div class="col-lg-3"><strong>Fixe</strong></div>\
-  <div class="col-lg-9">{{ $interpreteur->tel_fixe }}</div>\
-</div>\
-<div class="row">\
-  <div class="col-lg-8"></div>\
-  <div class="col-lg-4"><button type="button" onclick="addInterpreteur({{ $interpreteur->id }},\'{{$interpreteur->nom}} {{$interpreteur->prenom}}\',\'{{$interpreteur->email}}\',\'{{$interpreteur->image}}\',\'{{$interpreteur->tel_portable}}\',\'{{\App\Tools\AdresseTools::getAdresse($interpreteur->adresse_id)->adresse}}\')" class="btn btn-primary">Select</button></div>\
-</div>\
-</div>'
-            });
-
-
-
-            markers[{{$interpreteur->id}}].addListener('click', function() {
-                infowindows[{{$interpreteur->id}}].open(map, markers[{{$interpreteur->id}}]);
-            });
-            @endforeach
-
 
             $('#afficherTout').on('click',function (e) {
                 e.preventDefault();
@@ -616,12 +569,17 @@
                     var children = cur_td.children();
 
                     // add new td and element if it has a nane
-                    if ($(this).data("name") != undefined) {
+
+                    if($(this).data('name') == 'del'){
+                        var s = '<td data-name="del">\
+                                <a id="del'+newid+'" name="del'+newid+'" class="btn btn-danger glyphicon glyphicon-remove row-remove"></a>\
+                                </td>';
+                        $(tr).append(s);
+
+                    }else if ($(this).data("name") != undefined) {
                         var td = $("<td></td>", {
                             "data-name": $(cur_td).data("name")
                         });
-
-
                         var c = $(cur_td).find($(children[0]).prop('tagName')).clone().val("").text("");
                         c.attr("id", $(cur_td).data("name") + newid);
                         c.attr("name", $(cur_td).data("name")+"[]");
@@ -644,7 +602,7 @@
                     calculer(newid);
                 });
 
-                $(tr).find("td button.row-remove").on("click", function() {
+                $(tr).find("td a.row-remove").on("click", function() {
                     $("#qte"+newid).val(0);
                     $("#prixUnitaire"+newid).val(0);
                     calculer(newid);

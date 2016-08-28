@@ -41,24 +41,6 @@ $(document).ready(function() {
         $(target).toggleClass('hidden show');
     });
 
-    $(document).on('click', '.btn-add', function(e){
-        e.preventDefault();
-        var teams = $(this).parents('#langs:first');
-        var controlForm = $('#formID'),
-            currentEntry = $(this).parents('.entry:first'),
-            newEntry = $(currentEntry.clone()).appendTo(teams);
-        newEntry.find('input').val('');
-        controlForm.find('.entry:not(:last) .btn-add')
-            .removeClass('btn-add').addClass('btn-remove')
-            .removeClass('btn-success').addClass('btn-danger')
-            .html('<span class="glyphicon glyphicon-minus"></span>');
-    }).on('click', '.btn-remove', function(e){
-        $(this).parents('.entry:first').remove();
-
-        e.preventDefault();
-        return false;
-    });
-
     $(document.body).on('click','.editButton', function () {
         // Get the record's ID via attribute
         $id = $(this).attr('data-id');
@@ -72,6 +54,7 @@ $(document).ready(function() {
                 $("#prestation").val(data['prestation']);
                 $("#tel_fixe").val(data['tel_fixe']);
                 $("#tel_portable").val(data['tel_portable']);
+                $("#nationalite").val(data['nationalite']);
                 $("#nom").val(data['nom']);
                 $("#prenom").val(data['prenom']);
                 $("#devise").val(data['devise']);

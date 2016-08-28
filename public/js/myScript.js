@@ -33,7 +33,7 @@ $(function () {
         $(target).toggleClass('hidden show');
     });
 
-    $(document).on('click', '.btn-add', function(e){
+    $(document).on('click', '.btn-add', function (e) {
         e.preventDefault();
         var teams = $(this).parents('#langs:first');
         var controlForm = $('#formID'),
@@ -44,7 +44,7 @@ $(function () {
             .removeClass('btn-add').addClass('btn-remove')
             .removeClass('btn-success').addClass('btn-danger')
             .html('<span class="glyphicon glyphicon-minus"></span>');
-    }).on('click', '.btn-remove', function(e){
+    }).on('click', '.btn-remove', function (e) {
         $(this).parents('.entry:first').remove();
 
         e.preventDefault();

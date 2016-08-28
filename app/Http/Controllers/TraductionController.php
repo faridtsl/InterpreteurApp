@@ -31,7 +31,7 @@ class TraductionController extends Controller{
         $traduction = TraductionTools::getTraductionById($request['idT']);
         $interpreteur = InterpreteurTools::getInterpreteur($request['idI']);
         $interpreteur->traductions()->detach($traduction->id);
-        return $this->getTraductions($request['idI']);
+        return $this->getTraductions($request);
     }
 
     public function deleteTraductionByDemande(Request $request){

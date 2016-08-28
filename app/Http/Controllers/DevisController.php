@@ -33,27 +33,26 @@ class DevisController extends Controller{
     public function store(Request $request){
         $connectedUser = Auth::user();
         $demande = Demande::find($request['demande_id']);
-        $interpreteurs = InterpreteurTools::getAllInterpreteurs();
         try {
             DB::beginTransaction();
             $devis = DevisTools::addDevis($request,$connectedUser);
             $interps = $request['idInterp'];
             $sends = $request['sendMail'];
-            if($interps==null) return view('devis.devisAdd',['demande'=>$demande,'interpreteurs'=>$interpreteurs])->withErrors(['Vous devez choisir au moins un inteprete']);
+            if($interps==null) return view('devis.devisAdd',['demande'=>$demande])->withErrors(['Vous devez choisir au moins un inteprete']);
             $attachs = [];
             foreach($interps as $key => $value){
                 $interp = InterpreteurTools::getInterpreteur($value);
-                if($sends[$key]=='cv'){
+                if($sends[$key]=='cv' && $interp->cv != 'NULL'){
                     array_push($attachs,storage_path().'/cv/'.$interp->cv);
                 }
-                if($sends[$key]=='cv_anonyme'){
+                if($sends[$key]=='cv_anonyme'  && $interp->cv_anonyme != 'NULL'){
                     array_push($attachs,storage_path().'/cv_anonyme/'.$interp->cv_anonyme);
                 }
                 $interp->devis()->attach($devis);
             }
             DevisTools::sendDevisMail($devis,$attachs);
             DB::commit();
-            return view('devis.devisAdd',['demande'=>$demande,'interpreteurs'=>$interpreteurs,'message'=>'Devis ajouté avec success']);
+            return view('devis.devisAdd',['demande'=>$demande,'message'=>'Devis ajouté avec success']);
         }catch(\Exception $e){
             DB::rollback();
             $trace = new Trace();
@@ -158,22 +157,21 @@ class DevisController extends Controller{
     public function devisUpdateStore(Request $request){
         $devis = DevisTools::getDevisById($request['id']);
         $services = ServiceTools::getServices($devis->id);
-        $demande = Demande::find($request['demande_id']);
-        $interpreteurs = InterpreteurTools::getAllInterpreteurs();
+        $demande = DemandeTools::getDemande($devis->demande_id);
         $connectedUser = Auth::user();
         try {
             DB::beginTransaction();
             $interps = $request['idInterp'];
             $sends = $request['sendMail'];
             DB::table('devis_interpreteurs')->where('devi_id','=',$devis->id)->delete();
-            if($interps==null) return view('devis.devisUpdate',['demande'=>$demande,'interpreteurs'=>$interpreteurs])->withErrors(['Vous devez choisir au moins un inteprete']);
+            if($interps==null) return view('devis.devisUpdate',['demande'=>$demande,'devis'=>$devis,'interps'=>InterpreteurTools::getInterpreteurByDevis($devis->id)])->withErrors(['Vous devez choisir au moins un inteprete']);
             $attachs = [];
             foreach($interps as $key => $value){
                 $interp = InterpreteurTools::getInterpreteur($value);
-                if($sends[$key]=='cv'){
+                if($sends[$key]=='cv' && $interp->cv != 'NULL'){
                     array_push($attachs,storage_path().'/cv/'.$interp->cv);
                 }
-                if($sends[$key]=='cv_anonyme'){
+                if($sends[$key]=='cv_anonyme'  && $interp->cv_anonyme != 'NULL'){
                     array_push($attachs,storage_path().'/cv_anonyme/'.$interp->cv_anonyme);
                 }
                 $interp->devis()->attach($devis);

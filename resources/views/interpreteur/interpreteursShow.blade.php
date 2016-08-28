@@ -100,7 +100,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>nationalite</label>
-                                    <input class="form-control" value="{{ old('nationalite') }}"  name="nationalite" placeholder="nationalite">
+                                    <input class="form-control" value="{{ old('nationalite') }}"  name="nationalite" id="nationalite" placeholder="nationalite">
                                 </div>
                                 <div class="form-group">
                                     <label>Image : </label>

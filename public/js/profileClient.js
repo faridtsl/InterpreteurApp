@@ -132,6 +132,7 @@ $(document).ready(function() {
                 $("#prestation").val(data['prestation']);
                 $("#tel_fixe").val(data['tel_fixe']);
                 $("#tel_portable").val(data['tel_portable']);
+                $("#nationalite").val(data['nationalite']);
                 $("#nom").val(data['nom']);
                 $("#prenom").val(data['prenom']);
                 $("#devise").val(data['devise']);
