@@ -72,7 +72,9 @@ $(function () {
                 $.each(data,function (d) {
                     ajaxCall(data,d);
                 });
-
+                var elt = $(document).find('.btn-add');
+                alert(elt);
+                console.log(elt);
                 $(document.body).on('click', '.btn-add', function (e) {
                     e.preventDefault();
                     var teams = $(this).parents('#langs:first');
