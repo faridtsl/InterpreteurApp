@@ -7,6 +7,7 @@ use App\Http\Requests\DemandeSearchRequest;
 use App\Tools\AdresseTools;
 use App\Tools\ClientTools;
 use App\Tools\DemandeTools;
+use App\Tools\DevisTools;
 use App\Tools\EtatTools;
 use App\Tools\FactureTools;
 use App\Tools\LangueTools;
@@ -113,14 +114,9 @@ class DemandeController extends Controller{
         $clients = Demande::onlyTrashed()->join('adresses','demandes.adresse_id','=','adresses.id')->select(array('demandes.id','titre','etat_id','dateEvent','dateEndEvent','adresses.adresse','demandes.deleted_at','demandes.created_at','demandes.updated_at'));
         $ssData = Datatables::of($clients);
         $ssData = $ssData->editColumn('etat_id','{{\App\Tools\EtatTools::getEtatById($etat_id)->libelle}}');
-        $ssData = $ssData->addColumn('butts','<p>
-                                <a data-placement="top" data-toggle="tooltip" title="Restore" class="btn btn-success btn-xs restoreButton" href="/demande/restore?id={{$id}}" >
-                                    <span class="glyphicon glyphicon-refresh"></span>
-                                </a>
-                                <button data-placement="top" data-toggle="tooltip" title="View" class="btn btn-info btn-xs seeButton" data-id="{{$id}}" >
-                                    <span class="glyphicon glyphicon-search"></span>
-                                </button>
-                            </p>');
+        $ssData = $ssData->addColumn('butts','<a title="View" class="btn btn-info btn-xs seeButton" href="/demande/details?id={{$id}}" >
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </a>');
         $ssData = $ssData->addColumn('trads','
                             |
                             @foreach(\App\Tools\TraductionTools::getTraductionsByDemande($id) as $traduction)
@@ -157,5 +153,35 @@ class DemandeController extends Controller{
     public function getDemande($id){
         return response(DemandeTools::getDemande($id));
     }
+
+    public function getDemandeByYear(Request $request){
+        $resF = [];
+        $resT = [];
+        $ms = [1,2,3,4,5,6,7,8,9,10,11,12];
+        $precTot = 0;
+        foreach ($ms as $m) {
+            $q = Demande::where('etat_id','=','4')->whereYear('created_at', '=', date($request['y']));
+            $d = date($m);
+            $ds = $q->whereMonth('created_at','=',$d)->get();
+            array_push($resF,count($ds));
+        }
+    }
+
+    public function showDemandeDetails(Request $request){
+        $demande = DemandeTools::getDemande($request['id']);
+        if($demande == null) return redirect('/demande/archive');
+        $traduction = TraductionTools::getTraductionById($demande->traduction_id);
+        $langues = LangueTools::getAllLangues();
+        $client = ClientTools::getClient($demande->client_id);
+        $factures = FactureTools::getFactureByDemande($demande);
+        $devs = DevisTools::getArchiveDevisByDemander($request['id']);
+        $archFact = [];
+        foreach ($devs as $dev) {
+            $fact = FactureTools::getFactureByDevis($dev->id);
+            if ($fact != null && $fact->trashed()) array_push($archFact, $fact);
+        }
+        return view('demande.demandeDetails',['archiveFactures'=>$archFact,'client'=>$client,'langues'=>$langues,'traduction'=>$traduction,'demande'=>$demande,'factures'=>$factures]);
+    }
+
 
 }

@@ -14,7 +14,6 @@ $(document).ready(function() {
             {data: 'created_at', name: 'devis.created_at'},
             {data: 'updated_at', name: 'devis.updated_at'},
             {data: 'deleted_at', name: 'devis.deleted_at'},
-            {data: 'restore', name: 'restore' ,orderable: false, searchable: false},
             {data: 'butts', name: 'butts' ,orderable: false, searchable: false}
         ]
     });

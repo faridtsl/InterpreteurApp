@@ -100,7 +100,6 @@ class DevisController extends Controller{
         $ssData = $ssData->editColumn('etat_id','{{\App\Tools\DevisEtatTools::getEtatById($etat_id)->libelle}}');
         $ssData = $ssData->addColumn('butts','<a href="/devis/view?id={{$id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
                         /<a href="/devis/download?id={{$id}}" class="downloadButton"> <span class="glyphicon glyphicon-download-alt"></span> </a>');
-        $ssData = $ssData->addColumn('restore','<a href="/devis/restore?id={{$id}}"> <span class="glyphicon glyphicon-refresh"></span> </a>');
         $ssData = $ssData->addColumn('total','{{\App\Tools\DevisTools::getTotal($id)}}');
         return $ssData->make(true);
     }

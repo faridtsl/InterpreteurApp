@@ -67,7 +67,7 @@ class DevisTools{
 
 
     public static function getArchiveDevisByDemander($demande_id){
-        $devis = Devi::withTrashed()->where('demande_id',$demande_id)->get();
+        $devis = Devi::onlyTrashed()->where('demande_id',$demande_id)->get();
         return $devis;
     }
 
@@ -83,14 +83,14 @@ class DevisTools{
 
     public static function getDevisByInterp($interpreteur_id){
         $res = Devi::join('devis_interpreteurs', 'devis.id', '=', 'devis_interpreteurs.devi_id')
-            ->where('devis_interpreteurs.interpreteur_id',$interpreteur_id)->get();
+            ->where('devis_interpreteurs.interpreteur_id','=',$interpreteur_id)->get();
         return $res;
     }
 
     public static function getArchiveByInterp($interpreteur_id){
         $res = Devi::onlyTrashed()->join('devis_interpreteurs', 'devis.id', '=', 'devis_interpreteurs.devi_id')
-            ->where('devis_interpreteurs.interpreteur_id',$interpreteur_id)->get();
-        return $res;
+            ->where('devis_interpreteurs.interpreteur_id','=',$interpreteur_id);
+        return $res->get();
     }
 
     public static function getTotal($id){

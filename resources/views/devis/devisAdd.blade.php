@@ -420,8 +420,8 @@
                     row = $.map(row.data(), function(value, index) {
                         return [value];
                     });
-                    var npr = row[14].split(' ');
-                    markersNewPage(row[0],cnt,npr[0],npr[1],row[3],row[9],row[7],row[8],row[6],parseFloat(row[12]),parseFloat(row[13]));
+                    var npr = row[15].split(' ');
+                    markersNewPage(row[0],cnt,npr[0],npr[1],row[3],row[9],row[7],row[8],row[6],parseFloat(row[13]),parseFloat(row[14]));
                     cnt++;
                 } );
                console.log(cnt);
@@ -472,7 +472,8 @@
 </div>'
             });
 
-
+            console.log(lt+' '+lng);
+            markers[idx].setVisible(true);
 
             markers[idx].addListener('click', function() {
                 infowindows[idx].open(map, markers[idx]);

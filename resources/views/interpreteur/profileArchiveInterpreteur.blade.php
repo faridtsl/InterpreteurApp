@@ -83,7 +83,7 @@
                 </h4>
             </div>
             <div id="factPanel"  class="panel-body panel-collapse">
-                <table id="example" class="table table-striped table-bordered display responsive nowrap" cellspacing="0">
+                <table id="tableFactures" class="table table-striped table-bordered display responsive nowrap" cellspacing="0">
                     <thead>
                     <tr>
                         <th class="never">id</th>
@@ -171,7 +171,7 @@
                             <td><a href="/demande/update?id={{\App\Tools\DemandeTools::getDemande($devi->demande_id)->id}}">{{\App\Tools\DemandeTools::getDemande($devi->demande_id)->titre}}</a></td>
                             <td>{{$devi->created_at->format('l j F Y H:i')}}</td>
                             <td>{{$devi->updated_at->format('l j F Y H:i')}}</td>
-                            <td>{{$devi->deleted_at->format('l j F Y H:i')}}</td>
+                            <td>{{$devi->deleted_at}}</td>
                             <td>
                                 <a href="/devis/view?id={{$devi->id}}" class="viewButton"> <span class="glyphicon glyphicon-eye-open"></span> </a>
                                 /<a href="/devis/download?id={{$devi->id}}" class="downloadButton"> <span class="glyphicon glyphicon-download-alt"></span> </a>

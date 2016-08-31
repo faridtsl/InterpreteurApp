@@ -30,7 +30,6 @@
                 <th>Date creation du devis</th>
                 <th>Date modification du devis</th>
                 <th>Date suppression du devis</th>
-                <th>Restorer</th>
                 <th>Show</th>
             </tr>
             </thead>
@@ -41,7 +40,6 @@
                 <th>Date creation du devis</th>
                 <th>Date modification du devis</th>
                 <th>Date suppression du devis</th>
-                <th></th>
                 <th></th>
             </tr>
             </tfoot>

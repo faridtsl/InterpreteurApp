@@ -11,6 +11,7 @@ use App\Tools\InterpreteurTools;
 use App\Tools\LangueTools;
 use App\Tools\TraductionTools;
 use App\Trace;
+use App\Traduction;
 use Illuminate\Http\Request;
 
 use App\Http\Requests\InterpreteurRequest;
@@ -80,10 +81,16 @@ class InterpreteurController extends Controller{
     }
 
     public function queryInterpreteurs(Request $request){
-        $intepreteurs = Interpreteur::join('adresses','interpreteurs.adresse_id','=','adresses.id')->select(array('interpreteurs.id','nom','prenom','email','prestation','devise','adresse','tel_fixe','tel_portable','image','interpreteurs.created_at','interpreteurs.updated_at'));
-        $ssData = Datatables::of($intepreteurs);//->addColumn('adresse','{{ \App\Tools\AdresseTools::getAdresse($id)->adresse }}');
+        $intepreteurs = Interpreteur::join('interpreteurs_traductions','interpreteurs.id', '=' , 'interpreteurs_traductions.interpreteur_id')
+            ->join('traductions','traductions.id', '=' , 'interpreteurs_traductions.traduction_id')
+            ->join('langues AS l1',function($join){
+                $join->on('l1.id', '=' , 'traductions.cible');
+            })->join('langues AS l2',function($join){
+                $join->on('l2.id', '=' , 'traductions.source');
+            })->join('adresses','interpreteurs.adresse_id','=','adresses.id')->select(array('interpreteurs.id','nom','prenom','email','prestation','devise','adresse','tel_fixe','tel_portable','image','interpreteurs.created_at','interpreteurs.updated_at','l1.content','l2.content'));
+        $ssData = Datatables::of($intepreteurs);
         $ssData = $ssData->editColumn('nom','<img class="img-circle" src="/images/{{$image}}" style="width: 50px;height:50px;"/> {{$nom}} {{$prenom}}');
-        $ssData = $ssData->addColumn('traductions','
+        $ssData = $ssData->editColumn('traductions','
                                 |
                                 @foreach(\App\Tools\TraductionTools::getTraductionsByInterpreteur($id) as $traduction)
                                     {{\App\Tools\LangueTools::getLangue($traduction->source)->content}} <span class="glyphicon glyphicon-arrow-right"></span> {{\App\Tools\LangueTools::getLangue($traduction->cible)->content}}
@@ -100,12 +107,20 @@ class InterpreteurController extends Controller{
                                         <span class="glyphicon glyphicon-user"></span>
                                     </a>
                                 </p>');
-        return $ssData->make(true);
+        return $ssData->filterColumn('interpreteurs.nom', function($query, $keyword) {
+            $query->whereRaw("CONCAT(interpreteurs.nom,' ',interpreteurs.prenom) like ?", ["%{$keyword}%"]);
+        })->make(true);
     }
 
     public function query1Interpreteurs(Request $request){
-        $intepreteurs = Interpreteur::join('adresses','interpreteurs.adresse_id','=','adresses.id')->select(array('interpreteurs.id','nom','prenom','email','prestation','devise','adresse','tel_fixe','tel_portable','image','interpreteurs.created_at','interpreteurs.updated_at','adresses.lat','adresses.long'));
-        $ssData = Datatables::of($intepreteurs);//->addColumn('adresse','{{ \App\Tools\AdresseTools::getAdresse($id)->adresse }}');
+        $intepreteurs = Interpreteur::join('interpreteurs_traductions','interpreteurs.id', '=' , 'interpreteurs_traductions.interpreteur_id')
+            ->join('traductions','traductions.id', '=' , 'interpreteurs_traductions.traduction_id')
+            ->join('langues AS l1',function($join){
+                $join->on('l1.id', '=' , 'traductions.cible');
+            })->join('langues AS l2',function($join){
+                $join->on('l2.id', '=' , 'traductions.source');
+            })->join('adresses','interpreteurs.adresse_id','=','adresses.id')->select(array('interpreteurs.id','nom','prenom','email','prestation','devise','adresse','tel_fixe','tel_portable','image','interpreteurs.created_at','interpreteurs.updated_at','l1.content','l2.content','adresses.lat','adresses.long'));
+        $ssData = Datatables::of($intepreteurs);
         $ssData = $ssData->editColumn('nom','<img class="img-circle" src="/images/{{$image}}" style="width: 50px;height:50px;"/> {{$nom}} {{$prenom}}');
         $ssData = $ssData->addColumn('nomprenom','{{$nom}} {{$prenom}}');
         $ssData = $ssData->addColumn('traductions','
@@ -115,11 +130,19 @@ class InterpreteurController extends Controller{
                                         @endforeach
                                     </select>');
         $ssData = $ssData->addColumn('butts','<button class="btn btn-info selectInterpTab1" data-id="{{$id}}">Select</button>');
-        return $ssData->make(true);
+        return $ssData->filterColumn('interpreteurs.nom', function($query, $keyword) {
+            $query->whereRaw("CONCAT(interpreteurs.nom,' ',interpreteurs.prenom) like ?", ["%{$keyword}%"]);
+        })->make(true);
     }
     public function query2Interpreteurs(Request $request){
-        $intepreteurs = Interpreteur::join('adresses','interpreteurs.adresse_id','=','adresses.id')->select(array('interpreteurs.id','nom','prenom','email','prestation','devise','adresse','tel_fixe','tel_portable','image','interpreteurs.created_at','interpreteurs.updated_at'));
-        $ssData = Datatables::of($intepreteurs);//->addColumn('adresse','{{ \App\Tools\AdresseTools::getAdresse($id)->adresse }}');
+        $intepreteurs = Interpreteur::join('interpreteurs_traductions','interpreteurs.id', '=' , 'interpreteurs_traductions.interpreteur_id')
+            ->join('traductions','traductions.id', '=' , 'interpreteurs_traductions.traduction_id')
+            ->join('langues AS l1',function($join){
+                $join->on('l1.id', '=' , 'traductions.cible');
+            })->join('langues AS l2',function($join){
+                $join->on('l2.id', '=' , 'traductions.source');
+            })->join('adresses','interpreteurs.adresse_id','=','adresses.id')->select(array('interpreteurs.id','nom','prenom','email','prestation','devise','adresse','tel_fixe','tel_portable','image','interpreteurs.created_at','interpreteurs.updated_at','l1.content','l2.content','adresses.lat','adresses.long'));
+        $ssData = Datatables::of($intepreteurs);
         $ssData = $ssData->editColumn('nom','<img class="img-circle" src="/images/{{$image}}" style="width: 50px;height:50px;"/> {{$nom}} {{$prenom}}');
         $ssData = $ssData->addColumn('nomprenom','{{$nom}} {{$prenom}}');
         $ssData = $ssData->addColumn('traductions','
@@ -129,13 +152,21 @@ class InterpreteurController extends Controller{
                                         @endforeach
                                     </select>');
         $ssData = $ssData->addColumn('butts','<button class="btn btn-info selectInterp" data-id="{{$id}}">Select</button>');
-        return $ssData->make(true);
+        return $ssData->filterColumn('interpreteurs.nom', function($query, $keyword) {
+            $query->whereRaw("CONCAT(interpreteurs.nom,' ',interpreteurs.prenom) like ?", ["%{$keyword}%"]);
+        })->make(true);
     }
 
 
     public function queryArchiveInterpreteurs(Request $request){
-        $intepreteurs = Interpreteur::onlyTrashed()->join('adresses','interpreteurs.adresse_id','=','adresses.id')->select(array('interpreteurs.id','nom','prenom','email','prestation','devise','adresse','tel_fixe','tel_portable','image','interpreteurs.created_at','interpreteurs.updated_at'));
-        $ssData = Datatables::of($intepreteurs);//->addColumn('adresse','{{ \App\Tools\AdresseTools::getAdresse($id)->adresse }}');
+        $intepreteurs = Interpreteur::onlyTrashed()->join('interpreteurs_traductions','interpreteurs.id', '=' , 'interpreteurs_traductions.interpreteur_id')
+            ->join('traductions','traductions.id', '=' , 'interpreteurs_traductions.traduction_id')
+            ->join('langues AS l1',function($join){
+                $join->on('l1.id', '=' , 'traductions.cible');
+            })->join('langues AS l2',function($join){
+                $join->on('l2.id', '=' , 'traductions.source');
+            })->join('adresses','interpreteurs.adresse_id','=','adresses.id')->select(array('interpreteurs.id','nom','prenom','email','prestation','devise','adresse','tel_fixe','tel_portable','image','interpreteurs.created_at','interpreteurs.updated_at','l1.content','l2.content'));
+        $ssData = Datatables::of($intepreteurs);
         $ssData = $ssData->editColumn('nom','<img class="img-circle" src="/images/{{$image}}" style="width: 50px;height:50px;"/> {{$nom}} {{$prenom}}');
         $ssData = $ssData->addColumn('traductions','
                                 |
@@ -151,7 +182,9 @@ class InterpreteurController extends Controller{
                                 <span class="glyphicon glyphicon-user"></span>
                             </a>
                         </p>');
-        return $ssData->make(true);
+        return $ssData->filterColumn('interpreteurs.nom', function($query, $keyword) {
+            $query->whereRaw("CONCAT(interpreteurs.nom,' ',interpreteurs.prenom) like ?", ["%{$keyword}%"]);
+        })->make(true);
     }
 
     public function archiveInterpreteurs(){

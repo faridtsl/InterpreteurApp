@@ -12,8 +12,8 @@ $(document).ready(function() {
             {data: 'adresse', name: 'adresses.adresse'},
             {data: 'created_at', name: 'interpreteurs.created_at'},
             {data: 'updated_at', name: 'interpreteurs.updated_at'},
-            {data: 'traductions', name: 'traductions',orderable: false, searchable: false},
-            {data: 'butts', name: 'butts' ,orderable: false, searchable: false}
+            {data: 'traductions', name: 'l1.content'},
+            {data: 'butts', name: 'l2.content' ,orderable: false}
         ]
     });
 

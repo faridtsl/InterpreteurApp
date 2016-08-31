@@ -22,13 +22,13 @@ $(document).ready(function() {
             {data: 'nom', name: 'interpreteurs.nom'},
             {data: 'email', name: 'interpreteurs.email'},
             {data: 'prestation', name: 'interpreteurs.prestation'},
-            {data: 'traductions', name: 'traductions',orderable: false, searchable: false},
+            {data: 'traductions', name: 'l1.content'},
             {data: 'adresse', name: 'adresses.adresse'},
             {data: 'image', name: 'interpreteurs.image', visible:false, searchable:false},
             {data: 'tel_portable', name: 'interpreteurs.tel_portable', visible:false, searchable:false},
             {data: 'adresse', name: 'adresses.adresse', visible:false, searchable:false},
             {data: 'nomprenom', name: 'prenom', visible:false, searchable:false},
-            {data: 'butts', name: 'butts' ,orderable: false, searchable: false}
+            {data: 'butts', name: 'l2.content'}
         ]
     });
 
@@ -44,11 +44,11 @@ $(document).ready(function() {
             {data: 'nom', name: 'interpreteurs.nom'},
             {data: 'email', name: 'interpreteurs.email'},
             {data: 'prestation', name: 'interpreteurs.prestation'},
-            {data: 'traductions', name: 'traductions',orderable: false, searchable: false},
+            {data: 'traductions', name: 'l1.content'},
             {data: 'image', name: 'interpreteurs.image', visible:false, searchable:false},
             {data: 'tel_portable', name: 'interpreteurs.tel_portable', visible:false, searchable:false},
             {data: 'adresse', name: 'adresses.adresse', visible:false, searchable:false},
-            {data: 'butts', name: 'butts' ,orderable: false, searchable: false},
+            {data: 'butts', name: 'l2.content'},
             {data: 'lat', name: 'adresses.lat' , visible:false ,orderable: false, searchable: false},
             {data: 'long', name: 'adresses.long' , visible:false ,orderable: false, searchable: false}
         ]

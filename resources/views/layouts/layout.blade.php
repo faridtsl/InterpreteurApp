@@ -12,30 +12,27 @@
     <title>@yield('title')</title>
 
     <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
-    <link href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('bower_components/metisMenu/dist/metisMenu.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('dist/css/sb-admin-2.css') }}" rel="stylesheet">
-    <link href="{{ asset('bower_components/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/tabletools/2.2.4/css/dataTables.tableTools.css">
-    <link href="{{ asset('bower_components/morrisjs/morris.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/myStyle.css') }}" rel="stylesheet">
+    <link href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('bower_components/metisMenu/dist/metisMenu.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('dist/css/sb-admin-2.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('bower_components/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/tabletools/2.2.4/css/dataTables.tableTools.css"/>
+    <link href="{{ asset('bower_components/morrisjs/morris.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/myStyle.css') }}" rel="stylesheet"/>
 
 
+    <link href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet" />
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 
 
-        @yield('header')
+    @yield('header')
 
-    </head>
+</head>
 
-    <body>
+<body>
 
         <div id="wrapper">
 
@@ -265,20 +262,19 @@
 
 @yield('modals')
 
-<script src="{{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}}"></script>
-<script src="{{{ asset('bower_components/datatables/media/js/jquery.dataTables.min.js') }}}"></script>
-<script src="{{{ asset('bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js') }}}"></script>
-<script src="{{{ asset('bower_components/metisMenu/dist/metisMenu.min.js') }}}"></script>
-<script src="{{{ asset('bower_components/datatables-responsive/js/dataTables.responsive.js') }}}"></script>
+<script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('bower_components/datatables/media/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js') }}"></script>
+<script src="{{ asset('bower_components/metisMenu/dist/metisMenu.min.js') }}"></script>
+<script src="{{ asset('bower_components/datatables-responsive/js/dataTables.responsive.js') }}"></script>
 <script src="https://cdn.datatables.net/buttons/1.1.2/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.1.2/js/buttons.colVis.min.js"></script>
 
     @yield('footer')
 
-<script src="{{{ asset('dist/js/sb-admin-2.js') }}}"></script>
-
-
-
+<script src="{{ asset('dist/js/sb-admin-2.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/jquery-ui.min.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/jquery.canvasjs.min.js') }}"></script>
 </body>
 
 </html>

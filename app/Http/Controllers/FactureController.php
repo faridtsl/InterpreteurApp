@@ -59,7 +59,7 @@ class FactureController extends Controller{
         return redirect()->back();
     }
 
-    public static function archiveFactures(Request $request){
+    public function archiveFactures(Request $request){
         return view('facture.factureArchive');
     }
 
@@ -77,7 +77,7 @@ class FactureController extends Controller{
     }
 
 
-    public static function viewFacture(Request $request){
+    public function viewFacture(Request $request){
         $facture = FactureTools::getFactureById($request['id']);
         $devis = DevisTools::getDevisById($facture->devi_id);
         $demande = DemandeTools::getDemande($devis->demande_id);
@@ -98,6 +98,43 @@ class FactureController extends Controller{
         $services = ServiceTools::getServices($devis->id);
         if($devis->trashed()) $services = ServiceTools::getServicesArchive($devis->id);
         return MailTools::downloadAttach('facturation',['facture'=>$facture,'services' => $services, 'client' => $client, 'demande' => $demande, 'adresse' => $adresse, 'devis' => $devis],"Facture_Ref_".$facture->id);
+    }
+
+    public function getFacturesByYear(Request $request){
+        $res = [];
+        $ms = [1,2,3,4,5,6,7,8,9,10,11,12];
+        foreach ($ms as $m) {
+            if($request['pred']=='1') $q = Facture::whereYear('created_at', '=', date($request['y']));
+            else $q = Facture::where('fini','=','1')->whereYear('created_at', '=', date($request['y']));
+            $d = date($m);
+            $fs = $q->whereMonth('created_at','=',$d)->get();
+            $tot = 0;
+            foreach ($fs as $f) {
+                $tot += DevisTools::getTotal($f->devi_id);
+            }
+            array_push($res,$tot);
+        }
+        return response($res);
+    }
+
+
+    public function getCumuleFacturesByYear(Request $request){
+        $res = [];
+        $ms = [1,2,3,4,5,6,7,8,9,10,11,12];
+        $precTot = 0;
+        foreach ($ms as $m) {
+            if($request['pred']=='1') $q = Facture::whereYear('created_at', '=', date($request['y']));
+            else $q = Facture::where('fini','=','1')->whereYear('created_at', '=', date($request['y']));
+            $d = date($m);
+            $fs = $q->whereMonth('created_at','=',$d)->get();
+            $tot = $precTot;
+            foreach ($fs as $f) {
+                $tot += DevisTools::getTotal($f->devi_id);
+            }
+            array_push($res,$tot);
+            $precTot = $tot;
+        }
+        return response($res);
     }
 
 }

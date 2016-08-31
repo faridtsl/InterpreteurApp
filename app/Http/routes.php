@@ -201,6 +201,14 @@ Route::get(
     '/demande/get/{id}',
     ['middleware'=>'auth','uses'=>'DemandeController@getDemande']
 );
+Route::get(
+    '/demande/year',
+    ['middleware'=>'auth','uses'=>'DemandeController@getDemandeByYear']
+);
+Route::get(
+    '/demande/details',
+    ['middleware'=>'auth','uses'=>'DemandeController@showDemandeDetails']
+);
 
 
 //Langues Routes
@@ -240,7 +248,6 @@ Route::post(
 );
 
 //Adresse Routes
-
 Route::get(
     'adresse/{id}',
     ['middleware'=>'auth','uses'=>'AdresseController@get']
@@ -364,6 +371,14 @@ Route::get(
 Route::get(
     'facture/download',
     ['middleware'=>'auth','uses'=>'FactureController@downloadFacture']
+);
+Route::get(
+    'facture/year',
+    ['middleware'=>'auth','uses'=>'FactureController@getFacturesByYear']
+);
+Route::get(
+    'facture/year/cumul',
+    ['middleware'=>'auth','uses'=>'FactureController@getCumuleFacturesByYear']
 );
 
 

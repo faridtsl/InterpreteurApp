@@ -67,7 +67,7 @@
             </h4>
         </div>
         <div id="factPanel"  class="panel-body panel-collapse">
-            <table id="example" class="table table-striped table-bordered display responsive nowrap" cellspacing="0">
+            <table id="tableFactures" class="table table-striped table-bordered display responsive nowrap" cellspacing="0">
                 <thead>
                 <tr>
                     <th class="never">id</th>
