@@ -80,7 +80,13 @@ class DemandeController extends Controller{
         $langues = LangueTools::getAllLangues();
         $client = ClientTools::getClient($demande->client_id);
         $factures = FactureTools::getFactureByDemande($demande);
-        return view('demande.demandeUpdate',['client'=>$client,'langues'=>$langues,'traduction'=>$traduction,'demande'=>$demande,'factures'=>$factures]);
+        $devs = DevisTools::getArchiveDevisByDemander($request['id']);
+        $archFact = [];
+        foreach ($devs as $dev) {
+            $fact = FactureTools::getFactureByDevis($dev->id);
+            if ($fact != null && $fact->trashed()) array_push($archFact, $fact);
+        }
+        return view('demande.demandeUpdate',['archiveFactures'=>$archFact,'client'=>$client,'langues'=>$langues,'traduction'=>$traduction,'demande'=>$demande,'factures'=>$factures]);
     }
 
     public function storeUpdate(Request $request){

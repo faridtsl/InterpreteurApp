@@ -290,10 +290,13 @@ $(document).ready(function () {
             .html('<span class="glyphicon glyphicon-minus"></span>');
     }).on('click', '.btn-remove', function (e) {
         $(this).parents('.entry:first').remove();
-
         e.preventDefault();
         return false;
     });
 
+
+    $("#archFactPanel").addClass('collapse');
+    $('#archiveDevisTable').DataTable();
+    $('#archiveFact').DataTable();
 
 });

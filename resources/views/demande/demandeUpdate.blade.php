@@ -295,6 +295,117 @@
                         </table>
                     </div>
                 </div>
+
+                <div class="panel panel-info">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#archDevisPanel">Liste des archives devis</a>
+            </h4>
+        </div>
+        <div id="archDevisPanel" class="panel-body panel-collapse collapse">
+            <table class="table table-striped table-bordered table-hover responsive" width="90%" id="archiveDevisTable"
+                   cellspacing="0">
+                <thead>
+                <tr>
+                    <th width="20px">Etat</th>
+                    <th width="20px">Prix proposé</th>
+                    <th width="40px">Show</th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <th>Etat</th>
+                    <th>Prix proposé</th>
+                    <th></th>
+                </tr>
+                </tfoot>
+                <tbody>
+                @foreach(\App\Tools\DevisTools::getArchiveDevisByDemander($demande->id) as $devi)
+                    <tr>
+                        <td>{{\App\Tools\DevisEtatTools::getEtatById($devi->etat_id)->libelle}}</td>
+                        <td>{{\App\Tools\DevisTools::getTotal($devi->id)}} &euro;</td>
+                        <td>
+                            <a href="/devis/view?id={{$devi->id}}" class="viewButton"> <span
+                                        class="glyphicon glyphicon-eye-open"></span> </a>
+                            /<a href="/devis/download?id={{$devi->id}}" class="downloadButton"> <span
+                                        class="glyphicon glyphicon-download-alt"></span> </a>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+                <div class="panel panel-info">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#archFactPanel">Archive Factures</a>
+            </h4>
+        </div>
+        <div id="archFactPanel" class="panel-body panel-collapse">
+            <table id="archiveFact" class="table table-striped table-bordered display responsive nowrap"
+                   cellspacing="0">
+                <thead>
+                <tr>
+                    <th class="never">id</th>
+                    <th>Nom du client</th>
+                    <th>Date d'envoi</th>
+                    <th>Date de paiement</th>
+                    <th>Total</th>
+                    <th>Show Devis</th>
+                    <th>Show</th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <th class="never">id</th>
+                    <th>Nom du client</th>
+                    <th>Date d'envoi</th>
+                    <th>Date de paiement</th>
+                    <th>Total</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </tfoot>
+                <tbody>
+                @foreach($archiveFactures as $facture)
+                    <tr>
+                        <td>{{$facture->id}}</td>
+                        <td>{{\App\Tools\ClientTools::getClientByFacture($facture)->nom}} {{\App\Tools\ClientTools::getClientByFacture($facture)->prenom}}</td>
+                        <td>{{$facture->date_envoi_mail}}</td>
+                        <td>@if($facture->fini){{$facture->date_paiement}}@else Non Payée @endif</td>
+                        <td>{{\App\Tools\DevisTools::getDevisById($facture->devi_id)->total}} &euro;</td>
+                        <td>
+                            <a href="/devis/view?id={{$facture->devi_id}}" class="viewButton"> <span
+                                        class="glyphicon glyphicon-eye-open"></span> </a>
+                            /<a href="/facture/download?id={{$facture->devi_id}}" class="downloadButton">
+                                <span class="glyphicon glyphicon-download-alt"></span> </a>
+                        </td>
+                        <td>
+                            <a href="/facture/view?id={{$facture->id}}" class="viewButton"> <span
+                                        class="glyphicon glyphicon-eye-open"></span> </a>
+                            /<a href="/facture/download?id={{$facture->id}}" class="downloadButton"> <span
+                                        class="glyphicon glyphicon-download-alt"></span> </a>
+                        </td>
+                    </tr>
+
+
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $("#validate{{$facture->id}}").popConfirm({
+                                title: "Message de confirmation ?",
+                                content: "Voulez-vous déclarer le paiement de la facture en cours ?",
+                                placement: "bottom"
+                            });
+                        });
+                    </script>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+
             </div>
         </div>
     </div>

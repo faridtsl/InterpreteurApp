@@ -2,7 +2,7 @@
 
 
 @section('title')
-    Modifier la demande
+    Details de la demande
 @endsection
 
 @section('header')
@@ -66,26 +66,46 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="col-lg-6 lab">
-                                            <label>Date de debut : </label>
-                                        </div>
-                                        <div class="col-lg-6 par">
-                                            <span class="displayClass">{{\Carbon\Carbon::parse($demande->dateEvent)->format('l j F Y H:i')}}</span>
-                                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="col-lg-6 lab">
+                                        <label>Date de debut : </label>
                                     </div>
-                                    <div class="col-lg-6">
-                                        <div class="col-lg-6 lab">
-                                            <label>Date de fin : </label>
-                                        </div>
-                                        <div class="col-lg-6 par">
-                                            <span class="displayClass">{{\Carbon\Carbon::parse($demande->dateEndEvent)->format('l j F Y H:i')}}</span>
-                                        </div>
+                                    <div class="col-lg-6 par">
+                                        <span class="displayClass">{{\Carbon\Carbon::parse($demande->dateEvent)->format('l j F Y H:i')}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="col-lg-6 lab">
+                                        <label>Date de fin : </label>
+                                    </div>
+                                    <div class="col-lg-6 par">
+                                        <span class="displayClass">{{\Carbon\Carbon::parse($demande->dateEndEvent)->format('l j F Y H:i')}}</span>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="col-lg-6 lab">
+                                        <label>Date de creation : </label>
+                                    </div>
+                                    <div class="col-lg-6 par">
+                                        <span class="displayClass">{{\Carbon\Carbon::parse($demande->created_at)->format('l j F Y H:i')}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="col-lg-6 lab">
+                                        <label>Date d'archivage : </label>
+                                    </div>
+                                    <div class="col-lg-6 par">
+                                        <span class="displayClass">{{\Carbon\Carbon::parse($demande->deleted_at)->format('l j F Y H:i')}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                             <div class="form-group">
                                 <label>Contenu de la demande : </label>
                                 <textarea class="form-control ckeditor" id="content" rows="10"
@@ -137,59 +157,6 @@
                     </div>
                 </div>
 
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#devisPanel">Liste des devis</a>
-                        </h4>
-                    </div>
-                    <div id="devisPanel" class="panel-body panel-collapse collapse">
-                        <table class="table table-striped table-bordered table-hover responsive" width="90%" id="example"
-                               cellspacing="0">
-                            <thead>
-                            <tr>
-                                <th width="20px">Etat</th>
-                                <th width="20px">Prix proposé</th>
-                                <th width="40px">Resend/Edit/Delete @if($demande->etat_id == 2)
-                                        /Reserver @elseif($demande->etat_id == 3)/Facturer @endif</th>
-                                <th width="40px">Show</th>
-                            </tr>
-                            </thead>
-                            <tfoot>
-                            <tr>
-                                <th>Etat</th>
-                                <th>Prix proposé</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                            </tfoot>
-                            <tbody>
-                            @foreach(\App\Tools\DevisTools::getDevis($demande->id) as $devi)
-                                <tr>
-                                    <td>{{\App\Tools\DevisEtatTools::getEtatById($devi->etat_id)->libelle}}</td>
-                                    <td>{{\App\Tools\DevisTools::getTotal($devi->id)}} &euro;</td>
-                                    <td><a href="home" data-id="{{$devi->id}}" class="resendButton"> <span
-                                                    class="glyphicon glyphicon-refresh"></span> </a> / <a
-                                                href="/devis/update/{{$devi->id}}" class="editor_edit"><span
-                                                    class="glyphicon glyphicon-pencil"></span></a> / <a
-                                                id="delete{{$devi->id}}" href="/devis/delete?id={{$devi->id}}"
-                                                class="editor_remove"><span
-                                                    class="glyphicon glyphicon-trash"></span></a> @if($demande->etat_id == 2 || $demande->etat_id == 3)
-                                            /<a id="validate{{$devi->id}}" href="/devis/validate?id={{$devi->id}}"
-                                                class="editor_edit"><span class="glyphicon glyphicon-ok"></span></a>@endif
-                                    </td>
-                                    <td>
-                                        <a href="/devis/view?id={{$devi->id}}" class="viewButton"> <span
-                                                    class="glyphicon glyphicon-eye-open"></span> </a>
-                                        /<a href="/devis/download?id={{$devi->id}}" class="downloadButton"> <span
-                                                    class="glyphicon glyphicon-download-alt"></span> </a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
 
                 <div class="panel panel-info">
                     <div class="panel-heading">
@@ -235,87 +202,6 @@
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#factPanel">Factures</a>
-                        </h4>
-                    </div>
-                    <div id="factPanel" class="panel-body panel-collapse">
-                        <table id="exampleFact" class="table table-striped table-bordered display responsive nowrap"
-                               cellspacing="0">
-                            <thead>
-                            <tr>
-                                <th class="never">id</th>
-                                <th>Nom du client</th>
-                                <th>Date d'envoi</th>
-                                <th>Date de paiement</th>
-                                <th>Total</th>
-                                <th>Resend</th>
-                                <th>Show Devis</th>
-                                <th>Show</th>
-                                <th>Payer</th>
-                            </tr>
-                            </thead>
-                            <tfoot>
-                            <tr>
-                                <th class="never">id</th>
-                                <th>Nom du client</th>
-                                <th>Date d'envoi</th>
-                                <th>Date de paiement</th>
-                                <th>Total</th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                            </tfoot>
-                            <tbody>
-                            @foreach($factures as $facture)
-                                <tr>
-                                    <td>{{$facture->id}}</td>
-                                    <td>{{\App\Tools\ClientTools::getClientByFacture($facture)->nom}} {{\App\Tools\ClientTools::getClientByFacture($facture)->prenom}}</td>
-                                    <td>{{$facture->date_envoi_mail}}</td>
-                                    <td>@if($facture->fini){{$facture->date_paiement}}@else Non Payée @endif</td>
-                                    <td>{{\App\Tools\DevisTools::getDevisById($facture->devi_id)->total}} &euro;</td>
-                                    <td>
-                                        <a href="home" id="resend{{$facture->id}}" data-id="{{$facture->id}}"
-                                           class="resendButton"> <span class="glyphicon glyphicon-refresh"></span> </a>
-                                    </td>
-                                    <td>
-                                        <a href="/devis/view?id={{$facture->devi_id}}" class="viewButton"> <span
-                                                    class="glyphicon glyphicon-eye-open"></span> </a>
-                                        /<a href="/facture/download?id={{$facture->devi_id}}" class="downloadButton">
-                                            <span class="glyphicon glyphicon-download-alt"></span> </a>
-                                    </td>
-                                    <td>
-                                        <a href="/facture/view?id={{$facture->id}}" class="viewButton"> <span
-                                                    class="glyphicon glyphicon-eye-open"></span> </a>
-                                        /<a href="/facture/download?id={{$facture->id}}" class="downloadButton"> <span
-                                                    class="glyphicon glyphicon-download-alt"></span> </a>
-                                    </td>
-                                    <td>@if(!$facture->fini)<a id="validate{{$facture->id}}"
-                                                               href="/facture/validate?id={{$facture->id}}"
-                                                               class="validateButton"><span
-                                                    class="glyphicon glyphicon-ok"></span></a>@endif</td>
-                                </tr>
-
-
-                                <script type="text/javascript">
-                                    $(document).ready(function () {
-                                        $("#validate{{$facture->id}}").popConfirm({
-                                            title: "Message de confirmation ?",
-                                            content: "Voulez-vous déclarer le paiement de la facture en cours ?",
-                                            placement: "bottom"
-                                        });
-                                    });
-                                </script>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#archFactPanel">Archive Factures</a>
                         </h4>
                     </div>
@@ -329,6 +215,7 @@
                                 <th>Date d'envoi</th>
                                 <th>Date de paiement</th>
                                 <th>Total</th>
+                                <th>Date d'archivage</th>
                                 <th>Show Devis</th>
                                 <th>Show</th>
                             </tr>
@@ -340,6 +227,7 @@
                                 <th>Date d'envoi</th>
                                 <th>Date de paiement</th>
                                 <th>Total</th>
+                                <th>Date d'archivage</th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -352,6 +240,7 @@
                                     <td>{{$facture->date_envoi_mail}}</td>
                                     <td>@if($facture->fini){{$facture->date_paiement}}@else Non Payée @endif</td>
                                     <td>{{\App\Tools\DevisTools::getDevisById($facture->devi_id)->total}} &euro;</td>
+                                    <td>{{$facture->deleted_at}}</td>
                                     <td>
                                         <a href="/devis/view?id={{$facture->devi_id}}" class="viewButton"> <span
                                                     class="glyphicon glyphicon-eye-open"></span> </a>

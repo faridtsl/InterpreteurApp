@@ -167,9 +167,6 @@
                                             <a data-placement="top" data-toggle="tooltip" title="Edit" class="btn btn-warning btn-xs editButton" href="/demande/update?id={{$demande->id}}" >
                                                 <span class="glyphicon glyphicon-pencil"></span>
                                             </a>
-                                            <a title="View" class="btn btn-success btn-xs" href="/demande/details?id={{$demande->id}}" >
-                                                <span class="glyphicon glyphicon-search"></span>
-                                            </a>
                                             <a data-placement="top" data-toggle="tooltip" title="Duplicate" class="btn btn-info btn-xs dupButton" href="/demande/duplicate?id={{$demande->id}}" >
                                                 <span class="glyphicon glyphicon-copy"></span>
                                             </a>
@@ -253,9 +250,6 @@
                                                 <a data-placement="top" data-toggle="tooltip" title="Edit" class="btn btn-warning btn-xs editButton" href="/demande/update?id={{$demande->id}}" >
                                                     <span class="glyphicon glyphicon-pencil"></span>
                                                 </a>
-                                                <button data-placement="top" data-toggle="tooltip" title="View" class="btn btn-success btn-xs seeButton" data-id="{{$demande->id}}" >
-                                                    <span class="glyphicon glyphicon-search"></span>
-                                                </button>
                                                 <a data-placement="top" data-toggle="tooltip" title="Duplicate" class="btn btn-info btn-xs dupButton" href="/demande/duplicate?id={{$demande->id}}" >
                                                     <span class="glyphicon glyphicon-copy"></span>
                                                 </a>
