@@ -107,9 +107,9 @@ class InterpreteurController extends Controller{
                                         <span class="glyphicon glyphicon-user"></span>
                                     </a>
                                 </p>');
-        return $ssData->filterColumn('interpreteurs.nom', function($query, $keyword) {
+        return $ssData/*->filterColumn('interpreteurs.nom', function($query, $keyword) {
             $query->whereRaw("CONCAT(interpreteurs.nom,' ',interpreteurs.prenom) like ?", ["%{$keyword}%"]);
-        })->make(true);
+        })*/->make(true);
     }
 
     public function query1Interpreteurs(Request $request){
@@ -130,9 +130,9 @@ class InterpreteurController extends Controller{
                                         @endforeach
                                     </select>');
         $ssData = $ssData->addColumn('butts','<button class="btn btn-info selectInterpTab1" data-id="{{$id}}">Select</button>');
-        return $ssData->filterColumn('interpreteurs.nom', function($query, $keyword) {
+        return $ssData/*->filterColumn('interpreteurs.nom', function($query, $keyword) {
             $query->whereRaw("CONCAT(interpreteurs.nom,' ',interpreteurs.prenom) like ?", ["%{$keyword}%"]);
-        })->make(true);
+        })*/->make(true);
     }
     public function query2Interpreteurs(Request $request){
         $intepreteurs = Interpreteur::join('interpreteurs_traductions','interpreteurs.id', '=' , 'interpreteurs_traductions.interpreteur_id')
@@ -152,9 +152,9 @@ class InterpreteurController extends Controller{
                                         @endforeach
                                     </select>');
         $ssData = $ssData->addColumn('butts','<button class="btn btn-info selectInterp" data-id="{{$id}}">Select</button>');
-        return $ssData->filterColumn('interpreteurs.nom', function($query, $keyword) {
+        return $ssData/*->filterColumn('interpreteurs.nom', function($query, $keyword) {
             $query->whereRaw("CONCAT(interpreteurs.nom,' ',interpreteurs.prenom) like ?", ["%{$keyword}%"]);
-        })->make(true);
+        })*/->make(true);
     }
 
 
@@ -182,9 +182,9 @@ class InterpreteurController extends Controller{
                                 <span class="glyphicon glyphicon-user"></span>
                             </a>
                         </p>');
-        return $ssData->filterColumn('interpreteurs.nom', function($query, $keyword) {
+        return $ssData/*->filterColumn('interpreteurs.nom', function($query, $keyword) {
             $query->whereRaw("CONCAT(interpreteurs.nom,' ',interpreteurs.prenom) like ?", ["%{$keyword}%"]);
-        })->make(true);
+        })*/->make(true);
     }
 
     public function archiveInterpreteurs(){

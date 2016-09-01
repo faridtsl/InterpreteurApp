@@ -89,7 +89,7 @@ $(document).ready(function() {
         } );
         console.log(row);
         $('#interpreteur').val(row[0]);
-        addInterpreteur(row[0],row[12],row[3],row[9],row[7],row[6]);
+        addInterpreteur(row[0],row[15],row[3],row[9],row[7],row[6]);
     });
 
 
@@ -104,7 +104,7 @@ $(document).ready(function() {
         } );
         $('#interpreteur').val(row[0]);
         console.log(row);
-        addInterpreteur(row[0],row[14] ,row[3],row[9],row[7],row[6]);
+        addInterpreteur(row[0],row[15] ,row[3],row[9],row[7],row[6]);
     });
 
     t = $('#dynamicInterp').DataTable({
