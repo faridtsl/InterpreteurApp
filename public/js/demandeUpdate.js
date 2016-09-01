@@ -6,10 +6,26 @@ $(document).ready(function () {
         tableTools: {
             "sRowSelect": "single",
             fnRowSelected: function (nodes) {
-                console.log("here");
                 var ttInstance = TableTools.fnGetInstance("clients");
                 var row = ttInstance.fnGetSelectedData();
                 $('#client').val(row[0]['id']);
+                $id = row[0]['id'];
+
+                $.ajax({
+                    url: "/client/infos?id="+$id,
+                    type:"GET",
+                    success:function(data){
+                        console.log(data);
+                        $("#emailCli").html(data['email']);
+                        $("#fixeCli").html(data['tel_fixe']);
+                        $("#portCli").html(data['tel_portable']);
+                        $("#nomCli").html(data['nom']+ ' ' + data['prenom']);
+                        $("#imgCli").html('<img class="img-circle" src="/images/'+data['image']+'"\
+                        style="width: 100px;height:100px;">');
+                    },error:function(){
+                        alert("error!!!!");
+                    }
+                });
             },
 
             fnRowDeselected: function (node) {

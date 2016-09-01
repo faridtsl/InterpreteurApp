@@ -13,6 +13,7 @@ $(document).ready(function() {
             {data: 'created_at', name: 'interpreteurs.created_at'},
             {data: 'updated_at', name: 'interpreteurs.updated_at'},
             {data: 'traductions', name: 'l1.content'},
+            {data: 'prenom', name: 'interpreteurs.prenom', visible:false},
             {data: 'butts', name: 'l2.content' ,orderable: false}
         ]
     });

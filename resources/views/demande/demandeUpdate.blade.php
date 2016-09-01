@@ -54,64 +54,59 @@
                         <form role="form" method="POST" action="/demande/update">
                             {!! csrf_field() !!}
                             <input type="hidden" value="{{$demande->id}}" id="id" name="id"/>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="col-lg-3 lab">
-                                            <label>Titre de la demande : </label>
+                            <div class="row">
+                                <div class="col-lg-3 lab">
+                                    <label>Titre de la demande : </label>
+                                </div>
+                                <div class="col-lg-3 par">
+                                    <span class="displayClass">{{$demande->titre}}</span>
+                                    <input class="form-control editClass" name="titre"
+                                           value="{{ $demande->titre }}"
+                                           placeholder="Saisir l'objet de la demande.">
+                                </div>
+                                <div class="col-lg-3">
+                                    <span class="label label-{{\App\Tools\EtatTools::getClassById($demande->etat_id)}} displayClass">{{\App\Tools\EtatTools::getEtatById($demande->etat_id)->libelle}}</span>
+                                </div>
+                                <div class="col-lg-3">
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 lab">
+                                    <label>Date de debut : </label>
+                                </div>
+                                <div class="col-lg-3 par">
+                                    <span class="displayClass">{{\Carbon\Carbon::parse($demande->dateEvent)->format('l j F Y H:i')}}</span>
+                                    <div class="input-group date editClass">
+                                        <input type="text" name="dateEvent" id="date-start" class="form-control"
+                                               value="{{ $demande->dateEvent }}" placeholder="Date de debut">
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon glyphicon-th"></span>
                                         </div>
-                                        <div class="col-lg-3 par">
-                                            <span class="displayClass">{{$demande->titre}}</span>
-                                            <input class="form-control editClass" name="titre"
-                                                   value="{{ $demande->titre }}"
-                                                   placeholder="Saisir l'objet de la demande.">
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <span class="label label-{{\App\Tools\EtatTools::getClassById($demande->etat_id)}} displayClass">{{\App\Tools\EtatTools::getEtatById($demande->etat_id)->libelle}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 lab">
+                                    <label>Date de fin : </label>
+                                </div>
+                                <div class="col-lg-3 par">
+                                    <span class="displayClass">{{\Carbon\Carbon::parse($demande->dateEndEvent)->format('l j F Y H:i')}}</span>
+                                    <div class="input-group date editClass">
+                                        <input type="text" name="dateEndEvent" id="date-end"
+                                               class="form-control" value="{{ $demande->dateEndEvent }}"
+                                               placeholder="Date de fin">
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon glyphicon-th"></span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="col-lg-6 lab">
-                                            <label>Date de debut : </label>
-                                        </div>
-                                        <div class="col-lg-6 par">
-                                            <span class="displayClass">{{\Carbon\Carbon::parse($demande->dateEvent)->format('l j F Y H:i')}}</span>
-                                            <div class="input-group date editClass">
-                                                <input type="text" name="dateEvent" id="date-start" class="form-control"
-                                                       value="{{ $demande->dateEvent }}" placeholder="Date de debut">
-                                                <div class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-th"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="col-lg-6 lab">
-                                            <label>Date de fin : </label>
-                                        </div>
-                                        <div class="col-lg-6 par">
-                                            <span class="displayClass">{{\Carbon\Carbon::parse($demande->dateEndEvent)->format('l j F Y H:i')}}</span>
-                                            <div class="input-group date editClass">
-                                                <input type="text" name="dateEndEvent" id="date-end"
-                                                       class="form-control" value="{{ $demande->dateEndEvent }}"
-                                                       placeholder="Date de fin">
-                                                <div class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-th"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
+                                <div class="col-lg-12 lab">
+                                    <label>Contenu de la demande : </label>
+                                    <textarea class="form-control ckeditor" id="content" rows="10"
+                                              name="content">{{ $demande->content }}</textarea>
+                                    <p class="help-block editClass">Saisir le contenu de la demande.</p>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Contenu de la demande : </label>
-                                <textarea class="form-control ckeditor" id="content" rows="10"
-                                          name="content">{{ $demande->content }}</textarea>
-                                <p class="help-block editClass">Saisir le contenu de la demande.</p>
                             </div>
                             <button class="btn btn-outline btn-primary" type="submit">Enregistrer les modifications
                             </button>
@@ -132,17 +127,17 @@
                     </div>
                     <div id="clientPanel" class="panel-body panel-collapse collapse">
                         <div class="row">
-                            <div class="col-lg-2">
+                            <div class="col-lg-2" id="imgCli">
                                 <img class="img-circle" src="/images/{{$client->image}}"
                                      style="width: 100px;height:100px;">
                             </div>
                             <div class="col-lg-9">
-                                <h3>
+                                <h3 id="nomCli">
                                     {{$client->nom}} {{$client->prenom}}
                                 </h3>
-                                <span class="glyphicon glyphicon-phone-alt"> {{$client->tel_portable}} </span><br/>
-                                <span class="glyphicon glyphicon-earphone"> {{$client->tel_fixe}}</span><br/>
-                                <span class="glyphicon glyphicon-globe"> {{$client->email}}</span><br/>
+                                <span class="glyphicon glyphicon-phone-alt" id="portCli"> {{$client->tel_portable}} </span><br/>
+                                <span class="glyphicon glyphicon-earphone" id="fixeCli"> {{$client->tel_fixe}}</span><br/>
+                                <span class="glyphicon glyphicon-globe" id="emailCli"> {{$client->email}}</span><br/>
                             </div>
                         </div>
                         <div class="row" style="margin-top: 20px;margin-left: 10px">

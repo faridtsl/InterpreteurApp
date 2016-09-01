@@ -38,6 +38,7 @@
                     <th>Date creation</th>
                     <th>Date modification</th>
                     <th>Traductions</th>
+                    <th>prenom</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -52,6 +53,7 @@
                     <th>Date creation</th>
                     <th>Date modification</th>
                     <th>Traductions</th>
+                    <th>prenom</th>
                     <th></th>
                 </tr>
                 </tfoot>

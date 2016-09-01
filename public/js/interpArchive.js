@@ -10,7 +10,7 @@ $(function () {
             {data: 'prestation', name: 'interpreteurs.prestation'},
             {data: 'tel_portable', name: 'interpreteurs.tel_portable'},
             {data: 'adresse', name: 'adresses.adresse'},
-            {data: 'butts', name: 'butts' ,orderable: false, searchable: false}
+            {data: 'butts', name: 'interpreteurs.prenom' ,orderable: false}
         ]});
 
     // Setup - add a text input to each footer cell
