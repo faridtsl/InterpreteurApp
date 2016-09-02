@@ -64,7 +64,7 @@ class DevisController extends Controller{
             DB::commit();
         }
         $errors = ['Une erreur s\'est survenu veuillez reverifier vos données'];
-        return view('devis.devisAdd',['demande'=>$demande,'interpreteurs'=>$interpreteurs])->withErrors($errors);
+        return view('devis.devisAdd',['demande'=>$demande,'interpreteurs'=>[]])->withErrors($errors);
     }
 
     public function showDevis(Request $request){
