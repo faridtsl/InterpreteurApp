@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="323faa9a-1b42-43af-ae09-e82e697c525e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/devis.pdf" afterPath="$PROJECT_DIR$/storage/devis.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/DevisController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/DevisController.php" />
     </list>
     <ignored path="InterpreteurApp.iws" />
@@ -47,9 +45,58 @@
       <file leaf-file-name="DevisController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DevisController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="648">
-              <caret line="66" column="76" selection-start-line="66" selection-start-column="76" selection-end-line="66" selection-end-column="76" />
+            <state relative-caret-position="515">
+              <caret line="64" column="10" selection-start-line="64" selection-start-column="10" selection-end-line="64" selection-end-column="10" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="devisAdd.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/devis/devisAdd.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1528">
+              <caret line="108" column="30" selection-start-line="108" selection-start-column="30" selection-end-line="108" selection-end-column="30" />
+              <folding>
+                <marker date="1472566396920" expanded="true" signature="19571:19595" ph="..." />
+                <marker date="1472566396920" expanded="true" signature="19750:20002" ph="..." />
+                <marker date="1472566396920" expanded="false" signature="22339:22350" ph="..." />
+                <marker date="1472566396920" expanded="true" signature="22351:23527" ph="..." />
+                <marker date="1472566396920" expanded="true" signature="22396:22541" ph="..." />
+                <marker date="1472566396920" expanded="false" signature="22482:22506" ph="..." />
+                <marker date="1472566396920" expanded="true" signature="22586:22737" ph="..." />
+                <marker date="1472566396920" expanded="true" signature="22756:22862" ph="..." />
+                <marker date="1472566396920" expanded="true" signature="22881:22985" ph="..." />
+                <marker date="1472566396920" expanded="true" signature="23004:23118" ph="..." />
+                <marker date="1472566396920" expanded="true" signature="23137:23243" ph="..." />
+                <marker date="1472566396920" expanded="true" signature="23262:23519" ph="..." />
+                <marker date="1472566396920" expanded="true" signature="25297:25303" ph="€" />
+                <marker date="1472566396920" expanded="true" signature="25507:25513" ph="€" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="interpArchive.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/interpArchive.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="12" column="55" selection-start-line="12" selection-start-column="55" selection-end-line="12" selection-end-column="55" />
+              <folding>
+                <marker date="1472754705128" expanded="true" signature="821:833" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="interpShow.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/interpShow.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="15" column="74" selection-start-line="15" selection-start-column="74" selection-end-line="15" selection-end-column="74" />
+              <folding>
+                <marker date="1472754676460" expanded="true" signature="1101:1113" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -551,12 +598,12 @@
       <workItem from="1472645892912" duration="7067000" />
       <workItem from="1472673634720" duration="2265000" />
       <workItem from="1472720856695" duration="9213000" />
-      <workItem from="1472815377954" duration="549000" />
+      <workItem from="1472815377954" duration="1938000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="691505000" />
+    <option name="totallyTimeSpent" value="692894000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="741" extended-state="6" />
@@ -727,13 +774,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/devis/devisAdd.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="424" column="26" selection-start-line="421" selection-start-column="23" selection-end-line="424" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Tools/DevisEtatTools.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -883,20 +923,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/interpArchive.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="55" selection-start-line="12" selection-start-column="55" selection-end-line="12" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/interpShow.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="14" column="54" selection-start-line="14" selection-start-column="54" selection-end-line="15" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/demandeAdd.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -956,18 +982,61 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DevisController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="66" column="76" selection-start-line="66" selection-start-column="76" selection-end-line="66" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/demande/demandeUpdate.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2322">
           <caret line="129" column="59" selection-start-line="129" selection-start-column="59" selection-end-line="129" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/interpShow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="74" selection-start-line="15" selection-start-column="74" selection-end-line="15" selection-end-column="74" />
+          <folding>
+            <marker date="1472754676460" expanded="true" signature="1101:1113" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/interpArchive.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" column="55" selection-start-line="12" selection-start-column="55" selection-end-line="12" selection-end-column="55" />
+          <folding>
+            <marker date="1472754705128" expanded="true" signature="821:833" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/devis/devisAdd.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1528">
+          <caret line="108" column="30" selection-start-line="108" selection-start-column="30" selection-end-line="108" selection-end-column="30" />
+          <folding>
+            <marker date="1472566396920" expanded="true" signature="19571:19595" ph="..." />
+            <marker date="1472566396920" expanded="true" signature="19750:20002" ph="..." />
+            <marker date="1472566396920" expanded="false" signature="22339:22350" ph="..." />
+            <marker date="1472566396920" expanded="true" signature="22351:23527" ph="..." />
+            <marker date="1472566396920" expanded="true" signature="22396:22541" ph="..." />
+            <marker date="1472566396920" expanded="false" signature="22482:22506" ph="..." />
+            <marker date="1472566396920" expanded="true" signature="22586:22737" ph="..." />
+            <marker date="1472566396920" expanded="true" signature="22756:22862" ph="..." />
+            <marker date="1472566396920" expanded="true" signature="22881:22985" ph="..." />
+            <marker date="1472566396920" expanded="true" signature="23004:23118" ph="..." />
+            <marker date="1472566396920" expanded="true" signature="23137:23243" ph="..." />
+            <marker date="1472566396920" expanded="true" signature="23262:23519" ph="..." />
+            <marker date="1472566396920" expanded="true" signature="25297:25303" ph="€" />
+            <marker date="1472566396920" expanded="true" signature="25507:25513" ph="€" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DevisController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="515">
+          <caret line="64" column="10" selection-start-line="64" selection-start-column="10" selection-end-line="64" selection-end-column="10" />
           <folding />
         </state>
       </provider>
