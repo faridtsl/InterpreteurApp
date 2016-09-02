@@ -33,7 +33,7 @@ class DevisController extends Controller{
     public function store(Request $request){
         $connectedUser = Auth::user();
         $demande = Demande::find($request['demande_id']);
-       // try {
+        try {
             DB::beginTransaction();
             $devis = DevisTools::addDevis($request,$connectedUser);
             $interps = $request['idInterp'];
@@ -51,9 +51,9 @@ class DevisController extends Controller{
                 $interp->devis()->attach($devis);
             }
             DevisTools::sendDevisMail($devis,$attachs);
-         //   DB::commit();
+            DB::commit();
             return view('devis.devisAdd',['demande'=>$demande,'message'=>'Devis ajouté avec success']);
-        //}catch(\Exception $e){
+        }catch(\Exception $e){
             DB::rollback();
             $trace = new Trace();
             $trace->operation = "Creation";
@@ -62,7 +62,7 @@ class DevisController extends Controller{
             $trace->user()->associate($connectedUser);
             $trace->save();
             DB::commit();
-        //}
+        }
         $errors = ['Une erreur s\'est survenu veuillez reverifier vos données'];
         return view('devis.devisAdd',['demande'=>$demande,'interpreteurs'=>[]])->withErrors($errors);
     }
