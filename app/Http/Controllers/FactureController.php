@@ -103,7 +103,8 @@ class FactureController extends Controller{
     public function getFacturesByYear(Request $request){
         $res = [];
         $ms = [1,2,3,4,5,6,7,8,9,10,11,12];
-        foreach ($ms as $m) {
+        $names = ['Janv','Fev','Mar','Avr','Mai','Jun','Jul','Aout','Sept','Oct','Nov','Dec'];
+        foreach ($ms as $key=>$m) {
             if($request['pred']=='1') $q = Facture::whereYear('created_at', '=', date($request['y']));
             else $q = Facture::where('fini','=','1')->whereYear('created_at', '=', date($request['y']));
             $d = date($m);
@@ -112,7 +113,10 @@ class FactureController extends Controller{
             foreach ($fs as $f) {
                 $tot += DevisTools::getTotal($f->devi_id);
             }
-            array_push($res,$tot);
+            $obj = [];
+            $obj['y'] = $tot;
+            $obj['label'] = $names[$key];
+            array_push($res,$obj);
         }
         return response($res);
     }
@@ -121,8 +125,9 @@ class FactureController extends Controller{
     public function getCumuleFacturesByYear(Request $request){
         $res = [];
         $ms = [1,2,3,4,5,6,7,8,9,10,11,12];
+        $names = ['Janv','Fev','Mar','Avr','Mai','Jun','Jul','Aout','Sept','Oct','Nov','Dec'];
         $precTot = 0;
-        foreach ($ms as $m) {
+        foreach ($ms as $key => $m) {
             if($request['pred']=='1') $q = Facture::whereYear('created_at', '=', date($request['y']));
             else $q = Facture::where('fini','=','1')->whereYear('created_at', '=', date($request['y']));
             $d = date($m);
@@ -131,8 +136,11 @@ class FactureController extends Controller{
             foreach ($fs as $f) {
                 $tot += DevisTools::getTotal($f->devi_id);
             }
-            array_push($res,$tot);
             $precTot = $tot;
+            $obj = [];
+            $obj['y'] = $precTot;
+            $obj['label'] = $names[$key];
+            array_push($res,$obj);
         }
         return response($res);
     }

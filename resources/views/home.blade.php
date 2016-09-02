@@ -22,6 +22,9 @@
 
 
     <div id="chartContainer1" style="height: 240px; width: 100%;"></div>
+    <div id="chartContainer2" style="height: 240px; width: 100%;"></div>
+    <div id="chartContainer3" style="height: 240px; width: 100%;"></div>
+    <div id="chartContainer4" style="height: 240px; width: 100%;"></div>
 
 @endsection
 
@@ -40,39 +43,64 @@
     <script type="text/javascript">
         $(document).ready(function() {
 
-            //Better to construct options first and then pass it as a parameter
-            var options1 = {
-                title: {
-                    text: "Revenue de l'annee 2016"
-                },
-                animationEnabled: true,
-                data: [
-                    {
-                        type: "spline", //change it to line, area, bar, pie, etc
-                        dataPoints: [
-                            {label: 'Janv', y: 10 },
-                            {label: 'Fev', y: 6 },
-                            {label: 'Mar', y: 14 },
-                            {label: 'Avr', y: 12 },
-                            {label: 'Mai', y: 19 },
-                            {label: 'Jun', y: 14 },
-                            {label: 'Jul', y: 26 },
-                            {label: 'Aout', y: 10 },
-                            {label: 'Sept', y: 22 },
-                            {label: 'Oct', y: 29 },
-                            {label: 'Nov', y: 28 },
-                            {label: 'Dec', y: 23 }
-                        ]
-                    }
-                ],
-                axisX: {
-                    labelFontSize: 14
-                },
-                axisY: {
-                    labelFontSize: 14
+            $.ajax({
+                url: '/facture/year/cumul?y=' + new Date().getFullYear() + '&pred=1',
+                type: "GET",
+                success: function (data) {
+                    console.log(data);
+                    var options1 = {
+                        title: {
+                            text: "Prediction du revenue cumule de l'annee " + new Date().getFullYear()
+                        },
+                        animationEnabled: true,
+                        data: [
+                            {
+                                type: "spline", //change it to line, area, bar, pie, etc
+                                dataPoints: data
+                            }
+                        ],
+                        axisX: {
+                            labelFontSize: 14
+                        },
+                        axisY: {
+                            labelFontSize: 14
+                        }
+                    };
+                    $("#chartContainer2").CanvasJSChart(options1);
+                }, error: function () {
+                    alert("error!!!!");
                 }
-            };
-            $("#chartContainer1").CanvasJSChart(options1);
+            });
+
+
+            $.ajax({
+                url: '/facture/year?y='+new Date().getFullYear()+'&pred=1',
+                type:"GET",
+                success:function(data){
+                    console.log(data);
+                    var options1 = {
+                        title: {
+                            text: "Prediction du revenue de l'annee "+new Date().getFullYear()
+                        },
+                        animationEnabled: true,
+                        data: [
+                            {
+                                type: "spline", //change it to line, area, bar, pie, etc
+                                dataPoints: data
+                            }
+                        ],
+                        axisX: {
+                            labelFontSize: 14
+                        },
+                        axisY: {
+                            labelFontSize: 14
+                        }
+                    };
+                    $("#chartContainer1").CanvasJSChart(options1);
+                },error:function(){
+                    alert("error!!!!");
+                }
+            });
         });
     </script>
 @endsection
