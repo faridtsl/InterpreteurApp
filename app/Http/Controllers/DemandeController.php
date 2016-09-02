@@ -164,13 +164,20 @@ class DemandeController extends Controller{
         $resF = [];
         $resT = [];
         $ms = [1,2,3,4,5,6,7,8,9,10,11,12];
-        $precTot = 0;
         foreach ($ms as $m) {
             $q = Demande::where('etat_id','=','4')->whereYear('created_at', '=', date($request['y']));
             $d = date($m);
             $ds = $q->whereMonth('created_at','=',$d)->get();
             array_push($resF,count($ds));
+            $q = Demande::whereYear('created_at', '=', date($request['y']));
+            $d = date($m);
+            $ds = $q->whereMonth('created_at','=',$d)->get();
+            array_push($resT,count($ds));
         }
+        $res = [];
+        $res['T'] = $resT;
+        $res['F'] = $resF;
+        return response($res);
     }
 
     public function showDemandeDetails(Request $request){
