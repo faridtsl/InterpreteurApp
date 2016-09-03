@@ -34,73 +34,157 @@
 
 
 @section('footer')
-    <script src="{{ asset("js/tableTools.js") }}"> </script>
-    <script src="{{ asset("js/steps.js") }}"> </script>
-    <script src="{{ asset("js/modifJS.js") }}"> </script>
-    <script src="{{ asset("js/mapsJS.js") }}"> </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVuJ8zI1I-V9ckmycKWAbNRJmcTzs7nZE&signed_in=true&libraries=places&callback=initAutocomplete"
-            async defer></script>
     <script type="text/javascript">
         $(document).ready(function() {
 
-            $.ajax({
-                url: '/facture/year/cumul?y=' + new Date().getFullYear() + '&pred=1',
-                type: "GET",
-                success: function (data) {
-                    console.log(data);
-                    var options1 = {
-                        title: {
-                            text: "Prediction du revenue cumule de l'annee " + new Date().getFullYear()
-                        },
-                        animationEnabled: true,
-                        data: [
-                            {
-                                type: "spline", //change it to line, area, bar, pie, etc
-                                dataPoints: data
+            function getCumule (y,pred) {
+                $.ajax({
+                    url: '/facture/year/cumul?y=' + y + '&pred=' + pred,
+                    type: "GET",
+                    success: function (data) {
+                        var options1 = {
+                            title: {
+                                text: "Prediction du revenue cumule de l'annee " + y
+                            },
+                            animationEnabled: true,
+                            data: [
+                                {
+                                    type: "spline", //change it to line, area, bar, pie, etc
+                                    dataPoints: data
+                                }
+                            ],
+                            axisX: {
+                                labelFontSize: 14
+                            },
+                            axisY: {
+                                labelFontSize: 14
                             }
-                        ],
-                        axisX: {
-                            labelFontSize: 14
-                        },
-                        axisY: {
-                            labelFontSize: 14
-                        }
-                    };
-                    $("#chartContainer2").CanvasJSChart(options1);
-                }, error: function () {
-                    alert("error!!!!");
-                }
-            });
+                        };
+                        $("#chartContainer2").CanvasJSChart(options1);
+                    }, error: function () {
+                        alert("error!!!!");
+                    }
+                });
+            }
 
-
-            $.ajax({
-                url: '/facture/year?y='+new Date().getFullYear()+'&pred=1',
-                type:"GET",
-                success:function(data){
-                    console.log(data);
-                    var options1 = {
-                        title: {
-                            text: "Prediction du revenue de l'annee "+new Date().getFullYear()
-                        },
-                        animationEnabled: true,
-                        data: [
-                            {
-                                type: "spline", //change it to line, area, bar, pie, etc
-                                dataPoints: data
+            function getRevenuFacts (y,pred) {
+                $.ajax({
+                    url: '/facture/year?y=' + y + '&pred=' + pred,
+                    type: "GET",
+                    success: function (data) {
+                        var options1 = {
+                            title: {
+                                text: "Prediction du revenue de l'annee " + y
+                            },
+                            animationEnabled: true,
+                            data: [
+                                {
+                                    type: "spline", //change it to line, area, bar, pie, etc
+                                    dataPoints: data
+                                }
+                            ],
+                            axisX: {
+                                labelFontSize: 14
+                            },
+                            axisY: {
+                                labelFontSize: 14
                             }
-                        ],
-                        axisX: {
-                            labelFontSize: 14
-                        },
-                        axisY: {
-                            labelFontSize: 14
+                        };
+                        $("#chartContainer1").CanvasJSChart(options1);
+                    }, error: function () {
+                        alert("error!!!!");
+                    }
+                });
+            }
+
+            var chart = new CanvasJS.Chart("chartContainer3",
+                {
+                    title:{
+                        text: "Olympic Medals of all Times (till 2012 Olympics)"
+                    },
+                    animationEnabled: true,
+                    legend: {
+                        cursor:"pointer",
+                        itemclick : function(e) {
+                            if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                                e.dataSeries.visible = false;
+                            }
+                            else {
+                                e.dataSeries.visible = true;
+                            }
+                            chart.render();
                         }
-                    };
-                    $("#chartContainer1").CanvasJSChart(options1);
-                },error:function(){
-                    alert("error!!!!");
-                }
-            });
+                    },
+                    axisY: {
+                        title: "Medals"
+                    },
+                    toolTip: {
+                        shared: true,
+                        content: function(e){
+                            var str = '';
+                            var total = 0 ;
+                            var str3;
+                            var str2 ;
+                            for (var i = 0; i < e.entries.length; i++){
+                                var  str1 = "<span style= 'color:"+e.entries[i].dataSeries.color + "'> " + e.entries[i].dataSeries.name + "</span>: <strong>"+  e.entries[i].dataPoint.y + "</strong> <br/>" ;
+                                total = e.entries[i].dataPoint.y + total;
+                                str = str.concat(str1);
+                            }
+                            str2 = "<span style = 'color:DodgerBlue; '><strong>"+e.entries[0].dataPoint.label + "</strong></span><br/>";
+                            str3 = "<span style = 'color:Tomato '>Total: </span><strong>" + total + "</strong><br/>";
+
+                            return (str2.concat(str)).concat(str3);
+                        }
+
+                    },
+                    data: [
+                        {
+                            type: "bar",
+                            showInLegend: true,
+                            name: "Silver",
+                            color: "silver",
+                            dataPoints: [
+                                { y: 166, label: "Italy"},
+                                { y: 144, label: "China"},
+                                { y: 223, label: "France"},
+                                { y: 272, label: "Great Britain"},
+                                { y: 319, label: "Soviet Union"},
+                                { y: 759, label: "USA"},
+                                { y: 166, label: "Italy"},
+                                { y: 144, label: "China"},
+                                { y: 223, label: "France"},
+                                { y: 272, label: "Great Britain"},
+                                { y: 319, label: "Soviet Union"},
+                                { y: 759, label: "USA"}
+                            ]
+                        },
+                        {
+                            type: "bar",
+                            showInLegend: true,
+                            name: "Bronze",
+                            color: "#A57164",
+                            dataPoints: [
+                                { y: 185, label: "Italy"},
+                                { y: 128, label: "China"},
+                                { y: 246, label: "France"},
+                                { y: 272, label: "Great Britain"},
+                                { y: 296, label: "Soviet Union"},
+                                { y: 666, label: "USA"},
+                                { y: 185, label: "Italy"},
+                                { y: 128, label: "China"},
+                                { y: 246, label: "France"},
+                                { y: 272, label: "Great Britain"},
+                                { y: 296, label: "Soviet Union"},
+                                { y: 666, label: "USA"}
+
+                            ]
+                        }
+
+                    ]
+                });
+
+            chart.render();
+
         });
     </script>
 @endsection
