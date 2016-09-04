@@ -30,6 +30,7 @@
                 <thead>
                 <tr>
                     <th>Image</th>
+                    <th>Nom</th>
                     <th>Prenom</th>
                     <th>Email</th>
                     <th>Prestation</th>
