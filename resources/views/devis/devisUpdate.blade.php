@@ -440,8 +440,8 @@
                     row = $.map(row.data(), function(value, index) {
                         return [value];
                     });
-                    var npr = row[15].split(' ');
-                    markersNewPage(row[0],cnt,npr[0],npr[1],row[3],row[9],row[7],row[8],row[6],parseFloat(row[13]),parseFloat(row[14]));
+                    var npr = row[16].split(' ');
+                    markersNewPage(row[0],cnt,npr[0],npr[1],row[3],row[9],row[7],row[8],row[6],parseFloat(row[14]),parseFloat(row[15]));
                     cnt++;
                 } );
                 console.log(cnt);
