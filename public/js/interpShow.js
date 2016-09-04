@@ -1,5 +1,9 @@
 $(document).ready(function() {
     oTable = $('#example').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'colvis'
+        ],
         "processing": true,
         "serverSide": true,
         "ajax": "/interpreteur/query",
