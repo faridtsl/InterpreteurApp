@@ -87,9 +87,9 @@ class InterpreteurController extends Controller{
                 $join->on('l1.id', '=' , 'traductions.cible');
             })->join('langues AS l2',function($join){
                 $join->on('l2.id', '=' , 'traductions.source');
-            })->join('adresses','interpreteurs.adresse_id','=','adresses.id')->select(array('interpreteurs.id','nom','prenom','email','prestation','devise','adresse','tel_fixe','tel_portable','image','interpreteurs.created_at','interpreteurs.updated_at','l1.content','l2.content'));
+            })->join('adresses','interpreteurs.adresse_id','=','adresses.id')->select(array('interpreteurs.id','nom','prenom','email','prestation','devise','adresse','tel_fixe','tel_portable','image','interpreteurs.created_at','interpreteurs.updated_at','l1.content','l2.content'))->groupBy('interpreteurs.id');
         $ssData = Datatables::of($intepreteurs);
-        $ssData = $ssData->editColumn('image','<img class="img-circle" src="/images/{{$image}}" style="width: 50px;height:50px;"/> ');
+        $ssData = $ssData->editColumn('nom','<img class="img-circle" src="/images/{{$image}}" style="width: 50px;height:50px;"/> {{$nom}} {{$prenom}}');
         $ssData = $ssData->editColumn('traductions','
                                 |
                                 @foreach(\App\Tools\TraductionTools::getTraductionsByInterpreteur($id) as $traduction)
