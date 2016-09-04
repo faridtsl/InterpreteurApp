@@ -29,7 +29,8 @@
             <table id="example" class="table table-striped table-bordered display responsive nowrap"  width="100%" cellspacing="0">
                 <thead>
                 <tr>
-                    <th>Nom</th>
+                    <th>Image</th>
+                    <th>Prenom</th>
                     <th>Email</th>
                     <th>Prestation</th>
                     <th>Telephone portable</th>
@@ -38,13 +39,14 @@
                     <th>Date creation</th>
                     <th>Date modification</th>
                     <th>Traductions</th>
-                    <th>prenom</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tfoot>
                 <tr>
+                    <th>Image</th>
                     <th>Nom</th>
+                    <th>Prenom</th>
                     <th>Email</th>
                     <th>Prestation</th>
                     <th>Telephone portable</th>
@@ -53,7 +55,6 @@
                     <th>Date creation</th>
                     <th>Date modification</th>
                     <th>Traductions</th>
-                    <th>prenom</th>
                     <th></th>
                 </tr>
                 </tfoot>

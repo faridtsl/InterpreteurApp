@@ -4,7 +4,9 @@ $(document).ready(function() {
         "serverSide": true,
         "ajax": "/interpreteur/query",
         "columns": [
+            {data: 'image', name:'interpreteurs.image', orderable:false,searchable:false},
             {data: 'nom', name: 'interpreteurs.nom'},
+            {data: 'prenom', name: 'interpreteurs.prenom'},
             {data: 'email', name: 'interpreteurs.email'},
             {data: 'prestation', name: 'interpreteurs.prestation'},
             {data: 'tel_portable', name: 'interpreteurs.tel_portable'},
@@ -13,7 +15,6 @@ $(document).ready(function() {
             {data: 'created_at', name: 'interpreteurs.created_at'},
             {data: 'updated_at', name: 'interpreteurs.updated_at'},
             {data: 'traductions', name: 'l1.content'},
-            {data: 'prenom', name: 'interpreteurs.prenom', visible:false},
             {data: 'butts', name: 'l2.content' ,orderable: false}
         ]
     });

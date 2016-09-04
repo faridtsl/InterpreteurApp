@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="323faa9a-1b42-43af-ae09-e82e697c525e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/DemandeController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/DemandeController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/home.blade.php" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/InterpreteurController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/InterpreteurController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/interpShow.js" afterPath="$PROJECT_DIR$/public/js/interpShow.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/interpreteur/interpreteursShow.blade.php" afterPath="$PROJECT_DIR$/resources/views/interpreteur/interpreteursShow.blade.php" />
     </list>
     <ignored path="InterpreteurApp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,48 +26,47 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DemandeController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DemandeController.php">
+      <file leaf-file-name="interpShow.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/interpShow.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="179" column="19" selection-start-line="179" selection-start-column="19" selection-end-line="179" selection-end-column="19" />
+            <state relative-caret-position="108">
+              <caret line="6" column="90" selection-start-line="6" selection-start-column="90" selection-end-line="6" selection-end-column="90" />
               <folding>
-                <marker date="1472943158607" expanded="true" signature="5606:5842" ph="..." />
-                <marker date="1472943158607" expanded="true" signature="5694:5841" ph="..." />
+                <marker date="1473019006918" expanded="true" signature="1177:1189" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="home.blade.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/home.blade.php">
+      <file leaf-file-name="InterpreteurController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/InterpreteurController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="24" column="59" selection-start-line="24" selection-start-column="59" selection-end-line="24" selection-end-column="59" />
+            <state relative-caret-position="234">
+              <caret line="91" column="131" selection-start-line="91" selection-start-column="131" selection-end-line="91" selection-end-column="131" />
               <folding>
-                <marker date="1472944030691" expanded="true" signature="8601:8607" ph="..." />
-                <marker date="1472944030691" expanded="true" signature="9025:9043" ph="..." />
-                <marker date="1472944030691" expanded="true" signature="9180:9193" ph="..." />
+                <marker date="1473019046378" expanded="true" signature="4072:4096" ph="..." />
+                <marker date="1473019046378" expanded="true" signature="4726:5605" ph="..." />
+                <marker date="1473019046378" expanded="true" signature="4889:5025" ph="..." />
+                <marker date="1473019046378" expanded="true" signature="5193:5328" ph="..." />
+                <marker date="1473019046378" expanded="true" signature="5439:5568" ph="..." />
+                <marker date="1473019046378" expanded="true" signature="6651:6675" ph="..." />
+                <marker date="1473019046378" expanded="true" signature="6912:7350" ph="..." />
+                <marker date="1473019046378" expanded="true" signature="8712:8736" ph="..." />
+                <marker date="1473019046378" expanded="true" signature="8973:9411" ph="..." />
+                <marker date="1473019046378" expanded="true" signature="10761:10785" ph="..." />
+                <marker date="1473019046378" expanded="true" signature="11434:11964" ph="..." />
+                <marker date="1473019046378" expanded="true" signature="11598:11719" ph="..." />
+                <marker date="1473019046378" expanded="true" signature="11822:11935" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <file leaf-file-name="interpreteursShow.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/interpreteur/interpreteursShow.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1330">
-              <caret line="209" column="71" selection-start-line="209" selection-start-column="71" selection-end-line="209" selection-end-column="71" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FactureController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/FactureController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="78">
-              <caret line="126" column="43" selection-start-line="126" selection-start-column="43" selection-end-line="127" selection-end-column="94" />
+            <state relative-caret-position="234">
+              <caret line="31" column="29" selection-start-line="31" selection-start-column="29" selection-end-line="31" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -126,18 +127,18 @@
         <option value="$PROJECT_DIR$/public/js/demandeDetails.js" />
         <option value="$PROJECT_DIR$/resources/views/demande/demandeDetails.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/demande/demandeShow.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/InterpreteurController.php" />
         <option value="$PROJECT_DIR$/resources/views/devis/devisUpdate.blade.php" />
         <option value="$PROJECT_DIR$/public/js/devisAddVars.js" />
         <option value="$PROJECT_DIR$/public/js/interpArchive.js" />
-        <option value="$PROJECT_DIR$/resources/views/interpreteur/interpreteursShow.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/demande/demandeUpdate.blade.php" />
         <option value="$PROJECT_DIR$/public/js/demandeUpdate.js" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/DevisController.php" />
-        <option value="$PROJECT_DIR$/public/js/interpShow.js" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/FactureController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/DemandeController.php" />
         <option value="$PROJECT_DIR$/resources/views/home.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/interpreteur/interpreteursShow.blade.php" />
+        <option value="$PROJECT_DIR$/public/js/interpShow.js" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/InterpreteurController.php" />
       </list>
     </option>
   </component>
@@ -188,6 +189,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -243,28 +245,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="interpreteur" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="InterpreteurApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="InterpreteurApp" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="devis" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -371,7 +351,6 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -538,12 +517,13 @@
       <workItem from="1472720856695" duration="9213000" />
       <workItem from="1472815377954" duration="7946000" />
       <workItem from="1472896516656" duration="2601000" />
-      <workItem from="1472933239169" duration="6845000" />
+      <workItem from="1472933239169" duration="7095000" />
+      <workItem from="1473017766212" duration="910000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="708348000" />
+    <option name="totallyTimeSpent" value="709508000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="741" extended-state="6" />
@@ -805,13 +785,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/InterpreteurController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-619">
-          <caret line="115" column="51" selection-start-line="115" selection-start-column="51" selection-end-line="115" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/demande/demandeAdd.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="191">
@@ -868,13 +841,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/interpArchive.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="55" selection-start-line="12" selection-start-column="55" selection-end-line="12" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/devisArchive.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -896,49 +862,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/interpreteur/interpreteursShow.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="40" column="29" selection-start-line="40" selection-start-column="29" selection-end-line="40" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/interpShow.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="16" column="65" selection-start-line="16" selection-start-column="65" selection-end-line="16" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/factureShow.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="186">
           <caret line="47" column="11" selection-start-line="37" selection-start-column="7" selection-end-line="47" selection-end-column="11" />
-          <folding>
-            <marker date="1470790121523" expanded="true" signature="513:525" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1330">
-          <caret line="209" column="71" selection-start-line="209" selection-start-column="71" selection-end-line="209" selection-end-column="71" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/FactureController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="126" column="43" selection-start-line="126" selection-start-column="43" selection-end-line="127" selection-end-column="94" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DemandeController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
+        <state relative-caret-position="2916">
           <caret line="179" column="19" selection-start-line="179" selection-start-column="19" selection-end-line="179" selection-end-column="19" />
           <folding>
             <marker date="1472943158607" expanded="true" signature="5606:5842" ph="..." />
@@ -955,6 +888,70 @@
             <marker date="1472944030691" expanded="true" signature="8601:8607" ph="..." />
             <marker date="1472944030691" expanded="true" signature="9025:9043" ph="..." />
             <marker date="1472944030691" expanded="true" signature="9180:9193" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="209" column="71" selection-start-line="209" selection-start-column="71" selection-end-line="209" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/FactureController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="126" column="43" selection-start-line="126" selection-start-column="43" selection-end-line="127" selection-end-column="94" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/interpArchive.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" column="55" selection-start-line="12" selection-start-column="55" selection-end-line="12" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/interpreteur/interpreteursShow.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="31" column="29" selection-start-line="31" selection-start-column="29" selection-end-line="31" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/interpShow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="90" selection-start-line="6" selection-start-column="90" selection-end-line="6" selection-end-column="90" />
+          <folding>
+            <marker date="1473019006918" expanded="true" signature="1177:1189" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/InterpreteurController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="91" column="131" selection-start-line="91" selection-start-column="131" selection-end-line="91" selection-end-column="131" />
+          <folding>
+            <marker date="1473019046378" expanded="true" signature="4072:4096" ph="..." />
+            <marker date="1473019046378" expanded="true" signature="4726:5605" ph="..." />
+            <marker date="1473019046378" expanded="true" signature="4889:5025" ph="..." />
+            <marker date="1473019046378" expanded="true" signature="5193:5328" ph="..." />
+            <marker date="1473019046378" expanded="true" signature="5439:5568" ph="..." />
+            <marker date="1473019046378" expanded="true" signature="6651:6675" ph="..." />
+            <marker date="1473019046378" expanded="true" signature="6912:7350" ph="..." />
+            <marker date="1473019046378" expanded="true" signature="8712:8736" ph="..." />
+            <marker date="1473019046378" expanded="true" signature="8973:9411" ph="..." />
+            <marker date="1473019046378" expanded="true" signature="10761:10785" ph="..." />
+            <marker date="1473019046378" expanded="true" signature="11434:11964" ph="..." />
+            <marker date="1473019046378" expanded="true" signature="11598:11719" ph="..." />
+            <marker date="1473019046378" expanded="true" signature="11822:11935" ph="..." />
           </folding>
         </state>
       </provider>
