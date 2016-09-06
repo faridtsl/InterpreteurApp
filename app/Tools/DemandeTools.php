@@ -145,10 +145,13 @@ class DemandeTools{
         $demande->adresse()->associate($d->adr);
         $demande->user()->associate($u);
         $demande->client()->associate($d->client);
-        $demande->traduction()->associate($d->traduction);
         $demande->etat()->associate($d->etat);
         $demande->origin_id = $d->id;
         $demande->save();
+        $trads = TraductionTools::getTraductionsByDemande($d->id);
+        foreach ($trads as $trad) {
+            DemandeTools::addTraduction($demande,$trad);
+        }
 
         $trace = new Trace();
         $trace->operation = 'Duplication';

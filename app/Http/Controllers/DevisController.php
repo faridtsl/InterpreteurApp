@@ -122,13 +122,17 @@ class DevisController extends Controller{
         try {
             DB::beginTransaction();
             $devis = Devi::find($request['id']);
+            $msg = '';
             if ($devis->etat_id == 2) {
                 $facture = DevisTools::facturerDevis($connectedUser,$devis);
                 FactureTools::sendFactureMail($facture);
+                $msg = 'Facturer avec success';
             } else if ($devis->etat_id == 1) {
                 DevisTools::validerDevis($connectedUser, $devis);
+                $msg = 'Reserver avec success';
             }
             DB::commit();
+            return redirect()->back()->with('message', $msg);
         }catch(\Exception $e){
             DB::rollback();
             $trace = new Trace();

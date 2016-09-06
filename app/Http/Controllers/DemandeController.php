@@ -101,7 +101,6 @@ class DemandeController extends Controller{
 
     public function duplicateDemande(Request $request){
         $demande = Demande::find($request['id']);
-        $demande->traduction = TraductionTools::getTraductionById($demande->traduction_id);
         $demande->adr = AdresseTools::getAdresse($demande->adresse_id);
         $demande->client = ClientTools::getClient($demande->client_id);
         $demande->etat = EtatTools::getEtatById($demande->etat_id);
