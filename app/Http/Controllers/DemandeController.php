@@ -160,12 +160,40 @@ class DemandeController extends Controller{
     }
 
     public function getDemandeByYear(Request $request){
+        if($request['id'] != null) return $this->getDemandeByYearByClient($request);
         $resF = [];
         $resT = [];
         $ms = [1,2,3,4,5,6,7,8,9,10,11,12];
         $names = ['Janv','Fev','Mar','Avr','Mai','Jun','Jul','Aout','Sept','Oct','Nov','Dec'];
         foreach ($ms as $key => $m) {
             $q = Demande::where('etat_id','=','4')->whereYear('created_at', '=', date($request['y']));
+            $d = date($m);
+            $ds = $q->whereMonth('created_at','=',$d)->get();
+            $obj = [];
+            $obj['y'] = count($ds);
+            $obj['label'] = $names[$key];
+            array_push($resF,$obj);
+            $q = Demande::where('etat_id','<','4')->whereYear('created_at', '=', date($request['y']));
+            $d = date($m);
+            $ds = $q->whereMonth('created_at','=',$d)->get();
+            $obj = [];
+            $obj['x'] = count($ds);
+            $obj['label'] = $names[$key];
+            array_push($resT,$obj);
+        }
+        $res = [];
+        $res['T'] = $resT;
+        $res['F'] = $resF;
+        return response($res);
+    }
+
+    public function getDemandeByYearByClient(Request $request){
+        $resF = [];
+        $resT = [];
+        $ms = [1,2,3,4,5,6,7,8,9,10,11,12];
+        $names = ['Janv','Fev','Mar','Avr','Mai','Jun','Jul','Aout','Sept','Oct','Nov','Dec'];
+        foreach ($ms as $key => $m) {
+            $q = Demande::where('etat_id','=','4')->where('client_id','=',$request['id'])->whereYear('created_at', '=', date($request['y']));
             $d = date($m);
             $ds = $q->whereMonth('created_at','=',$d)->get();
             $obj = [];

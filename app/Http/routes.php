@@ -143,6 +143,10 @@ Route::get(
     'client/profile/archive',
     ['middleware'=>'auth','uses'=>'ClientController@profileArchiveClient']
 );
+Route::get(
+    'client/profile/statistiques',
+    ['middleware'=>'auth','uses'=>'ClientController@profileStatsClient']
+);
 
 
 

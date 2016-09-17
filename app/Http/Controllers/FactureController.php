@@ -101,6 +101,7 @@ class FactureController extends Controller{
     }
 
     public function getFacturesByYear(Request $request){
+        if($request['id'] != null) return $this->getFacturesByYearByClient($request);
         $res = [];
         $ms = [1,2,3,4,5,6,7,8,9,10,11,12];
         $names = ['Janv','Fev','Mar','Avr','Mai','Jun','Jul','Aout','Sept','Oct','Nov','Dec'];
@@ -123,6 +124,7 @@ class FactureController extends Controller{
 
 
     public function getCumuleFacturesByYear(Request $request){
+        if($request['id'] != null) return $this->getFacturesByYearByClient($request);
         $res = [];
         $ms = [1,2,3,4,5,6,7,8,9,10,11,12];
         $names = ['Janv','Fev','Mar','Avr','Mai','Jun','Jul','Aout','Sept','Oct','Nov','Dec'];
@@ -132,6 +134,56 @@ class FactureController extends Controller{
             else $q = Facture::where('fini','=','1')->whereYear('created_at', '=', date($request['y']));
             $d = date($m);
             $fs = $q->whereMonth('created_at','=',$d)->get();
+            $tot = $precTot;
+            foreach ($fs as $f) {
+                $tot += DevisTools::getTotal($f->devi_id);
+            }
+            $precTot = $tot;
+            $obj = [];
+            $obj['y'] = $precTot;
+            $obj['label'] = $names[$key];
+            array_push($res,$obj);
+        }
+        return response($res);
+    }
+
+
+    public function getFacturesByYearByClient(Request $request){
+        $res = [];
+        $ms = [1,2,3,4,5,6,7,8,9,10,11,12];
+        $names = ['Janv','Fev','Mar','Avr','Mai','Jun','Jul','Aout','Sept','Oct','Nov','Dec'];
+        foreach ($ms as $key=>$m) {
+            if($request['pred']=='1') $q = Facture::join('devis','factures.devi_id','=','devis.id')->join('demandes','demandes.id','=','devis.demande_id')
+                ->join('clients','clients.id','=','demandes.client_id')->where('clients.id','=',$request['id'])->whereYear('factures.created_at', '=', date($request['y']));
+            else $q = Facture::join('devis','factures.devi_id','=','devis.id')->join('demandes','demandes.id','=','devis.demande_id')
+                ->join('clients','clients.id','=','demandes.client_id')->where('clients.id','=',$request['id'])->where('fini','=','1')->whereYear('factures.created_at', '=', date($request['y']));
+            $d = date($m);
+            $fs = $q->whereMonth('factures.created_at','=',$d)->get();
+            $tot = 0;
+            foreach ($fs as $f) {
+                $tot += DevisTools::getTotal($f->devi_id);
+            }
+            $obj = [];
+            $obj['y'] = $tot;
+            $obj['label'] = $names[$key];
+            array_push($res,$obj);
+        }
+        return response($res);
+    }
+
+
+    public function getCumuleFacturesByYearByClient(Request $request){
+        $res = [];
+        $ms = [1,2,3,4,5,6,7,8,9,10,11,12];
+        $names = ['Janv','Fev','Mar','Avr','Mai','Jun','Jul','Aout','Sept','Oct','Nov','Dec'];
+        $precTot = 0;
+        foreach ($ms as $key => $m) {
+            if($request['pred']=='1') $q = Facture::join('devis','factures.devi_id','=','devis.id')->join('demandes','demandes.id','=','devis.demande_id')
+                ->join('clients','clients.id','=','demandes.client_id')->where('clients.id','=',$request['id'])->whereYear('factures.created_at', '=', date($request['y']));
+            else $q = Facture::join('devis','factures.devi_id','=','devis.id')->join('demandes','demandes.id','=','devis.demande_id')
+                ->join('clients','clients.id','=','demandes.client_id')->where('clients.id','=',$request['id'])->where('fini','=','1')->whereYear('factures.created_at', '=', date($request['y']));
+            $d = date($m);
+            $fs = $q->whereMonth('factures.created_at','=',$d)->get();
             $tot = $precTot;
             foreach ($fs as $f) {
                 $tot += DevisTools::getTotal($f->devi_id);

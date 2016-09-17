@@ -325,6 +325,9 @@
         <a class="btn btn-default" href="/client/profile/archive?id={{$client->id}}">
             <span class="glyphicon glyphicon-clock"></span>Archives
         </a>
+        <a class="btn btn-primary" href="/client/profile/statistiques?id={{$client->id}}">
+            <span class="fa fa-bar-chart-o fa-fw"></span> Statistiques
+        </a>
         <button class="btn btn-warning editButton" data-title="Edit" data-toggle="modal" data-target="#edit" data-id="{{$client->id}}" >
             <span class="glyphicon glyphicon-pencil"></span> Modifier
         </button>
@@ -340,7 +343,6 @@
             });
 
         </script>
-
     </form>
 </div>
 
@@ -420,6 +422,7 @@
             </div>
         </div>
     </div>
+
 @endsection
 
 @section('footer')
@@ -430,4 +433,191 @@
     <script src="{{ asset("js/mapsJS.js") }}"> </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVuJ8zI1I-V9ckmycKWAbNRJmcTzs7nZE&signed_in=true&libraries=places&callback=initAutocomplete"
             async defer></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $("#statButt").on('click',function (e) {
+                e.preventDefault();
+                $("#statModal").modal('show');
+            });
+
+            function getCumule (y,pred) {
+                $.ajax({
+                    url: '/facture/year/cumul?y=' + y + '&pred=' + pred + '&id={{$client->id}}',
+                    type: "GET",
+                    success: function (data) {
+                        var options1 = {
+                            title: {
+                                text: "Revenue cumule de l'annee " + y,
+                                fontSize : 14
+                            },
+                            animationEnabled: true,
+                            data: [
+                                {
+                                    type: "spline", //change it to line, area, bar, pie, etc
+                                    dataPoints: data
+                                }
+                            ],
+                            axisX: {
+                                labelFontSize: 14
+                            },
+                            axisY: {
+                                labelFontSize: 14
+                            }
+                        };
+                        $("#chartContainer2").CanvasJSChart(options1);
+                    }, error: function () {
+                        alert("error!!!!");
+                    }
+                });
+            }
+
+            function getRevenuFacts (y,pred) {
+                $.ajax({
+                    url: '/facture/year?y=' + y + '&pred=' + pred + '&id={{$client->id}}',
+                    type: "GET",
+                    success: function (data) {
+                        var options1 = {
+                            title: {
+                                text: "Revenue de l'annee " + y,
+                                fontSize : 14
+                            },
+                            animationEnabled: true,
+                            data: [
+                                {
+                                    type: "spline", //change it to line, area, bar, pie, etc
+                                    dataPoints: data
+                                }
+                            ],
+                            axisX: {
+                                labelFontSize: 14
+                            },
+                            axisY: {
+                                labelFontSize: 14
+                            }
+                        };
+                        $("#chartContainer1").CanvasJSChart(options1);
+                    }, error: function () {
+                        alert("error!!!!");
+                    }
+                });
+            }
+
+            function getRevenuFactsPred (y) {
+                $.ajax({
+                    url: '/facture/year?y=' + y + '&pred=1' + '&id={{$client->id}}',
+                    type: "GET",
+                    success: function (data) {
+                        var options1 = {
+                            title: {
+                                text: "Prediction du revenue de l'annee " + y,
+                                fontSize : 14
+                            },
+                            animationEnabled: true,
+                            data: [
+                                {
+                                    type: "spline", //change it to line, area, bar, pie, etc
+                                    dataPoints: data
+                                }
+                            ],
+                            axisX: {
+                                labelFontSize: 14
+                            },
+                            axisY: {
+                                labelFontSize: 14
+                            }
+                        };
+                        $("#chartContainer4").CanvasJSChart(options1);
+                    }, error: function () {
+                        alert("error!!!!");
+                    }
+                });
+            }
+
+
+            function getDemandes (y) {
+                $.ajax({
+                    url: '/demande/year?y=' + y + '&id={{$client->id}}',
+                    type: "GET",
+                    success: function (data) {
+                        var chart = new CanvasJS.Chart("chartContainer3",
+                                {
+                                    title: {
+                                        text: "Nombre des demandes "+y,
+                                        fontSize : 14
+                                    },
+                                    animationEnabled: true,
+                                    legend: {
+                                        cursor: "pointer",
+                                        itemclick: function (e) {
+                                            if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                                                e.dataSeries.visible = false;
+                                            }
+                                            else {
+                                                e.dataSeries.visible = true;
+                                            }
+                                            chart.render();
+                                        }
+                                    },
+                                    axisY: {
+                                        title: "Demandes"
+                                    },
+                                    toolTip: {
+                                        shared: true,
+                                        content: function (e) {
+                                            var str = '';
+                                            var total = 0;
+                                            var str3;
+                                            var str2;
+                                            for (var i = 0; i < e.entries.length; i++) {
+                                                var str1 = "<span style= 'color:" + e.entries[i].dataSeries.color + "'> " + e.entries[i].dataSeries.name + "</span>: <strong>" + e.entries[i].dataPoint.y + "</strong> <br/>";
+                                                total = e.entries[i].dataPoint.y + total;
+                                                str = str.concat(str1);
+                                            }
+                                            str2 = "<span style = 'color:DodgerBlue; '><strong>" + e.entries[0].dataPoint.label + "</strong></span><br/>";
+                                            str3 = "<span style = 'color:Tomato '>Total: </span><strong>" + total + "</strong><br/>";
+
+                                            return (str2.concat(str)).concat(str3);
+                                        }
+
+                                    },
+                                    data: [
+                                        {
+                                            type: "bar",
+                                            showInLegend: true,
+                                            name: "Finalisee",
+                                            color: "silver",
+                                            dataPoints: data['F']
+                                        },
+                                        {
+                                            type: "bar",
+                                            showInLegend: true,
+                                            name: "Non finalisees",
+                                            color: "#A57164",
+                                            dataPoints: data['T']
+                                        }
+
+                                    ]
+                                });
+                        chart.render();
+                    }
+                });
+            }
+
+            $('.changeYear').on('click',function (e) {
+                e.preventDefault();
+                var y = $(this).attr('data-id');
+                getDemandes(y);
+                getRevenuFacts(y,0);
+                getRevenuFactsPred(y);
+                getCumule(y,0);
+            });
+
+
+            getDemandes(new Date().getFullYear());
+            getRevenuFacts(new Date().getFullYear(),0);
+            getRevenuFactsPred(new Date().getFullYear());
+            getCumule(new Date().getFullYear(),0);
+        });
+    </script>
 @endsection

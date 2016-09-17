@@ -185,6 +185,12 @@ class ClientController extends Controller{
     }
 
 
+    public function profileStatsClient(Request $request){
+        $client = ClientTools::getClient($request['id']);
+        return view('client.statsClient',['client'=>$client]);
+    }
+
+
     public function profileArchiveClient(Request $request){
         $client = ClientTools::getClient($request['id']);
         $demandes = DemandeTools::getArchiveDemandesByClient($client->id);
